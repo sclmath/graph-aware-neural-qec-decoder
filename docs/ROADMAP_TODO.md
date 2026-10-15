@@ -130,11 +130,10 @@ $env:PYTHONPATH = "src"
 - [ ] **T10 · 多种子统计稳健性 + 强度复核**　（P1）
   - 范围：对 4 个关键结论（d=5/d=7 的 `bp` vs `bp_gnn`、HGP 跨尺寸迁移、MWPM 边权结论）给出 3 seeds 的均值 ± 标准误与配对检验；并在 repetition d=5 的目标分布验证集上复核先验插值强度（当前 d=5 评测沿用源配置上限 1.00）
   - 工作量：编码 1 人日；算力并入 T6
-- [ ] **T11 · CPU 工程性能表**　（P1）
+- [x] **T11 · CPU 工程性能表**　（2026-10-15 完成）
   - 依据：`README.md` 8.2
-  - 覆盖：CPU 单 shot 延迟、batch throughput、峰值内存、BP 迭代数、OSD 候选规模、参数量
-  - 工作量：编码 1 人日；算力 0.5 h
-  - 验收：`results/m5/ENGINEERING_TABLE.md`
+  - 产出：`scripts/engineering_table.py` 从 `results/` 自动生成 `results/m5/ENGINEERING_TABLE.md`（95 行：M1 六个配置 + M2/M3/M4 运行记录，含 LER、µs/shot、shot/s、峰值 RSS delta、BP 平均迭代、OSD 触发比例、syndrome 一致率、模型规模）
+  - 不可测项（GPU 延迟/显存、更大 batch 的吞吐）在表中显式列出原因
 - [ ] **T12 · 真零样本迁移（移除边特征中的 p）**　（P2）
   - 依据：现有跨噪声率评测中 GNN 仍能读到输入的 p，属于同模型迁移而非零样本
   - 工作量：编码 2 人日；算力 1 h

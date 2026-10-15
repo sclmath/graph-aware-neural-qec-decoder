@@ -2,6 +2,7 @@
 
 | 路径 | 内容 |
 |---|---|
+| `ENGINEERING_TABLE.md` | CPU 工程性能表（T11），由 `scripts/engineering_table.py` 从 `results/` 自动生成 |
 | `GNN_PERF.md` | GNN 前向优化（T5）：profile、三项改动、数值等价性、优化前后 µs/shot 与峰值 RSS |
 | `QUANTIZATION.md` / `quantization.json` | GNN float32 vs 动态 int8：模型大小、单 shot 推理延迟、机制后验质量，以及接回 BP 后的 LER |
 | `CPU_BUDGET.md` 对应的 `cpu_budget.json` | CPU 预算实测（向量化 BP 与 GNN 在 d=3/5/7/9 的 µs/shot、收敛率、峰值 RSS、训练单步成本），由 `scripts/probe_cpu_budget.py` 生成 |
