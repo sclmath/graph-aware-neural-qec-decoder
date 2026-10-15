@@ -142,6 +142,11 @@
 | m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p005 | bp_osd | 0.277344 | 164,533 | 6.0778 | - | 28.8784 | 0.87915 | 1 |
 | m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p005 | bp_gnn | 0.16748 | 46,054 | 21.7137 | - | 23.5459 | - | 0.29834 |
 | m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p005 | bp_gnn_osd | 0.210693 | 78,175 | 12.7918 | - | 23.5459 | 0.70166 | 1 |
+| m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p008 | mwpm | 0.0495605 | 16.9802 | 58,892 | - | - | - | - |
+| m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p008 | bp | 0.35498 | 51,427 | 19.445 | - | 31.5801 | - | 0.0178223 |
+| m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p008 | bp_osd | 0.4021 | 88,276 | 11.3282 | - | 31.5801 | 0.982178 | 1 |
+| m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p008 | bp_gnn | 0.299561 | 50,234 | 19.9068 | - | 30.1121 | - | 0.0717773 |
+| m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p008 | bp_gnn_osd | 0.338379 | 84,633 | 11.8157 | - | 30.1121 | 0.928223 | 1 |
 | m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p003 | mwpm | 0.00170898 | 4.43962 | 225,244 | - | - | - | - |
 | m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p003 | bp | 0.158447 | 38,949 | 25.6745 | - | 23.0049 | - | 0.331055 |
 | m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p003 | bp_osd | 0.194092 | 64,728 | 15.4492 | - | 23.0049 | 0.668945 | 1 |

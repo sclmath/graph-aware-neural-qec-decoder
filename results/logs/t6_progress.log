@@ -90,3 +90,6 @@
 [2026-10-16 05:01:03] [15/30] d5_p0p008_s3: start -> m4_rotated_surface_code_circuit_level_d5_s3__d5__circuit_level__p0p008
 [2026-10-16 05:37:45] [15/30] d5_p0p008_s3: done in 36.7 min
 [2026-10-16 05:37:45] [16/30] d7_p0p008_s1: start -> m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p008
+[2026-10-16 06:45:24] [16/30] d7_p0p008_s1: done in 67.7 min
+[2026-10-16 06:45:24] [17/30] d7_p0p008_s2: budget 720 min reached (735.7 min elapsed, 16 runs); stopping
+[2026-10-16 06:45:24] grid finished: 16 runs executed, 30 points in plan

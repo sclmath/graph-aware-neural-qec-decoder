@@ -1,6 +1,12 @@
 <#
 .SYNOPSIS
-    关机守卫：等工作全部结束后自动关机。
+    关机守卫：等工作全部结束后自动关机（**当前未启用**）。
+
+.NOTES
+    2026-10-16：用户取消了自动关机，计划任务 Codex-QEC-ShutdownWhenDone 已注销。
+    本脚本保留作为可复用工具，需要时手动重新注册：
+        Register-ScheduledTask -TaskName 'Codex-QEC-ShutdownWhenDone' ...
+    或直接运行它做一次条件检查（加 -DryRun 只记日志不关机）。
 
 .DESCRIPTION
     由计划任务 Codex-QEC-ShutdownWhenDone 每 5 分钟调用一次。满足下面两个条件

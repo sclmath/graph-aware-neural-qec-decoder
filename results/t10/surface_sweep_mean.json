@@ -268,5 +268,50 @@
     "noise_model": "circuit_level",
     "physical_error_rate": 0.005,
     "shots": 12288
+  },
+  {
+    "decoder": "bp",
+    "distance": 7,
+    "logical_error_rate": 0.35498046875,
+    "logical_error_rate_standard_error": 0.0,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.008,
+    "shots": 4096
+  },
+  {
+    "decoder": "bp_gnn",
+    "distance": 7,
+    "logical_error_rate": 0.299560546875,
+    "logical_error_rate_standard_error": 0.0,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.008,
+    "shots": 4096
+  },
+  {
+    "decoder": "bp_gnn_osd",
+    "distance": 7,
+    "logical_error_rate": 0.33837890625,
+    "logical_error_rate_standard_error": 0.0,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.008,
+    "shots": 4096
+  },
+  {
+    "decoder": "bp_osd",
+    "distance": 7,
+    "logical_error_rate": 0.402099609375,
+    "logical_error_rate_standard_error": 0.0,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.008,
+    "shots": 4096
+  },
+  {
+    "decoder": "mwpm",
+    "distance": 7,
+    "logical_error_rate": 0.049560546875,
+    "logical_error_rate_standard_error": 0.0,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.008,
+    "shots": 4096
   }
 ]

@@ -779,8 +779,113 @@
         1.0
       ],
       "test_shots_per_seed": 4096
+    },
+    {
+      "comparisons": [
+        {
+          "a": "bp",
+          "b": "bp_gnn",
+          "deltas": [
+            0.055419921875
+          ],
+          "mean_delta": 0.055419921875,
+          "sign_test": {
+            "negative": 0,
+            "p": 1.0,
+            "positive": 1
+          }
+        },
+        {
+          "a": "bp",
+          "b": "bp_osd",
+          "deltas": [
+            -0.047119140625
+          ],
+          "mean_delta": -0.047119140625,
+          "sign_test": {
+            "negative": 1,
+            "p": 1.0,
+            "positive": 0
+          }
+        },
+        {
+          "a": "bp_gnn",
+          "b": "bp_gnn_osd",
+          "deltas": [
+            -0.038818359375
+          ],
+          "mean_delta": -0.038818359375,
+          "sign_test": {
+            "negative": 1,
+            "p": 1.0,
+            "positive": 0
+          }
+        }
+      ],
+      "distance": 7,
+      "noise_model": "circuit_level",
+      "per_decoder": {
+        "bp": {
+          "mean": 0.35498046875,
+          "rates": [
+            0.35498046875
+          ],
+          "seeds": [
+            7
+          ],
+          "standard_error": 0.0
+        },
+        "bp_gnn": {
+          "mean": 0.299560546875,
+          "rates": [
+            0.299560546875
+          ],
+          "seeds": [
+            7
+          ],
+          "standard_error": 0.0
+        },
+        "bp_gnn_osd": {
+          "mean": 0.33837890625,
+          "rates": [
+            0.33837890625
+          ],
+          "seeds": [
+            7
+          ],
+          "standard_error": 0.0
+        },
+        "bp_osd": {
+          "mean": 0.402099609375,
+          "rates": [
+            0.402099609375
+          ],
+          "seeds": [
+            7
+          ],
+          "standard_error": 0.0
+        },
+        "mwpm": {
+          "mean": 0.049560546875,
+          "rates": [
+            0.049560546875
+          ],
+          "seeds": [
+            7
+          ],
+          "standard_error": 0.0
+        }
+      },
+      "physical_error_rate": 0.008,
+      "seeds": [
+        7
+      ],
+      "selected_strengths": [
+        1.0
+      ],
+      "test_shots_per_seed": 4096
     }
   ],
   "results_dir": "results\\m4_surface",
-  "runs": 16
+  "runs": 17
 }
