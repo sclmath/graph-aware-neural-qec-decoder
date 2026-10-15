@@ -151,7 +151,10 @@ $env:PYTHONPATH = "src"
   - 未完成（转 P2 强化）：learning-to-rank（数据驱动的候选排序）；见第 7 节
   - 产出：`results/t8/`、`docs/T8_OSD_CANDIDATE_SET.md`
   - 验收：✅ 新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表
-- [ ] **T9 · 消融补全：图特征组合 + top-k 候选规模**　（P1，部分完成：top-k 已做，图特征组合转后续）
+- [x] **T9 · 消融补全：图特征组合 + top-k 候选规模**　（P1，2026-10-15 完成）
+  - top-k：OSD-CS 的 λ ∈ {0,2,4,6,8} 扫描（见 T8）——表面码单调、repetition 非单调（λ=4 最优）
+  - 图特征组合：`scripts/t9_feature_ablation.py`（置零特征列 + 同 seed 重训）；repetition d=3 上显式坐标/时间特征冗余（ΔLER < 0.0002），但只留 DEM 先验会让 LER 恶化 2.5×（0.00952 → 0.02371）而 AUC 仍有 0.986
+  - 产出：`results/t9/`、`docs/FINAL_REPORT.md` 4.8 节
   - 依据：`README.md` 7.2 列出 7 类消融，当前 3 类有数据
   - 依赖：T8（top-k 需要候选集机制）
   - 工作量：编码 3 人日；算力 1 h
