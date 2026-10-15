@@ -5,10 +5,10 @@ Test shots: 16384, batch size 1024, best of 3 runs.
 
 | model | parameters (MB) | inference (s) | us/shot | mechanism log loss |
 |---|---:|---:|---:|---:|
-| float32 | 0.0612 | 0.633 | 38.63 | 0.01497 |
-| int8 (dynamic) | 0.0165 | 0.753 | 45.96 | 0.01497 |
+| float32 | 0.0612 | 0.520 | 31.73 | 0.01497 |
+| int8 (dynamic) | 0.0165 | 0.672 | 40.99 | 0.01497 |
 
-- speedup (float / int8): 0.84x
+- speedup (float / int8): 0.77x
 - parameter compression: 3.72x
 - mechanism sign agreement: 1.0000 (max |logit delta| 0.438)
 

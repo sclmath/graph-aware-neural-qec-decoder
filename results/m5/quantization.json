@@ -30,20 +30,20 @@
     }
   },
   "float32": {
-    "inference_seconds": 0.6328730000004725,
-    "mechanism_log_loss": 0.014970603260038245,
-    "microseconds_per_shot": 38.62750244143509,
+    "inference_seconds": 0.5199453999994148,
+    "mechanism_log_loss": 0.01497060310981346,
+    "microseconds_per_shot": 31.734948730433032,
     "model_size_mb": 0.061188
   },
   "int8_dynamic": {
-    "inference_seconds": 0.752983199998198,
+    "inference_seconds": 0.6715487000001303,
     "mechanism_log_loss": 0.01496713758805948,
-    "microseconds_per_shot": 45.95844726551501,
+    "microseconds_per_shot": 40.98807983399233,
     "model_size_mb": 0.016452
   },
-  "max_abs_logit_delta": 0.43766772747039795,
+  "max_abs_logit_delta": 0.4376683235168457,
   "shots": 16384,
   "sign_agreement": 0.9999505905877977,
   "size_ratio": 0.2688762502451461,
-  "speedup": 0.8404875434166222
+  "speedup": 0.7742482414146791
 }

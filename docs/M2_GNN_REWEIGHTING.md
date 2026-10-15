@@ -119,7 +119,7 @@ GNN 只在 train split 上训练，validation split 选 checkpoint，测试集�
 | **BP+GNN prior（`bp_gnn`）** | 312 | 0.00952 | 0.00054 | **0.9912** | **0.557** | 0.9912 | **1.3 µs** |
 
 - LER 上 `bp_gnn` 与 `bp` 没有可测差异（0.00952 vs 0.00943，McNemar z=-0.77，p=0.44）；两者都落后于 Union-Find（0.00970 相近，差异在噪声内）与 MWPM（0.00662）；
-- 学习先验的价值体现在收敛行为上：平均迭代 0.707 → 0.557（-21%），收敛率 0.9899 → 0.9912，含 GNN 前向的端到端单 shot 延迟反而更低（1.8 → 1.3 µs，GNN 前向本身 37 µs/shot 在 batch 下摊薄）；
+- 学习先验的价值体现在收敛行为上：平均迭代 0.707 → 0.557（-21%），收敛率 0.9899 → 0.9912，含 GNN 前向的端到端单 shot 延迟反而更低（1.8 → 1.3 µs，GNN 前向本身 32 µs/shot 在 batch 下摊薄）；
 - 结论：**在 d=3 repetition 上，正确的 BP 已经接近该码距的可达精度，学习先验没有 LER 发挥空间**；收益要到 BP 明显退化的大图（d=5 及更大码距、表面码线路级）才兑现，见 `docs/M3_HYBRID_DECODER.md` 第 7、8 节与 `docs/M4_HGP_AND_SURFACE.md`。
 
 validation split 上的插值扫描（8192 shots）：

@@ -105,14 +105,32 @@ def render(rows: Sequence[dict[str, Any]]) -> str:
     quantization = Path("results/m5/quantization.json")
     if quantization.exists():
         payload = json.loads(quantization.read_text(encoding="utf-8"))
-        model = payload.get("model", {})
+        architecture = (payload.get("checkpoint") or {}).get("architecture", {})
+        float32 = payload.get("float32") or {}
+        int8 = payload.get("int8_dynamic") or {}
         lines.append(
-            "| BipartiteSyndromeGNN (hidden=32, layers=3) | {} | {} | {} |".format(
-                _fmt(model.get("parameter_count")),
-                _fmt(model.get("float32_bytes")),
-                _fmt(model.get("int8_bytes")),
+            "| BipartiteSyndromeGNN (hidden={}, layers={}) | {} shots/batch | {} MB | {} MB |".format(
+                architecture.get("hidden_size", "-"),
+                architecture.get("num_layers", "-"),
+                payload.get("batch_size", "-"),
+                _fmt(float32.get("model_size_mb"), 4),
+                _fmt(int8.get("model_size_mb"), 4),
             )
         )
+        lines += [
+            "",
+            "量化推理（`scripts/m5_quantization.py`，batch={}，{} shots）：float32 {} µs/shot、"
+            "int8 动态 {} µs/shot（speedup {}），权重压缩 {}，机制符号一致率 {}，logit 最大偏差 {}。".format(
+                payload.get("batch_size", "-"),
+                payload.get("shots", "-"),
+                _fmt(float32.get("microseconds_per_shot"), 4),
+                _fmt(int8.get("microseconds_per_shot"), 4),
+                _fmt(payload.get("speedup"), 4),
+                _fmt(payload.get("size_ratio"), 4),
+                _fmt(payload.get("sign_agreement"), 6),
+                _fmt(payload.get("max_abs_logit_delta"), 4),
+            ),
+        ]
     else:
         lines.append("| BipartiteSyndromeGNN | - | - | - |")
     lines += [

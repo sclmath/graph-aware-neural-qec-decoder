@@ -1,0 +1,3 @@
+[m2] generating splits for m4_rotated_surface_code_circuit_level_d5
+[m2] splits ready: train=16384 validation=2048 test=2048 (0.2s)
+[m2] graph: 120 detectors, 1677 mechanisms, 5004 edges

@@ -148,3 +148,17 @@ def test_forward_with_embeddings_returns_hidden_states() -> None:
     assert logits.shape == (4, graph.num_variables)
     assert embeddings.shape == (4, graph.num_variables, 16)
     assert np.all(np.isfinite(logits.numpy()))
+
+def test_forward_falls_back_for_non_linear_message_layers() -> None:
+    """Dynamic quantization replaces ``nn.Linear``; the forward must still work."""
+
+    model, graph, static, syndrome = _fixture(distance=3, batch=4)
+    model.eval()
+    with torch.no_grad():
+        expected = model(syndrome=syndrome, **static)
+    quantized = torch.ao.quantization.quantize_dynamic(model, {torch.nn.Linear}, dtype=torch.qint8)
+    with torch.no_grad():
+        actual = quantized(syndrome=syndrome, **static)
+    assert actual.shape == expected.shape
+    assert float((actual - expected).abs().max()) < 0.5
+    assert np.all(np.isfinite(actual.numpy()))

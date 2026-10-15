@@ -167,24 +167,44 @@ class BipartiteSyndromeGNN(nn.Module):
         )
         check_degree = torch.bincount(edge_checks, minlength=num_checks).clamp(min=1).to(syndrome.dtype)
 
-        for _ in range(self.num_layers):
-            # The two message passes share the same gathers, and the edge-feature
-            # block of each message MLP is shot-independent.
-            check_at_edges = check_state[:, edge_checks, :]
-            variable_at_edges = variable_state[:, edge_variables, :]
+        # The split-linear fast path needs plain ``nn.Linear`` layers: dynamic
+        # quantization replaces them with modules whose ``weight`` is a callable
+        # rather than a tensor, and those must go through their own forward.
+        fast_path = all(
+            isinstance(mlp.layers[0], nn.Linear)
+            for mlp in (self.check_to_variable, self.variable_to_check)
+        )
+        if fast_path:
             edge_for_c2v = self._edge_projection(self.check_to_variable, edge_features).unsqueeze(0)
             edge_for_v2c = self._edge_projection(self.variable_to_check, edge_features).unsqueeze(0)
+        else:
+            expanded_edges = edge_features.unsqueeze(0).expand(batches, -1, -1)
 
-            check_messages = self._message(
-                self.check_to_variable, check_at_edges, variable_at_edges, edge_for_c2v
-            )
+        for _ in range(self.num_layers):
+            # The two message passes share the same gathers.
+            check_at_edges = check_state[:, edge_checks, :]
+            variable_at_edges = variable_state[:, edge_variables, :]
+
+            if fast_path:
+                check_messages = self._message(
+                    self.check_to_variable, check_at_edges, variable_at_edges, edge_for_c2v
+                )
+            else:
+                check_messages = self.check_to_variable(
+                    torch.cat([check_at_edges, variable_at_edges, expanded_edges], dim=-1)
+                )
             variable_aggregate = self._aggregate(
                 check_messages, edge_variables, num_variables, "c2v"
             ) / variable_degree.view(1, -1, 1)
 
-            variable_messages = self._message(
-                self.variable_to_check, variable_at_edges, check_at_edges, edge_for_v2c
-            )
+            if fast_path:
+                variable_messages = self._message(
+                    self.variable_to_check, variable_at_edges, check_at_edges, edge_for_v2c
+                )
+            else:
+                variable_messages = self.variable_to_check(
+                    torch.cat([variable_at_edges, check_at_edges, expanded_edges], dim=-1)
+                )
             check_aggregate = self._aggregate(
                 variable_messages, edge_checks, num_checks, "v2c"
             ) / check_degree.view(1, -1, 1)

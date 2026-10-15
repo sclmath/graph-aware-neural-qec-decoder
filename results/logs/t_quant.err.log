@@ -1,0 +1,38 @@
+D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m5_quantization.py:105: DeprecationWarning: torch.ao.quantization is deprecated and will be removed in 2.10. 
+For migrations of users: 
+1. Eager mode quantization (torch.ao.quantization.quantize, torch.ao.quantization.quantize_dynamic), please migrate to use torchao eager mode quantize_ API instead 
+2. FX graph mode quantization (torch.ao.quantization.quantize_fx.prepare_fx,torch.ao.quantization.quantize_fx.convert_fx, please migrate to use torchao pt2e quantization API instead (prepare_pt2e, convert_pt2e) 
+3. pt2e quantization has been migrated to torchao (https://github.com/pytorch/ao/tree/main/torchao/quantization/pt2e) 
+see https://github.com/pytorch/ao/issues/2259 for more details
+  quantized = torch.ao.quantization.quantize_dynamic(
+D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\ao\nn\quantized\modules\utils.py:72: UserWarning: torch.quantize_per_tensor, torch.quantize_per_channel and other quantized tensor creation functions that produce tensors with dtype torch.quint8, torch.qint8, and torch.qint32 are deprecated and will be removed in a future PyTorch release. Please see https://github.com/pytorch/pytorch/issues/184982 for more information. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\quantized\Quantizer.cpp:116.)
+  qweight = torch.quantize_per_tensor(
+Traceback (most recent call last):
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m5_quantization.py", line 234, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m5_quantization.py", line 110, in main
+    int8_logits, int8_seconds = _timed_predict(
+                                ^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m5_quantization.py", line 64, in _timed_predict
+    logits = predict_logits(model, tensors, detections, batch_size=batch_size)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\models\bipartite_gnn.py", line 223, in predict_logits
+    logits = model(syndrome=batch, **tensors)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\nn\modules\module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\models\bipartite_gnn.py", line 175, in forward
+    edge_for_c2v = self._edge_projection(self.check_to_variable, edge_features).unsqueeze(0)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\models\bipartite_gnn.py", line 112, in _edge_projection
+    return F.linear(edge_features, weight[:, 2 * weight.shape[0] :])
+                                                 ^^^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'shape'

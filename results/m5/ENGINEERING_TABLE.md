@@ -105,7 +105,9 @@
 
 | 模型 | 参数量 | float32 权重 | int8 动态量化权重 |
 |---|---:|---:|---:|
-| BipartiteSyndromeGNN (hidden=32, layers=3) | - | - | - |
+| BipartiteSyndromeGNN (hidden=32, layers=3) | 1024 shots/batch | 0.06119 MB | 0.01645 MB |
+
+量化推理（`scripts/m5_quantization.py`，batch=1024，16384 shots）：float32 31.73 µs/shot、int8 动态 40.99 µs/shot（speedup 0.7742），权重压缩 0.2689，机制符号一致率 0.999951，logit 最大偏差 0.4377。
 
 ## 不可测项与原因
 

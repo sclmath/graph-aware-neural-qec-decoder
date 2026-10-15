@@ -1,0 +1,61 @@
+d=3 code_capacity p=0.01
+  mwpm        d=3 code_capacity p=0.01: LER=0.00214 (35) 0.1 us/shot
+  union_find  d=3 code_capacity p=0.01: LER=0.06311 (1034) 108.3 us/shot
+  bp          d=3 code_capacity p=0.01: LER=0.00275 (45) 19.0 us/shot
+  bp_osd      d=3 code_capacity p=0.01: LER=0.00311 (51) 13.0 us/shot
+d=3 code_capacity p=0.02
+  mwpm        d=3 code_capacity p=0.02: LER=0.00916 (150) 0.3 us/shot
+  union_find  d=3 code_capacity p=0.02: LER=0.11597 (1900) 104.2 us/shot
+  bp          d=3 code_capacity p=0.02: LER=0.01038 (170) 17.1 us/shot
+  bp_osd      d=3 code_capacity p=0.02: LER=0.01215 (199) 26.0 us/shot
+d=3 code_capacity p=0.05
+  mwpm        d=3 code_capacity p=0.05: LER=0.04877 (799) 0.4 us/shot
+  union_find  d=3 code_capacity p=0.05: LER=0.24231 (3970) 108.7 us/shot
+  bp          d=3 code_capacity p=0.05: LER=0.05243 (859) 46.3 us/shot
+  bp_osd      d=3 code_capacity p=0.05: LER=0.05688 (932) 88.4 us/shot
+d=3 code_capacity p=0.08
+  mwpm        d=3 code_capacity p=0.08: LER=0.11432 (1873) 0.4 us/shot
+  union_find  d=3 code_capacity p=0.08: LER=0.33270 (5451) 126.1 us/shot
+  bp          d=3 code_capacity p=0.08: LER=0.12567 (2059) 131.1 us/shot
+  bp_osd      d=3 code_capacity p=0.08: LER=0.13806 (2262) 191.4 us/shot
+d=3 code_capacity p=0.1
+  mwpm        d=3 code_capacity p=0.1: LER=0.16644 (2727) 0.5 us/shot
+  union_find  d=3 code_capacity p=0.1: LER=0.37433 (6133) 94.7 us/shot
+  bp          d=3 code_capacity p=0.1: LER=0.17957 (2942) 121.1 us/shot
+  bp_osd      d=3 code_capacity p=0.1: LER=0.19366 (3173) 186.2 us/shot
+d=3 code_capacity p=0.12
+  mwpm        d=3 code_capacity p=0.12: LER=0.21411 (3508) 0.6 us/shot
+  union_find  d=3 code_capacity p=0.12: LER=0.40747 (6676) 121.8 us/shot
+  bp          d=3 code_capacity p=0.12: LER=0.22784 (3733) 89.1 us/shot
+  bp_osd      d=3 code_capacity p=0.12: LER=0.24493 (4013) 176.6 us/shot
+d=5 code_capacity p=0.01
+  mwpm        d=5 code_capacity p=0.01: LER=0.00037 (6) 0.5 us/shot
+  union_find  d=5 code_capacity p=0.01: LER=0.22607 (3704) 451.4 us/shot
+  bp          d=5 code_capacity p=0.01: LER=0.00580 (95) 155.4 us/shot
+  bp_osd      d=5 code_capacity p=0.01: LER=0.01062 (174) 198.0 us/shot
+d=5 code_capacity p=0.02
+  mwpm        d=5 code_capacity p=0.02: LER=0.00262 (43) 0.9 us/shot
+  union_find  d=5 code_capacity p=0.02: LER=0.34180 (5600) 610.8 us/shot
+  bp          d=5 code_capacity p=0.02: LER=0.02472 (405) 358.0 us/shot
+  bp_osd      d=5 code_capacity p=0.02: LER=0.04199 (688) 507.2 us/shot
+d=5 code_capacity p=0.05
+  mwpm        d=5 code_capacity p=0.05: LER=0.04016 (658) 2.0 us/shot
+  union_find  d=5 code_capacity p=0.05: LER=0.47565 (7793) 1134.4 us/shot
+  bp          d=5 code_capacity p=0.05: LER=0.13550 (2220) 1232.6 us/shot
+  bp_osd      d=5 code_capacity p=0.05: LER=0.22131 (3626) 1990.3 us/shot
+d=5 code_capacity p=0.08
+  mwpm        d=5 code_capacity p=0.08: LER=0.12799 (2097) 3.4 us/shot
+  union_find  d=5 code_capacity p=0.08: LER=0.49945 (8183) 1543.6 us/shot
+  bp          d=5 code_capacity p=0.08: LER=0.27008 (4425) 2032.9 us/shot
+  bp_osd      d=5 code_capacity p=0.08: LER=0.36963 (6056) 3391.4 us/shot
+d=5 code_capacity p=0.1
+  mwpm        d=5 code_capacity p=0.1: LER=0.20642 (3382) 4.6 us/shot
+  union_find  d=5 code_capacity p=0.1: LER=0.49231 (8066) 1772.5 us/shot
+  bp          d=5 code_capacity p=0.1: LER=0.34662 (5679) 2328.0 us/shot
+  bp_osd      d=5 code_capacity p=0.1: LER=0.43243 (7085) 3897.5 us/shot
+d=5 code_capacity p=0.12
+  mwpm        d=5 code_capacity p=0.12: LER=0.28107 (4605) 4.8 us/shot
+  union_find  d=5 code_capacity p=0.12: LER=0.50323 (8245) 2022.1 us/shot
+  bp          d=5 code_capacity p=0.12: LER=0.40649 (6660) 2510.8 us/shot
+  bp_osd      d=5 code_capacity p=0.12: LER=0.46954 (7693) 4207.1 us/shot
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4_threshold\surface_sweep.csv
