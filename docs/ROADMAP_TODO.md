@@ -151,11 +151,11 @@ $env:PYTHONPATH = "src"
   - 未完成（转 P2 强化）：learning-to-rank（数据驱动的候选排序）；见第 7 节
   - 产出：`results/t8/`、`docs/T8_OSD_CANDIDATE_SET.md`
   - 验收：✅ 新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表
-- [ ] **T9 · 消融补全：图特征组合 + top-k 候选规模**　（P1）
+- [ ] **T9 · 消融补全：图特征组合 + top-k 候选规模**　（P1，部分完成：top-k 已做，图特征组合转后续）
   - 依据：`README.md` 7.2 列出 7 类消融，当前 3 类有数据
   - 依赖：T8（top-k 需要候选集机制）
   - 工作量：编码 3 人日；算力 1 h
-- [ ] **T10 · 多种子统计稳健性 + 强度复核**　（P1）
+- [ ] **T10 · 多种子统计稳健性 + 强度复核**　（P1，d=5 headline 已完成，其余随 T6 网格落地）
   - 范围：对 4 个关键结论（d=5/d=7 的 `bp` vs `bp_gnn`、HGP 跨尺寸迁移、MWPM 边权结论）给出 3 seeds 的均值 ± 标准误与配对检验；并在 repetition d=5 的目标分布验证集上复核先验插值强度（当前 d=5 评测沿用源配置上限 1.00）
   - 工作量：编码 1 人日；算力并入 T6
 - [x] **T11 · CPU 工程性能表**　（P1，2026-10-15 完成）
@@ -184,9 +184,10 @@ $env:PYTHONPATH = "src"
   - 产出：`results/m1/`（重跑）、`results/m4/surface_sweep.{json,csv}`（重跑）、`scripts/t18_rerun.ps1`、`tests/test_union_find_t18.py`（6 项）、`docs/T18_UNION_FIND_ANALYSIS.md`
   - 验收：✅ 表面码 d=3 码容量 p=0.01 的 Union-Find LER 与 MWPM **完全一致**（0.00214 vs 0.00214，16384 shots），单测已断言；所有引用 Union-Find 的表格已重新生成
 
-- [ ] **T17 · 技术报告（集成 M0-M5 + 局限性 + 复现说明）**　（P1）
-  - 工作量：3-5 人日；依赖 T6-T11 收敛
-  - 验收：`docs/FINAL_REPORT.md`，含适用范围、计算成本、未解决问题三节
+- [x] **T17 · 技术报告（集成 M0-M5 + 局限性 + 复现说明）**　（P1，2026-10-15 完成）
+  - 产出：`docs/FINAL_REPORT.md`（摘要 + 交付范围 + 方法与实现 + 4.1-4.9 结果 + 适用范围 + 计算成本 + 未解决问题 + 复现说明）
+  - 说明：第 4.6/4.7 节（d=5/d=7 全网格与线路级阈值）标了 `【待刷新】`，由夜间巡检在 T6 网格结束后用 `results/t10/` 与 `results/m4/THRESHOLD.md` 的最终值替换
+  - 验收：✅ 含适用范围、计算成本、未解决问题三节
 
 ---
 
