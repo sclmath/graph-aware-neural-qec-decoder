@@ -8,7 +8,7 @@ quality and in decoder LER?
 Usage:
     .\.venv\Scripts\python.exe scripts\m5_quantization.py `
         --config configs\m3_learned_basis_repetition_circuit_level_d3.json `
-        --checkpoint results\m3_fixed\<run>\model_state.pt
+        --checkpoint results\m3\<run>\model_state.pt
 """
 
 from __future__ import annotations

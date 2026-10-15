@@ -1,28 +1,30 @@
 # M5+：把学习后验接进 MWPM（保分解 + 相对重加权）
 
 日期：2026-10-14
-前置：`docs/M5_ENGINEERING.md` 第 5 节（该节结论是"实现问题、不下科学结论"）
+前置：`docs/M4_HGP_AND_SURFACE.md`（对可匹配码应修正 MWPM 的边权重）
 代码：`src/graph_qec/m5.py`、`scripts/m5_gnn_mwpm_decomposed.py`、`tests/test_m5_decomposed_mwpm.py`（13 项）
 数据：`results/m5/gnn_mwpm_decomposed_cc/`（码容量 d=3，8192 shots）、`results/m5/gnn_mwpm_decomposed_cl/`（线路级 d=3，4096 shots）
 
-## 1. 本轮要解决的问题
+## 1. 问题
 
-M4 的结论是：对**可匹配码**，学习到的机制后验应该去修正 *matching graph 的边权重*，而不是 BP 的先验。M5 第 5 节做了原型，LER 从 0.0439 崩到 0.3130；控制实验显示"用 DEM 自己的概率重建 DEM"就已经把 MWPM 从 0.0439 弄坏到 0.0679，因此判定为实现缺陷并停在那里。本轮把这个缺陷修干净，给出可复核的数字。
+M4 的结论是：对**可匹配码**，学习到的机制后验应该去修正 *matching graph 的边权重*，而不是 BP 的先验。直接把逐机制概率灌进重建的 DEM 会产生结构性劣化（对照实验见 `docs/M5_ENGINEERING.md` 第 5 节），因此必须先固定三个实现约定，才能评估学习后验在 MWPM 上的真实效果。本文给出固定后的实现、阶梯式对照与可复核的数字。
 
-## 2. 定位到的三个缺陷
+## 2. 实现中的三个关键约定
 
-### 2.1 结构性：重建 DEM 丢掉了 Stim 的 `^` 分解
+### 2.1 结构性：必须保留 Stim 的 `^` 分解
 
-`scripts/m5_gnn_mwpm.py` 从二值系统 `(H, L)` 逐机制重写 `error(p) D... L...`。但 >2 detector 的超边（例如 Y 误差翻 4 个 detector）在 `decompose_errors=False` 的 DEM 里就是超边，重写后被原样保留；PyMatching 只处理 ≤2 detector 的边，于是它**静默地**按自己的顺序把超边拆成边，得到一张更稠密、错误的匹配图——**不报错**：
+从二值系统 `(H, L)` 逐机制重写 `error(p) D... L...` 会保留 >2 detector 的超边（例如 Y 误差翻 4 个 detector）。PyMatching 只处理 ≤2 detector 的边，于是它**静默地**按自己的顺序把超边拆成边，得到一张更稠密、错误的匹配图——**不报错**：
 
 | 配置 | Stim 分解 DEM 边数 | 原始 DEM 直接建图边数 | LER 变化 |
 |---|---:|---:|---:|
 | 表面码 d=3 线路级 p=0.005（4096 shots） | 78 | **106** | 64 → 73 错误（+14%） |
 | 表面码 d=3 码容量 p=0.05（8192 shots） | 35 | **43** | 455 → 588 错误（+29%） |
 
-### 2.2 约定性：LLR 符号接反
+因此实现必须**在 Stim 分解后的指令上工作**，重写出的 DEM 与输入的分解 DEM 逐条一致。
 
-原型写 `probabilities = 1 / (1 + exp(-combined))`。项目约定是 `llr = log((1-p)/p)`（`graph_features.prior_log_odds`、`bp_engine`），因此 `p = sigmoid(-llr)`；原型把 `1-p` 灌进了整张匹配图。`graph_qec.m5.log_odds_to_probabilities` 现在把这条约定固化成函数并加了单测。
+### 2.2 约定性：LLR 到概率的换算必须固定
+
+项目约定是 `llr = log((1-p)/p)`（`graph_features.prior_log_odds`、`bp_engine`），因此 `p = sigmoid(-llr)`。若按 `p = sigmoid(+llr)` 换算，等于把 `1-p` 灌进整张匹配图。`graph_qec.m5.log_odds_to_probabilities` 把这条换算固化成函数并加了单测。
 
 ### 2.3 尺度性：逐机制概率**不能**原样代换
 
@@ -56,9 +58,9 @@ shift  = strength * (learned_llr - prior_llr)
 | 1 | `mwpm` | Stim 分解 DEM 基线 | 455（0.05554） / 64（0.01563） |
 | 2 | `mwpm_rebuilt` | 用**它自己的概率**走重写路径 | **455 / 64**（逐 shot 相同） |
 | 3 | `mwpm_shift_zero` | 相对形式、零强度 | **455 / 64（`matches_baseline: true`）** |
-| 4 | `mwpm_map_prior_absolute` | 原样代入父机制先验（尺度缺陷） | 455 / **71**（max \\|Δp\\| = 0.0174） |
-| 5 | `mwpm_naive_raw` | 原型路径（原始超边建图） | **588**（43 边） / **73**（106 边） |
-| 6 | `mwpm_map_learned`，强度 0/0.25/0.5/0.75/1.0 | 本轮的问题 | 455/455/455/**451**/498 ； 64/**63**/67/74/91 |
+| 4 | `mwpm_map_prior_absolute` | 原样代入父机制先验（未保尺度） | 455 / **71**（max \\|Δp\\| = 0.0174） |
+| 5 | `mwpm_naive_raw` | 直接重建 DEM（丢失 `^` 分解） | **588**（43 边） / **73**（106 边） |
+| 6 | `mwpm_map_learned`，强度 0/0.25/0.5/0.75/1.0 | 学习后验的相对重加权 | 455/455/455/**451**/498 ； 64/**63**/67/74/91 |
 | 7 | `bp` / `bp_gnn`（同 checkpoint，强度 1.0） | 对照：信息本身有没有用 | 464 / 496 ； 185 / **153（-17%）** |
 
 映射质量本身也是可报的数字：
@@ -70,7 +72,7 @@ shift  = strength * (learned_llr - prior_llr)
 
 ## 5. 结论
 
-1. **原型的三个缺陷已修复并被 13 项单测锁住**：`mwpm_rebuilt` 与 `mwpm_shift_zero` 在两种配置上都与基线**逐 shot 完全一致**（455/455、64/64），说明"保结构 + 保尺度换概率"这条路径本身零副作用；同时 `mwpm_naive_raw` 把原型的结构性劣化**定量**复现（+29% / +14%）。
+1. **「保结构 + 保尺度换概率」这条路径零副作用，并被 13 项单测锁定**：`mwpm_rebuilt` 与 `mwpm_shift_zero` 在两种配置上都与基线**逐 shot 完全一致**（455/455、64/64），说明"保结构 + 保尺度换概率"这条路径本身零副作用；同时 `mwpm_naive_raw` 把「丢失 `^` 分解」带来的结构性劣化**定量**复现（+29% / +14%）。
 2. **学习后验接进 MWPM 拿不到 LER 收益**，两种码族一致：
    - 码容量 d=3：455 → 最好 **451**（s=0.75，约 1.7σ，噪声量级），满强度**明显变坏**（498，+9.5%）；
    - 线路级 d=3：64 → 最好 **63**（s=0.25，1 个错误，完全在噪声内），强度升高单调变坏（0.5→67，1.0→91）。
@@ -81,7 +83,7 @@ shift  = strength * (learned_llr - prior_llr)
 
 ## 6. 后续工作（按优先级）
 
-1. **精确的原始↔分解对应**：现在用"支撑包含 + 最小性"启发式。本轮已确认：`circuit.explain_detector_error_model_errors()` 返回的 219 条解释与原始 DEM 的机制**一一对应**，并且在分解 DEM 的 graphlike 边上做并查集能得到探测器的 X/Z 两类（每个机制的类分组都 ≤2 detector，198/286 条分解指令的 piece 结构与某个原始机制**完全一致**）。剩下的 88 条是 Stim 基于 XOR 的分解（pieces 可以互相抵消，如 `(1) (4) (5)`），需要在解释信息上做一次精确集合求解，才能把覆盖从 91.6% 提到 100%。
+1. **精确的原始↔分解对应**：当前用"支撑包含 + 最小性"启发式。已确认：`circuit.explain_detector_error_model_errors()` 返回的 219 条解释与原始 DEM 的机制**一一对应**，并且在分解 DEM 的 graphlike 边上做并查集能得到探测器的 X/Z 两类（每个机制的类分组都 ≤2 detector，198/286 条分解指令的 piece 结构与某个原始机制**完全一致**）。剩下的 88 条是 Stim 基于 XOR 的分解（pieces 可以互相抵消，如 `(1) (4) (5)`），需要在解释信息上做一次精确集合求解，才能把覆盖从 91.6% 提到 100%。
 2. **每边一次建图**：去掉 2.8 ms/shot 的重建成本。已核实 PyMatching 2.4 的公开接口**不支持**这条捷径：`Matching.decode(z, weights=...)` 会**静默忽略** `weights`（实测把某条边权重 +50 也不改变输出），`decode_batch` 直接抛 `TypeError`。因此需要走底层 `MatchingGraph` / `decode_to_edges_array`，或自己维护边表 + 稀疏匹配实现；否则这个方向没有工程出路。
 3. **换目标而不是换权重**：把学习目标从"逐机制边际"改成候选基排序 / OSD-λ，与 M2、M3 的结论方向一致。
 

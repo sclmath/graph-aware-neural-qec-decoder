@@ -11,9 +11,9 @@ $steps = @(
   @{ name = 'm4_hgp_hamming';         args = @('-m','graph_qec.m4','--config','configs\m4_hgp_hamming7x7_code_capacity_p0p05.json','--output-dir','results\m4_hgp') },
   @{ name = 'surface_cc_d3_to_d5';    args = @('-m','graph_qec.m3','--config','configs\m4_rotated_surface_code_code_capacity_d3.json','--checkpoint',$surf_cc_ckpt,'--output-dir','results\m4_surface_cc','--target-distance','5','--target-rounds','5','--decoders','mwpm','bp','bp_osd','bp_gnn','bp_gnn_osd','--test-shots','8192','--test-seeds','301','302','--timed-runs','1') },
   @{ name = 'hgp_rep3_to_hamming';    args = @('scripts\m4_transfer.py','--source-config','configs\m4_hgp_rep3x3_code_capacity_p0p05.json','--target-config','configs\m4_hgp_hamming7x7_code_capacity_p0p05.json','--checkpoint',$hgp_rep_ckpt,'--output-dir','results\m4') },
-  @{ name = 'm2_d5_eval_fixed';       args = @('-m','graph_qec.m3','--config','configs\m2_learned_basis_repetition_circuit_level_d5.json','--checkpoint','results\m2\m2_learned_basis_repetition_circuit_level_d5__d5__circuit_level__p0p01__train_only\model_state.pt','--output-dir','results\m3_fixed','--tag','m2_d5_eval_fixed','--decoders','mwpm','bp','bp_osd','bp_gnn','bp_gnn_osd','--timed-runs','1') },
+  @{ name = 'm2_d5_eval';       args = @('-m','graph_qec.m3','--config','configs\m2_learned_basis_repetition_circuit_level_d5.json','--checkpoint','results\m2\m2_learned_basis_repetition_circuit_level_d5__d5__circuit_level__p0p01__train_only\model_state.pt','--output-dir','results\m3','--tag','m2_d5_eval','--decoders','mwpm','bp','bp_osd','bp_gnn','bp_gnn_osd','--timed-runs','1') },
   @{ name = 'surface_sweep';          args = @('scripts\m4_surface_sweep.py','--distances','3','5','--shots','16384') },
-  @{ name = 'm5_quantization';        args = @('scripts\m5_quantization.py','--config','configs\m3_learned_basis_repetition_circuit_level_d3.json','--checkpoint','results\m3_fixed\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\model_state.pt') }
+  @{ name = 'm5_quantization';        args = @('scripts\m5_quantization.py','--config','configs\m3_learned_basis_repetition_circuit_level_d3.json','--checkpoint','results\m3\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\model_state.pt') }
 )
 foreach ($step in $steps) {
   $log = "results\logs\$($step.name).log"

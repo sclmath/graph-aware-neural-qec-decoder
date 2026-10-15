@@ -1,5 +1,5 @@
 {
-  "converged_shots": 32304,
+  "converged_shots": 32480,
   "experiment": {
     "distance": 3,
     "noise_model": "circuit_level",
@@ -8,35 +8,35 @@
   },
   "non_converged_buckets": [
     {
-      "bp_errors": 120,
-      "broken": 62,
-      "osd_errors": 145,
-      "rescued": 37,
-      "shots": 232,
+      "bp_errors": 154,
+      "broken": 88,
+      "osd_errors": 175,
+      "rescued": 67,
+      "shots": 288,
       "syndrome_weight": "1"
     },
     {
-      "bp_errors": 17,
-      "broken": 41,
-      "osd_errors": 58,
+      "bp_errors": 0,
+      "broken": 0,
+      "osd_errors": 0,
       "rescued": 0,
-      "shots": 161,
+      "shots": 0,
       "syndrome_weight": "2"
     },
     {
-      "bp_errors": 36,
-      "broken": 31,
-      "osd_errors": 52,
-      "rescued": 15,
-      "shots": 67,
+      "bp_errors": 0,
+      "broken": 0,
+      "osd_errors": 0,
+      "rescued": 0,
+      "shots": 0,
       "syndrome_weight": "3"
     },
     {
       "bp_errors": 0,
-      "broken": 2,
-      "osd_errors": 2,
+      "broken": 0,
+      "osd_errors": 0,
       "rescued": 0,
-      "shots": 4,
+      "shots": 0,
       "syndrome_weight": "4"
     },
     {
@@ -48,78 +48,78 @@
       "syndrome_weight": "5+"
     }
   ],
-  "non_converged_shots": 464,
+  "non_converged_shots": 288,
   "policy": [
     {
-      "logical_error_rate": 0.012420654296875,
-      "logical_errors": 407,
-      "osd_rate": 0.01416015625,
-      "osd_shots": 464,
+      "logical_error_rate": 0.010162353515625,
+      "logical_errors": 333,
+      "osd_rate": 0.0087890625,
+      "osd_shots": 288,
       "syndrome_consistency_rate": 1.0,
       "threshold": 0
     },
     {
-      "logical_error_rate": 0.01165771484375,
-      "logical_errors": 382,
-      "osd_rate": 0.007080078125,
-      "osd_shots": 232,
-      "syndrome_consistency_rate": 0.992919921875,
+      "logical_error_rate": 0.009521484375,
+      "logical_errors": 312,
+      "osd_rate": 0.0,
+      "osd_shots": 0,
+      "syndrome_consistency_rate": 0.9912109375,
       "threshold": 1
     },
     {
-      "logical_error_rate": 0.010406494140625,
-      "logical_errors": 341,
-      "osd_rate": 0.002166748046875,
-      "osd_shots": 71,
-      "syndrome_consistency_rate": 0.988006591796875,
+      "logical_error_rate": 0.009521484375,
+      "logical_errors": 312,
+      "osd_rate": 0.0,
+      "osd_shots": 0,
+      "syndrome_consistency_rate": 0.9912109375,
       "threshold": 2
     },
     {
-      "logical_error_rate": 0.009918212890625,
-      "logical_errors": 325,
-      "osd_rate": 0.0001220703125,
-      "osd_shots": 4,
-      "syndrome_consistency_rate": 0.9859619140625,
+      "logical_error_rate": 0.009521484375,
+      "logical_errors": 312,
+      "osd_rate": 0.0,
+      "osd_shots": 0,
+      "syndrome_consistency_rate": 0.9912109375,
       "threshold": 3
     },
     {
-      "logical_error_rate": 0.009857177734375,
-      "logical_errors": 323,
+      "logical_error_rate": 0.009521484375,
+      "logical_errors": 312,
       "osd_rate": 0.0,
       "osd_shots": 0,
-      "syndrome_consistency_rate": 0.98583984375,
+      "syndrome_consistency_rate": 0.9912109375,
       "threshold": 4
     },
     {
-      "logical_error_rate": 0.009857177734375,
-      "logical_errors": 323,
+      "logical_error_rate": 0.009521484375,
+      "logical_errors": 312,
       "osd_rate": 0.0,
       "osd_shots": 0,
-      "syndrome_consistency_rate": 0.98583984375,
+      "syndrome_consistency_rate": 0.9912109375,
       "threshold": 6
     },
     {
-      "logical_error_rate": 0.009857177734375,
-      "logical_errors": 323,
+      "logical_error_rate": 0.009521484375,
+      "logical_errors": 312,
       "osd_rate": 0.0,
       "osd_shots": 0,
-      "syndrome_consistency_rate": 0.98583984375,
+      "syndrome_consistency_rate": 0.9912109375,
       "threshold": 8
     },
     {
-      "logical_error_rate": 0.009857177734375,
-      "logical_errors": 323,
+      "logical_error_rate": 0.009521484375,
+      "logical_errors": 312,
       "osd_rate": 0.0,
       "osd_shots": 0,
-      "syndrome_consistency_rate": 0.98583984375,
+      "syndrome_consistency_rate": 0.9912109375,
       "threshold": 12
     },
     {
-      "logical_error_rate": 0.009857177734375,
-      "logical_errors": 323,
+      "logical_error_rate": 0.009521484375,
+      "logical_errors": 312,
       "osd_rate": 0.0,
       "osd_shots": 0,
-      "syndrome_consistency_rate": 0.98583984375,
+      "syndrome_consistency_rate": 0.9912109375,
       "threshold": 1000000
     }
   ],

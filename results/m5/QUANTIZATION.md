@@ -1,6 +1,6 @@
 # M5: float32 versus dynamic int8 GNN inference
 
-Checkpoint: `results\m3_fixed\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\model_state.pt`  
+Checkpoint: `results\m3\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\model_state.pt`  
 Test shots: 16384, batch size 1024, best of 3 runs.
 
 | model | parameters (MB) | inference (s) | us/shot | mechanism log loss |

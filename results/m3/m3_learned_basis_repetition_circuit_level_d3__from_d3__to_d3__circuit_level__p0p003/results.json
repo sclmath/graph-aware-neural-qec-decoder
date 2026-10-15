@@ -93,12 +93,12 @@
         "num_nodes": 8
       },
       "latency": {
-        "mean_per_shot_microseconds": 0.14562377925741998,
-        "mean_total_seconds": 0.004771799998707138,
+        "mean_per_shot_microseconds": 0.14035644529952762,
+        "mean_total_seconds": 0.004599199999574921,
         "run_seconds": [
-          0.004771799998707138
+          0.004599199999574921
         ],
-        "throughput_shots_per_second": 6867010.354348065,
+        "throughput_shots_per_second": 7124717.342804959,
         "timed_runs": 1
       },
       "logical_error_rate": 0.000823974609375,
@@ -110,107 +110,111 @@
     {
       "decoder": "bp",
       "diagnostics": {
-        "average_final_syndrome_distance": 0.002197265625,
-        "average_iterations": 0.18634033203125,
-        "converged_shots": 32708,
-        "convergence_rate": 0.9981689453125,
+        "average_final_syndrome_distance": 0.000885009765625,
+        "average_iterations": 0.155975341796875,
+        "converged_shots": 32739,
+        "convergence_rate": 0.999114990234375,
+        "engine": "batched_min_sum",
         "prior_llr_override": false
       },
       "latency": {
-        "mean_per_shot_microseconds": 78.85133666996057,
-        "mean_total_seconds": 2.5838006000012683,
+        "mean_per_shot_microseconds": 2.5980041504225504,
+        "mean_total_seconds": 0.08513140000104613,
         "run_seconds": [
-          2.5838006000012683
+          0.08513140000104613
         ],
-        "throughput_shots_per_second": 12682.093192479293,
+        "throughput_shots_per_second": 384910.85544930934,
         "timed_runs": 1
       },
-      "logical_error_rate": 0.001312255859375,
-      "logical_error_rate_standard_error": 0.00019998579691500284,
-      "logical_errors": 43,
-      "prediction_sha256": "cc8157efccc13a069f58ec7fee49cd3114700caa19f472d17ee59eae7ff5d08f",
-      "syndrome_consistency_rate": 0.9981689453125
+      "logical_error_rate": 0.00103759765625,
+      "logical_error_rate_standard_error": 0.00017785418758304433,
+      "logical_errors": 34,
+      "prediction_sha256": "a79343f78296b1cb6476125bb856380adc2506870a7eeac8a705be7a4980d576",
+      "syndrome_consistency_rate": 0.999114990234375
     },
     {
       "decoder": "bp_osd",
       "diagnostics": {
-        "average_iterations": 0.18634033203125,
+        "average_iterations": 0.155975341796875,
         "average_osd_rank": 8.0,
-        "converged_shots": 32708,
-        "convergence_rate": 0.9981689453125,
+        "converged_shots": 32739,
+        "convergence_rate": 0.999114990234375,
+        "engine": "batched_min_sum",
         "forced_osd": false,
         "osd_order": 0,
         "osd_ordering_override": false,
-        "osd_rate": 0.0018310546875,
-        "osd_shots": 60,
+        "osd_rate": 0.000885009765625,
+        "osd_shots": 29,
         "prior_llr_override": false
       },
       "latency": {
-        "mean_per_shot_microseconds": 97.05882263183474,
-        "mean_total_seconds": 3.1804234999999608,
+        "mean_per_shot_microseconds": 2.89976196288233,
+        "mean_total_seconds": 0.0950193999997282,
         "run_seconds": [
-          3.1804234999999608
+          0.0950193999997282
         ],
-        "throughput_shots_per_second": 10303.03039831029,
+        "throughput_shots_per_second": 344855.89258713205,
         "timed_runs": 1
       },
-      "logical_error_rate": 0.00140380859375,
-      "logical_error_rate_standard_error": 0.00020683495375578394,
-      "logical_errors": 46,
-      "prediction_sha256": "6927627987c1cf18b247cea59980f4c863a68eb99491007513cd040758175bc9",
+      "logical_error_rate": 0.001068115234375,
+      "logical_error_rate_standard_error": 0.0001804479800870309,
+      "logical_errors": 35,
+      "prediction_sha256": "0e1fe9c3175e0243e658c67d7fdd304c983c0b55d7c4265df09709b641b59743",
       "syndrome_consistency_rate": 1.0
     },
     {
       "decoder": "bp_gnn",
       "diagnostics": {
-        "average_final_syndrome_distance": 0.003662109375,
-        "average_iterations": 0.251007080078125,
-        "converged_shots": 32652,
-        "convergence_rate": 0.9964599609375,
+        "average_final_syndrome_distance": 0.000762939453125,
+        "average_iterations": 0.1192626953125,
+        "converged_shots": 32743,
+        "convergence_rate": 0.999237060546875,
+        "engine": "batched_min_sum",
         "prior_llr_override": true
       },
       "latency": {
-        "mean_per_shot_microseconds": 81.53617553707804,
-        "mean_total_seconds": 2.671777399998973,
+        "mean_per_shot_microseconds": 2.244491577096941,
+        "mean_total_seconds": 0.07354749999831256,
         "run_seconds": [
-          2.671777399998973
+          0.07354749999831256
         ],
-        "throughput_shots_per_second": 12264.494789128987,
+        "throughput_shots_per_second": 445535.19835143024,
         "timed_runs": 1
       },
-      "logical_error_rate": 0.00244140625,
-      "logical_error_rate_standard_error": 0.0002726241130730803,
-      "logical_errors": 80,
-      "prediction_sha256": "a93081aa90868d6570082723d810403e60e0b0f798ca8d3adee0455a1430529d",
-      "syndrome_consistency_rate": 0.9964599609375
+      "logical_error_rate": 0.0009765625,
+      "logical_error_rate_standard_error": 0.00017254917721402956,
+      "logical_errors": 32,
+      "prediction_sha256": "47b59a60ebed1ef11290f2723810ec0b20dd8464cc8d79efff9e5ee71173fe54",
+      "syndrome_consistency_rate": 0.999237060546875
     },
     {
       "decoder": "bp_gnn_osd",
       "diagnostics": {
-        "average_iterations": 0.251007080078125,
+        "average_iterations": 0.1192626953125,
         "average_osd_rank": 8.0,
-        "converged_shots": 32652,
-        "convergence_rate": 0.9964599609375,
+        "converged_shots": 32743,
+        "convergence_rate": 0.999237060546875,
+        "engine": "batched_min_sum",
         "forced_osd": false,
         "osd_order": 0,
         "osd_ordering_override": false,
-        "osd_rate": 0.0035400390625,
-        "osd_shots": 116,
+        "osd_rate": 0.000762939453125,
+        "osd_shots": 25,
         "prior_llr_override": true
       },
       "latency": {
-        "mean_per_shot_microseconds": 84.50390014647091,
-        "mean_total_seconds": 2.769023799999559,
+        "mean_per_shot_microseconds": 2.3457489013445354,
+        "mean_total_seconds": 0.07686549999925774,
         "run_seconds": [
-          2.769023799999559
+          0.07686549999925774
         ],
-        "throughput_shots_per_second": 11833.773331960967,
+        "throughput_shots_per_second": 426303.0878653808,
         "timed_runs": 1
       },
-      "logical_error_rate": 0.00341796875,
-      "logical_error_rate_standard_error": 0.00032241527016231504,
-      "logical_errors": 112,
-      "prediction_sha256": "43a498694f2fffd1c46a094920826405327f43f1c8b6e5f7647856fb5347dd5c",
+      "logical_error_rate": 0.001129150390625,
+      "logical_error_rate_standard_error": 0.00018552634837284564,
+      "logical_errors": 37,
+      "prediction_sha256": "552ebcdee2b1063ee5e708aaf2aa538f7b7781817c5e13852decda6829bd2117",
       "syndrome_consistency_rate": 1.0
     }
   ],
@@ -250,7 +254,7 @@
     }
   },
   "stage": "M3-transfer",
-  "total_seconds": 39.51202299999932,
+  "total_seconds": 18.66602149999926,
   "transfer": {
     "reweight_strength": 1.0,
     "source_experiment": {

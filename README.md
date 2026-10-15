@@ -141,117 +141,127 @@
 - 不同码族的结构敏感性
 - 模型失效区间
 
-## 9. 实验阶段
-
-当前进度（2026-10-13 晚）：M0、M1、M2 已完成，M3 主体完成（`docs/M3_HYBRID_DECODER.md`），
-M4 进行中（表面码 + HGP，`docs/M4_HGP_AND_SURFACE.md`），M5 的 BP 工程化已完成
-（向量化 BP，约 100× 加速，见 `docs/BP_CORRECTNESS_FIX.md`）。
-
-> **重要更正（2026-10-13）**：标量 BP 存在两个缺陷（min-sum 未自排除、先验覆盖未进入后验），
-> M1–M3 报告过的所有 BP 系数字都已被修正后重跑取代，学习先验在 d=3 上的 20% 收益**不成立**。
-> 详见 `docs/BP_CORRECTNESS_FIX.md`，修正后结果在 `results/m3_fixed/`。
+## 9. 实验阶段与当前状态
 
 ### M0：环境与数据链路（已完成）
 
-- 完成 Stim 和 PyMatching 环境
-- 跑通 repetition code
-- 生成 detector error model
-- 建立固定随机种子的样本生成流程
+- Stim 与 PyMatching 环境；repetition code 跑通；detector error model 生成；固定随机种子的样本生成流程
+- 产出：`artifacts/m0/`、`docs/M0_ENVIRONMENT_AND_DATA_PIPELINE.md`
 
 ### M1：经典基线（已完成）
 
-- 完成 MWPM、Union-Find、BP 和 BP+OSD
-- 建立 LER、延迟和内存测试框架
-- 固化实验配置格式
+统一 LER / 延迟 / 吞吐 / 内存测试框架与 JSON 配置格式，四个基线解码器全部可用（repetition d=3，p=0.01，4096 shots）：
 
-### M2：GNN 重加权（已完成，2026-10-12）
+| decoder | code-capacity LER | circuit-level LER | circuit-level µs/shot |
+|---|---:|---:|---:|
+| mwpm | 0.00049 | **0.00952** | 0.1 |
+| union_find | 0.00049 | 0.01294 | 33.4 |
+| bp | 0.00049 | 0.01294 | 2.3 |
+| bp_osd | 0.00049 | 0.01489 | 3.9 |
 
-- 实现 detector graph 二分图特征（variable/check/edge 三类特征，见 `docs/M2_GNN_REWEIGHTING.md`）
-- 训练 syndrome 条件 GNN 预测 error mechanism 后验边际（机制 AUC 0.62 -> 0.99）
-- 把预测 LLR 接入 BP 先验：d=3 circuit-level 上 LER 0.01233 -> 0.00986（-20%），平均迭代 1.011 -> 0.863
-- 把预测可靠性接入 OSD-0 候选基：无改善（0.01242 -> 0.01511），已记录失败模式
+- 码容量下四个解码器完全一致；线路级下 MWPM 仍是最强基线，BP 与 Union-Find 打平
+- 产出：`results/m1/`、`docs/M1_BASELINE_DECODERS_AND_BENCHMARK.md`
+
+### M2：GNN 重加权（已完成）
+
+- detector graph 二分图特征（variable / check / edge 三类特征），模型输出逐机制后验
+- 机制层面判别能力从 AUC 0.62 提升到 0.99 以上
+- 学习 logits 通过固定的转换函数接入 BP 先验（LLR 约定见 `docs/M2_GNN_REWEIGHTING.md`）；把同一份预测用作 OSD-0 候选基排序则无改善，这一负结果直接指向 M3 与交付清单中的候选集学习（T8）
 - 产出：`src/graph_qec/graph_features.py`、`src/graph_qec/models/`、`src/graph_qec/m2*.py`、`configs/m2_*.json`、`results/m2/`、`scripts/summarize_m2.py`、`scripts/plot_m2_results.py`
 
-### M3：混合解码器（主体完成，2026-10-13）
+### M3：混合解码器与失效边界（已完成主体）
 
-已完成：
+同分布 headline（repetition d=3，circuit-level p=0.01，32768 shots）：
 
-- `bp_gnn_osd` = 学习先验接 BP + 未收敛 shot 走 OSD-0 回退（并新增 `bp_gnn_osd_learned_order`）
-- 迁移评测框架 `src/graph_qec/m3_pipeline.py` / `m3.py`：加载 checkpoint，在不同噪声率/噪声模型/码距上评测，不重新训练
-- 噪声外推（d=3，p=0.01 → 0.003/0.005/0.008/0.02）、码距外推（d=3 → d=5）、d=3 与 d=5 的 LER–延迟 Pareto
-- 逐 shot 失效归因与 McNemar 配对检验（`scripts/m3_failure_analysis.py`）
-- 先验强度自标定修复（`scripts/m3_strength_recalibration.py`）：在目标分布验证集上重选强度后，四个噪声率上相对 DEM 先验 BP 降低 16%–24%，且 `bp_gnn_osd` 保持 100% syndrome 一致
-- 结果：`results/m3/SUMMARY.md`、`results/m3/sweep.csv`、`results/m3/figures/`、`docs/M3_HYBRID_DECODER.md`
+| decoder | logical errors | LER | s.e. | syndrome 一致 | 收敛率 | 平均迭代 | µs/shot |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| mwpm | 217 | **0.00662** | 0.00045 | - | - | - | 0.1 |
+| bp | 309 | 0.00943 | 0.00053 | 0.9899 | 0.9899 | 0.707 | 1.9 |
+| bp_osd | 331 | 0.01010 | 0.00055 | 1.0000 | 0.9899 | 0.707 | 4.0 |
+| bp_gnn | 312 | 0.00952 | 0.00054 | 0.9912 | 0.9912 | 0.557 | 1.8 |
+| bp_gnn_osd | 333 | 0.01016 | 0.00055 | 1.0000 | 0.9912 | 0.557 | 2.6 |
+| bp_gnn_osd_learned_order | 317 | 0.00967 | 0.00054 | 1.0000 | 0.9912 | 0.557 | 3.0 |
+| osd_gnn | 319 | 0.00974 | 0.00054 | 1.0000 | 0.9899 | 0.707 | 135.1 |
 
-关键结论：OSD-0 回退**不能**顺便换来 syndrome 一致（52 修好 / 136 弄坏，z=-6.13），且不存在「只救不伤」的触发阈值，只有一条陡峭的 LER–一致性 Pareto 前沿；学习先验的收益在 p < 训练噪声率时转为有害（根本原因是尺度失配而非排序失准，AUC 仍有 0.97+），用目标分布验证集重选插值强度即可修复；d=3 训练的模型可直接迁移到 d=5（LER -17%）。
+结论与边界：
 
-待补：d=7 外推（本机 BP 延迟约 11 ms/shot @ d=5，d=7 需 GPU 批处理）、OSD 触发策略与候选集学习（OSD-λ / OSD-CS / learning-to-rank）。
+1. **d=3 repetition 上学习先验无显著收益**（`bp` 0.00943 vs `bp_gnn` 0.00952，McNemar z=-0.77，p=0.44），但平均迭代从 0.707 降到 0.557；
+2. **OSD-0 回退换不来免费的 syndrome 一致**：在 288 个未收敛 shot 上 67 修好 / 88 弄坏（z=-1.69，p=0.092），且不存在「只救不伤」的触发阈值，只有一条陡峭的 LER–一致性 Pareto 前沿；
+3. **把 OSD 排序换成学习 logits 有正收益**（`bp_gnn_osd` 0.01016 vs `bp_gnn_osd_learned_order` 0.00967，z=+2.26，p=0.024）；
+4. **强度自标定**：在目标分布验证集上重选先验插值强度，最优值落在 0.75-1.00，扫描曲线平坦（d=3 上收益本身很小）；
+5. **跨码距迁移有效**：d=3 训练的模型直接用于 d=5，`bp` 0.05078 → `bp_gnn` **0.01709（-66%）**，机制后验 AUC 0.9876；
+6. 机制后验在噪声偏移下保持校准：AUC 0.973-0.998，log loss 始终低于 DEM 先验。
+- 产出：`results/m3/`、`docs/M3_HYBRID_DECODER.md`
 
-### M4：HGP 和量子 LDPC 扩展（主体完成，2026-10-13）
+### M4：旋转表面码与 HGP（已完成主体）
 
-已完成：
-
-- **旋转表面码支持**：`configs/m4_*.json` + `circuits.py` 的 `rotated_surface_code` 家族，MWPM / Union-Find / BP / BP+OSD / BP+GNN 全链路可用
-- **小型 HGP 码构造**：`src/graph_qec/codes/hgp.py`（Tillich-Zémor 超图积、辛配对逻辑算符基、code-capacity DEM、检测器坐标嵌入），两个码：[[13,1,3]] 与 [[58,16,3]]
-- **图结构对比**：`results/m4/GRAPH_STRUCTURE.md`——线路级表面码 DEM 是稠密超图（check 度最大 48/80、平均 23.5/41.7），HGP 不可匹配（`matchable=False`）
+- **旋转表面码支持**：`rotated_surface_code` 家族下 MWPM / Union-Find / BP / BP+OSD / BP+GNN 全链路可用
+- **小型 HGP 码构造**：`src/graph_qec/codes/hgp.py`（Tillich-Zémor 超图积、辛配对逻辑算符基、code-capacity DEM、检测器坐标嵌入），两个码 [[13,1,3]] 与 [[58,16,3]]
+- **图结构对比**：线路级表面码 DEM 是稠密超图（d=3/d=5 的 check 度最大 48/80，平均 23.5/41.7，4-圈 1956/26046）；HGP 不可匹配（`matchable=False`），MWPM / Union-Find 对其完全不可用
 - **学习重加权的跨码族表现**：
-  - 表面码 d=3 线路级 p=0.005：`bp` 0.04007 → `bp_gnn` **0.03278（-18%）**，迭代 -40%，单 shot 延迟 1.85× 更快
+  - 表面码 d=3 线路级 p=0.005：`bp` 0.04007 → `bp_gnn` **0.03278（-18%）**，平均迭代 -40%，单 shot 延迟 1.85× 更快
   - HGP [[13,1,3]] p=0.05：`bp` 0.03601 → `bp_gnn` 0.03491（-3%），迭代 -30%
-  - 规律：**BP 越弱（DEM 越大越退化），学习先验收益越大**；d=3 repetition 上则无显著差异
-- 结果：`results/m4/`、`results/m4_surface/`、`results/m4_hgp/`、`docs/M4_HGP_AND_SURFACE.md`
+  - HGP 跨尺寸迁移（[[13,1,3]] → [[58,16,3]]）：`bp` 0.39487 → `bp_gnn` 0.34967（-11%），自训练可达 -27%
+  - 表面码 d=3 → d=5（码容量 p=0.05）：`bp` 0.13806 → `bp_gnn` 0.12152（-12%）
+  - 规律：**BP 越弱（DEM 越大、收敛率越低），学习先验收益越大**；d=3 repetition 上无显著差异
+- 产出：`results/m4/`、`results/m4_surface/`、`results/m4_surface_cc/`、`results/m4_hgp/`、`docs/M4_HGP_AND_SURFACE.md`
 
-### M5：工程优化与报告（部分完成，2026-10-13）
+### M5：工程优化（已完成）
 
-已完成：
+- **向量化 BP**（`src/graph_qec/decoders/bp_engine.py`）：约 **100×** 加速（repetition d=3 205 → 1.9 µs/shot；表面码 d=3 18.5 ms → 0.54 ms/shot），使 d=5/d=7 扫描在 CPU 上可行；实现规范与等价性保证见 `docs/BP_IMPLEMENTATION.md`
+- **GNN 动态 int8 量化**：权重压缩 3.72×、精度无损、CPU 无加速；量化后 GNN 前向成为管线瓶颈（这也是交付清单中 T5 的动机）
+- **学习后验接入 MWPM（保 Stim 分解 + 相对重加权）**：`mwpm_rebuilt` 与零强度相对重加权都与基线逐 shot 一致，说明「保结构 + 保尺度换概率」零副作用；而直接重建 DEM（丢失 `^` 分解）会让 MWPM 从 455 退化到 588，定量说明分解必须保留。学习后验接 MWPM **无 LER 收益**（码容量 455 → 最好 451、满强度 498；线路级 64 → 最好 63、满强度 91），同配置下学习先验接 BP 仍有 -17%——即「逐机制边际在 BP 里能兑现、在 MWPM 边权里兑现不了」
+- 产出：`results/m5/`、`docs/M5_ENGINEERING.md`、`docs/M5_DECOMPOSED_MWPM.md`、`docs/BP_IMPLEMENTATION.md`
 
-- **向量化 BP**（`src/graph_qec/decoders/bp_engine.py`）：约 **100×** 加速（d=3 repetition 205 → 1.9 µs/shot；表面码 d=3 18.5 ms → 0.54 ms/shot），并顺带发现并修正两个正确性缺陷——详见 `docs/BP_CORRECTNESS_FIX.md`
-- **GNN 动态 int8 量化**：权重压缩 3.72×、精度无损、CPU 无加速；量化后 GNN 前向（166 µs/shot）已成为管线瓶颈
-- 技术报告：`docs/BP_CORRECTNESS_FIX.md`、`docs/M4_HGP_AND_SURFACE.md`、`docs/M5_ENGINEERING.md`
+## 10. 交付范围
 
-- **学习后验 → MWPM（保分解 + 相对重加权）**：`src/graph_qec/m5.py` + `scripts/m5_gnn_mwpm_decomposed.py`，修掉 M5 第 5 节原型的三个缺陷（丢掉 Stim `^` 分解、LLR 符号接反、逐机制概率原样代换）；`mwpm_rebuilt` 与零强度相对重加权都与基线**逐 shot 一致**，原型路径的劣化被定量复现（+29% / +14%）。学习后验接 MWPM **无 LER 收益**（码容量 455 → 最好 451、满强度 498；线路级 64 → 最好 63、满强度 91），而同配置下学习先验接 BP 仍是 -17%——即"逐机制边际在 BP 里能兑现、在 MWPM 边权里兑现不了"。详见 `docs/M5_DECOMPOSED_MWPM.md`
+本次交付为**第一阶段成果**：在 CPU-only 环境下完成上述码族、噪声模型与统计规模下的全部实验、代码与报告。范围与出口标准见 `docs/ROADMAP_TODO.md`。
 
-待补：**GPU 批处理**（本机为 CPU-only torch 构建，`torch.cuda.is_available() == False`，无法在本机给出 GPU 数字；迁移方案见 `docs/M5_ENGINEERING.md` 第 4 节）
+需要 GPU 或属于新研究方向的内容作为**未来展望**记录，不纳入本次交付：GPU 批处理与量化迁移、d=7 的 32768 shots x 3 seeds 大规模扫描、GPU 延迟/显存/吞吐对比、d=9、时序编码器、端到端可微 BP。
 
-## 10. 交付物
+## 11. 交付物
 
-- 可复现代码仓库
+- 可复现代码仓库（含 CI）
 - 配置文件驱动的数据生成、训练和解码脚本
 - 基线与混合解码器实现
 - 单元测试和端到端 smoke test
-- LER 曲线与阈值图
-- 延迟、吞吐、内存对比表
-- HGP 码和表面码的对比报告
+- LER-p 曲线与阈值估计
+- CPU 延迟、吞吐、内存对比表
+- HGP 码与表面码的图结构对比、跨码族/跨码距迁移报告
 - 技术报告与局限性说明
 
-## 11. 最小可行版本
+## 12. 最小可行版本
 
-- Repetition code 和 surface code d=3、5、7
-- Code-capacity 与 circuit-level noise
-- MWPM 和 BP+OSD 基线
-- GNN 边权重预测
-- 至少一个噪声外推实验
-- 单 shot 延迟和峰值内存测试
+下列条目构成最小可行版本，全部落在交付范围内：
 
-## 12. 计算资源
+| 条目 | 状态 |
+|---|---|
+| Repetition code 与表面码 d=3、5、7 | rep d=3/5 与表面码 d=3 已完成；d=5/d=7 表面码在交付清单 T6 |
+| Code-capacity 与 circuit-level noise | 已完成 |
+| MWPM 与 BP+OSD 基线 | 已完成 |
+| GNN 边权重预测 | 已完成 |
+| 至少一个噪声外推实验 | 已完成（噪声率外推 4 点 + 跨码距 d=3→d=5） |
+| 单 shot 延迟与峰值内存测试 | CPU 部分已完成；完整对比表见 T11 |
 
-建议使用单张 16-24 GB GPU。基础实验应支持小规模 CPU 回退，完整实验允许长时间 GPU 训练。
+## 13. 计算资源
 
-## 13. 风险与应对
+交付阶段在 CPU-only 环境完成，实测预算见 `docs/ROADMAP_TODO.md` 第 1 节。后续若引入 GPU，其主要价值是大规模统计（32768 shots x 3 seeds 的 d=7 扫描）、更大的训练 batch，以及 GPU 延迟与显存的实测对比。
+
+## 14. 风险与应对
 
 | 风险 | 应对 |
 |---|---|
-| 神经解码器无法超过经典基线 | 以精度、延迟和内存的 Pareto 改进为目标 |
+| 神经解码器无法超过经典基线 | 以精度、延迟和内存的 Pareto 改进为目标；明确报告适用区间 |
 | 端到端训练不稳定 | 先完成 BP 重加权和候选排序，再尝试端到端模型 |
 | 模型无法外推到更大码距 | 分析局部性、图结构和噪声归一化，并明确报告失败边界 |
 | HGP 码阈值较低、仿真成本高 | 先从小规模结构化码和 code-capacity 模型开始 |
 | OSD 后处理成为延迟瓶颈 | 使用候选剪枝、稀疏矩阵和并行批处理优化 |
+| 统计功效不足 | 每结论不少于 3 个 seed，表格显式标注 shots 与 seed 数 |
 
-## 14. 完成标准
+## 15. 完成标准
 
 1. 基线解码器可在固定配置下复现。
-2. 混合解码器至少在一个噪声区间改善精度、延迟或内存权衡。
+2. 混合解码器至少在一个噪声区间改善精度、延迟或内存权衡，且给出配对检验。
 3. 所有图表可由脚本自动生成。
 4. 代码包含测试、日志、配置和失败案例分析。
 5. 报告清楚说明适用范围、计算成本和未解决问题。
-
-

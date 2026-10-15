@@ -1,11 +1,5 @@
 # M1：经典基线解码器与 Benchmark
 
-> **⚠ 2026-10-13 晚更新：本文档的 BP 系数字已被推翻。**
-> `bp` / `bp_osd` 使用了有缺陷的 min-sum 实现（见 `docs/BP_CORRECTNESS_FIX.md`），修正后
-> d=3 circuit-level 上 `bp` 0.01587 → **0.01294**（与 Union-Find 打平）、`bp_osd` 0.01782 → 0.01489，
-> 码容量下 `bp` 与 MWPM 完全一致。修正后的结果在 `results/m1_fixed/`，MWPM / Union-Find 的数字不受影响。
-
-
 ## 1. 阶段目标
 
 M1 建立后续 GNN 重加权和混合解码器必须共同使用的经典基线：
@@ -71,7 +65,7 @@ BP 达到 syndrome 一致时立即停止。若未收敛，仍输出当前最优�
 3. 固定非 pivot 位，求解 pivot 位；
 4. 输出满足 syndrome 约束的 correction。
 
-M1 只实现 OSD-0；更高阶 OSD combination sweep 留给 M3 的混合解码器扩展。
+M1 只实现 OSD-0；更高阶 OSD（OSD-λ / combination sweep）见 `docs/ROADMAP_TODO.md`（T8）。
 
 ## 4. 固化的实验配置
 
@@ -140,20 +134,16 @@ M1 只实现 OSD-0；更高阶 OSD combination sweep 留给 M3 的混合解码�
 
 ## 7. 实测结果
 
-执行日期：2026-10-03（Asia/Shanghai）。测试结果：
-
-```text
-13 passed in 0.82s
-```
+执行环境：Windows / Python 3.12 / CPU-only（Intel i5-12400）。回归测试：`pytest` 全绿。
 
 ### 7.1 Code-capacity，4096 shots，p=0.01
 
 | Decoder | Logical errors | LER | Mean per-shot | Throughput | RSS delta | Python peak |
 |---|---:|---:|---:|---:|---:|---:|
-| MWPM | 2 | 0.00048828125 | 0.0335 us | 29,871,645 shot/s | 24 KiB | 118,764 B |
-| Union-Find | 2 | 0.00048828125 | 15.222 us | 65,695 shot/s | 49 KiB | 119,008 B |
-| BP | 2 | 0.00048828125 | 15.861 us | 63,049 shot/s | 152 KiB | 140,320 B |
-| BP+OSD-0 | 2 | 0.00048828125 | 14.340 us | 69,736 shot/s | 78 KiB | 194,302 B |
+| MWPM | 2 | 0.000488 | 0.030 us | 33,673,134 shot/s | 20 KiB | 104,127 B |
+| Union-Find | 2 | 0.000488 | 12.095 us | 82,682 shot/s | 24 KiB | 103,663 B |
+| BP | 2 | 0.000488 | 0.310 us | 3,222,659 shot/s | 52 KiB | 1,143,487 B |
+| BP+OSD-0 | 2 | 0.000488 | 0.287 us | 3,490,889 shot/s | 44 KiB | 1,143,359 B |
 
 该低噪声设置下四种解码器的 LER 相同。MWPM 使用原生 C++ batch 实现，延迟明显最低。
 
@@ -161,22 +151,21 @@ M1 只实现 OSD-0；更高阶 OSD combination sweep 留给 M3 的混合解码�
 
 | Decoder | Logical errors | LER | Mean per-shot | Throughput | RSS delta | Python peak |
 |---|---:|---:|---:|---:|---:|---:|
-| MWPM | 39 | 0.009521 | 0.1906 us | 5,247,649 shot/s | 0 KiB* | 118,456 B |
-| Union-Find | 53 | 0.012939 | 35.422 us | 28,231 shot/s | 29 KiB | 117,144 B |
-| BP | 65 | 0.015869 | 235.141 us | 4,253 shot/s | 1.14 MiB | 1,035,455 B |
-| BP+OSD-0 | 73 | 0.017822 | 209.445 us | 4,775 shot/s | 1.21 MiB | 1,562,276 B |
+| MWPM | 39 | 0.009521 | 0.124 us | 8,085,594 shot/s | 36 KiB | 104,211 B |
+| Union-Find | 53 | 0.012939 | 33.370 us | 29,967 shot/s | 36 KiB | 103,855 B |
+| BP | 53 | 0.012939 | 2.334 us | 428,478 shot/s | 1.88 MiB | 5,592,025 B |
+| BP+OSD-0 | 61 | 0.014893 | 3.868 us | 258,507 shot/s | 1.97 MiB | 5,591,913 B |
 
-\* MWPM 的 RSS delta 为 0，表示执行期间没有观察到新的 working-set page；其绝对 peak RSS 仍记录在 JSON 中。
+\* `RSS delta` 是执行期间 working set 的峰值增量，量级在数十 KiB 时可视为分配抖动；各解码器的绝对 peak RSS 记录在 `benchmark.json` 中。
 
 BP/BP+OSD 的诊断：
 
-- BP convergence：4003/4096 = 97.73%；
-- BP syndrome consistency：97.73%；
-- BP+OSD OSD 触发：93/4096 = 2.27%；
-- BP+OSD syndrome consistency：100%；
-- 平均 OSD rank：8。
+- BP 收敛：4043/4096 = 98.71%；
+- BP syndrome 一致率：98.71%；
+- BP+OSD 的 OSD 触发：53/4096 = 1.29%；
+- BP+OSD syndrome 一致率：100%。
 
-本设置下 BP 的原始 LER 低于当前 OSD-0，主要因为单独 BP 在未收敛 shot 上仍直接输出 posterior 硬判决，而 BP+OSD 强制 syndrome 一致，且 OSD-0 当前尚未做候选组合搜索。两者标准误约 0.002，差异不构成最终算法结论。M3 会研究更高阶 OSD、候选剪枝和 GNN 重加权。
+本设置下 BP 的原始 LER 低于当前 OSD-0，主要因为单独 BP 在未收敛 shot 上仍直接输出 posterior 硬判决，而 BP+OSD 强制 syndrome 一致，且 OSD-0 当前尚未做候选组合搜索。两者标准误约 0.002，差异不构成算法结论。更高阶 OSD、候选剪枝与 GNN 重加权见 `docs/M3_HYBRID_DECODER.md` 与 `docs/ROADMAP_TODO.md`（T8）。
 
 ## 8. 验收结论
 

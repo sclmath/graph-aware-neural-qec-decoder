@@ -1,32 +1,32 @@
 {
   "0.008": {
-    "selected_strength": 0.75,
+    "selected_strength": 1.0,
     "sweep": [
       [
         0.0,
-        128
+        98
       ],
       [
         0.25,
-        126
+        100
       ],
       [
         0.5,
-        126
+        98
       ],
       [
         0.75,
-        101
+        92
       ],
       [
         1.0,
-        104
+        92
       ]
     ],
     "test": {
-      "bp": 261,
-      "bp_gnn_osd_recalibrated": 210,
-      "bp_gnn_recalibrated": 200
+      "bp": 197,
+      "bp_gnn_osd_recalibrated": 207,
+      "bp_gnn_recalibrated": 194
     }
   },
   "0.02": {
@@ -34,30 +34,30 @@
     "sweep": [
       [
         0.0,
-        726
+        584
       ],
       [
         0.25,
-        727
+        588
       ],
       [
         0.5,
-        705
+        576
       ],
       [
         0.75,
-        659
+        576
       ],
       [
         1.0,
-        595
+        576
       ]
     ],
     "test": {
-      "bp": 1359,
-      "bp_gnn_osd_recalibrated": 1206,
-      "bp_gnn_recalibrated": 1146
+      "bp": 1129,
+      "bp_gnn_osd_recalibrated": 1192,
+      "bp_gnn_recalibrated": 1122
     }
   }
 }
-wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m3\recal_highp
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m3_fixed\recal_highp

@@ -4,11 +4,11 @@
     "sweep": [
       [
         0.0,
-        21
+        19
       ],
       [
         0.25,
-        21
+        19
       ],
       [
         0.5,
@@ -20,44 +20,44 @@
       ],
       [
         1.0,
-        48
+        19
       ]
     ],
     "test": {
-      "bp": 43,
-      "bp_gnn_osd_recalibrated": 34,
-      "bp_gnn_recalibrated": 34
+      "bp": 34,
+      "bp_gnn_osd_recalibrated": 37,
+      "bp_gnn_recalibrated": 32
     }
   },
   "0.005": {
-    "selected_strength": 0.75,
+    "selected_strength": 1.0,
     "sweep": [
       [
         0.0,
-        57
+        41
       ],
       [
         0.25,
-        56
+        41
       ],
       [
         0.5,
-        47
+        36
       ],
       [
         0.75,
-        42
+        36
       ],
       [
         1.0,
-        83
+        36
       ]
     ],
     "test": {
-      "bp": 123,
-      "bp_gnn_osd_recalibrated": 98,
-      "bp_gnn_recalibrated": 93
+      "bp": 87,
+      "bp_gnn_osd_recalibrated": 91,
+      "bp_gnn_recalibrated": 85
     }
   }
 }
-wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m3\recal_lowp
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m3_fixed\recal_lowp

@@ -1,7 +1,0 @@
-[m2] transfer evaluation: m2_learned_basis_repetition_circuit_level_d5 -> d5 circuit_level p=0.01 (4096 shots/seed)
-[m2] target graph: 24 detectors, 101 mechanisms, 182 edges
-[m2] evaluating mwpm on 4096 shots
-[m2] evaluating bp on 4096 shots
-[m2] evaluating bp_osd on 4096 shots
-[m2] evaluating bp_gnn on 4096 shots
-[m2] evaluating bp_gnn_osd on 4096 shots

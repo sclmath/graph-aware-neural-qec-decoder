@@ -8,7 +8,7 @@
       "num_layers": 3,
       "variable_feature_dim": 6
     },
-    "checkpoint": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m3_fixed\\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\\model_state.pt",
+    "checkpoint": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m3\\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\\model_state.pt",
     "checkpoint_config_sha256": "d4b07dde7e583301d0b52d652524a6fb7fc3ca56a2ae74ac9b7a3f5d2cda6ea6"
   },
   "config": "configs\\m3_learned_basis_repetition_circuit_level_d3.json",
