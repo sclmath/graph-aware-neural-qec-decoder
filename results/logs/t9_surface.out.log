@@ -1,0 +1,6 @@
+all                    AUC=0.9931  LER=0.03455 (1132/32768)
+no_check_features      AUC=0.9932  LER=0.02972 (974/32768)
+no_variable_geometry   AUC=0.9933  LER=0.02615 (857/32768)
+no_check_geometry      AUC=0.9934  LER=0.03174 (1040/32768)
+no_edge_degree         AUC=0.9930  LER=0.03439 (1127/32768)
+prior_only             AUC=0.9921  LER=0.06616 (2168/32768)

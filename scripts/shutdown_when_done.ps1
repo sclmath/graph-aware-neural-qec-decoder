@@ -72,6 +72,20 @@ if ($running -gt 0) {
     exit 0
 }
 
+# Do not shut down in the gap between the grid finishing and the post-processing
+# task running: that would lose the final T10 / T7 / engineering-table refresh.
+$postProcessDone = Join-Path $logDir 't6_postprocess.done'
+$progress = Join-Path $logDir 't6_progress.log'
+$gridFinished = $false
+if (Test-Path $progress) {
+    $last = Get-Content $progress -Tail 1 -ErrorAction SilentlyContinue
+    if ($last -and ($last -match 'grid finished')) { $gridFinished = $true }
+}
+if ($gridFinished -and (-not (Test-Path $postProcessDone)) -and ((Get-Date) -lt $Deadline)) {
+    Write-Log 'grid finished but post-processing has not run yet; waiting'
+    exit 0
+}
+
 Write-Log "conditions met (sentinel=$sentinelReady deadline=$pastDeadline); issuing shutdown in $GraceSeconds s"
 if ($DryRun) {
     Write-Log 'dry run: no shutdown issued'

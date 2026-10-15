@@ -49,6 +49,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results-dir", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument(
+        "--min-test-shots",
+        type=int,
+        default=0,
+        help="Ignore runs whose test split is smaller than this (keeps legacy "
+        "single points at a different shot count out of a multi-seed group).",
+    )
     args = parser.parse_args(argv)
 
     runs: list[dict[str, Any]] = []
@@ -57,6 +64,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         experiment = payload["config"]["experiment"]
         match = _ARTIFACT.search(result_path.parent.name)
         if match is None:
+            continue
+        if int(payload["splits"]["test"]["shots"]) < args.min_test_shots:
             continue
         runs.append(
             {

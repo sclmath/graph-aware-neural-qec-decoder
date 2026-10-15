@@ -1,0 +1,51 @@
+D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Scripts\python.exe -m graph_qec.m2 --config D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\configs\t6\m4_rotated_surface_code_circuit_level_d5_s2__p0p008.json --output-dir D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4_surface
+
+[m2] generating splits for m4_rotated_surface_code_circuit_level_d5_s2
+[m2] splits ready: train=16384 validation=2048 test=8192 (0.3s)
+[m2] graph: 120 detectors, 1677 mechanisms, 5004 edges
+[m2] epoch 1/4: train=0.04640 validation=0.01174 (251.1s)
+[m2] epoch 2/4: train=0.01118 validation=0.01066 (255.6s)
+[m2] epoch 3/4: train=0.01068 validation=0.01061 (254.2s)
+[m2] epoch 4/4: train=0.01028 validation=0.00934 (255.3s)
+[m2] training done: best validation log loss 0.00934 in 1016.2s
+[m2] validation sweep: s=0.0:ler=0.17920, s=0.25:ler=0.15381, s=0.5:ler=0.13721, s=0.75:ler=0.12549, s=1.0:ler=0.11768
+[m2] selected reweight strength 1.0
+[m2] evaluating mwpm on 8192 test shots
+[m2] evaluating bp on 8192 test shots
+[m2] evaluating bp_osd on 8192 test shots
+[m2] evaluating bp_gnn on 8192 test shots
+[m2] evaluating bp_gnn_osd on 8192 test shots
+[
+  {
+    "config_sha256": "dcf4642f1103adc0f5bf38d9ab9f878ea5043139695c415f5021e836540111d2",
+    "decoders": [
+      {
+        "ler": 0.0498046875,
+        "mean_per_shot_us": 5.289758300719427,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.193359375,
+        "mean_per_shot_us": 13713.739245604373,
+        "name": "bp"
+      },
+      {
+        "ler": 0.244873046875,
+        "mean_per_shot_us": 17047.334082031186,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.1318359375,
+        "mean_per_shot_us": 9053.774951171434,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.1673583984375,
+        "mean_per_shot_us": 11361.581445312297,
+        "name": "bp_gnn_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_surface\\m4_rotated_surface_code_circuit_level_d5_s2__d5__circuit_level__p0p008",
+    "selected_reweight_strength": 1.0
+  }
+]

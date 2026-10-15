@@ -66,3 +66,27 @@
 [2026-10-15 19:36:43] [3/30] d5_p0p005_s3: start -> m4_rotated_surface_code_circuit_level_d5_s3__d5__circuit_level__p0p005
 [2026-10-15 20:10:02] [3/30] d5_p0p005_s3: done in 33.3 min
 [2026-10-15 20:10:02] [4/30] d7_p0p005_s1: start -> m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p005
+[2026-10-15 21:42:12] [4/30] d7_p0p005_s1: done in 92.2 min
+[2026-10-15 21:42:12] [5/30] d7_p0p005_s2: start -> m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p005
+[2026-10-15 22:50:06] [5/30] d7_p0p005_s2: done in 67.9 min
+[2026-10-15 22:50:06] [6/30] d7_p0p005_s3: start -> m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p005
+[2026-10-15 23:54:32] [6/30] d7_p0p005_s3: done in 64.4 min
+[2026-10-15 23:54:32] [7/30] d5_p0p003_s1: start -> m4_rotated_surface_code_circuit_level_d5_s1__d5__circuit_level__p0p003
+[2026-10-16 00:18:42] [7/30] d5_p0p003_s1: done in 24.2 min
+[2026-10-16 00:18:42] [8/30] d5_p0p003_s2: start -> m4_rotated_surface_code_circuit_level_d5_s2__d5__circuit_level__p0p003
+[2026-10-16 00:43:15] [8/30] d5_p0p003_s2: done in 24.5 min
+[2026-10-16 00:43:15] [9/30] d5_p0p003_s3: start -> m4_rotated_surface_code_circuit_level_d5_s3__d5__circuit_level__p0p003
+[2026-10-16 01:07:26] [9/30] d5_p0p003_s3: done in 24.2 min
+[2026-10-16 01:07:26] [10/30] d7_p0p003_s1: start -> m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p003
+[2026-10-16 01:57:07] [10/30] d7_p0p003_s1: done in 49.7 min
+[2026-10-16 01:57:07] [11/30] d7_p0p003_s2: start -> m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p003
+[2026-10-16 02:52:11] [11/30] d7_p0p003_s2: done in 55.1 min
+[2026-10-16 02:52:11] [12/30] d7_p0p003_s3: start -> m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p003
+[2026-10-16 03:47:47] [12/30] d7_p0p003_s3: done in 55.6 min
+[2026-10-16 03:47:47] [13/30] d5_p0p008_s1: start -> m4_rotated_surface_code_circuit_level_d5_s1__d5__circuit_level__p0p008
+[2026-10-16 04:24:11] [13/30] d5_p0p008_s1: done in 36.4 min
+[2026-10-16 04:24:11] [14/30] d5_p0p008_s2: start -> m4_rotated_surface_code_circuit_level_d5_s2__d5__circuit_level__p0p008
+[2026-10-16 05:01:03] [14/30] d5_p0p008_s2: done in 36.9 min
+[2026-10-16 05:01:03] [15/30] d5_p0p008_s3: start -> m4_rotated_surface_code_circuit_level_d5_s3__d5__circuit_level__p0p008
+[2026-10-16 05:37:45] [15/30] d5_p0p008_s3: done in 36.7 min
+[2026-10-16 05:37:45] [16/30] d7_p0p008_s1: start -> m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p008

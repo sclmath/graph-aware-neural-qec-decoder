@@ -56,7 +56,7 @@ try {
 if ($running -gt 0) { Write-Log "grid finished but $running python process(es) still running; waiting"; exit 0 }
 
 Write-Log 'running the T6 post-processing chain'
-& $py scripts\t10_multiseed_stats.py --results-dir results\m4_surface --output-dir results\t10 *>> $log
+& $py scripts\t10_multiseed_stats.py --results-dir results\m4_surface --output-dir results\t10 --min-test-shots 4096 *>> $log
 Write-Log "t10 exit=$LASTEXITCODE"
 
 & $py scripts\threshold_estimate.py --inputs results\t10\surface_sweep_mean.json results\m4\surface_sweep.json results\m4_threshold\surface_sweep.json --output results\m4\THRESHOLD.md *>> $log
