@@ -1,0 +1,112 @@
+{
+  "bp": [
+    {
+      "average_iterations": 4.486328125,
+      "convergence_rate": 0.8876953125,
+      "detectors": 24,
+      "distance": 3,
+      "edges": 744,
+      "estimate_seconds": {
+        "32768": 7.939075200003572,
+        "8192": 1.984768800000893
+      },
+      "max_check_degree": 63,
+      "mechanisms": 286,
+      "microseconds_per_shot": 242.281347656359,
+      "shots": 1024
+    },
+    {
+      "average_iterations": 16.796875,
+      "convergence_rate": 0.53515625,
+      "detectors": 120,
+      "distance": 5,
+      "edges": 5814,
+      "estimate_seconds": {
+        "32768": 265.4218496000394,
+        "8192": 66.35546240000986
+      },
+      "max_check_degree": 82,
+      "mechanisms": 1953,
+      "microseconds_per_shot": 8100.032031251203,
+      "shots": 256
+    },
+    {
+      "average_iterations": 29.140625,
+      "convergence_rate": 0.109375,
+      "detectors": 336,
+      "distance": 7,
+      "edges": 20196,
+      "estimate_seconds": {
+        "32768": 1535.3177600000054,
+        "8192": 383.82944000000134
+      },
+      "max_check_degree": 91,
+      "mechanisms": 6602,
+      "microseconds_per_shot": 46854.17968750016,
+      "shots": 64
+    },
+    {
+      "average_iterations": 32.0,
+      "convergence_rate": 0.0,
+      "detectors": 720,
+      "distance": 9,
+      "edges": 46960,
+      "estimate_seconds": {
+        "32768": 4190.2684159986675,
+        "8192": 1047.5671039996669
+      },
+      "max_check_degree": 91,
+      "mechanisms": 14966,
+      "microseconds_per_shot": 127876.84374995934,
+      "shots": 32
+    }
+  ],
+  "gnn": [
+    {
+      "batch": 128,
+      "distance": 5,
+      "edges": 5814,
+      "forward_microseconds_per_shot": 9452.000781251969,
+      "parameters": 15297,
+      "peak_rss_mb": 701.136896,
+      "training_epoch_seconds_8192": null,
+      "training_peak_rss_mb": null,
+      "training_step_seconds": null
+    },
+    {
+      "batch": 512,
+      "distance": 5,
+      "edges": 5814,
+      "forward_microseconds_per_shot": 10667.416015625264,
+      "parameters": 15297,
+      "peak_rss_mb": 1285.091328,
+      "training_epoch_seconds_8192": 167.0209152000025,
+      "training_peak_rss_mb": 761.716736,
+      "training_step_seconds": 2.609701800000039
+    },
+    {
+      "batch": 64,
+      "distance": 7,
+      "edges": 20196,
+      "forward_microseconds_per_shot": 33665.815624999595,
+      "parameters": 15297,
+      "peak_rss_mb": 1381.875712,
+      "training_epoch_seconds_8192": null,
+      "training_peak_rss_mb": null,
+      "training_step_seconds": null
+    },
+    {
+      "batch": 256,
+      "distance": 7,
+      "edges": 20196,
+      "forward_microseconds_per_shot": 39187.51249999985,
+      "parameters": 15297,
+      "peak_rss_mb": 2946.777088,
+      "training_epoch_seconds_8192": 595.0505343999248,
+      "training_peak_rss_mb": 1102.983168,
+      "training_step_seconds": 4.6488322999994125
+    }
+  ],
+  "probability": 0.005,
+  "torch_threads": 6
+}
