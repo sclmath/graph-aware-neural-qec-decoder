@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from math import exp, lgamma, log
 from typing import Any
 
 import numpy as np
@@ -14,9 +15,17 @@ def mcnemar(only_a: int, only_b: int) -> dict[str, float]:
     if only_a + only_b == 0:
         return {"b": 0, "c": 0, "z": 0.0, "p_normal": 1.0, "p_exact": 1.0}
     z = (only_a - only_b) / math.sqrt(only_a + only_b)
-    tail = (
-        sum(math.comb(only_a + only_b, k) for k in range(0, min(only_a, only_b) + 1))
-        / 2.0 ** (only_a + only_b)
+    # Log-space binomial tail: the direct form overflows once b + c reaches a
+    # few thousand, which happens on the 32768-shot runs.
+    total = only_a + only_b
+    tail = sum(
+        exp(
+            lgamma(total + 1)
+            - lgamma(k + 1)
+            - lgamma(total - k + 1)
+            - total * log(2.0)
+        )
+        for k in range(0, min(only_a, only_b) + 1)
     )
     return {
         "b": int(only_a),

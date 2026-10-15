@@ -1,0 +1,80 @@
+{
+  "bp": {
+    "logical_error_rate": 0.040069580078125,
+    "logical_errors": 1313,
+    "standard_error": 0.0010834336133262153,
+    "syndrome_consistency_rate": 0.902587890625
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.0345458984375,
+    "logical_errors": 1132,
+    "standard_error": 0.001008879028367413,
+    "syndrome_consistency_rate": 0.953582763671875
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.040374755859375,
+    "logical_errors": 1323,
+    "standard_error": 0.0010873786939105752,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs2": {
+    "logical_error_rate": 0.026519775390625,
+    "logical_errors": 869,
+    "standard_error": 0.0008876127257006163,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.021026611328125,
+    "logical_errors": 689,
+    "standard_error": 0.0007925836685092331,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs6": {
+    "logical_error_rate": 0.019561767578125,
+    "logical_errors": 641,
+    "standard_error": 0.0007650489068916104,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs8": {
+    "logical_error_rate": 0.019134521484375,
+    "logical_errors": 627,
+    "standard_error": 0.0007568129597709329,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.04315185546875,
+    "logical_errors": 1414,
+    "standard_error": 0.00112252566489946,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs2": {
+    "logical_error_rate": 0.0318603515625,
+    "logical_errors": 1044,
+    "standard_error": 0.0009702179773683967,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.027587890625,
+    "logical_errors": 904,
+    "standard_error": 0.0009048143078878205,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs6": {
+    "logical_error_rate": 0.02545166015625,
+    "logical_errors": 834,
+    "standard_error": 0.0008700311124923838,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs8": {
+    "logical_error_rate": 0.025054931640625,
+    "logical_errors": 821,
+    "standard_error": 0.0008633993492661023,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.016937255859375,
+    "logical_errors": 555,
+    "standard_error": 0.0007128319801077182,
+    "syndrome_consistency_rate": 1.0
+  }
+}

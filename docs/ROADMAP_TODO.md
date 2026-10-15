@@ -143,11 +143,14 @@ $env:PYTHONPATH = "src"
   - 已得结论（MWPM，码容量，d=3/5，各 16384 shots）：**0.05 < p_th < 0.08（线性插值 ≈ 0.0616）**——p=0.05 时 d=5 更优（0.04016 vs 0.04877），p=0.08 时 d=3 更优（0.11432 vs 0.12799）
   - 未完成：**BP / BP+OSD 的码容量阈值在 0.01-0.12 内始终没有出现码距抑制**（d=3 全程优于 d=5），需要 d=7 与更高噪声率才能定位；**线路级阈值完全未定**，因为现有扫描只有一个 p 点同时覆盖 d=3 与 d=5，需要 T6 补齐
   - 依赖：T6（线路级与 d=7 数据）
-- [ ] **T8 · OSD 候选集学习：OSD-λ / OSD-CS / learning-to-rank**　（P1，**最高性价比**）
+- [x] **T8 · OSD 候选集学习：OSD-λ / OSD-CS**　（P1，**最高性价比**，2026-10-15 完成 OSD-CS 部分）
   - 依据：M2 的 OSD 排序无改善、M3 的 OSD-0 回退无 Pareto 窗口、M5 的 MWPM 边权重无收益——三条结论都指向「学习目标应从逐机制边际改为候选基质量」
-  - 现状：只有 OSD-0
-  - 工作量：编码 8-12 人日；算力约 2 h；依赖：无
-  - 验收：新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表
+  - **已完成**：OSD-CS(λ)（combination sweep）——对 λ 个最不可靠的非 pivot 列枚举全部子集，按 `Σ|posterior LLR|` 取最优；Gray 码枚举 + 增量权重。新增解码器 `bp_osd_cs` / `bp_gnn_osd_cs` / `bp_gnn_osd_cs_learned_order`，`decoder.osd_combination_sweep` 配置项，4 项单测（`tests/test_osd_combination_sweep.py`），研究脚本 `scripts/t8_osd_cs_study.py`
+  - **结果（repetition d=3 电路级 p=0.01，32768 shots）**：`bp` 309 → OSD-0 331（确认 M3 的负结果）→ **OSD-CS(4) 247**；OSD-0 vs OSD-CS(4)：救回 126 / 弄坏 42，McNemar z=6.48，p<1e-6。在 288 个 BP+GNN 未收敛 shot 上，OSD-0 把 154 变成 175（弄坏），OSD-CS(4) 降到 91（MWPM 83）
+  - **结论**：M3 的负结果的正面出口——把学习目标从「逐机制边际」换成「候选基质量」后，OSD 回退从「有害」变成「显著有益」；而 DEM 先验与学习先验在 λ=4 上打平（247 vs 249，p=0.53），说明**候选集选对之后，逐机制边际不再提供额外信息**
+  - 未完成（转 P2 强化）：learning-to-rank（数据驱动的候选排序）；见第 7 节
+  - 产出：`results/t8/`、`docs/T8_OSD_CANDIDATE_SET.md`
+  - 验收：✅ 新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表
 - [ ] **T9 · 消融补全：图特征组合 + top-k 候选规模**　（P1）
   - 依据：`README.md` 7.2 列出 7 类消融，当前 3 类有数据
   - 依赖：T8（top-k 需要候选集机制）
@@ -176,7 +179,10 @@ $env:PYTHONPATH = "src"
   - 影响：`results/m4/surface_sweep.json` 中的 `union_find` 列不可用；`results/m4/SURFACE_BASELINE_TABLE.md` 已不含该列，但仍需显式声明
   - **决策（2026-10-15）：修实现，不降级**——不采用「把 Union-Find 限定为 repetition code 专用基线」的路线，因此 T18 保持 P1；修复后必须重跑所有引用它的结果，不能只在文档里缩小适用范围
   - 工作量：修正 + 单元测试 8-12 人日；算力 1 h（重跑表面码扫描与 M1 基线）
-  - 验收：新增断言测试（表面码 d=3 码容量 p=0.01 的 Union-Find LER 与 MWPM 同量级）；重跑 `results/m1/` 与表面码扫描，并重新生成所有引用 Union-Find 的结果与表格
+  - **2026-10-15 进展（部分完成）**：补齐 T-join peeling，恢复 correction 的 syndrome 一致性（旧实现约 97% 的含缺陷 shot 产出违反 `H·c = s` 的 correction）。表面码 d=5 码容量 LER 0.219 → **0.0117**，d=3 0.067 → 0.054；全部配置严格不劣化。新增 `tests/test_union_find_t18.py`（5 项，逐 shot 断言 `H·c = s`）
+  - **仍未达标**：表面码 LER 仍比 MWPM 差 9-50×。根因是 greedy growth 的**边界短视**（等权重时缺陷先被 boundary 终止，链内边再也进不了候选集），不是 peeling。最小反例、已实测的 6 种变体与忠实实现所需的 3 条改动见 `docs/T18_UNION_FIND_ANALYSIS.md`
+  - **需要决策**：继续按忠实加权 Union-Find 实现（8-12 人日），或改用其它近似解码器（见分析文档第 6 节）
+  - 验收：⚠️ 断言测试已加（syndrome 一致性），但「LER 与 MWPM 同量级」未达成；`results/m1/` 与表面码扫描的重跑推迟到实现定案之后
 
 - [ ] **T17 · 技术报告（集成 M0-M5 + 局限性 + 复现说明）**　（P1）
   - 工作量：3-5 人日；依赖 T6-T11 收敛
