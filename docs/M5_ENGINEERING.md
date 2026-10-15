@@ -49,7 +49,7 @@
 
 - **量化几乎无损**：权重压缩 **3.72×**，机制后验 log loss 与接回 BP 后的 LER 完全不变（logit 最大偏差 0.44，机制符号一致率 0.99995）；
 - **但 CPU 上没有加速（1.00×）**：动态量化的反量化开销抵消了更便宜的矩阵乘，且当前规模（34 条边、hidden 32）本来就偏小；
-- 工程观察：**向量化之后，GNN 前向（166 µs/shot）成了整条管线的瓶颈，而 BP 只要 1.9 µs/shot**。因此要优化的是 GNN 的形状（减少每边的 MLP 计算、预分配缓冲、或把消息传递改成稀疏矩阵乘），而不是 BP；表面码 d=7 上 GNN 前向已达 39 ms/shot，与 BP 同量级（见 `docs/BP_IMPLEMENTATION.md` 第 4 节）。
+- 工程观察：**向量化之后，GNN 前向成了整条管线的瓶颈，而 BP 只要 1.9 µs/shot**。因此要优化的是 GNN 的形状（减少每边的 MLP 计算、预分配缓冲、或把消息传递改成稀疏矩阵乘），而不是 BP；表面码 d=7 上 GNN 前向与 BP 同量级（优化后 35 ms/shot @ batch 256，BP 为 47 ms/shot，见 `docs/BP_IMPLEMENTATION.md` 第 4 节与 `results/m5/GNN_PERF.md`）。
 - 该小节的数字与 `docs/M3_HYBRID_DECODER.md` 第 3 节的同分布结论一致：d=3 repetition 上学习先验没有可测的 LER 收益。
 
 ## 4. GPU 现状与迁移路径

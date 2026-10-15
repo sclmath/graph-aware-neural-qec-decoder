@@ -1,0 +1,219 @@
+{
+  "benchmark_name": "m1_repetition_circuit_level_p0p002",
+  "config": {
+    "benchmark": {
+      "decoders": [
+        "mwpm",
+        "union_find",
+        "bp",
+        "bp_osd"
+      ],
+      "max_shots": 4096,
+      "timed_runs": 5,
+      "warmup_runs": 1
+    },
+    "decoder_parameters": {
+      "bp": {
+        "damping": 0.0,
+        "max_iterations": 32,
+        "min_sum_scaling": 0.75
+      },
+      "bp_osd": {
+        "damping": 0.0,
+        "max_iterations": 32,
+        "min_sum_scaling": 0.75,
+        "osd_order": 0
+      }
+    },
+    "experiment": {
+      "code": {
+        "distance": 3,
+        "family": "repetition_code",
+        "rounds": 3
+      },
+      "name": "repetition",
+      "noise": {
+        "model": "circuit_level",
+        "physical_error_rate": 0.002
+      },
+      "sampling": {
+        "shots": 32768
+      },
+      "seed": 20261003
+    },
+    "name": "m1_repetition_circuit_level_p0p002",
+    "schema_version": 1
+  },
+  "config_sha256": "b6da07a0e04e3a1106050f7de3c11fc4ca87d98eed7f2b2ae2b716f6dc4f6450",
+  "dataset": {
+    "num_dem_errors": 21,
+    "num_detectors": 8,
+    "num_observables": 1,
+    "shots": 4096
+  },
+  "decoders": [
+    {
+      "decoder": "mwpm",
+      "diagnostics": {
+        "num_edges": 21,
+        "num_nodes": 8
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 0.039663085937499995,
+        "mean_total_seconds": 0.00016245999999999999,
+        "run_seconds": [
+          0.0001524,
+          0.0001478,
+          0.0001699,
+          0.0001774,
+          0.0001648
+        ],
+        "throughput_shots_per_second": 25212359.96552998,
+        "timed_runs": 5
+      },
+      "logical_error_rate": 0.000244140625,
+      "logical_error_rate_standard_error": 0.00024411082085840083,
+      "logical_errors": 1,
+      "memory": {
+        "peak_python_bytes": 102888,
+        "peak_rss_bytes": 80519168,
+        "peak_rss_delta_bytes": 61440,
+        "start_rss_bytes": 80457728
+      },
+      "parameters": {},
+      "prediction_sha256": "a269cc323f16aae0bd8f36828705a2e2dd466ae1da6ccffe22484dd0b4dffa44",
+      "shots": 4096
+    },
+    {
+      "decoder": "union_find",
+      "diagnostics": {
+        "num_edges": 33,
+        "num_nodes": 8,
+        "unresolved_shots": 0
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 30.59369140625,
+        "mean_total_seconds": 0.12531176,
+        "run_seconds": [
+          0.1307266,
+          0.1194243,
+          0.1217167,
+          0.1212216,
+          0.1334696
+        ],
+        "throughput_shots_per_second": 32686.477310669008,
+        "timed_runs": 5
+      },
+      "logical_error_rate": 0.000244140625,
+      "logical_error_rate_standard_error": 0.00024411082085840083,
+      "logical_errors": 1,
+      "memory": {
+        "peak_python_bytes": 103152,
+        "peak_rss_bytes": 80523264,
+        "peak_rss_delta_bytes": 24576,
+        "start_rss_bytes": 80498688
+      },
+      "parameters": {},
+      "prediction_sha256": "a269cc323f16aae0bd8f36828705a2e2dd466ae1da6ccffe22484dd0b4dffa44",
+      "shots": 4096
+    },
+    {
+      "decoder": "bp",
+      "diagnostics": {
+        "average_final_syndrome_distance": 0.0,
+        "average_iterations": 0.09130859375,
+        "converged_shots": 4096,
+        "convergence_rate": 1.0,
+        "engine": "batched_min_sum",
+        "prior_llr_override": false,
+        "syndrome_consistency_rate": 1.0,
+        "syndrome_consistent_shots": 4096
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 0.40735839843750005,
+        "mean_total_seconds": 0.0016685400000000003,
+        "run_seconds": [
+          0.0015621,
+          0.0015621,
+          0.002055,
+          0.0016056,
+          0.0015579
+        ],
+        "throughput_shots_per_second": 2454840.758986898,
+        "timed_runs": 5
+      },
+      "logical_error_rate": 0.000244140625,
+      "logical_error_rate_standard_error": 0.00024411082085840083,
+      "logical_errors": 1,
+      "memory": {
+        "peak_python_bytes": 2491844,
+        "peak_rss_bytes": 80601088,
+        "peak_rss_delta_bytes": 61440,
+        "start_rss_bytes": 80539648
+      },
+      "parameters": {
+        "damping": 0.0,
+        "max_iterations": 32,
+        "min_sum_scaling": 0.75
+      },
+      "prediction_sha256": "a269cc323f16aae0bd8f36828705a2e2dd466ae1da6ccffe22484dd0b4dffa44",
+      "shots": 4096
+    },
+    {
+      "decoder": "bp_osd",
+      "diagnostics": {
+        "average_iterations": 0.09130859375,
+        "average_osd_rank": 0.0,
+        "converged_shots": 4096,
+        "convergence_rate": 1.0,
+        "engine": "batched_min_sum",
+        "forced_osd": false,
+        "osd_order": 0,
+        "osd_ordering_override": false,
+        "osd_rate": 0.0,
+        "osd_shots": 0,
+        "prior_llr_override": false,
+        "syndrome_consistency_rate": 1.0,
+        "syndrome_consistent_shots": 4096
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 0.6845166015625,
+        "mean_total_seconds": 0.00280378,
+        "run_seconds": [
+          0.0016055,
+          0.0016411,
+          0.0016605,
+          0.0039839,
+          0.0051279
+        ],
+        "throughput_shots_per_second": 1460884.9481771037,
+        "timed_runs": 5
+      },
+      "logical_error_rate": 0.000244140625,
+      "logical_error_rate_standard_error": 0.00024411082085840083,
+      "logical_errors": 1,
+      "memory": {
+        "peak_python_bytes": 2491972,
+        "peak_rss_bytes": 80646144,
+        "peak_rss_delta_bytes": 106496,
+        "start_rss_bytes": 80539648
+      },
+      "parameters": {
+        "damping": 0.0,
+        "max_iterations": 32,
+        "min_sum_scaling": 0.75,
+        "osd_order": 0
+      },
+      "prediction_sha256": "a269cc323f16aae0bd8f36828705a2e2dd466ae1da6ccffe22484dd0b4dffa44",
+      "shots": 4096
+    }
+  ],
+  "environment": {
+    "numpy": "2.5.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.1",
+    "stim": "1.16.0"
+  },
+  "schema_version": 1,
+  "stage": "M1"
+}

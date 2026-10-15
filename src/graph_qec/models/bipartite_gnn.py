@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import numpy as np
 import torch
+import torch.nn.functional as F
 from torch import nn
 
 from ..graph_features import GraphTensor
@@ -72,12 +73,67 @@ class BipartiteSyndromeGNN(nn.Module):
         self.variable_update = _MessageMLP(2 * hidden_size, hidden_size, dropout)
         self.check_update = _MessageMLP(2 * hidden_size + 1, hidden_size, dropout)
         self.readout = nn.Linear(hidden_size, 1)
+        # Reusable aggregation buffers, keyed by message direction. Plain dict so
+        # it never shows up in state_dict(); see ``_aggregate`` for the contract.
+        self._aggregate_cache: dict[str, torch.Tensor] = {}
 
     @staticmethod
-    def _aggregate(messages: torch.Tensor, index: torch.Tensor, size: int) -> torch.Tensor:
-        aggregated = messages.new_zeros(messages.shape[0], size, messages.shape[2])
-        aggregated.index_add_(1, index, messages)
-        return aggregated
+    def _message(
+        mlp: "_MessageMLP",
+        part_a: torch.Tensor,
+        part_b: torch.Tensor,
+        static_edge: torch.Tensor | None = None,
+    ) -> torch.Tensor:
+        """Computes ``mlp(cat([part_a, part_b, edge_features]))`` without building the concat.
+
+        The first linear layer is split into its three feature blocks. The
+        edge-feature block does not depend on the shot, so the caller hoists it
+        out of the batch dimension; only the two node-state gathers stay on the
+        per-shot path.
+        """
+
+        first = mlp.layers[0]
+        weight = first.weight
+        hidden = weight.shape[0]
+        pre_activation = F.linear(part_a, weight[:, :hidden], first.bias)
+        pre_activation = pre_activation + F.linear(part_b, weight[:, hidden : 2 * hidden])
+        if static_edge is not None:
+            pre_activation = pre_activation + static_edge
+        result = pre_activation
+        for layer in mlp.layers[1:]:
+            result = layer(result)
+        return result
+
+    @staticmethod
+    def _edge_projection(mlp: "_MessageMLP", edge_features: torch.Tensor) -> torch.Tensor:
+        """Precomputes the edge-feature contribution of the first linear layer."""
+
+        weight = mlp.layers[0].weight
+        return F.linear(edge_features, weight[:, 2 * weight.shape[0] :])
+
+    def _aggregate(self, messages: torch.Tensor, index: torch.Tensor, size: int, key: str) -> torch.Tensor:
+        """Mean-sums ``messages`` per node, reusing one buffer per direction.
+
+        Under ``torch.no_grad()`` the returned tensor is owned by the cache and
+        valid until the next call with the same ``key``; callers consume it
+        immediately. With autograd enabled a fresh tensor is returned instead.
+        """
+
+        shape = (messages.shape[0], size, messages.shape[2])
+        if torch.is_grad_enabled():
+            # Training needs the pre-update aggregate value for the backward pass,
+            # so the buffer cannot be recycled in place there.
+            aggregated = messages.new_zeros(*shape)
+            aggregated.index_add_(1, index, messages)
+            return aggregated
+        cached = self._aggregate_cache.get(key)
+        if cached is None or cached.shape != shape:
+            cached = messages.new_zeros(*shape)
+            self._aggregate_cache[key] = cached
+        else:
+            cached.zero_()
+        cached.index_add_(1, index, messages)
+        return cached
 
     def forward(
         self,
@@ -112,31 +168,26 @@ class BipartiteSyndromeGNN(nn.Module):
         check_degree = torch.bincount(edge_checks, minlength=num_checks).clamp(min=1).to(syndrome.dtype)
 
         for _ in range(self.num_layers):
-            check_messages = self.check_to_variable(
-                torch.cat(
-                    [
-                        check_state[:, edge_checks, :],
-                        variable_state[:, edge_variables, :],
-                        edge_features.unsqueeze(0).expand(batches, -1, -1),
-                    ],
-                    dim=-1,
-                )
-            )
-            variable_aggregate = self._aggregate(check_messages, edge_variables, num_variables)
-            variable_aggregate = variable_aggregate / variable_degree.view(1, -1, 1)
+            # The two message passes share the same gathers, and the edge-feature
+            # block of each message MLP is shot-independent.
+            check_at_edges = check_state[:, edge_checks, :]
+            variable_at_edges = variable_state[:, edge_variables, :]
+            edge_for_c2v = self._edge_projection(self.check_to_variable, edge_features).unsqueeze(0)
+            edge_for_v2c = self._edge_projection(self.variable_to_check, edge_features).unsqueeze(0)
 
-            variable_messages = self.variable_to_check(
-                torch.cat(
-                    [
-                        variable_state[:, edge_variables, :],
-                        check_state[:, edge_checks, :],
-                        edge_features.unsqueeze(0).expand(batches, -1, -1),
-                    ],
-                    dim=-1,
-                )
+            check_messages = self._message(
+                self.check_to_variable, check_at_edges, variable_at_edges, edge_for_c2v
             )
-            check_aggregate = self._aggregate(variable_messages, edge_checks, num_checks)
-            check_aggregate = check_aggregate / check_degree.view(1, -1, 1)
+            variable_aggregate = self._aggregate(
+                check_messages, edge_variables, num_variables, "c2v"
+            ) / variable_degree.view(1, -1, 1)
+
+            variable_messages = self._message(
+                self.variable_to_check, variable_at_edges, check_at_edges, edge_for_v2c
+            )
+            check_aggregate = self._aggregate(
+                variable_messages, edge_checks, num_checks, "v2c"
+            ) / check_degree.view(1, -1, 1)
 
             variable_state = variable_state + self.variable_update(
                 torch.cat([variable_state, variable_aggregate], dim=-1)

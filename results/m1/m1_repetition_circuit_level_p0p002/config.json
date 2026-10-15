@@ -1,0 +1,44 @@
+{
+  "benchmark": {
+    "decoders": [
+      "mwpm",
+      "union_find",
+      "bp",
+      "bp_osd"
+    ],
+    "max_shots": 4096,
+    "timed_runs": 5,
+    "warmup_runs": 1
+  },
+  "decoder_parameters": {
+    "bp": {
+      "damping": 0.0,
+      "max_iterations": 32,
+      "min_sum_scaling": 0.75
+    },
+    "bp_osd": {
+      "damping": 0.0,
+      "max_iterations": 32,
+      "min_sum_scaling": 0.75,
+      "osd_order": 0
+    }
+  },
+  "experiment": {
+    "code": {
+      "distance": 3,
+      "family": "repetition_code",
+      "rounds": 3
+    },
+    "name": "repetition",
+    "noise": {
+      "model": "circuit_level",
+      "physical_error_rate": 0.002
+    },
+    "sampling": {
+      "shots": 32768
+    },
+    "seed": 20261003
+  },
+  "name": "m1_repetition_circuit_level_p0p002",
+  "schema_version": 1
+}

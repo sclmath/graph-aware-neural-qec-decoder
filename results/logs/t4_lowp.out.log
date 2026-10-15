@@ -1,0 +1,110 @@
+[
+  {
+    "config_sha256": "5ff3b0a560ecde6d20aa29defb4d22c033ad81b6cffc966f6e1c58801f4c39cb",
+    "decoders": [
+      {
+        "ler": 0.00048828125,
+        "mean_per_shot_us": 0.028891601562499994,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.00048828125,
+        "mean_per_shot_us": 12.3064697265625,
+        "name": "union_find"
+      },
+      {
+        "ler": 0.00048828125,
+        "mean_per_shot_us": 0.2002392578125,
+        "name": "bp"
+      },
+      {
+        "ler": 0.00048828125,
+        "mean_per_shot_us": 0.18848632812500002,
+        "name": "bp_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m1\\m1_repetition_code_capacity_p0p001",
+    "shots": 4096
+  },
+  {
+    "config_sha256": "387f05d11a55a106d17291e1362eea846cc121cc34c07878a4a9f34639db1260",
+    "decoders": [
+      {
+        "ler": 0.00048828125,
+        "mean_per_shot_us": 0.029775390625000005,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.00048828125,
+        "mean_per_shot_us": 12.4677490234375,
+        "name": "union_find"
+      },
+      {
+        "ler": 0.00048828125,
+        "mean_per_shot_us": 0.19982421875000003,
+        "name": "bp"
+      },
+      {
+        "ler": 0.00048828125,
+        "mean_per_shot_us": 0.20220703125,
+        "name": "bp_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m1\\m1_repetition_code_capacity_p0p002",
+    "shots": 4096
+  },
+  {
+    "config_sha256": "1b62c9cff982e51f856dcfed5ced2ca90fb65242e2f86026275527577919873a",
+    "decoders": [
+      {
+        "ler": 0.009521484375,
+        "mean_per_shot_us": 0.2045458984375,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.012939453125,
+        "mean_per_shot_us": 33.199990234375,
+        "name": "union_find"
+      },
+      {
+        "ler": 0.012939453125,
+        "mean_per_shot_us": 2.270595703125,
+        "name": "bp"
+      },
+      {
+        "ler": 0.014892578125,
+        "mean_per_shot_us": 3.9101220703125,
+        "name": "bp_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m1\\m1_repetition_circuit_level_p0p001",
+    "shots": 4096
+  },
+  {
+    "config_sha256": "1bdd85d7ceddc7db68da12d5e3895ed8e5a6b8dd9196f7c32bac3fb05e4660a7",
+    "decoders": [
+      {
+        "ler": 0.009521484375,
+        "mean_per_shot_us": 0.1118505859375,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.012939453125,
+        "mean_per_shot_us": 32.767006835937494,
+        "name": "union_find"
+      },
+      {
+        "ler": 0.012939453125,
+        "mean_per_shot_us": 2.1563330078125,
+        "name": "bp"
+      },
+      {
+        "ler": 0.014892578125,
+        "mean_per_shot_us": 3.7287890625,
+        "name": "bp_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m1\\m1_repetition_circuit_level_p0p002",
+    "shots": 4096
+  }
+]

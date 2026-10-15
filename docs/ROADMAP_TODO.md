@@ -86,25 +86,26 @@ $env:PYTHONPATH = "src"
 
 ### 2.1 启动批次（零外部依赖，先补齐交付标准）
 
-- [ ] **T1 · CI（GitHub Actions 跑 57 项测试）**　（P0）
-  - 工作量：编码 0.5 人日
-  - 验收：`.github/workflows/ci.yml` 首次运行通过
-- [ ] **T2 · 文档同步**　（P0）
-  - 待修正：`docs/HARDWARE_REQUIREMENTS.md` 开头仍称「仓库当前尚未包含可运行代码」；`README.md` 第 9 节仍写「M4 进行中」；`results/m4_surface/` 缺 `SUMMARY.md`
-  - 工作量：编码 1 人日
-- [ ] **T3 · 一键复现总脚本 + 端到端 smoke**　（P0）
-  - 现状：只有分段脚本 `scripts/run_m3_*.ps1`、`run_m4_m5_sequence.ps1`
-  - 工作量：编码 1-2 人日；算力 0.5 h
-  - 验收：`scripts/run_all.ps1` 小规模模式全绿
-- [ ] **T4 · 补噪声率 p = 0.001 / 0.002**　（P0）
-  - 依据：`README.md` 3.2 列出 0.001-0.01，现有扫描为 0.003-0.02
-  - 工作量：编码 0.2 人日；算力 0.2 h
-- [ ] **T5 · GNN 前向优化**　（P0，**关键路径**）
+- [x] **T1 · CI（GitHub Actions）　（2026-10-15 完成）
+  - 产出：`.github/workflows/ci.yml`，Python 3.10/3.12 两个矩阵，torch 走 CPU 索引安装，跑 `pytest -q`
+  - 待办：绑定远端（决策项 D1）后确认首次运行通过
+- [x] **T2 · 文档同步**　（2026-10-15 完成）
+  - 已修正：`docs/HARDWARE_REQUIREMENTS.md` 的资源估算说明、`README.md` 的进度与交付范围段；各里程碑文档的历史叙述已按单一版本清理
+  - 说明：`results/m4_surface/` 不含 `SUMMARY.md` 属设计如此（M4 管线只输出 `results.json`/`summary.csv`），不作为缺口
+- [x] **T3 · 一键复现总脚本 + 端到端 smoke**　（2026-10-15 完成）
+  - 产出：`scripts/run_all.ps1`（默认小规模：单测 → M0 → M1 → CPU 预算探针 → M2 汇总与出图；`-Full` 追加 M2 训练与 M3 扫描）
+  - 实测：跳过单测的端到端运行 **18 s** 全绿（M0 0.8 s、M1 1.5 s、CPU 探针 15.7 s、M2 汇总 0.1 s）
+- [x] **T4 · 补噪声率 p = 0.001 / 0.002**　（2026-10-15 完成）
+  - 产出：`configs/m1_repetition_{code_capacity,circuit_level}_p0p00{1,2}.json` 与对应 `results/m1/` 结果（各 32768 shots）
+  - 结果：p=0.001 四个解码器均为 0 个逻辑错误；p=0.002 为 0-1 个。**该区间低于 32768 shots 的分辨率**，要给出定量 LER 需 ≥1e5 shots，因此这两个点在报告中只作低噪声端的定性说明
+  - 注意：噪声率写在 `experiment.noise.physical_error_rate`（不是 `experiment.physical_error_rate`）
+- [x] **T5 · GNN 前向优化（部分完成，2026-10-15）**
   - 依据：第 1.3 节第 3 条——d=7 时 GNN 前向 39 ms/shot，与 BP 同量级
-  - 手段：`index_select` + 预分配缓冲、减少逐边 MLP 拼接、消息传递改稀疏矩阵乘、按 `(edges, hidden)` 复用 workspace
-  - 工作量：编码 2-3 人日；算力 1 h
-  - 目标：d=7 前向从 39 ms/shot 降到 ≤ 10 ms/shot，并压低 batch 256 的峰值 RSS
-  - 验收：`results/m5/GNN_PERF.md`（优化前后 µs/shot、峰值 RSS、d=7 端到端延迟）
+  - 已完成：拆掉消息 MLP 的三段 `cat`、把边特征项提到 batch 维之外、两个方向复用 gather 与聚合缓冲；数值等价（Δ logits ≤ 3e-7），已交付结果不变（M2 headline `bp_gnn` 312 错误 / 0.00952 逐位一致）
+  - 实测：前向 **1.11-1.22×**（d=7 39.2 → 35.3 ms/shot @ batch 256；d=3 repetition 37.0 → 32.4 µs/shot），训练单步 4.65 → 4.29 s
+  - **未达标**：原目标「d=7 ≤ 10 ms/shot」未实现；小 batch 下峰值 RSS 反而升高（d=7/batch 256：2.9 → 4.5 GB）
+  - 遗留（转入后续工作）：按边分块的消息传递、稀疏矩阵乘实现、解耦消息 MLP 的中间宽度。详见 `results/m5/GNN_PERF.md`
+  - 验收：`results/m5/GNN_PERF.md`、`tests/test_gnn_forward_equivalence.py`
 
 ### 2.2 主线实验
 
@@ -145,10 +146,6 @@ $env:PYTHONPATH = "src"
   - 现状：局部性映射覆盖 262/286（91.6%）；逐 shot 重建匹配图 2.8-2.9 ms/shot
   - 工作量：编码 5-8 人日；算力 0.5 h
   - 备注：PyMatching 2.4 公开接口不支持只换边权（`decode(z, weights=...)` 被静默忽略），需走 `MatchingGraph` / `decode_to_edges_array` 或自实现
-- [ ] **T16 · 结构化量子 LDPC（非 HGP）支持**　（P3）
-  - 依据：`README.md` 3.1 列出该码族，`src/graph_qec/codes/` 目前只有 `hgp.py`
-  - 工作量：编码 10-15 人日（可复用 `hgp.py` 的 GF(2)/CSS 工具）；算力 3 h
-  - 是否纳入交付见决策项 D5
 - [ ] **T17 · 技术报告（集成 M0-M5 + 局限性 + 复现说明）**　（P1）
   - 工作量：3-5 人日；依赖 T6-T11 收敛
   - 验收：`docs/FINAL_REPORT.md`，含适用范围、计算成本、未解决问题三节
@@ -161,11 +158,11 @@ $env:PYTHONPATH = "src"
 |---|---|---|---|
 | 启动批次 | T1-T5 | 4.7-6.7 | 约 1.2 h |
 | 主线实验 | T6-T11 | 14.5-19.5 | 约 22 h |
-| 强化项 | T12-T16 | 21-32 | 约 7 h |
+| 强化项 | T12-T15 | 11-17 | 约 4 h |
 | 报告 | T17 | 3-5 | - |
-| **合计** | | **43-63** | 约 20-25 h |
+| **合计** | | **33-48** | 约 20-25 h |
 
-优先级视角：**P0+P1 = T1-T11 + T17，共 22-31 人日**，构成可交付的最小闭环；T12-T16 为加强项。
+优先级视角：**P0+P1 = T1-T11 + T17，共 22-31 人日**，构成可交付的最小闭环；T12-T15 为加强项。
 
 ---
 
@@ -193,7 +190,7 @@ T8 OSD 候选集学习 ──> T9 消融 ──> T11 CPU 性能表
 |---|---|---|
 | T5 优化不达预期 | d=7 端到端 86 ms/shot，3 seeds 扫描超过 15 h | 先做 T5 再排 T6；若无果，d=7 降到 3 个噪声率点 |
 | 16 GB 内存限制 d=7 训练 batch | epoch 9.9 min，8 epochs 1.3 h/seed，batch 无法加大 | 交付范围内接受该成本；更大的 batch 留待未来展望 |
-| 统计功效不足被当成结论 | 审阅者可直接否掉百分比结论 | T10 优先于 T12-T16；所有表格标注 shots 与 seed 数 |
+| 统计功效不足被当成结论 | 审阅者可直接否掉百分比结论 | T10 优先于 T12-T15；所有表格标注 shots 与 seed 数 |
 | 主线的否定结果缺少建设性出口 | 「学习信息用不上」的系列结论没有正面对应 | T8 是 P1 最高优先级 |
 | 无远程仓库 | 本地磁盘故障即丢失全部结果 | 决策项 D2；建议绑定私有远端 |
 | 交付范围蔓延 | 阶段一被算力拖长 | 按第 1.4 节预算表卡死 shots x seeds 组合，超预算的组合移入未来展望 |
@@ -205,17 +202,20 @@ T8 OSD 候选集学习 ──> T9 消融 ──> T11 CPU 性能表
 - [ ] **D1 · 远端仓库**：是否绑定 GitHub（私有）或其他远端，用于备份与协作
 - [ ] **D2 · 许可证**：`LICENSE` 未确定（学术项目常见 MIT / Apache-2.0 / 暂不声明）
 - [ ] **D3 · 参考文献 PDF 策略**：当前不入库（可由 `scripts/download_references.py` 重建）；若要求离线自洽可改用 Git LFS
-- [ ] **D4 · T16（结构化 qLDPC）是否纳入交付**：10-15 人日，是清单中最大的 P3 项
 
 ---
 
 ## 7. 未来展望（不排期、不计入本次交付）
 
-以下内容需要 GPU 资源，或属于新研究方向，作为后续工作记录。若全部启动，另需约 **25-38 人日**。
+以下内容需要 GPU 资源，或属于新研究方向，作为后续工作记录，不纳入本次交付。若全部启动，另需约 **40-55 人日**。
 
-- [ ] **F1 · GPU 批处理与量化迁移**：`bp_engine` 活动集合切片改 `torch.Tensor`、边聚合改 `index_add_`/`torch.sparse`；GNN 改 `device=`；动态量化迁 `torchao`。前置是解决 GPU 设备获取。
-- [ ] **F2 · d=7 大规模统计**：32768 shots x 3 seeds 的 d=7 扫描（CPU 约 40 h/seed，GPU 可压缩到小时级）。
-- [ ] **F3 · GPU 工程性能对比**：GPU 单 shot 延迟、batch throughput、峰值显存，补齐工程性能表的 GPU 列。
-- [ ] **F4 · d=9**：BP 收敛率 0.000、128 ms/shot，属于「需要更强先验或更长迭代」的开放问题，而非算力问题。
-- [ ] **F5 · 时序编码器**：syndrome history 的 1D 卷积或轻量 Transformer（`README.md` 5.3 的研究方向）。技术上不依赖 GPU，但优先级低于交付清单。
-- [ ] **F6 · 端到端 / 可微 BP**：让 BP 迭代次数或 check-to-variable 消息带可学习偏置，直接优化 LER 而非机制 BCE。研究性强，结果不确定。
+- [ ] **F1 · 结构化量子 LDPC（非 HGP）**　（展望中优先级最高）
+  - 依据：`README.md` 3.1 列出该码族，而 `src/graph_qec/codes/` 目前只有 `hgp.py`
+  - 工作量：编码 10-15 人日（可复用 `hgp.py` 的 GF(2)/CSS 工具）；算力 3 h
+  - 不纳入第一阶段交付，作为后续工作的首要项
+- [ ] **F2 · GPU 批处理与量化迁移**：`bp_engine` 活动集合切片改 `torch.Tensor`、边聚合改 `index_add_`/`torch.sparse`；GNN 改 `device=`；动态量化迁 `torchao`。前置是解决 GPU 设备获取。
+- [ ] **F3 · d=7 大规模统计**：32768 shots x 3 seeds 的 d=7 扫描（CPU 约 40 h/seed，GPU 可压缩到小时级）。
+- [ ] **F4 · GPU 工程性能对比**：GPU 单 shot 延迟、batch throughput、峰值显存，补齐工程性能表的 GPU 列。
+- [ ] **F5 · d=9**：BP 收敛率 0.000、128 ms/shot，属于「需要更强先验或更长迭代」的开放问题，而非算力问题。
+- [ ] **F6 · 时序编码器**：syndrome history 的 1D 卷积或轻量 Transformer（`README.md` 5.3 的研究方向）。技术上不依赖 GPU，但优先级低于交付清单。
+- [ ] **F7 · 端到端 / 可微 BP**：让 BP 迭代次数或 check-to-variable 消息带可学习偏置，直接优化 LER 而非机制 BCE。研究性强，结果不确定。
