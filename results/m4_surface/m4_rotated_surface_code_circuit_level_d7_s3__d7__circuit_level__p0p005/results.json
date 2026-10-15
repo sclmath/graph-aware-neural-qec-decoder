@@ -1,0 +1,350 @@
+{
+  "config": {
+    "benchmark": {
+      "decoders": [
+        "mwpm",
+        "bp",
+        "bp_osd",
+        "bp_gnn",
+        "bp_gnn_osd"
+      ],
+      "timed_runs": 1
+    },
+    "decoder": {
+      "damping": 0.0,
+      "max_iterations": 32,
+      "min_sum_scaling": 0.75,
+      "osd_combination_sweep": 0,
+      "reweight_strengths": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ]
+    },
+    "experiment": {
+      "code": {
+        "distance": 7,
+        "family": "rotated_surface_code",
+        "rounds": 7
+      },
+      "name": "surface",
+      "noise": {
+        "model": "circuit_level",
+        "physical_error_rate": 0.005
+      },
+      "sampling": {
+        "shots": 4096
+      },
+      "seed": 20261040
+    },
+    "model": {
+      "dropout": 0.0,
+      "hidden_size": 32,
+      "num_layers": 3
+    },
+    "name": "m4_rotated_surface_code_circuit_level_d7_s3",
+    "schema_version": 1,
+    "splits": {
+      "test_seeds": [
+        303
+      ],
+      "test_shots": 4096,
+      "train_seeds": [
+        105,
+        106
+      ],
+      "train_shots": 4096,
+      "validation_seeds": [
+        203
+      ],
+      "validation_shots": 1024
+    },
+    "training": {
+      "batch_size": 128,
+      "epochs": 2,
+      "learning_rate": 0.002,
+      "max_grad_norm": 1.0,
+      "seed": 27,
+      "torch_threads": 6,
+      "weight_decay": 0.0
+    }
+  },
+  "config_sha256": "1b2c12dd82b237e77bd93372f01359db12e0170e1ed0657a7dd49d6a7b3ac174",
+  "decoders": [
+    {
+      "decoder": "mwpm",
+      "diagnostics": {
+        "num_edges": 1558,
+        "num_nodes": 336
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 8.74384765658931,
+        "mean_total_seconds": 0.03581480000138981,
+        "run_seconds": [
+          0.03581480000138981
+        ],
+        "throughput_shots_per_second": 114366.12796500477,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.010009765625,
+      "logical_error_rate_standard_error": 0.0015554191288177379,
+      "logical_errors": 41,
+      "prediction_sha256": "09939ac2c958d3f34b28cba87eb24ab227cb2780ef0f3ec3f0e88fefb3bdfc2a",
+      "syndrome_consistency_rate": null
+    },
+    {
+      "decoder": "bp",
+      "diagnostics": {
+        "average_final_syndrome_distance": 4.4130859375,
+        "average_iterations": 28.982666015625,
+        "converged_shots": 483,
+        "convergence_rate": 0.117919921875,
+        "engine": "batched_min_sum",
+        "prior_llr_override": false
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 48789.71252441389,
+        "mean_total_seconds": 199.84266249999928,
+        "run_seconds": [
+          199.84266249999928
+        ],
+        "throughput_shots_per_second": 20.4961240445844,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.24072265625,
+      "logical_error_rate_standard_error": 0.006680034877991119,
+      "logical_errors": 986,
+      "prediction_sha256": "6616f8c6862d5a9842f65050c6107bd9ef2ab491bca04fc0bdfa197dfeffc680",
+      "syndrome_consistency_rate": 0.117919921875
+    },
+    {
+      "decoder": "bp_osd",
+      "diagnostics": {
+        "average_iterations": 28.982666015625,
+        "average_osd_rank": 336.0,
+        "combination_sweep_order": 0,
+        "converged_shots": 483,
+        "convergence_rate": 0.117919921875,
+        "engine": "batched_min_sum",
+        "forced_osd": false,
+        "osd_order": 0,
+        "osd_ordering_override": false,
+        "osd_rate": 0.882080078125,
+        "osd_shots": 3613,
+        "prior_llr_override": false
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 82193.31437988409,
+        "mean_total_seconds": 336.6638157000052,
+        "run_seconds": [
+          336.6638157000052
+        ],
+        "throughput_shots_per_second": 12.166439661724349,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.303955078125,
+      "logical_error_rate_standard_error": 0.007186929131660615,
+      "logical_errors": 1245,
+      "prediction_sha256": "ae972b2b28f37f0a4862f26959460ed2d5084cb04b19f42fe816e5f4db6c94f6",
+      "syndrome_consistency_rate": 1.0
+    },
+    {
+      "decoder": "bp_gnn",
+      "diagnostics": {
+        "average_final_syndrome_distance": 3.24462890625,
+        "average_iterations": 27.6162109375,
+        "converged_shots": 681,
+        "convergence_rate": 0.166259765625,
+        "engine": "batched_min_sum",
+        "prior_llr_override": true
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 46847.25842285253,
+        "mean_total_seconds": 191.88637050000398,
+        "run_seconds": [
+          191.88637050000398
+        ],
+        "throughput_shots_per_second": 21.345966309784963,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.176513671875,
+      "logical_error_rate_standard_error": 0.005957134384685177,
+      "logical_errors": 723,
+      "prediction_sha256": "b4655eaac4f6efa1f6e1c073b32461167cd0ec88133c33a7f0db71e3f8b8310d",
+      "syndrome_consistency_rate": 0.166259765625
+    },
+    {
+      "decoder": "bp_gnn_osd",
+      "diagnostics": {
+        "average_iterations": 27.6162109375,
+        "average_osd_rank": 336.0,
+        "combination_sweep_order": 0,
+        "converged_shots": 681,
+        "convergence_rate": 0.166259765625,
+        "engine": "batched_min_sum",
+        "forced_osd": false,
+        "osd_order": 0,
+        "osd_ordering_override": false,
+        "osd_rate": 0.833740234375,
+        "osd_shots": 3415,
+        "prior_llr_override": true
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 78142.14035644618,
+        "mean_total_seconds": 320.07020690000354,
+        "run_seconds": [
+          320.07020690000354
+        ],
+        "throughput_shots_per_second": 12.797192339990813,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.265869140625,
+      "logical_error_rate_standard_error": 0.0069030454366794045,
+      "logical_errors": 1089,
+      "prediction_sha256": "b98b6b2b1500083ca741b90e8701147ef9f22506acabbeb4fce66e46b5f1a3d9",
+      "syndrome_consistency_rate": 1.0
+    }
+  ],
+  "environment": {
+    "numpy": "2.5.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.1",
+    "stim": "1.16.0",
+    "torch": "2.14.1+cpu"
+  },
+  "gnn_inference": {
+    "mean_per_shot_microseconds": 25462.59287109365,
+    "shots": 4096,
+    "total_seconds": 104.29478039999958
+  },
+  "graph": {
+    "check_feature_names": [
+      "degree_norm",
+      "detector_index",
+      "detector_time"
+    ],
+    "edge_feature_names": [
+      "prior_log_odds_scaled",
+      "inverse_variable_degree",
+      "inverse_check_degree"
+    ],
+    "num_detectors": 336,
+    "num_edges": 18424,
+    "num_errors": 6023,
+    "num_observables": 1,
+    "variable_feature_names": [
+      "prior_log_odds",
+      "prior_probability",
+      "hyperedge_size",
+      "observable_count",
+      "detector_index_mean",
+      "detector_time_mean"
+    ]
+  },
+  "mechanism_prediction": {
+    "all_zeros_accuracy": 0.9979925179390462,
+    "dem_prior_log_loss": 0.012863775224200307,
+    "dem_prior_roc_auc": 0.8161584826752052,
+    "positive_rate": 0.0020074820609538436,
+    "test_binary_accuracy": 0.9979925179390462,
+    "test_log_loss": 0.005681177504917842,
+    "test_roc_auc": 0.9925770383545763
+  },
+  "name": "m4_rotated_surface_code_circuit_level_d7_s3",
+  "schema_version": 1,
+  "selected_reweight_strength": 1.0,
+  "splits": {
+    "test": {
+      "detections_sha256": "209b19cc2b5bb7388f74f44136edc71b449661c0d5e0e67d592d5b80dfaf30b3",
+      "mechanism_rate": 0.0020074820609538436,
+      "seeds": [
+        303
+      ],
+      "shots": 4096
+    },
+    "train": {
+      "detections_sha256": "7046c3b3a65e3db2252019029b37b9e133325a38bb4027de3d198e3f40d575ef",
+      "mechanism_rate": 0.002009164251878217,
+      "seeds": [
+        105,
+        106
+      ],
+      "shots": 8192
+    },
+    "validation": {
+      "detections_sha256": "3c7e27f6c567bb12fe521b9dc40a6414f0368cce244f4e31711a2d067d3ce85d",
+      "mechanism_rate": 0.0020152241926780674,
+      "seeds": [
+        203
+      ],
+      "shots": 1024
+    }
+  },
+  "stage": "M2",
+  "total_seconds": 3863.352819699998,
+  "training": {
+    "best_validation_log_loss": 0.005757625796832144,
+    "epochs": 2,
+    "final_train_log_loss": 0.007635989735717885,
+    "history": [
+      {
+        "epoch": 1,
+        "seconds": 502.28527320000285,
+        "train_log_loss": 0.091595322068315,
+        "validation_log_loss": 0.012462961138226092
+      },
+      {
+        "epoch": 2,
+        "seconds": 500.56702249999944,
+        "train_log_loss": 0.007635989735717885,
+        "validation_log_loss": 0.005757625796832144
+      }
+    ],
+    "parameters": 15297,
+    "total_training_seconds": 1002.8522957000023
+  },
+  "validation_selection": [
+    {
+      "convergence_rate": 0.1328125,
+      "logical_error_rate": 0.2431640625,
+      "logical_errors": 249,
+      "mean_iterations": 28.6728515625,
+      "reweight_strength": 0.0,
+      "syndrome_consistency_rate": 0.1328125
+    },
+    {
+      "convergence_rate": 0.150390625,
+      "logical_error_rate": 0.2236328125,
+      "logical_errors": 229,
+      "mean_iterations": 28.2158203125,
+      "reweight_strength": 0.25,
+      "syndrome_consistency_rate": 0.150390625
+    },
+    {
+      "convergence_rate": 0.142578125,
+      "logical_error_rate": 0.2431640625,
+      "logical_errors": 249,
+      "mean_iterations": 28.326171875,
+      "reweight_strength": 0.5,
+      "syndrome_consistency_rate": 0.142578125
+    },
+    {
+      "convergence_rate": 0.1435546875,
+      "logical_error_rate": 0.2314453125,
+      "logical_errors": 237,
+      "mean_iterations": 28.2421875,
+      "reweight_strength": 0.75,
+      "syndrome_consistency_rate": 0.1435546875
+    },
+    {
+      "convergence_rate": 0.1953125,
+      "logical_error_rate": 0.1591796875,
+      "logical_errors": 163,
+      "mean_iterations": 26.90625,
+      "reweight_strength": 1.0,
+      "syndrome_consistency_rate": 0.1953125
+    }
+  ]
+}
