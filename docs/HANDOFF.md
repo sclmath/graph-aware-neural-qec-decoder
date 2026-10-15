@@ -74,15 +74,15 @@ Start-Process -FilePath $py -ArgumentList @('-m','graph_qec.m2',
 
 **验收**：新增解码器 + 单测 + 对照表（至少 d=3 repetition 与表面码 d=3 两个配置）；`docs/M3_HYBRID_DECODER.md` 增补小节。
 
-### WP3 · T18 修正 Union-Find（P1，可降级为 P2）
+### WP3 · T18 修正 Union-Find 的 peeling（P1，路线已定案）
 
 `src/graph_qec/decoders/union_find.py` 的 `_decode_shot` 只累加合并边的 `fault_mask`，**缺少标准 Union-Find 的 peeling 步骤**，因此在表面码上失效（d=3 码容量 p=0.01：0.06311 vs MWPM 0.00214；d=5 为 0.226-0.476）。
 
-两条路线：
-1. **修实现**：加簇内生成树自叶向根剥离；改完必须重跑 `results/m1/`（repetition）与表面码扫描，并更新受影响的文档数字（README、M1 文档、`results/m4/SURFACE_BASELINE_TABLE.md`——该表当前不含 union_find 列）。工作量 8-12 人日。
-2. **降级**：把它明确定义为 repetition code 专用基线，在文档与结果表里显式声明，交付清单里去掉 T18。工作量 0.5 人日。
+**已定路线：修实现，不降级**（2026-10-15 决策，记录于 `docs/ROADMAP_TODO.md` 第 6.1 节）。不采用「把 Union-Find 限定为 repetition code 专用基线」的路线，因此它保持 P1。
 
-**验收（路线 1）**：新增测试断言表面码 d=3 码容量的 Union-Find LER 与 MWPM 同量级；所有引用了 Union-Find 的表格重新生成。
+**待做**：在 `_decode_shot` 中加入标准 Union-Find 的 peeling——簇内对生成树自叶向根剥离，只保留真正的 correction。改完必须重跑 `results/m1/`（repetition）与表面码扫描，并更新受影响的文档数字（`README.md`、M1 文档、`results/m4/SURFACE_BASELINE_TABLE.md`——该表当前不含 union_find 列）。工作量 8-12 人日。
+
+**验收**：新增测试断言表面码 d=3 码容量 p=0.01 的 Union-Find LER 与 MWPM 同量级；所有引用了 Union-Find 的表格重新生成。
 
 ### WP4 · T10 多种子统计稳健性（P1，依赖 WP1）
 
@@ -110,7 +110,6 @@ Start-Process -FilePath $py -ArgumentList @('-m','graph_qec.m2',
 | D1 | 是否绑定远端仓库（GitHub 私有等） | **阻塞 T1 的 CI 首次运行**；当前无远端，本地磁盘故障即丢全部结果 |
 | D2 | `LICENSE` 未确定 | 交付物缺一项 |
 | D3 | 参考文献 PDF 策略（当前不入库，可由 `scripts/download_references.py` 重建） | 若要求离线自洽需改用 Git LFS |
-| — | T18 走「修实现」还是「限定适用码族」 | 决定 P0+P1 是 30-43 人日还是 22-31 人日 |
 | — | 是否启动 d=7（WP1b） | 单点约 35 min，3 seeds 全网格约 10 h |
 
 ## 6. 接手检查清单
