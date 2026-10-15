@@ -97,11 +97,19 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--sweeps", type=int, nargs="+", default=[0, 2, 4, 6, 8])
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--tag", type=str, default=None)
+    parser.add_argument(
+        "--test-shots",
+        type=int,
+        default=None,
+        help="Override the config's test split size (useful for a cheap "
+        "directional probe on an expensive distance such as d=7).",
+    )
     args = parser.parse_args(argv)
 
     config = M2Config.from_json_file(args.config)
+    test_shots = config.splits.test_shots if args.test_shots is None else args.test_shots
     test_split, reference = generate_split(
-        config, config.splits.test_seeds, config.splits.test_shots
+        config, config.splits.test_seeds, test_shots
     )
     system = DEMSystem.from_detector_error_model(reference.raw_dem)
     detections = test_split.detections
@@ -183,6 +191,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "config": str(args.config),
         "checkpoint": None if args.checkpoint is None else str(args.checkpoint),
         "shots": int(detections.shape[0]),
+        "test_shots_override": args.test_shots,
         "test_seeds": list(config.splits.test_seeds),
         "reweight_strength": strength,
         "sweeps": sorted(set(args.sweeps)),
