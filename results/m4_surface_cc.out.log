@@ -1,0 +1,34 @@
+[
+  {
+    "config_sha256": "4b97843e0f9ecd7838468b3f5d10d1ba75fe45bb822d4173fa3172bc070557ca",
+    "decoders": [
+      {
+        "ler": 0.05078125,
+        "mean_per_shot_us": 0.381762695345067,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.05389404296875,
+        "mean_per_shot_us": 114.18869018553491,
+        "name": "bp"
+      },
+      {
+        "ler": 0.06097412109375,
+        "mean_per_shot_us": 132.62716674800058,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.05267333984375,
+        "mean_per_shot_us": 48.297280883791146,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.050079345703125,
+        "mean_per_shot_us": 66.80979309081624,
+        "name": "bp_gnn_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_surface_cc\\m4_learned_basis_rotated_surface_code_code_capacity_d3__d3__code_capacity__p0p05",
+    "selected_reweight_strength": 0.75
+  }
+]

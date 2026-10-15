@@ -1,0 +1,23 @@
+[m2] HGP(rep3,rep3): 13 qubits, 12 detectors, 39 mechanisms, 80 edges, k=1
+[m2] splits ready: train=32768 validation=16384 test=32768 (0.1s)
+[m2] epoch 1/15: train=0.12501 validation=0.07950 (24.2s)
+[m2] epoch 2/15: train=0.05212 validation=0.04337 (34.9s)
+[m2] epoch 3/15: train=0.04208 validation=0.04020 (43.5s)
+[m2] epoch 4/15: train=0.03953 validation=0.03874 (42.6s)
+[m2] epoch 5/15: train=0.03862 validation=0.03753 (44.3s)
+[m2] epoch 6/15: train=0.03144 validation=0.02614 (42.2s)
+[m2] epoch 7/15: train=0.02438 validation=0.02302 (42.9s)
+[m2] epoch 8/15: train=0.02267 validation=0.02255 (42.8s)
+[m2] epoch 9/15: train=0.02230 validation=0.02211 (42.6s)
+[m2] epoch 10/15: train=0.02197 validation=0.02176 (42.1s)
+[m2] epoch 11/15: train=0.02184 validation=0.02172 (42.6s)
+[m2] epoch 12/15: train=0.02167 validation=0.02172 (45.2s)
+[m2] epoch 13/15: train=0.02143 validation=0.02144 (41.9s)
+[m2] epoch 14/15: train=0.02136 validation=0.02148 (41.8s)
+[m2] epoch 15/15: train=0.02133 validation=0.02153 (43.4s)
+[m2] training done: best validation log loss 0.02144 in 617.1s
+[m2] validation sweep: s=0.0:ler=0.03699, s=0.25:ler=0.03638, s=0.5:ler=0.03503, s=0.75:ler=0.03546, s=1.0:ler=0.03638
+[m2] evaluating bp on 32768 shots
+[m2] evaluating bp_osd on 32768 shots
+[m2] evaluating bp_gnn on 32768 shots
+[m2] evaluating bp_gnn_osd on 32768 shots

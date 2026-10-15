@@ -1,0 +1,213 @@
+{
+  "benchmark_name": "m1_repetition_code_capacity",
+  "config": {
+    "benchmark": {
+      "decoders": [
+        "mwpm",
+        "union_find",
+        "bp",
+        "bp_osd"
+      ],
+      "max_shots": 4096,
+      "timed_runs": 5,
+      "warmup_runs": 1
+    },
+    "decoder_parameters": {
+      "bp": {
+        "damping": 0.0,
+        "max_iterations": 32,
+        "min_sum_scaling": 0.75
+      },
+      "bp_osd": {
+        "damping": 0.0,
+        "max_iterations": 32,
+        "min_sum_scaling": 0.75,
+        "osd_order": 0
+      }
+    },
+    "experiment": {
+      "code": {
+        "distance": 3,
+        "family": "repetition_code",
+        "rounds": 3
+      },
+      "name": "repetition",
+      "noise": {
+        "model": "code_capacity",
+        "physical_error_rate": 0.01
+      },
+      "sampling": {
+        "shots": 4096
+      },
+      "seed": 20261003
+    },
+    "name": "m1_repetition_code_capacity",
+    "schema_version": 1
+  },
+  "config_sha256": "f377628c2f1b5647ae5e02aaacc1f3235d63f43f58e2c33ca4b0f1f90bc26ea5",
+  "dataset": {
+    "num_dem_errors": 9,
+    "num_detectors": 8,
+    "num_observables": 1,
+    "shots": 4096
+  },
+  "decoders": [
+    {
+      "decoder": "mwpm",
+      "diagnostics": {
+        "num_edges": 9,
+        "num_nodes": 8
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 0.033476562499999994,
+        "mean_total_seconds": 0.00013712,
+        "run_seconds": [
+          0.0001391,
+          0.0001398,
+          0.0001278,
+          0.0001292,
+          0.0001497
+        ],
+        "throughput_shots_per_second": 29871645.27421237,
+        "timed_runs": 5
+      },
+      "logical_error_rate": 0.00048828125,
+      "logical_error_rate_standard_error": 0.00034518267901195124,
+      "logical_errors": 2,
+      "memory": {
+        "peak_python_bytes": 118764,
+        "peak_rss_bytes": 79024128,
+        "peak_rss_delta_bytes": 24576,
+        "start_rss_bytes": 78999552
+      },
+      "parameters": {},
+      "prediction_sha256": "d0f93a2df3f4f5631cf9d3db72f59461b7960cb90b6ed10e8f3270a999e682e7",
+      "shots": 4096
+    },
+    {
+      "decoder": "union_find",
+      "diagnostics": {
+        "num_edges": 9,
+        "num_nodes": 8,
+        "unresolved_shots": 0
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 15.221958007812502,
+        "mean_total_seconds": 0.062349140000000004,
+        "run_seconds": [
+          0.0599303,
+          0.0803588,
+          0.067717,
+          0.0532906,
+          0.050449
+        ],
+        "throughput_shots_per_second": 65694.57092752201,
+        "timed_runs": 5
+      },
+      "logical_error_rate": 0.00048828125,
+      "logical_error_rate_standard_error": 0.00034518267901195124,
+      "logical_errors": 2,
+      "memory": {
+        "peak_python_bytes": 119008,
+        "peak_rss_bytes": 79269888,
+        "peak_rss_delta_bytes": 49152,
+        "start_rss_bytes": 79220736
+      },
+      "parameters": {},
+      "prediction_sha256": "d0f93a2df3f4f5631cf9d3db72f59461b7960cb90b6ed10e8f3270a999e682e7",
+      "shots": 4096
+    },
+    {
+      "decoder": "bp",
+      "diagnostics": {
+        "average_final_syndrome_distance": 0.0,
+        "average_iterations": 0.106689453125,
+        "converged_shots": 4096,
+        "convergence_rate": 1.0,
+        "syndrome_consistency_rate": 1.0,
+        "syndrome_consistent_shots": 4096
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 15.86080078125,
+        "mean_total_seconds": 0.06496584,
+        "run_seconds": [
+          0.0832266,
+          0.0666878,
+          0.0602345,
+          0.0587667,
+          0.0559136
+        ],
+        "throughput_shots_per_second": 63048.51903708164,
+        "timed_runs": 5
+      },
+      "logical_error_rate": 0.00048828125,
+      "logical_error_rate_standard_error": 0.00034518267901195124,
+      "logical_errors": 2,
+      "memory": {
+        "peak_python_bytes": 140320,
+        "peak_rss_bytes": 79527936,
+        "peak_rss_delta_bytes": 151552,
+        "start_rss_bytes": 79376384
+      },
+      "parameters": {
+        "damping": 0.0,
+        "max_iterations": 32,
+        "min_sum_scaling": 0.75
+      },
+      "prediction_sha256": "d0f93a2df3f4f5631cf9d3db72f59461b7960cb90b6ed10e8f3270a999e682e7",
+      "shots": 4096
+    },
+    {
+      "decoder": "bp_osd",
+      "diagnostics": {
+        "average_iterations": 0.106689453125,
+        "average_osd_rank": 0.0,
+        "converged_shots": 4096,
+        "convergence_rate": 1.0,
+        "osd_order": 0,
+        "osd_rate": 0.0,
+        "osd_shots": 0,
+        "syndrome_consistency_rate": 1.0,
+        "syndrome_consistent_shots": 4096
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 14.339833984375,
+        "mean_total_seconds": 0.05873596,
+        "run_seconds": [
+          0.058613,
+          0.0553069,
+          0.0615717,
+          0.0561827,
+          0.0620055
+        ],
+        "throughput_shots_per_second": 69735.81431205006,
+        "timed_runs": 5
+      },
+      "logical_error_rate": 0.00048828125,
+      "logical_error_rate_standard_error": 0.00034518267901195124,
+      "logical_errors": 2,
+      "memory": {
+        "peak_python_bytes": 194302,
+        "peak_rss_bytes": 80142336,
+        "peak_rss_delta_bytes": 77824,
+        "start_rss_bytes": 80064512
+      },
+      "parameters": {
+        "damping": 0.0,
+        "max_iterations": 32,
+        "min_sum_scaling": 0.75,
+        "osd_order": 0
+      },
+      "prediction_sha256": "d0f93a2df3f4f5631cf9d3db72f59461b7960cb90b6ed10e8f3270a999e682e7",
+      "shots": 4096
+    }
+  ],
+  "environment": {
+    "numpy": "2.5.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.1",
+    "stim": "1.16.0"
+  },
+  "schema_version": 1,
+  "stage": "M1"
+}

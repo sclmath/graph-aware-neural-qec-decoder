@@ -1,0 +1,9 @@
+[19:16:29] START hgp_rep3_to_hamming
+[m2] transfer hgp_rep3x3 -> hgp_hamming7x7 (32768 shots), strength=1.0
+{
+  "bp": 12939,
+  "bp_gnn": 11458,
+  "bp_gnn_osd": 12029
+}
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4\hgp_rep3x3_to_hgp_hamming7x7
+[19:19:34] DONE hgp_rep3_to_hamming exit=0

@@ -1,0 +1,24 @@
+{
+  "checkpoint": "results\\m4_surface\\m4_learned_basis_rotated_surface_code_circuit_level_d3__d3__circuit_level__p0p005\\model_state.pt",
+  "config": "configs\\m4_rotated_surface_code_circuit_level_d3.json",
+  "decoders": {
+    "bp_gnn": {
+      "ler": 0.02685546875,
+      "logical_errors": 55,
+      "us_per_shot": 89.42192382743741
+    },
+    "mwpm": {
+      "ler": 0.013671875,
+      "logical_errors": 28,
+      "us_per_shot": 0.32817382855654387
+    },
+    "mwpm_gnn": {
+      "ler": 0.90478515625,
+      "logical_errors": 1853,
+      "standard_error": 0.006485748246142113,
+      "us_per_shot": 1625.2185546870023
+    }
+  },
+  "reweight_strength": 1.0,
+  "shots": 2048
+}

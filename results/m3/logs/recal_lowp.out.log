@@ -1,0 +1,63 @@
+{
+  "0.003": {
+    "selected_strength": 0.75,
+    "sweep": [
+      [
+        0.0,
+        21
+      ],
+      [
+        0.25,
+        21
+      ],
+      [
+        0.5,
+        19
+      ],
+      [
+        0.75,
+        19
+      ],
+      [
+        1.0,
+        48
+      ]
+    ],
+    "test": {
+      "bp": 43,
+      "bp_gnn_osd_recalibrated": 34,
+      "bp_gnn_recalibrated": 34
+    }
+  },
+  "0.005": {
+    "selected_strength": 0.75,
+    "sweep": [
+      [
+        0.0,
+        57
+      ],
+      [
+        0.25,
+        56
+      ],
+      [
+        0.5,
+        47
+      ],
+      [
+        0.75,
+        42
+      ],
+      [
+        1.0,
+        83
+      ]
+    ],
+    "test": {
+      "bp": 123,
+      "bp_gnn_osd_recalibrated": 98,
+      "bp_gnn_recalibrated": 93
+    }
+  }
+}
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m3\recal_lowp

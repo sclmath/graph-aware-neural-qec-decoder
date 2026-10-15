@@ -1,0 +1,16 @@
+{
+  "name": "repetition",
+  "seed": 20261003,
+  "code": {
+    "family": "repetition_code",
+    "distance": 3,
+    "rounds": 3
+  },
+  "noise": {
+    "model": "code_capacity",
+    "physical_error_rate": 0.01
+  },
+  "sampling": {
+    "shots": 4096
+  }
+}

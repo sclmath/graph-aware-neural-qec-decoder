@@ -1,0 +1,7 @@
+[m2] transfer evaluation: m4_learned_basis_rotated_surface_code_code_capacity_d3 -> d5 code_capacity p=0.05 (8192 shots/seed)
+[m2] target graph: 120 detectors, 289 mechanisms, 644 edges
+[m2] evaluating mwpm on 16384 shots
+[m2] evaluating bp on 16384 shots
+[m2] evaluating bp_osd on 16384 shots
+[m2] evaluating bp_gnn on 16384 shots
+[m2] evaluating bp_gnn_osd on 16384 shots

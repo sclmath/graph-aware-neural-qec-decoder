@@ -1,0 +1,142 @@
+{
+  "bp_gnn_convergence_rate": 0.98583984375,
+  "checkpoint": "results\\m3\\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\\model_state.pt",
+  "non_converged_shots": 464,
+  "osd_effect_on_non_converged_shots": {
+    "broken": 136,
+    "flips": 188,
+    "rescued": 52,
+    "still_wrong": 121
+  },
+  "pairwise": [
+    {
+      "a": "bp",
+      "b": "bp_gnn",
+      "errors_a": 404,
+      "errors_b": 323,
+      "mcnemar": {
+        "b": 113,
+        "c": 32,
+        "p_exact": 8.496680376155467e-12,
+        "p_normal": 1.735732784313914e-11,
+        "z": 6.7266838681529375
+      },
+      "only_a": 113,
+      "only_b": 32,
+      "shots": 32768
+    },
+    {
+      "a": "bp_gnn",
+      "b": "bp_gnn_osd",
+      "errors_a": 323,
+      "errors_b": 407,
+      "mcnemar": {
+        "b": 52,
+        "c": 136,
+        "p_exact": 7.435699616518533e-10,
+        "p_normal": 8.992939488730415e-10,
+        "z": -6.126329642911571
+      },
+      "only_a": 52,
+      "only_b": 136,
+      "shots": 32768
+    },
+    {
+      "a": "bp_osd",
+      "b": "bp_gnn_osd",
+      "errors_a": 407,
+      "errors_b": 407,
+      "mcnemar": {
+        "b": 116,
+        "c": 116,
+        "p_exact": 1.0,
+        "p_normal": 1.0,
+        "z": 0.0
+      },
+      "only_a": 116,
+      "only_b": 116,
+      "shots": 32768
+    },
+    {
+      "a": "bp_gnn_osd",
+      "b": "bp_gnn_osd_learned_order",
+      "errors_a": 407,
+      "errors_b": 403,
+      "mcnemar": {
+        "b": 60,
+        "c": 56,
+        "p_exact": 0.7807391284762694,
+        "p_normal": 0.7103465689955668,
+        "z": 0.3713906763541037
+      },
+      "only_a": 60,
+      "only_b": 56,
+      "shots": 32768
+    },
+    {
+      "a": "bp_gnn",
+      "b": "bp_gnn_osd",
+      "errors_a": 173,
+      "errors_b": 257,
+      "mcnemar": {
+        "b": 52,
+        "c": 136,
+        "p_exact": 7.435699616518533e-10,
+        "p_normal": 8.992939488730415e-10,
+        "z": -6.126329642911571
+      },
+      "only_a": 52,
+      "only_b": 136,
+      "shots": 464
+    }
+  ],
+  "per_decoder": {
+    "bp": {
+      "logical_error_rate": 0.0123291015625,
+      "logical_errors": 404,
+      "syndrome_consistency_rate": 0.981048583984375
+    },
+    "bp_gnn": {
+      "logical_error_rate": 0.009857177734375,
+      "logical_errors": 323,
+      "syndrome_consistency_rate": 0.98583984375
+    },
+    "bp_gnn_osd": {
+      "logical_error_rate": 0.012420654296875,
+      "logical_errors": 407,
+      "syndrome_consistency_rate": 1.0
+    },
+    "bp_gnn_osd_learned_order": {
+      "logical_error_rate": 0.012298583984375,
+      "logical_errors": 403,
+      "syndrome_consistency_rate": 1.0
+    },
+    "bp_osd": {
+      "logical_error_rate": 0.012420654296875,
+      "logical_errors": 407,
+      "syndrome_consistency_rate": 1.0
+    }
+  },
+  "reweight_strength": 1.0,
+  "shots": 32768,
+  "subgroups": {
+    "converged_under_bp_gnn": {
+      "errors": {
+        "bp_gnn": 150,
+        "bp_gnn_osd": 150,
+        "bp_gnn_osd_learned_order": 150
+      },
+      "shots": 32304
+    },
+    "non_converged_under_bp_gnn": {
+      "errors": {
+        "bp": 160,
+        "bp_gnn": 173,
+        "bp_gnn_osd": 257,
+        "bp_gnn_osd_learned_order": 253,
+        "bp_osd": 175
+      },
+      "shots": 464
+    }
+  }
+}

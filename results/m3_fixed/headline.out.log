@@ -1,0 +1,44 @@
+[
+  {
+    "config_sha256": "d4b07dde7e583301d0b52d652524a6fb7fc3ca56a2ae74ac9b7a3f5d2cda6ea6",
+    "decoders": [
+      {
+        "ler": 0.006622314453125,
+        "mean_per_shot_us": 0.1495747884068995,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.009429931640625,
+        "mean_per_shot_us": 1.9092091878188575,
+        "name": "bp"
+      },
+      {
+        "ler": 0.010101318359375,
+        "mean_per_shot_us": 3.9751495361321316,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.009521484375,
+        "mean_per_shot_us": 1.7604187011651302,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.010162353515625,
+        "mean_per_shot_us": 2.618416341119515,
+        "name": "bp_gnn_osd"
+      },
+      {
+        "ler": 0.009674072265625,
+        "mean_per_shot_us": 3.020175170879528,
+        "name": "bp_gnn_osd_learned_order"
+      },
+      {
+        "ler": 0.009735107421875,
+        "mean_per_shot_us": 135.08595479329773,
+        "name": "osd_gnn"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m3_fixed\\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01",
+    "selected_reweight_strength": 1.0
+  }
+]

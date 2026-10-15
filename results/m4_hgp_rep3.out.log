@@ -1,0 +1,41 @@
+[
+  {
+    "code": {
+      "k": 1,
+      "name": "HGP(rep3,rep3)",
+      "num_detectors": 12,
+      "num_mechanisms": 39,
+      "num_qubits": 13,
+      "num_x_checks": 6,
+      "num_z_checks": 6
+    },
+    "decoders": [
+      {
+        "ler": 0.0360107421875,
+        "logical_errors": 1180,
+        "mean_per_shot_us": 25.723910522440498,
+        "name": "bp"
+      },
+      {
+        "ler": 0.04669189453125,
+        "logical_errors": 1530,
+        "mean_per_shot_us": 65.25228424072994,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.034912109375,
+        "logical_errors": 1144,
+        "mean_per_shot_us": 23.458807373061276,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.038177490234375,
+        "logical_errors": 1251,
+        "mean_per_shot_us": 36.976148986817,
+        "name": "bp_gnn_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_hgp\\m4_hgp_rep3x3_code_capacity_p0p05__d3__code_capacity__p0p05",
+    "selected_reweight_strength": 0.5
+  }
+]

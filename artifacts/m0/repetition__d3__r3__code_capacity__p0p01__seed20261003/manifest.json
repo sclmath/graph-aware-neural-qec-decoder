@@ -1,0 +1,78 @@
+{
+  "circuit": {
+    "num_detectors": 8,
+    "num_observables": 1,
+    "num_qubits": 5,
+    "num_ticks": 9,
+    "sha256": "8c2bcd25abf60a3ef51cc36488b1bca5a3c49c02dd0d137c1cca9d24e44ef260"
+  },
+  "config": {
+    "code": {
+      "distance": 3,
+      "family": "repetition_code",
+      "rounds": 3
+    },
+    "name": "repetition",
+    "noise": {
+      "model": "code_capacity",
+      "physical_error_rate": 0.01
+    },
+    "sampling": {
+      "shots": 4096
+    },
+    "seed": 20261003
+  },
+  "config_sha256": "efda914374558b905c96c2053ad894c82dd968232efd3d744ca85c1ff31dcc78",
+  "detector_error_model": {
+    "decomposed_sha256": "cbe7e368494c63804cd86501fefb8b9716c6a7bd7cc189e4dce4896e5e6c71b4",
+    "num_detectors": 8,
+    "num_errors": 9,
+    "num_observables": 1,
+    "sha256": "cbe7e368494c63804cd86501fefb8b9716c6a7bd7cc189e4dce4896e5e6c71b4"
+  },
+  "environment": {
+    "numpy": "2.5.3",
+    "pymatching": "2.4.0",
+    "python": "3.12.1",
+    "stim": "1.16.0"
+  },
+  "pymatching_smoke": {
+    "decoded_shots": 4096,
+    "logical_error_rate": 0.00048828125,
+    "logical_errors": 2,
+    "num_edges": 9,
+    "num_nodes": 8
+  },
+  "samples": {
+    "detections": {
+      "dtype": "uint8",
+      "mean_event_rate": 0.011932373046875,
+      "sha256": "af161fefcc35746b7385380c41a358aea7679b35d4589dbfee05f64664599e00",
+      "shape": [
+        4096,
+        8
+      ]
+    },
+    "error_mechanisms": {
+      "dtype": "uint8",
+      "mean_mechanism_rate": 0.007676866319444444,
+      "sha256": "47796879c9c20b496116c6e9aad503efc216637d04a094db857f48379d19df6b",
+      "shape": [
+        4096,
+        9
+      ]
+    },
+    "observables": {
+      "dtype": "uint8",
+      "mean_flip_rate": 0.0205078125,
+      "sha256": "d40f466b7e749ae681819cf01a2b76ea3dae060a6e446738f09971bd5baf3a7c",
+      "shape": [
+        4096,
+        1
+      ]
+    },
+    "shots": 4096
+  },
+  "schema_version": 1,
+  "stage": "M0"
+}

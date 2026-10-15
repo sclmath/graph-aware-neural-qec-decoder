@@ -1,0 +1,16 @@
+d=3 circuit_level p=0.003
+  mwpm        d=3 circuit_level p=0.003: LER=0.00610 (50) 0.2 us/shot
+  union_find  d=3 circuit_level p=0.003: LER=0.07068 (579) 398.4 us/shot
+  bp          d=3 circuit_level p=0.003: LER=0.01489 (122) 142.8 us/shot
+  bp_osd      d=3 circuit_level p=0.003: LER=0.01770 (145) 175.3 us/shot
+d=3 circuit_level p=0.005
+  mwpm        d=3 circuit_level p=0.005: LER=0.01599 (131) 0.5 us/shot
+  union_find  d=3 circuit_level p=0.005: LER=0.11121 (911) 354.3 us/shot
+  bp          d=3 circuit_level p=0.005: LER=0.04065 (333) 351.0 us/shot
+  bp_osd      d=3 circuit_level p=0.005: LER=0.04236 (347) 410.4 us/shot
+d=3 circuit_level p=0.008
+  mwpm        d=3 circuit_level p=0.008: LER=0.04089 (335) 0.8 us/shot
+  union_find  d=3 circuit_level p=0.008: LER=0.16846 (1380) 294.9 us/shot
+  bp          d=3 circuit_level p=0.008: LER=0.07581 (621) 611.3 us/shot
+  bp_osd      d=3 circuit_level p=0.008: LER=0.08411 (689) 769.5 us/shot
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4\surface_sweep.csv

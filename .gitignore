@@ -1,0 +1,22 @@
+# ===== Python =====
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+build/
+dist/
+*.egg-info/
+
+# ===== 参考文献 PDF（68 个 / 129.7 MB，第三方版权）=====
+# 不入库，由 scripts/download_references.py 依据 manifest 重新获取；
+# 清单元数据（manifest.csv/json、pdfinfo_validation.json、references.md）仍然入库。
+docs/references/references_pdfs/*.pdf
+
+# ===== 编辑器 / 系统 =====
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ===== 运行期临时文件 =====
+*.tmp

@@ -1,0 +1,58 @@
+{
+  "decoders": [
+    {
+      "ler": 0.025543212890625,
+      "logical_errors": 837,
+      "name": "mwpm",
+      "status": "ok",
+      "us_per_shot": 0.7073883056540886
+    },
+    {
+      "ler": 0.041473388671875,
+      "logical_errors": 1359,
+      "name": "bp",
+      "status": "ok",
+      "us_per_shot": 744.4778533935437
+    },
+    {
+      "ler": 0.042816162109375,
+      "logical_errors": 1403,
+      "name": "bp_osd",
+      "status": "ok",
+      "us_per_shot": 679.6698059082229
+    },
+    {
+      "ler": 0.03497314453125,
+      "logical_errors": 1146,
+      "name": "bp_gnn",
+      "status": "ok",
+      "us_per_shot": 600.5743011474607
+    },
+    {
+      "ler": 0.03680419921875,
+      "logical_errors": 1206,
+      "name": "bp_gnn_osd",
+      "status": "ok",
+      "us_per_shot": 574.3907501220558
+    }
+  ],
+  "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m3\\m3_learned_basis_repetition_circuit_level_d3__from_d3__to_d3__circuit_level__p0p02",
+  "transfer": {
+    "reweight_strength": 1.0,
+    "source_experiment": {
+      "distance": 3,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 3
+    },
+    "strength_source": "fixed at the source config maximum; not re-selected on target",
+    "target_experiment": {
+      "distance": 3,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.02,
+      "rounds": 3
+    }
+  }
+}

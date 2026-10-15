@@ -1,0 +1,49 @@
+{
+  "batch_size": 1024,
+  "checkpoint": {
+    "architecture": {
+      "check_feature_dim": 3,
+      "edge_feature_dim": 3,
+      "hidden_size": 32,
+      "num_layers": 3,
+      "variable_feature_dim": 6
+    },
+    "checkpoint": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m3_fixed\\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\\model_state.pt",
+    "checkpoint_config_sha256": "d4b07dde7e583301d0b52d652524a6fb7fc3ca56a2ae74ac9b7a3f5d2cda6ea6"
+  },
+  "config": "configs\\m3_learned_basis_repetition_circuit_level_d3.json",
+  "decoders": {
+    "bp_no_prior": {
+      "logical_error_rate": 0.0087890625,
+      "logical_errors": 144,
+      "syndrome_consistency_rate": 0.99072265625
+    },
+    "float32": {
+      "logical_error_rate": 0.00885009765625,
+      "logical_errors": 145,
+      "syndrome_consistency_rate": 0.99169921875
+    },
+    "int8": {
+      "logical_error_rate": 0.00885009765625,
+      "logical_errors": 145,
+      "syndrome_consistency_rate": 0.99169921875
+    }
+  },
+  "float32": {
+    "inference_seconds": 0.6328730000004725,
+    "mechanism_log_loss": 0.014970603260038245,
+    "microseconds_per_shot": 38.62750244143509,
+    "model_size_mb": 0.061188
+  },
+  "int8_dynamic": {
+    "inference_seconds": 0.752983199998198,
+    "mechanism_log_loss": 0.01496713758805948,
+    "microseconds_per_shot": 45.95844726551501,
+    "model_size_mb": 0.016452
+  },
+  "max_abs_logit_delta": 0.43766772747039795,
+  "shots": 16384,
+  "sign_agreement": 0.9999505905877977,
+  "size_ratio": 0.2688762502451461,
+  "speedup": 0.8404875434166222
+}

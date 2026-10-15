@@ -1,0 +1,265 @@
+{
+  "checkpoint": {
+    "architecture": {
+      "check_feature_dim": 3,
+      "edge_feature_dim": 3,
+      "hidden_size": 32,
+      "num_layers": 3,
+      "variable_feature_dim": 6
+    },
+    "checkpoint": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m2\\m2_learned_basis_repetition_circuit_level_d5__d5__circuit_level__p0p01__train_only\\model_state.pt",
+    "checkpoint_config_sha256": "c8fea417077f5018af6b2d5caf3906cab47ab2bbef65e8c95fa3a5576f6a2330"
+  },
+  "config": {
+    "benchmark": {
+      "decoders": [
+        "mwpm",
+        "bp",
+        "bp_osd",
+        "osd_bp",
+        "osd_gnn"
+      ],
+      "timed_runs": 1
+    },
+    "decoder": {
+      "damping": 0.0,
+      "max_iterations": 32,
+      "min_sum_scaling": 0.75,
+      "reweight_strengths": [
+        0.0,
+        1.0
+      ]
+    },
+    "experiment": {
+      "code": {
+        "distance": 5,
+        "family": "repetition_code",
+        "rounds": 5
+      },
+      "name": "repetition",
+      "noise": {
+        "model": "circuit_level",
+        "physical_error_rate": 0.01
+      },
+      "sampling": {
+        "shots": 4096
+      },
+      "seed": 20261012
+    },
+    "model": {
+      "dropout": 0.0,
+      "hidden_size": 32,
+      "num_layers": 3
+    },
+    "name": "m2_learned_basis_repetition_circuit_level_d5",
+    "schema_version": 1,
+    "splits": {
+      "test_seeds": [
+        301
+      ],
+      "test_shots": 4096,
+      "train_seeds": [
+        101,
+        102
+      ],
+      "train_shots": 8192,
+      "validation_seeds": [
+        201
+      ],
+      "validation_shots": 8192
+    },
+    "training": {
+      "batch_size": 1024,
+      "epochs": 12,
+      "learning_rate": 0.002,
+      "max_grad_norm": 1.0,
+      "seed": 7,
+      "torch_threads": 6,
+      "weight_decay": 0.0
+    }
+  },
+  "config_sha256": "c8fea417077f5018af6b2d5caf3906cab47ab2bbef65e8c95fa3a5576f6a2330",
+  "decoders": [
+    {
+      "decoder": "mwpm",
+      "diagnostics": {
+        "num_edges": 65,
+        "num_nodes": 24
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 0.8388671877135323,
+        "mean_total_seconds": 0.0034360000008746283,
+        "run_seconds": [
+          0.0034360000008746283
+        ],
+        "throughput_shots_per_second": 1192083.8180900377,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.001220703125,
+      "logical_error_rate_standard_error": 0.0005455817317288437,
+      "logical_errors": 5,
+      "prediction_sha256": "85c4f08797646e3ab44724d2d3a3397b41ce16a9816f4dc4045725b1e4b2dd1d",
+      "syndrome_consistency_rate": null
+    },
+    {
+      "decoder": "bp",
+      "diagnostics": {
+        "average_final_syndrome_distance": 0.669189453125,
+        "average_iterations": 12.438232421875,
+        "converged_shots": 2691,
+        "convergence_rate": 0.656982421875,
+        "prior_llr_override": false
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 10998.691430664121,
+        "mean_total_seconds": 45.05064010000024,
+        "run_seconds": [
+          45.05064010000024
+        ],
+        "throughput_shots_per_second": 90.91990681837123,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.062744140625,
+      "logical_error_rate_standard_error": 0.00378909676022624,
+      "logical_errors": 257,
+      "prediction_sha256": "2e221de3a9c8b8c9c15e03566a6f45e7e195644faa7c8b89ddac051824aebd0c",
+      "syndrome_consistency_rate": 0.656982421875
+    },
+    {
+      "decoder": "bp_osd",
+      "diagnostics": {
+        "average_iterations": 12.438232421875,
+        "average_osd_rank": 24.0,
+        "converged_shots": 2691,
+        "convergence_rate": 0.656982421875,
+        "forced_osd": false,
+        "osd_order": 0,
+        "osd_ordering_override": false,
+        "osd_rate": 0.343017578125,
+        "osd_shots": 1405,
+        "prior_llr_override": false
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 11823.133569336174,
+        "mean_total_seconds": 48.42755510000097,
+        "run_seconds": [
+          48.42755510000097
+        ],
+        "throughput_shots_per_second": 84.57994609766946,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.089599609375,
+      "logical_error_rate_standard_error": 0.004462613776966908,
+      "logical_errors": 367,
+      "prediction_sha256": "01e46e21d8443bfb3923888af8e34a4d4d8772373728a1eda3f3a921ea92b989",
+      "syndrome_consistency_rate": 1.0
+    },
+    {
+      "decoder": "bp_gnn",
+      "diagnostics": {
+        "average_final_syndrome_distance": 0.65283203125,
+        "average_iterations": 11.9775390625,
+        "converged_shots": 2802,
+        "convergence_rate": 0.68408203125,
+        "prior_llr_override": true
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 11333.390429687728,
+        "mean_total_seconds": 46.421567200000936,
+        "run_seconds": [
+          46.421567200000936
+        ],
+        "throughput_shots_per_second": 88.23484959809623,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.050537109375,
+      "logical_error_rate_standard_error": 0.0034226636488100272,
+      "logical_errors": 207,
+      "prediction_sha256": "ee96c4b4c47d14813d84ed20b30f23b81e890e07df4b9c72bee080d6840e94d3",
+      "syndrome_consistency_rate": 0.68408203125
+    },
+    {
+      "decoder": "bp_gnn_osd",
+      "diagnostics": {
+        "average_iterations": 11.9775390625,
+        "average_osd_rank": 24.0,
+        "converged_shots": 2802,
+        "convergence_rate": 0.68408203125,
+        "forced_osd": false,
+        "osd_order": 0,
+        "osd_ordering_override": false,
+        "osd_rate": 0.31591796875,
+        "osd_shots": 1294,
+        "prior_llr_override": true
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 11273.508837890578,
+        "mean_total_seconds": 46.17629219999981,
+        "run_seconds": [
+          46.17629219999981
+        ],
+        "throughput_shots_per_second": 88.70352739148721,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.06689453125,
+      "logical_error_rate_standard_error": 0.0039037383468634476,
+      "logical_errors": 274,
+      "prediction_sha256": "b48779c7c5af26a912089791b77ad48c07092c846b3685b48a6c6d8b16c8ca23",
+      "syndrome_consistency_rate": 1.0
+    }
+  ],
+  "environment": {
+    "numpy": "2.5.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.1",
+    "stim": "1.16.0",
+    "torch": "2.14.1+cpu"
+  },
+  "graph": {
+    "num_detectors": 24,
+    "num_edges": 182,
+    "num_errors": 101,
+    "num_observables": 1
+  },
+  "mechanism_prediction": {
+    "all_zeros_accuracy": 0.9906259668935643,
+    "dem_prior_log_loss": 0.05142207043884324,
+    "dem_prior_roc_auc": 0.6646725425614471,
+    "positive_rate": 0.009374033106435644,
+    "test_binary_accuracy": 0.9922866065903465,
+    "test_log_loss": 0.01824117398774595,
+    "test_roc_auc": 0.9884284694524621
+  },
+  "name": "m2_learned_basis_repetition_circuit_level_d5",
+  "schema_version": 1,
+  "splits": {
+    "test": {
+      "detections_sha256": "3dc9b18e537093e074af6f27a9f486ba1db7c78591a15486213afd28af02cb43",
+      "mechanism_rate": 0.009374033106435644,
+      "seeds": [
+        301
+      ],
+      "shots": 4096
+    }
+  },
+  "stage": "M3-transfer",
+  "total_seconds": 402.69780960000026,
+  "transfer": {
+    "reweight_strength": 1.0,
+    "source_experiment": {
+      "distance": 5,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 5
+    },
+    "strength_source": "fixed at the source config maximum; not re-selected on target",
+    "target_experiment": {
+      "distance": 5,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 5
+    }
+  }
+}

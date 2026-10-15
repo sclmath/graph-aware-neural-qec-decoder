@@ -1,0 +1,262 @@
+{
+  "checkpoint": "results\\m3\\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\\model_state.pt",
+  "config": "configs\\m3_learned_basis_repetition_circuit_level_d3.json",
+  "results": [
+    {
+      "decoders": [
+        {
+          "decoder": "bp",
+          "diagnostics": {
+            "average_final_syndrome_distance": 0.002197265625,
+            "average_iterations": 0.18634033203125,
+            "converged_shots": 32708,
+            "convergence_rate": 0.9981689453125,
+            "prior_llr_override": false
+          },
+          "latency": {
+            "mean_per_shot_microseconds": 52.70138854979179,
+            "mean_total_seconds": 1.7269190999995772,
+            "run_seconds": [
+              1.7269190999995772
+            ],
+            "throughput_shots_per_second": 18974.83211576502,
+            "timed_runs": 1
+          },
+          "logical_error_rate": 0.001312255859375,
+          "logical_error_rate_standard_error": 0.00019998579691500284,
+          "logical_errors": 43,
+          "prediction_sha256": "cc8157efccc13a069f58ec7fee49cd3114700caa19f472d17ee59eae7ff5d08f",
+          "syndrome_consistency_rate": 0.9981689453125
+        },
+        {
+          "decoder": "bp_gnn_recalibrated",
+          "diagnostics": {
+            "average_final_syndrome_distance": 0.0018310546875,
+            "average_iterations": 0.18145751953125,
+            "converged_shots": 32723,
+            "convergence_rate": 0.998626708984375,
+            "prior_llr_override": true
+          },
+          "latency": {
+            "mean_per_shot_microseconds": 54.548580932567425,
+            "mean_total_seconds": 1.7874478999983694,
+            "run_seconds": [
+              1.7874478999983694
+            ],
+            "throughput_shots_per_second": 18332.282580113184,
+            "timed_runs": 1
+          },
+          "logical_error_rate": 0.00103759765625,
+          "logical_error_rate_standard_error": 0.00017785418758304433,
+          "logical_errors": 34,
+          "prediction_sha256": "a79343f78296b1cb6476125bb856380adc2506870a7eeac8a705be7a4980d576",
+          "syndrome_consistency_rate": 0.998626708984375
+        },
+        {
+          "decoder": "bp_gnn_osd_recalibrated",
+          "diagnostics": {
+            "average_iterations": 0.18145751953125,
+            "average_osd_rank": 8.0,
+            "converged_shots": 32723,
+            "convergence_rate": 0.998626708984375,
+            "forced_osd": false,
+            "osd_order": 0,
+            "osd_ordering_override": false,
+            "osd_rate": 0.001373291015625,
+            "osd_shots": 45,
+            "prior_llr_override": true
+          },
+          "latency": {
+            "mean_per_shot_microseconds": 57.97388916017887,
+            "mean_total_seconds": 1.8996884000007412,
+            "run_seconds": [
+              1.8996884000007412
+            ],
+            "throughput_shots_per_second": 17249.14464918942,
+            "timed_runs": 1
+          },
+          "logical_error_rate": 0.00103759765625,
+          "logical_error_rate_standard_error": 0.00017785418758304433,
+          "logical_errors": 34,
+          "prediction_sha256": "1d303b326aa77f601be2ac418c747bb22c0e815e275139324acac04ed2d0a83e",
+          "syndrome_consistency_rate": 1.0
+        }
+      ],
+      "mechanism_prediction": {
+        "dem_prior_log_loss": 5.4310036580509395,
+        "test_log_loss": 0.0023834184809189466
+      },
+      "physical_error_rate": 0.003,
+      "selected_strength": 0.75,
+      "test_shots": 32768,
+      "validation_shots": 16384,
+      "validation_sweep": [
+        {
+          "convergence_rate": 0.9976806640625,
+          "logical_error_rate": 0.00128173828125,
+          "logical_errors": 21,
+          "mean_iterations": 0.20599365234375,
+          "strength": 0.0
+        },
+        {
+          "convergence_rate": 0.9976806640625,
+          "logical_error_rate": 0.00128173828125,
+          "logical_errors": 21,
+          "mean_iterations": 0.211181640625,
+          "strength": 0.25
+        },
+        {
+          "convergence_rate": 0.99822998046875,
+          "logical_error_rate": 0.00115966796875,
+          "logical_errors": 19,
+          "mean_iterations": 0.19732666015625,
+          "strength": 0.5
+        },
+        {
+          "convergence_rate": 0.99835205078125,
+          "logical_error_rate": 0.00115966796875,
+          "logical_errors": 19,
+          "mean_iterations": 0.19549560546875,
+          "strength": 0.75
+        },
+        {
+          "convergence_rate": 0.99542236328125,
+          "logical_error_rate": 0.0029296875,
+          "logical_errors": 48,
+          "mean_iterations": 0.288330078125,
+          "strength": 1.0
+        }
+      ]
+    },
+    {
+      "decoders": [
+        {
+          "decoder": "bp",
+          "diagnostics": {
+            "average_final_syndrome_distance": 0.006134033203125,
+            "average_iterations": 0.37847900390625,
+            "converged_shots": 32594,
+            "convergence_rate": 0.99468994140625,
+            "prior_llr_override": false
+          },
+          "latency": {
+            "mean_per_shot_microseconds": 100.31514587399704,
+            "mean_total_seconds": 3.287126699999135,
+            "run_seconds": [
+              3.287126699999135
+            ],
+            "throughput_shots_per_second": 9968.584417512298,
+            "timed_runs": 1
+          },
+          "logical_error_rate": 0.003753662109375,
+          "logical_error_rate_standard_error": 0.000337820491734488,
+          "logical_errors": 123,
+          "prediction_sha256": "55bd8c81158d70269747f87961cf43352282d70132d396ba1514ec5b45e48a1e",
+          "syndrome_consistency_rate": 0.99468994140625
+        },
+        {
+          "decoder": "bp_gnn_recalibrated",
+          "diagnostics": {
+            "average_final_syndrome_distance": 0.0050048828125,
+            "average_iterations": 0.335052490234375,
+            "converged_shots": 32642,
+            "convergence_rate": 0.99615478515625,
+            "prior_llr_override": true
+          },
+          "latency": {
+            "mean_per_shot_microseconds": 95.8177154540829,
+            "mean_total_seconds": 3.1397548999993887,
+            "run_seconds": [
+              3.1397548999993887
+            ],
+            "throughput_shots_per_second": 10436.483433788535,
+            "timed_runs": 1
+          },
+          "logical_error_rate": 0.002838134765625,
+          "logical_error_rate_standard_error": 0.0002938829360040762,
+          "logical_errors": 93,
+          "prediction_sha256": "1bff305ec02f248e96a6d600ccfee9e7cbae240bd76d65e43707a5fa838e21e0",
+          "syndrome_consistency_rate": 0.99615478515625
+        },
+        {
+          "decoder": "bp_gnn_osd_recalibrated",
+          "diagnostics": {
+            "average_iterations": 0.335052490234375,
+            "average_osd_rank": 8.0,
+            "converged_shots": 32642,
+            "convergence_rate": 0.99615478515625,
+            "forced_osd": false,
+            "osd_order": 0,
+            "osd_ordering_override": false,
+            "osd_rate": 0.00384521484375,
+            "osd_shots": 126,
+            "prior_llr_override": true
+          },
+          "latency": {
+            "mean_per_shot_microseconds": 96.28854370119511,
+            "mean_total_seconds": 3.1551830000007612,
+            "run_seconds": [
+              3.1551830000007612
+            ],
+            "throughput_shots_per_second": 10385.451493619259,
+            "timed_runs": 1
+          },
+          "logical_error_rate": 0.00299072265625,
+          "logical_error_rate_standard_error": 0.00030165651031421035,
+          "logical_errors": 98,
+          "prediction_sha256": "499a7556c33c358da80001b4d1247b2a7f9cd3a2cb45ca6451c0447677fe6b6e",
+          "syndrome_consistency_rate": 1.0
+        }
+      ],
+      "mechanism_prediction": {
+        "dem_prior_log_loss": 4.909206976155267,
+        "test_log_loss": 0.005113226669038454
+      },
+      "physical_error_rate": 0.005,
+      "selected_strength": 0.75,
+      "test_shots": 32768,
+      "validation_shots": 16384,
+      "validation_sweep": [
+        {
+          "convergence_rate": 0.99468994140625,
+          "logical_error_rate": 0.00347900390625,
+          "logical_errors": 57,
+          "mean_iterations": 0.38909912109375,
+          "strength": 0.0
+        },
+        {
+          "convergence_rate": 0.994384765625,
+          "logical_error_rate": 0.00341796875,
+          "logical_errors": 56,
+          "mean_iterations": 0.39923095703125,
+          "strength": 0.25
+        },
+        {
+          "convergence_rate": 0.9952392578125,
+          "logical_error_rate": 0.00286865234375,
+          "logical_errors": 47,
+          "mean_iterations": 0.38720703125,
+          "strength": 0.5
+        },
+        {
+          "convergence_rate": 0.99658203125,
+          "logical_error_rate": 0.0025634765625,
+          "logical_errors": 42,
+          "mean_iterations": 0.3323974609375,
+          "strength": 0.75
+        },
+        {
+          "convergence_rate": 0.99359130859375,
+          "logical_error_rate": 0.00506591796875,
+          "logical_errors": 83,
+          "mean_iterations": 0.42633056640625,
+          "strength": 1.0
+        }
+      ]
+    }
+  ],
+  "targets": [
+    0.003,
+    0.005
+  ]
+}

@@ -1,0 +1,16 @@
+[19:19:40] START surface_sweep
+d=3 code_capacity p=0.002
+Traceback (most recent call last):
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m4_surface_sweep.py", line 124, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m4_surface_sweep.py", line 108, in main
+    run_point(distance, distance, noise_model, float(probability), args.shots)
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m4_surface_sweep.py", line 67, in run_point
+    metrics = _evaluate(decoder.decode_batch, dataset.detections, dataset.observables, system)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m4_surface_sweep.py", line 34, in _evaluate
+    residual = (system.check_matrix.astype(np.int64) @ result.corrections.T.astype(np.int64)) % 2
+                                                       ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'T'
+[19:19:41] DONE surface_sweep exit=1

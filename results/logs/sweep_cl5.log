@@ -1,0 +1,6 @@
+d=5 circuit_level p=0.005
+  mwpm        d=5 circuit_level p=0.005: LER=0.01416 (58) 2.7 us/shot
+  union_find  d=5 circuit_level p=0.005: LER=0.28906 (1184) 1816.8 us/shot
+  bp          d=5 circuit_level p=0.005: LER=0.09741 (399) 11871.4 us/shot
+  bp_osd      d=5 circuit_level p=0.005: LER=0.13794 (565) 13149.0 us/shot
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4\surface_sweep.csv

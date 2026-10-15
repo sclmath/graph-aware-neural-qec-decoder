@@ -1,0 +1,689 @@
+% [R01] 基础理论: 拓扑量子存储；把解码连接到统计力学与相变。
+@article{Dennis2002_r01,
+  author = {Eric Dennis and Alexei Kitaev and Andrew Landahl and John Preskill},
+  title = {Topological quantum memory},
+  year = {2002},
+  journal = {Journal of Mathematical Physics},
+  doi = {10.1063/1.1499754},
+  url = {https://doi.org/10.1063/1.1499754}
+}
+
+% [R02] 基础综述: 表面码系统综述，统一码距、阈值、syndrome 与容错计算术语。
+@article{Fowler2012_r02,
+  author = {Austin G. Fowler and M. Mariantoni and John M. Martinis and Andrew N. Cleland},
+  title = {Surface codes: Towards practical large-scale quantum computation},
+  year = {2012},
+  journal = {Physical Review A},
+  doi = {10.1103/physreva.86.032324},
+  url = {https://doi.org/10.1103/physreva.86.032324}
+}
+
+% [R03] 仿真工具: Stim 快速 stabilizer 仿真器，项目生成 DEM 与训练数据的基础工具。
+@article{Gidney2021_r03,
+  author = {Craig Gidney},
+  title = {Stim: a fast stabilizer circuit simulator},
+  year = {2021},
+  journal = {Quantum},
+  doi = {10.22331/q-2021-07-06-497},
+  url = {https://doi.org/10.22331/q-2021-07-06-497}
+}
+
+% [R04] 匹配基线: PyMatching 的 MWPM 实现，表面码强基线。
+@article{Higgott2022_r04,
+  author = {Oscar Higgott},
+  title = {PyMatching: A Python Package for Decoding Quantum Codes with Minimum-Weight Perfect Matching},
+  year = {2022},
+  journal = {ACM Transactions on Quantum Computing},
+  doi = {10.1145/3505637},
+  url = {https://doi.org/10.1145/3505637}
+}
+
+% [R05] 低延迟基线: Union-Find 近线性时间拓扑码解码，适合延迟对照。
+@article{Delfosse2021_r05,
+  author = {Nicolas Delfosse and Naomi Nickerson},
+  title = {Almost-linear time decoding algorithm for topological codes},
+  year = {2021},
+  journal = {Quantum},
+  doi = {10.22331/q-2021-12-02-595},
+  url = {https://doi.org/10.22331/q-2021-12-02-595}
+}
+
+% [R06] 解码综述: 表面码解码算法综述，可统一 LER/阈值/复杂度的实验口径。
+@article{iOlius2024_r06,
+  author = {Antonio deMarti iOlius and Patricio Fuentes and Román Orús and Pedro M. Crespo and Josu Etxezarreta Martínez},
+  title = {Decoding algorithms for surface codes},
+  year = {2024},
+  journal = {Quantum},
+  doi = {10.22331/q-2024-10-10-1498},
+  url = {https://doi.org/10.22331/q-2024-10-10-1498}
+}
+
+% [R07] qLDPC 综述: 量子 LDPC 码综述，覆盖 Tanner 图、HGP、量子 Tanner 码。
+@article{Breuckmann2021_r07,
+  author = {Nikolas P. Breuckmann and Jens Niklas Eberhardt},
+  title = {Quantum Low-Density Parity-Check Codes},
+  year = {2021},
+  journal = {PRX Quantum},
+  doi = {10.1103/prxquantum.2.040101},
+  url = {https://doi.org/10.1103/prxquantum.2.040101}
+}
+
+% [R08] qLDPC 构造: Tillich–Zémor 量子 LDPC 码构造，HGP 路线的早期核心。
+@article{Tillich2014_r08,
+  author = {Jean-Pierre Tillich and Gilles Zemor},
+  title = {Quantum LDPC Codes With Positive Rate and Minimum Distance Proportional to the Square Root of the Blocklength},
+  year = {2014},
+  journal = {IEEE Transactions on Information Theory},
+  doi = {10.1109/tit.2013.2292061},
+  url = {https://doi.org/10.1109/tit.2013.2292061}
+}
+
+% [R09] HGP/解码: HGP 码有限长度性能与 BP+OSD 代表作。
+@article{Panteleev2021_r09,
+  author = {Pavel Panteleev and Gleb Vyacheslavovich Kalachev},
+  title = {Degenerate Quantum LDPC Codes With Good Finite Length Performance},
+  year = {2021},
+  journal = {Quantum},
+  doi = {10.22331/q-2021-11-22-585},
+  url = {https://doi.org/10.22331/q-2021-11-22-585}
+}
+
+% [R10] qLDPC 解码综述: 跨 qLDPC 码族比较 BP/OSD，说明退化码的解码难点。
+@article{Roffe2020_r10,
+  author = {Joschka Roffe and David R. White and Simon Burton and Earl Campbell},
+  title = {Decoding across the quantum low-density parity-check code landscape},
+  year = {2020},
+  journal = {Physical Review Research},
+  doi = {10.1103/physrevresearch.2.043423},
+  url = {https://doi.org/10.1103/physrevresearch.2.043423}
+}
+
+% [R11] 混合解码: 硬/软解码结合用于 HGP 码，可启发 GNN 重加权后接后处理。
+@article{Grospellier2021_r11,
+  author = {Antoine Grospellier and Lucien Grouès and Anirudh Krishna and Anthony Leverrier},
+  title = {Combining hard and soft decoders for hypergraph product codes},
+  year = {2021},
+  journal = {Quantum},
+  doi = {10.22331/q-2021-04-15-432},
+  url = {https://doi.org/10.22331/q-2021-04-15-432}
+}
+
+% [R12] 理论: 好的量子 Tanner 码可单次解码，为少轮测量和结构化解码提供理论锚点。
+@article{Gu2024_r12,
+  author = {Shouzhen Gu and Eugene Yee Hing Tang and Libor Caha and Shin Ho Choe and Zhiyang He and Aleksander Kubica},
+  title = {Single-Shot Decoding of Good Quantum LDPC Codes},
+  year = {2024},
+  journal = {Communications in Mathematical Physics},
+  doi = {10.1007/s00220-024-04951-6},
+  url = {https://doi.org/10.1007/s00220-024-04951-6}
+}
+
+% [R13] qLDPC/系统: 0.7% circuit-level 阈值、288 物理量子比特存 12 逻辑比特的端到端方案。
+@article{Bravyi2024_r13,
+  author = {Sergey Bravyi and Andrew W. Cross and Jay Gambetta and Dmitri A Maslov and Patrick Rall and Theodore J. Yoder},
+  title = {High-threshold and low-overhead fault-tolerant quantum memory},
+  year = {2024},
+  journal = {Nature},
+  doi = {10.1038/s41586-024-07107-7},
+  url = {https://doi.org/10.1038/s41586-024-07107-7}
+}
+
+% [R14] 最新代码: 面向中性原子长程连接的高码率 qLDPC；低门错误下优于表面码。
+@article{Pecorari2025_r14,
+  author = {Laura Pecorari and Sven Jandura and Gavin K. Brennen and Guido Pupillo},
+  title = {High-rate quantum LDPC codes for long-range-connected neutral atom registers},
+  year = {2025},
+  journal = {Nature Communications},
+  doi = {10.1038/s41467-025-56255-5},
+  url = {https://doi.org/10.1038/s41467-025-56255-5}
+}
+
+% [R15] 表面码实验: Google 距离扩展实验，是噪声模型和实验数据的重要基准。
+@article{AI2023_r15,
+  author = {Google Quantum AI and Rajeev Acharya and I. L. Aleǐner and R. M. Allen and Trond I. Andersen and M. Ansmann and Frank Arute and Kunal Arya and Abraham T. Asfaw and Juan Atalaya and Ryan Babbush and Dave Bacon and Joseph C. Bardin and Joao Basso and Andreas Bengtsson and Sergio Boixo and Gina Bortoli and Alexandre Bourassa and Jenna Bovaird and Leon Brill and Michael Broughton and Bob B. Buckley and David A. Buell and Tim Burger and Brian Burkett and Nicholas Bushnell and Yu Chen and Zijun Chen and B. Chiaro and Josh Cogan and Roberto Collins and Paul Conner and William H. Courtney and Alexander L. Crook and Ben Curtin and Dripto M. Debroy and Alexander Del Toro Barba and Sean Demura and A. Dunsworth and Daniel Eppens and Catherine Erickson and Lara Faoro and Edward Farhi and Reza Fatemi and Leslie Flores Burgos and Ebrahim Forati and Austin G. Fowler and Brooks Foxen and W. Giang and Craig Gidney and Dar Gilboa and Marissa Giustina and Alejandro Grajales Dau and Jonathan A. Gross and Steve Habegger and Michael C. Hamilton and Matthew P. Harrigan and Sean David Harrington and Oscar Higgott and Jeremy Hilton and M. R. Hoffmann and Sabrina Hong and Trent Huang and Ashley Huff and William J. Huggins and L. B. Ioffe and Sergei V. Isakov and Justin Iveland and Evan R. Jeffrey and Jiang Zhang and Cody Jones and Pavol Juhás and Dvir Kafri and Kostyantyn Kechedzhi and J. Kelly and Tanuj Khattar and Mostafa Khezri and Mária Kieferová and Seon Kim and Alexei Kitaev and Paul V. Klimov and Andrey R. Klots and Alexander N. Korotkov and Fedor Kostritsa and John Mark Kreikebaum and David Landhuis and Pavel Laptev and Kim-Ming Lau and Lily Laws and Joonho Lee and Kenny Lee and Brian Lester and Alexander T. Lill and Wayne Liu and Aditya Locharla and Erik A. Lucero and Fionn D. Malone and Jeffrey Marshall and Orion Martin and Jarrod R. McClean},
+  title = {Suppressing quantum errors by scaling a surface code logical qubit},
+  year = {2023},
+  journal = {Nature},
+  doi = {10.1038/s41586-022-05434-1},
+  url = {https://doi.org/10.1038/s41586-022-05434-1}
+}
+
+% [R16] 阈值/实时: Willow 低于阈值的表面码存储；d=5 实时解码平均 63 μs/cycle。
+@article{Collaborators2024_r16,
+  author = {Google Quantum AI and Collaborators and Rajeev Acharya and Dmitry A. Abanin and Laleh Aghababaie-Beni and I. L. Aleǐner and Trond I. Andersen and M. Ansmann and Frank Arute and Kunal Arya and Abraham T. Asfaw and Nikita Astrakhantsev and Juan Atalaya and Ryan Babbush and Dave Bacon and Brian Ballard and Joseph C. Bardin and Johannes Bausch and Andreas Bengtsson and Alexander Bilmes and Sam Blackwell and Sergio Boixo and Gina Bortoli and Alexandre Bourassa and Jenna Bovaird and Leon Brill and Michael Broughton and David A. Browne and Brett Buchea and Bob B. Buckley and David A. Buell and Tim Burger and Brian Burkett and Nicholas Bushnell and Anthony Cabrera and Juan Campero and Hung-Shen Chang and Yu Chen and Zijun Chen and B. Chiaro and Desmond Chik and Charina Chou and Jahan Claes and Agnetta Y. Cleland and Josh Cogan and Roberto Collins and Paul W. Conner and William H. Courtney and Alexander L. Crook and Ben Curtin and Sayan Das and Alex Davies and Laura de Lorenzo and Dripto M. Debroy and Sean Demura and Michel Devoret and Agustín Di Paolo and Paul Donohoe and Ilya Drozdov and A. Dunsworth and Clint Earle and Thomas Edlich and Alec Eickbusch and Aviv Moshe Elbag and Mahmoud Elzouka and Catherine Erickson and Lara Faoro and Edward Farhi and Vinicius S. Ferreira and Leslie Flores Burgos and Ebrahim Forati and Austin G. Fowler and Brooks Foxen and Suhas Ganjam and Gonzalo Cerruela García and Robert Gasca and Élie Genois and William Giang and Craig Gidney and Dar Gilboa and Raja Gosula and Alejandro Grajales Dau and Dietrich Graumann and Alex Greene and Jonathan A. Gross and Steve Habegger and John A. Hall and Michael C. Hamilton and Monica Hansen and Matthew P. Harrigan and Sean David Harrington and Francisco J. H. Heras and Stephen Heslin and Paula Heu and Oscar Higgott and Gordon Hill and J. Hilton and George A. Holland and Sabrina Hong and Hsin-Yuan Huang and Ashley Huff},
+  title = {Quantum error correction below the surface code threshold},
+  year = {2024},
+  journal = {Nature},
+  doi = {10.1038/s41586-024-08449-y},
+  url = {https://doi.org/10.1038/s41586-024-08449-y}
+}
+
+% [R17] color code 实验: 超导 color code 的距离扩展、逻辑门和魔法态实验。
+@article{Lacroix2025_r17,
+  author = {Nathan Lacroix and Alexandre Bourassa and Francisco J. H. Heras and L. M. Zhang and Johannes Bausch and Andrew Senior and Thomas Edlich and Noah Shutty and V. Sivak and Andreas Bengtsson and Matt McEwen and Oscar Higgott and Dvir Kafri and Jahan Claes and Alexis Morvan and Z. Chen and Adam Zalcman and Sid Madhuk and R. Acharya and Laleh Aghababaie Beni and Georg Aigeldinger and Raúl Alcaraz and Trond I. Andersen and M. Ansmann and Frank Arute and K. Arya and Abraham T. Asfaw and J. Atalaya and Ryan Babbush and Beau D. Ballard and Joseph C. Bardin and A. Bilmes and Susan A. Blackwell and J. Bovaird and Daniel C. Bowers and Leon Brill and Michael Broughton and D. A. Browne and Brett Buchea and B. B. Buckley and T. Burger and Brian Burkett and N. Bushnell and A. Cabrera and J. Campero and Hung-Shen Chang and Benjamin Chiaro and Liang-Ying Chih and Agnetta Y. Cleland and J. Cogan and R. Collins and P. Conner and W. Courtney and A. L. Crook and Ben Curtin and Sayan Das and Sean Demura and Luis Lorenzo and Agustín Di Paolo and Paul Donohoe and Ilya Drozdov and A. Dunsworth and Alec Eickbusch and Aviv Moshe Elbag and Mahmoud Elzouka and C. Erickson and V. S. Ferreira and Leslie Flores Burgos and E. Forati and A. G. Fowler and Brooks Foxen and Suhas Ganjam and G. Garcia and Rebeca Gasca and Élie Genois and W. Giang and D. Gilboa and Raja Gosula and Alejandro Grajales Dau and Dietrich Graumann and Alex Greene and Jonathan A. Gross and Taekjip Ha and Steve Habegger and M. Hansen and Matthew P. Harrigan and Sean David Harrington and Stephen Heslin and Paula Heu and Reno Hiltermann and J. Hilton and Sabrina Hong and Hanxia Huang and Ashley Huff and William J. Huggins and E. Jeffrey and Jiang Zhang and Xin Jin and Chaitanya Joshi and Pavol Juhás},
+  title = {Scaling and logic in the colour code on a superconducting quantum processor},
+  year = {2025},
+  journal = {Nature},
+  doi = {10.1038/s41586-025-09061-4},
+  url = {https://doi.org/10.1038/s41586-025-09061-4}
+}
+
+% [R18] 神经解码: 拓扑码神经解码早期代表，建立 syndrome→logical class 范式。
+@article{Torlai2017_r18,
+  author = {Giacomo Torlai and Roger G. Melko},
+  title = {Neural Decoder for Topological Codes},
+  year = {2017},
+  journal = {Physical Review Letters},
+  doi = {10.1103/physrevlett.119.030501},
+  url = {https://doi.org/10.1103/physrevlett.119.030501}
+}
+
+% [R19] 神经解码: 稳定子码概率神经解码，可处理相关噪声。
+@article{Krastanov2017_r19,
+  author = {Stefan Krastanov and Liang Jiang},
+  title = {Deep Neural Network Probabilistic Decoder for Stabilizer Codes},
+  year = {2017},
+  journal = {Scientific Reports},
+  doi = {10.1038/s41598-017-11266-1},
+  url = {https://doi.org/10.1038/s41598-017-11266-1}
+}
+
+% [R20] 神经解码: 前馈网络解码小表面码，代表早期 CNN/MLP 路线。
+@article{Varsamopoulos2017_r20,
+  author = {Savvas Varsamopoulos and Ben Criger and Koen Bertels},
+  title = {Decoding small surface codes with feedforward neural networks},
+  year = {2017},
+  journal = {Quantum Science and Technology},
+  doi = {10.1088/2058-9565/aa955a},
+  url = {https://doi.org/10.1088/2058-9565/aa955a}
+}
+
+% [R21] 神经解码: 机器学习辅助拓扑码相关错误修正。
+@article{Baireuther2018_r21,
+  author = {Paul Baireuther and Thomas E. O’Brien and Brian Tarasinski and C. W. J. Beenakker},
+  title = {Machine-learning-assisted correction of correlated qubit errors in a topological code},
+  year = {2018},
+  journal = {Quantum},
+  doi = {10.22331/q-2018-01-29-48},
+  url = {https://doi.org/10.22331/q-2018-01-29-48}
+}
+
+% [R22] 神经解码: 大距离 2D toric code 神经解码，讨论泛化与规模。
+@article{Ni2020_r22,
+  author = {Xiaotong Ni},
+  title = {Neural Network Decoders for Large-Distance 2D Toric Codes},
+  year = {2020},
+  journal = {Quantum},
+  doi = {10.22331/q-2020-08-24-310},
+  url = {https://doi.org/10.22331/q-2020-08-24-310}
+}
+
+% [R23] 强化学习: 面向容错量子计算的 RL 解码器。
+@article{Sweke2020_r23,
+  author = {Ryan Sweke and Markus S Kesselring and Evert P L van Nieuwenburg and Jens Eisert},
+  title = {Reinforcement learning decoders for fault-tolerant quantum computation},
+  year = {2020},
+  journal = {Machine Learning Science and Technology},
+  doi = {10.1088/2632-2153/abc609},
+  url = {https://doi.org/10.1088/2632-2153/abc609}
+}
+
+% [R24] 可扩展 ANN: 支持任意形状/边界和大码距的 ANN syndrome 解码。
+@article{Gicev2023_r24,
+  author = {Spiro Gicev and Lloyd C. L. Hollenberg and Muhammad Ahsan Usman},
+  title = {A scalable and fast artificial neural network syndrome decoder for surface codes},
+  year = {2023},
+  journal = {Quantum},
+  doi = {10.22331/q-2023-07-12-1058},
+  url = {https://doi.org/10.22331/q-2023-07-12-1058}
+}
+
+% [R25] AlphaQubit: 循环 Transformer 在真实 Sycamore 数据上超过当时 SOTA，并利用软读出/泄漏信息。
+@article{Bausch2024_r25,
+  author = {Johannes Bausch and Andrew Senior and Francisco J. H. Heras and Thomas Edlich and Alex Davies and Michael E. Newman and Cody Jones and Kevin J. Satzinger and Murphy Yuezhen Niu and Sam Blackwell and George A. Holland and Dvir Kafri and Juan Atalaya and Craig Gidney and Demis Hassabis and Sergio Boixo and Hartmut Neven and Pushmeet Kohli},
+  title = {Learning high-accuracy error decoding for quantum processors},
+  year = {2024},
+  journal = {Nature},
+  doi = {10.1038/s41586-024-08148-8},
+  url = {https://doi.org/10.1038/s41586-024-08148-8}
+}
+
+% [R26] 近实验神经: 处理 Y 错误、软读出与真实实验分布，与 MWPM 直接比较。
+@article{Varbanov2025_r26,
+  author = {Boris Varbanov and Marc Serra-Peralta and David C. Byfield and Barbara M. Terhal},
+  title = {Neural network decoder for near-term surface-code experiments},
+  year = {2025},
+  journal = {Physical Review Research},
+  doi = {10.1103/physrevresearch.7.013029},
+  url = {https://doi.org/10.1103/physrevresearch.7.013029}
+}
+
+% [R27] 实验验证: IBM heavy-hex 处理器上的 ANN syndrome 解码。
+@article{Hall2024_r27,
+  author = {Bradley R. Hall and Spiro Gicev and Muhammad Ahsan Usman},
+  title = {Artificial neural network syndrome decoding on IBM quantum processors},
+  year = {2024},
+  journal = {Physical Review Research},
+  doi = {10.1103/physrevresearch.6.l032004},
+  url = {https://doi.org/10.1103/physrevresearch.6.l032004}
+}
+
+% [R28] 先验误差: 解码先验优化和噪声涨落；训练/评估不可忽略先验。
+@article{Sivak2024_r28,
+  author = {Volodymyr Sivak and Michael Newman and Paul Klimov},
+  title = {Optimization of Decoder Priors for Accurate Quantum Error Correction},
+  year = {2024},
+  journal = {Physical Review Letters},
+  doi = {10.1103/physrevlett.133.150603},
+  url = {https://doi.org/10.1103/physrevlett.133.150603}
+}
+
+% [R29] 混合架构: 局部快速解码器+全局解码器，直接对应候选剪枝+OSD。
+@article{Chamberland2023_r29,
+  author = {Christopher Chamberland and Luis Flavio Gonçalves and Prasahnt Sivarajah and Eric David Peterson and Sebastian Grimberg},
+  title = {Techniques for combining fast local decoders with global decoders under circuit-level noise},
+  year = {2023},
+  journal = {Quantum Science and Technology},
+  doi = {10.1088/2058-9565/ace64d},
+  url = {https://doi.org/10.1088/2058-9565/ace64d}
+}
+
+% [R30] 最新正式论文: 完全卷积 3D 网络在 syndrome circuit noise 下推广到 d=97。
+@article{Gicev2026_r30,
+  author = {Spiro Gicev and Lloyd C L Hollenberg and Muhammad Usman},
+  title = {Fully convolutional 3D neural network decoders for surface codes with syndrome circuit noise},
+  year = {2026},
+  journal = {Quantum Science and Technology},
+  doi = {10.1088/2058-9565/ae5fc9},
+  url = {https://doi.org/10.1088/2058-9565/ae5fc9}
+}
+
+% [R31] 最新预印本: Qubit-centric Transformer 通过图掩码把拓扑结构注入注意力；报告 depolarizing 阈值 18.1%。
+@misc{Park2025_r31,
+  author = {Seong-Joon Park and Hee-Youl Kwak and Yongjune Kim},
+  title = {Qubit-centric Transformer for Surface Code Decoding},
+  year = {2025},
+  eprint = {2510.11593},
+  archivePrefix = {arXiv},
+  url = {https://arxiv.org/abs/2510.11593}
+}
+
+% [R32] 偏置噪声: GNN+多任务学习用于 XZZX 表面码的偏置噪声。
+@article{Xiao2025_r32,
+  author = {Bo Xiao and Zhe-Cheng Fan and Huijuan Sun and Hongyang Ma and Xingkui Fan},
+  title = {A graph neural network and multi-task learning-based decoding algorithm for enhancing XZZX code stability in biased noise},
+  year = {2025},
+  journal = {Chinese Physics B},
+  doi = {10.1088/1674-1056/adbadb},
+  url = {https://doi.org/10.1088/1674-1056/adbadb}
+}
+
+% [R33] 最新综述: 从统计力学、张量网络和 AI 三视角统一梳理最大似然解码，是当前解码理论综述入口。
+@misc{Cao2026_r33,
+  author = {Hanyan Cao and Ge Yan and Yuxuan Du and Feng Pan},
+  title = {Maximum Likelihood Decoding of Quantum Error Correction Codes},
+  year = {2026},
+  eprint = {2605.17230},
+  archivePrefix = {arXiv},
+  url = {https://arxiv.org/abs/2605.17230}
+}
+
+% [R34] 核心 GNN: 在 detector graph 上做图分类；circuit-level 表面码超越完整误差模型的匹配器。
+@article{Lange2025_r34,
+  author = {Moritz Lange and Pontus Havström and Basudha Srivastava and Isak Bengtsson and Valdemar Bergentall and Karl Hammar and Olivia Heuts and Evert van Nieuwenburg and Mats Granath},
+  title = {Data-driven decoding of quantum error correcting codes using graph neural networks},
+  year = {2025},
+  journal = {Physical Review Research},
+  doi = {10.1103/physrevresearch.7.023181},
+  url = {https://doi.org/10.1103/physrevresearch.7.023181}
+}
+
+% [R35] 核心 GNN: BP 与 GNN 交替运行，在同一稀疏解码图上重新初始化 BP。
+@article{Gong2024_r35,
+  author = {Anqi Gong and Sebastian Cammerer and Joseph M. Renes},
+  title = {Graph Neural Networks for Enhanced Decoding of Quantum LDPC Codes},
+  year = {2024},
+  journal = {IEEE ISIT 2024},
+  doi = {10.1109/isit57864.2024.10619589},
+  url = {https://doi.org/10.1109/isit57864.2024.10619589}
+}
+
+% [R36] GNN: 把 qLDPC 解码写成图消息传递并比较多种 qLDPC 设计。
+@article{Ninkovi2024_r36,
+  author = {Vukan Ninković and Ognjen Kundačina and Dejan Vukobratović and Christian H. Hager and Alexandre Graell i Amat},
+  title = {Decoding Quantum LDPC Codes Using Graph Neural Networks},
+  year = {2024},
+  journal = {IEEE GLOBECOM 2024},
+  doi = {10.1109/globecom52923.2024.10901425},
+  url = {https://doi.org/10.1109/globecom52923.2024.10901425}
+}
+
+% [R37] 核心 GNN: Astra 在 Tanner 图上消息传递；表面码 d≤11、BB 码 d≤18 优于 BP+OSD，并外推更大距离。
+@article{Maan2025_r37,
+  author = {Arshpreet Singh Maan and Alexandru Paler},
+  title = {Machine learning message-passing for the scalable decoding of QLDPC codes},
+  year = {2025},
+  journal = {npj Quantum Information},
+  doi = {10.1038/s41534-025-01033-w},
+  url = {https://doi.org/10.1038/s41534-025-01033-w}
+}
+
+% [R38] 神经 BP: 早期量子码神经置信传播，将 BP 更新参数化为可学习模块。
+@article{Liu2019_r38,
+  author = {Ye-Hua Liu and David Poulin},
+  title = {Neural Belief-Propagation Decoders for Quantum Error-Correcting Codes},
+  year = {2019},
+  journal = {Physical Review Letters},
+  doi = {10.1103/physrevlett.122.200501},
+  url = {https://doi.org/10.1103/physrevlett.122.200501}
+}
+
+% [R39] 神经 BP: 过完备校验矩阵缓解简并/短环，是 qLDPC NBP 关键技巧。
+@article{Miao2023_r39,
+  author = {Sisi Miao and Alexander Schnerring and Haizheng Li and Laurent Schmalen},
+  title = {Neural Belief Propagation Decoding of Quantum LDPC Codes Using Overcomplete Check Matrices},
+  year = {2023},
+  journal = {IEEE Information Theory Workshop (ITW) 2023},
+  doi = {10.1109/itw55543.2023.10161656},
+  url = {https://doi.org/10.1109/itw55543.2023.10161656}
+}
+
+% [R40] 神经 BP: 四元神经 BP+过完备校验矩阵，面向短中型 qLDPC 的低延迟高精度。
+@article{Miao2025_r40,
+  author = {Sisi Miao and Alexander Schnerring and Haizheng Li and Laurent Schmalen},
+  title = {Quaternary Neural Belief Propagation Decoding of Quantum LDPC Codes With Overcomplete Check Matrices},
+  year = {2025},
+  journal = {IEEE Access},
+  doi = {10.1109/access.2025.3539475},
+  url = {https://doi.org/10.1109/access.2025.3539475}
+}
+
+% [R41] BP 后处理: BP guided decimation 缓解退化码不收敛，可减少 OSD 调用。
+@article{Yao2024_r41,
+  author = {Hanwen Yao and Waleed Abu Laban and Christian H. Hager and Alexandre Graell i Amat and Henry D. Pfister},
+  title = {Belief Propagation Decoding of Quantum LDPC Codes with Guided Decimation},
+  year = {2024},
+  journal = {IEEE ISIT 2024},
+  doi = {10.1109/isit57864.2024.10619083},
+  url = {https://doi.org/10.1109/isit57864.2024.10619083}
+}
+
+% [R42] BP 后处理: Check-agnosia 后处理器，无需反复解线性系统处理不收敛。
+@article{Crest2024_r42,
+  author = {Julien du Crest and Francisco García-Herrero and Mehdi Mhalla and Valentin Savin and Javier Valls},
+  title = {Check-Agnosia based Post-Processor for Message-Passing Decoding of Quantum LDPC Codes},
+  year = {2024},
+  journal = {Quantum},
+  doi = {10.22331/q-2024-05-02-1334},
+  url = {https://doi.org/10.22331/q-2024-05-02-1334}
+}
+
+% [R43] qLDPC 解码: Ambiguity Clustering 是 BP+OSD 之外的重要准确后处理基线。
+@article{Wolanski2024_r43,
+  author = {Stasiu Wolanski and Ben Barber},
+  title = {Introducing Ambiguity Clustering: An Accurate and Efficient Decoder for qLDPC Codes},
+  year = {2024},
+  journal = {IEEE QCE 2024},
+  doi = {10.1109/qce60285.2024.10326},
+  url = {https://doi.org/10.1109/qce60285.2024.10326}
+}
+
+% [R44] 时序解码: 带噪 syndrome 的滑动窗口解码，适合测量错误与跨轮相关实验。
+@article{Huang2024_r44,
+  author = {Shilin Huang and Shruti Puri},
+  title = {Increasing memory lifetime of quantum low-density parity check codes with sliding-window noisy syndrome decoding},
+  year = {2024},
+  journal = {Physical Review A},
+  doi = {10.1103/physreva.110.012453},
+  url = {https://doi.org/10.1103/physreva.110.012453}
+}
+
+% [R45] 擦除解码: Cluster Decomposition 改善 qLDPC 擦除解码，与 qubit loss 场景相关。
+@article{Yao2025_r45,
+  author = {Hanwen Yao and Mert Gökduman and Henry D. Pfister},
+  title = {Cluster Decomposition for Improved Erasure Decoding of Quantum LDPC Codes},
+  year = {2025},
+  journal = {IEEE Journal on Selected Areas in Information Theory},
+  doi = {10.1109/jsait.2025.3578597},
+  url = {https://doi.org/10.1109/jsait.2025.3578597}
+}
+
+% [R46] 最新图神经: HyperNQ 用超图表示高阶 stabilizer 约束；预印本报告优于 BP/GNN 的 LER。
+@article{Bhave2026_r46,
+  author = {Ameya Bhave and Navnil Choudhury and Kanad Basu},
+  title = {HyperNQ: A Hypergraph Neural Network Decoder for Quantum LDPC Codes},
+  year = {2026},
+  journal = {IEEE ICC 2026},
+  doi = {10.1109/icc59461.2026.11587226},
+  url = {https://doi.org/10.1109/icc59461.2026.11587226}
+}
+
+% [R47] 最新硬件: 面向 FPGA 的低延迟 GNN：硬件导向剪枝/重训、量化和图过滤，目标覆盖平均和最坏 syndrome cycle。
+@misc{Cicero2026_r47,
+  author = {Alessio Cicero and Luigi Altamura and Moritz Lange and Mats Granath and Pedro Trancoso},
+  title = {Low Latency GNN Accelerator for Quantum Error Correction},
+  year = {2026},
+  eprint = {2603.22149},
+  archivePrefix = {arXiv},
+  url = {https://arxiv.org/abs/2603.22149}
+}
+
+% [R48] 最新混合: Neural MWPM：GNN 提取局部特征、Transformer 捕获长程依赖，并预测 MWPM 动态边权；toric code depolarizing 阈值 17.9%。
+@misc{Peled2026_r48,
+  author = {Yotam Peled and David Zenati and Eliya Nachmani},
+  title = {Neural Minimum Weight Perfect Matching for Quantum Error Codes},
+  year = {2026},
+  eprint = {2601.00242},
+  archivePrefix = {arXiv},
+  url = {https://arxiv.org/abs/2601.00242}
+}
+
+% [R49] 最新混合: Neural belief-matching：用卷积神经 BP 替换 BP 阶段，再交给 matching；强调跨尺寸权重共享与训练成本。
+@misc{Menti2026_r49,
+  author = {Luca Menti and Francisco Lázaro},
+  title = {Neural Belief-Matching Decoding for Topological Quantum Error Correction Codes},
+  year = {2026},
+  eprint = {2603.21730},
+  archivePrefix = {arXiv},
+  url = {https://doi.org/10.48550/arxiv.2603.21730}
+}
+
+% [R50] 最新神经 BP: Logical NBP 把目标从物理底层转向逻辑层； depolarizing 阈值 17.5%，circuit-level d=9 精度接近 BP-OSD 但复杂度约 0.2%。
+@misc{Kwak2026_r50,
+  author = {Hee-Youl Kwak and Seong‐Joon Park and Dae-Young Yun and Eliya Nachmani and Jae-Won Kim},
+  title = {Logical Neural Belief Propagation for Linear-Complexity Decoding of Surface Codes},
+  year = {2026},
+  eprint = {2608.27682},
+  archivePrefix = {arXiv},
+  url = {https://doi.org/10.48550/arxiv.2608.27682}
+}
+
+% [R51] 最新消息传递: 在级联稳定子码的层间双向传播软信息，为跨层级/跨码族图编码提供新范式。
+@misc{Wu2026_r51,
+  author = {Jiahui Wu and Chao Zhang and Zipeng Wu and Shilin Huang},
+  title = {Learning to Decode Concatenated Quantum Codes with Hierarchical Message Passing},
+  year = {2026},
+  eprint = {2608.28571},
+  archivePrefix = {arXiv},
+  url = {https://doi.org/10.48550/arxiv.2608.28571}
+}
+
+% [R52] 最新鲁棒性: QAdapt 面向非平稳硬件噪声，自适应神经预解码并向全局解码器传递残差 syndrome，强调分布漂移。
+@misc{Miao2026_r52,
+  author = {Ran Miao and Rui Luo and Xiaohan Shan and Xiaoming Sun},
+  title = {QAdapt: A Noise-Adaptive Neural Pre-Decoding Framework for Quantum Error Correction},
+  year = {2026},
+  eprint = {2607.28422},
+  archivePrefix = {arXiv},
+  url = {https://doi.org/10.48550/arxiv.2607.28422}
+}
+
+% [R53] 最新工程: QuantiSpect 用结构感知轻量 3D CNN 做预解码，匹配/超过稠密 CNN 感受野并减少参数与 MAC。
+@misc{Gao2026_r53,
+  author = {Pan Gao and Xusheng Xu and Ji-Ze Han and Jing-Wei Wen and Ling Qian and Xu-Dong Lv and Run-Qing Zhang and Xiao-Xiao Hu and Gui-Lu Long},
+  title = {QuantiSpect: A Structure-Aware Lightweight 3D CNN Pre-Decoder for Scalable Surface Code Quantum Error Correction},
+  year = {2026},
+  eprint = {2607.18204},
+  archivePrefix = {arXiv},
+  url = {https://doi.org/10.48550/arxiv.2607.18204}
+}
+
+% [R54] 置信度: 研究 GNN logit 是否可替代 MWPM logical gap 作为可靠性分数；对后选择、级联和拒识很有价值。
+@misc{Dentelski2026_r54,
+  author = {David Dentelski},
+  title = {Neural network decoder confidence as a learned proxy for the logical gap},
+  year = {2026},
+  eprint = {2606.08758},
+  archivePrefix = {arXiv},
+  url = {https://arxiv.org/abs/2606.08758}
+}
+
+% [R55] 最新相关: STGNN 同时预测 qubit loss 和 Pauli 修正；适合拓展项目的 erasure/leakage 图特征。
+@misc{Wang2026_r55,
+  author = {Yuqing Wang and Xiaotian Nie and Jiale Dai and Zhongyi Ni and Tao Zhang and Hui Zhai and Linghui Chen},
+  title = {AI-Enabled Decoding of Qubit Loss for Quantum Error - Correcting Codes},
+  year = {2026},
+  eprint = {2604.14269},
+  archivePrefix = {arXiv},
+  url = {https://arxiv.org/abs/2604.14269}
+}
+
+% [R56] 生成式解码: DiffQEC 把解码写成离散去噪扩散的后验推断，避免只输出单一 correction 假设。
+@misc{Xu2026_r56,
+  author = {Tianyi Xu and Qinglong Liu and Maolin Wang and Fei Zhang and Zhe Zhao and Yang Wang and Ye Wei},
+  title = {DiffQEC: A versatile diffusion model for quantum error correction},
+  year = {2026},
+  eprint = {2604.24640},
+  archivePrefix = {arXiv},
+  url = {https://arxiv.org/abs/2604.24640}
+}
+
+% [R57] 实时架构: 并行窗口解码消除指数 backlog，是吞吐/延迟实验的架构基线。
+@article{Skori2023_r57,
+  author = {Luka Skorić and Dan E. Browne and Kenton M. Barnes and Neil I. Gillespie and Earl T. Campbell},
+  title = {Parallel window decoding enables scalable fault tolerant quantum computation},
+  year = {2023},
+  journal = {Nature Communications},
+  doi = {10.1038/s41467-023-42482-1},
+  url = {https://doi.org/10.1038/s41467-023-42482-1}
+}
+
+% [R58] 实时架构: 时间维并行解码，不牺牲准确率地解决 backlog。
+@article{Tan2023_r58,
+  author = {Xinyu Tan and Fang Zhang and Rui Chao and Yaoyun Shi and Jianxin Chen},
+  title = {Scalable Surface-Code Decoders with Parallelization in Time},
+  year = {2023},
+  journal = {PRX Quantum},
+  doi = {10.1103/prxquantum.4.040344},
+  url = {https://doi.org/10.1103/prxquantum.4.040344}
+}
+
+% [R59] 硬件/系统: 从最坏情况与硬件吞吐定义解码系统设计，而非仅看平均延迟。
+@article{Ravi2023_r59,
+  author = {Gokul Subramanian Ravi and Jonathan M. Baker and Arash Fayyazi and Sophia Fuhui Lin and Ali Javadi-Abhari and Massoud Pedram and Frederic T. Chong},
+  title = {Better Than Worst-Case Decoding for Quantum Error Correction},
+  year = {2023},
+  journal = {ASPLOS 2023},
+  doi = {10.1145/3575693.3575733},
+  url = {https://doi.org/10.1145/3575693.3575733}
+}
+
+% [R60] 硬件/预处理: Promatch 用自适应预解码降低 syndrome Hamming weight，扩展实时 MWPM 距离。
+@article{Alavisamani2024_r60,
+  author = {Narges Alavisamani and Suhas Vittal and Ramin Ayanzadeh and Poulami Das and Moinuddin K. Qureshi},
+  title = {Promatch: Extending the Reach of Real-Time Quantum Error Correction with Adaptive Predecoding},
+  year = {2024},
+  journal = {ASPLOS 2024},
+  doi = {10.1145/3620666.3651339},
+  url = {https://doi.org/10.1145/3620666.3651339}
+}
+
+% [R61] 工程基线: 低开销、可扩展、面向实时约束的解码器架构。
+@article{Barber2025_r61,
+  author = {Ben Barber and Kenton M. Barnes and Tomasz Bialas and Okan Buğdaycı and Earl T. Campbell and Neil I. Gillespie and Kauser Johar and Ram Rajan and Adam W. Richardson and Luka Skorić and Canberk Topal and Mark L. Turner and Abbas B. Ziad},
+  title = {A real-time, scalable, fast and resource-efficient decoder for a quantum computer},
+  year = {2025},
+  journal = {Nature Electronics},
+  doi = {10.1038/s41928-024-01319-5},
+  url = {https://doi.org/10.1038/s41928-024-01319-5}
+}
+
+% [R62] 最新神经解码: AlphaQubit 2 面向表面码和 color code，强调大面积真实噪声下 accuracy、速度和规模三者兼顾。
+@misc{W2025_r62,
+  author = {Senior, Andrew W. and Edlich, Thomas and Heras, Francisco J. H. and Zhang, Lei M. and Higgott, Oscar and Spencer, James S. and Applebaum, Taylor and Blackwell, Sam and Ledford, Justin and Žemgulytė, Akvilė and Žídek, Augustin and Shutty, Noah and Cowie, Andrew and Li, Yin and Holland, George and Brooks, Peter and Beattie, Charlie and Newman, Michael and Davies, Alex and Jones, Cody and Boixo, Sergio and Neven, Hartmut and Kohli, Pushmeet and Bausch, Johannes},
+  title = {A scalable and real-time neural decoder for topological quantum codes},
+  year = {2025},
+  eprint = {2512.07737},
+  archivePrefix = {arXiv},
+  url = {https://doi.org/10.48550/arxiv.2512.07737}
+}
+
+% [R63] 最新实时神经: 自协调窗口神经网络并行解码；报告单 TPU v6e 上 d≤25、约 1 μs/round 的目标，并验证到 Zuchongzhi d=7。
+@misc{Zhang2026_r63,
+  author = {Kai Zhang and Zhengzhong Yi and Shaojun Guo and Linghang Kong and Situ Wang and Xiaoyu Zhan and Tan He and W. W. Lin and Tao Jiang and Dongxin Gao and Yiming Zhang and Fangming Liu and Fang Zhang and ZhengFeng JI and F. Chen and Jianxin Chen},
+  title = {Learning to Decode in Parallel: Self-Coordinating Neural Network for Real-Time Quantum Error Correction},
+  year = {2026},
+  eprint = {2601.09921},
+  archivePrefix = {arXiv},
+  url = {https://doi.org/10.48550/arxiv.2601.09921}
+}
+
+% [R64] 最新级联: 置信度门控：大多数 syndrome 走轻量网络，仅低置信样本升级到 MWPM；直接对应“快路径+慢路径”设计。
+@misc{Chongder2026_r64,
+  author = {Sumit Chongder},
+  title = {Latency-Constrained Hardware-Aware Quantum Error Correction Co-Design with Adaptive Confidence-Gated Neural Decoding for the Rotated Surface Code},
+  year = {2026},
+  eprint = {2607.05814},
+  archivePrefix = {arXiv},
+  url = {https://arxiv.org/abs/2607.05814}
+}
+
+% [R65] 最新系统: 单个 CPU 上的 MegaQuOp 级实时解码栈，覆盖最多 408 个逻辑量子比特和百万 T 门场景。
+@misc{Ye2026_r65,
+  author = {Min Ye and Andrii Maksymov and Nicolas Delfosse},
+  title = {Real-time decoder for a MegaQuOp quantum computer using a single CPU},
+  year = {2026},
+  eprint = {2608.25027},
+  archivePrefix = {arXiv},
+  url = {https://doi.org/10.48550/arxiv.2608.25027}
+}
+
+% [R66] 最新低延迟: Cluster-As-You-Go 在 syndrome 测量过程中提前聚类，减少每轮测量后的空闲与尾延迟。
+@misc{Peduzzi2026_r66,
+  author = {Tommaso Peduzzi and Lukas Bödeker and Markus Müller and Luis Colmenárez},
+  title = {Reducing Decoding Latency in Quantum Error Correction by Early Starting Clustering},
+  year = {2026},
+  eprint = {2609.15612},
+  archivePrefix = {arXiv},
+  url = {https://doi.org/10.48550/arxiv.2609.15612}
+}
+
+% [R67] 最新硬件: 全并行 BP 硬件研究；特定条件下可优于 BP+OSD。
+@article{Wang2026_r67,
+  author = {Ming Wang and Ang Li and Frank Mueller},
+  title = {Fully Parallelized BP Decoding for Quantum LDPC Codes Can Outperform BP-OSD},
+  year = {2026},
+  journal = {IEEE HPCA 2026},
+  doi = {10.1109/hpca68181.2026.11408621},
+  url = {https://doi.org/10.1109/hpca68181.2026.11408621}
+}
+
+% [R68] 最新吞吐: 近存计算上的归一化 min-sum BP：强调内存访问和吞吐，而不只是 LER。
+@misc{Seo2026_r68,
+  author = {Jeonggeun Seo and Youngsun Han and Leanghok Hour and Dongmin Kim},
+  title = {High-Throughput Normalized Min-Sum Belief Propagation Decoding for Quantum LDPC Codes with Near-Memory Processing},
+  year = {2026},
+  eprint = {2608.27901},
+  archivePrefix = {arXiv},
+  url = {https://doi.org/10.48550/arxiv.2608.27901}
+}
+
+% [R69] 最新正式论文: 混合字母表 Tanner 图流式 BP，面向持续 syndrome 流的量子存储。
+@article{Kuo2026_r69,
+  author = {Kao-Yueh Kuo and Ching–Yi Lai},
+  title = {Streaming Belief Propagation on Mixed-Alphabet Tanner Graphs for Practical Quantum Memory},
+  year = {2026},
+  journal = {Quantum},
+  doi = {10.22331/q-2026-09-10-2207},
+  url = {https://doi.org/10.22331/q-2026-09-10-2207}
+}

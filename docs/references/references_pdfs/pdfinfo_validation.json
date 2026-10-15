@@ -1,0 +1,546 @@
+[
+  {
+    "file": "R01_Topological_quantum_memory.pdf",
+    "returncode": 0,
+    "pages": "54",
+    "title": "",
+    "producer": "StampPDF Batch 4.0.4 Solaris SPDF_1096+ May  4 2004",
+    "error": ""
+  },
+  {
+    "file": "R02_Surface_codes_Towards_practical_large-scale_quantum_computation.pdf",
+    "returncode": 0,
+    "pages": "54",
+    "title": null,
+    "producer": "GPL Ghostscript 9.05",
+    "error": ""
+  },
+  {
+    "file": "R03_Stim_a_fast_stabilizer_circuit_simulator.pdf",
+    "returncode": 0,
+    "pages": "26",
+    "title": "Stim: a fast stabilizer circuit simulator",
+    "producer": "pdfTeX-1.40.21",
+    "error": ""
+  },
+  {
+    "file": "R04_PyMatching_A_Python_Package_for_Decoding_Quantum_Codes_with_Minimum-Weight_Perfect_Matching.pdf",
+    "returncode": 0,
+    "pages": "15",
+    "title": "",
+    "producer": "pdfTeX-1.40.21",
+    "error": ""
+  },
+  {
+    "file": "R05_Almost-linear_time_decoding_algorithm_for_topological_codes.pdf",
+    "returncode": 0,
+    "pages": "12",
+    "title": "Almost-linear time decoding algorithm for topological codes",
+    "producer": "pdfTeX-1.40.21",
+    "error": ""
+  },
+  {
+    "file": "R06_Decoding_algorithms_for_surface_codes.pdf",
+    "returncode": 0,
+    "pages": "59",
+    "title": "Review on the decoding algorithms for surface codes",
+    "producer": "pdfTeX-1.40.25",
+    "error": ""
+  },
+  {
+    "file": "R07_Quantum_Low-Density_Parity-Check_Codes.pdf",
+    "returncode": 0,
+    "pages": "19",
+    "title": "",
+    "producer": "pdfTeX-1.40.21",
+    "error": ""
+  },
+  {
+    "file": "R08_Quantum_LDPC_Codes_With_Positive_Rate_and_Minimum_Distance_Proportional_to_the_Square_Root_of_the_Blocklength.pdf",
+    "returncode": 0,
+    "pages": "21",
+    "title": "",
+    "producer": "pdfTeX-1.40.12",
+    "error": ""
+  },
+  {
+    "file": "R09_Degenerate_Quantum_LDPC_Codes_With_Good_Finite_Length_Performance.pdf",
+    "returncode": 0,
+    "pages": "21",
+    "title": "Degenerate Quantum LDPC Codes With Good Finite Length Performance",
+    "producer": "pdfTeX-1.40.21",
+    "error": ""
+  },
+  {
+    "file": "R10_Decoding_across_the_quantum_low-density_parity-check_code_landscape.pdf",
+    "returncode": 0,
+    "pages": "15",
+    "title": "",
+    "producer": "dvips + GPL Ghostscript GIT PRERELEASE 9.22",
+    "error": ""
+  },
+  {
+    "file": "R11_Combining_hard_and_soft_decoders_for_hypergraph_product_codes.pdf",
+    "returncode": 0,
+    "pages": "17",
+    "title": "Combining hard and soft decoders for hypergraph product codes",
+    "producer": "pdfTeX-1.40.21",
+    "error": ""
+  },
+  {
+    "file": "R12_Single-Shot_Decoding_of_Good_Quantum_LDPC_Codes.pdf",
+    "returncode": 0,
+    "pages": "36",
+    "title": "",
+    "producer": "pdfTeX-1.40.25",
+    "error": ""
+  },
+  {
+    "file": "R13_High-threshold_and_low-overhead_fault-tolerant_quantum_memory.pdf",
+    "returncode": 0,
+    "pages": "11",
+    "title": "High-threshold and low-overhead fault-tolerant quantum memory",
+    "producer": null,
+    "error": ""
+  },
+  {
+    "file": "R14_High-rate_quantum_LDPC_codes_for_long-range-connected_neutral_atom_registers.pdf",
+    "returncode": 0,
+    "pages": "9",
+    "title": "High-rate quantum LDPC codes for long-range-connected neutral atom registers",
+    "producer": "iText庐 5.3.5 漏2000-2012 1T3XT BVBA (SPRINGER SBM; licensed version)",
+    "error": ""
+  },
+  {
+    "file": "R15_Suppressing_quantum_errors_by_scaling_a_surface_code_logical_qubit.pdf",
+    "returncode": 0,
+    "pages": "7",
+    "title": "Suppressing quantum errors by scaling a surface code logical qubit",
+    "producer": null,
+    "error": ""
+  },
+  {
+    "file": "R16_Quantum_error_correction_below_the_surface_code_threshold.pdf",
+    "returncode": 0,
+    "pages": "8",
+    "title": "Quantum error correction below the surface code threshold",
+    "producer": null,
+    "error": ""
+  },
+  {
+    "file": "R17_Scaling_and_logic_in_the_colour_code_on_a_superconducting_quantum_processor.pdf",
+    "returncode": 0,
+    "pages": "7",
+    "title": "Scaling and logic in the colour code on a superconducting quantum processor",
+    "producer": null,
+    "error": ""
+  },
+  {
+    "file": "R18_Neural_Decoder_for_Topological_Codes.pdf",
+    "returncode": 0,
+    "pages": "6",
+    "title": "",
+    "producer": "pdfTeX-1.40.12",
+    "error": ""
+  },
+  {
+    "file": "R19_Deep_Neural_Network_Probabilistic_Decoder_for_Stabilizer_Codes.pdf",
+    "returncode": 0,
+    "pages": "7",
+    "title": "Deep Neural Network Probabilistic Decoder for Stabilizer Codes",
+    "producer": "iText庐 5.3.5 漏2000-2012 1T3XT BVBA (AGPL-version)",
+    "error": ""
+  },
+  {
+    "file": "R20_Decoding_small_surface_codes_with_feedforward_neural_networks.pdf",
+    "returncode": 0,
+    "pages": "13",
+    "title": "",
+    "producer": "pdfTeX-1.40.17",
+    "error": ""
+  },
+  {
+    "file": "R21_Machine-learning-assisted_correction_of_correlated_qubit_errors_in_a_topological_code.pdf",
+    "returncode": 0,
+    "pages": "10",
+    "title": "Machine-learning-assisted correction of correlated qubit errors in a topological code",
+    "producer": "pdfTeX-1.40.17",
+    "error": ""
+  },
+  {
+    "file": "R22_Neural_Network_Decoders_for_Large-Distance_2D_Toric_Codes.pdf",
+    "returncode": 0,
+    "pages": "11",
+    "title": "Neural Network Decoders for Large-Distance 2D Toric Codes",
+    "producer": "pdfTeX-1.40.17",
+    "error": ""
+  },
+  {
+    "file": "R23_Reinforcement_learning_decoders_for_fault-tolerant_quantum_computation.pdf",
+    "returncode": 0,
+    "pages": "15",
+    "title": "",
+    "producer": "pdfTeX-1.40.17",
+    "error": ""
+  },
+  {
+    "file": "R24_A_scalable_and_fast_artificial_neural_network_syndrome_decoder_for_surface_codes.pdf",
+    "returncode": 0,
+    "pages": "69",
+    "title": "A scalable and fast artificial neural network syndrome decoder for~surface~codes",
+    "producer": "pdfTeX-1.40.25",
+    "error": ""
+  },
+  {
+    "file": "R25_Learning_high-accuracy_error_decoding_for_quantum_processors.pdf",
+    "returncode": 0,
+    "pages": "28",
+    "title": "Learning high-accuracy error decoding for quantum processors",
+    "producer": null,
+    "error": ""
+  },
+  {
+    "file": "R26_Neural_network_decoder_for_near-term_surface-code_experiments.pdf",
+    "returncode": 0,
+    "pages": "14",
+    "title": "Neural network decoder for near-term surface-code experiments",
+    "producer": "Acrobat Distiller 10.0.0 (Windows)",
+    "error": ""
+  },
+  {
+    "file": "R27_Artificial_neural_network_syndrome_decoding_on_IBM_quantum_processors.pdf",
+    "returncode": 0,
+    "pages": "7",
+    "title": "Artificial neural network syndrome decoding on IBM quantum processors",
+    "producer": "Acrobat Distiller 10.0.0 (Windows)",
+    "error": ""
+  },
+  {
+    "file": "R28_Optimization_of_Decoder_Priors_for_Accurate_Quantum_Error_Correction.pdf",
+    "returncode": 0,
+    "pages": "12",
+    "title": "",
+    "producer": "GPL Ghostscript 10.01.2",
+    "error": ""
+  },
+  {
+    "file": "R29_Techniques_for_combining_fast_local_decoders_with_global_decoders_under_circuit-level_noise.pdf",
+    "returncode": 0,
+    "pages": "29",
+    "title": "",
+    "producer": "pdfTeX-1.40.21",
+    "error": ""
+  },
+  {
+    "file": "R30_Fully_convolutional_3D_neural_network_decoders_for_surface_codes_with_syndrome_circuit_noise.pdf",
+    "returncode": 0,
+    "pages": "34",
+    "title": "Fully convolutional 3D neural network decoders for surface codes with syndrome circuit noise",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R31_Qubit-centric_Transformer_for_Surface_Code_Decoding.pdf",
+    "returncode": 0,
+    "pages": "10",
+    "title": "Qubit-centric Transformer for Surface Code Decoding",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R33_Maximum_Likelihood_Decoding_of_Quantum_Error_Correction_Codes.pdf",
+    "returncode": 0,
+    "pages": "33",
+    "title": "Maximum Likelihood Decoding of Quantum Error Correction Codes",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R34_Data-driven_decoding_of_quantum_error_correcting_codes_using_graph_neural_networks.pdf",
+    "returncode": 0,
+    "pages": "14",
+    "title": "Data-driven decoding of quantum error correcting codes using graph neural networks",
+    "producer": "Acrobat Distiller 10.0.0 (Windows)",
+    "error": ""
+  },
+  {
+    "file": "R35_Graph_Neural_Networks_for_Enhanced_Decoding_of_Quantum_LDPC_Codes.pdf",
+    "returncode": 0,
+    "pages": "9",
+    "title": "",
+    "producer": "dvips + GPL Ghostscript GIT PRERELEASE 9.22",
+    "error": ""
+  },
+  {
+    "file": "R36_Decoding_Quantum_LDPC_Codes_Using_Graph_Neural_Networks.pdf",
+    "returncode": 0,
+    "pages": "6",
+    "title": "",
+    "producer": "pdfTeX-1.40.25",
+    "error": ""
+  },
+  {
+    "file": "R37_Machine_learning_message-passing_for_the_scalable_decoding_of_QLDPC_codes.pdf",
+    "returncode": 0,
+    "pages": "8",
+    "title": "Machine learning message-passing for the scalable decoding of QLDPC codes",
+    "producer": "iText庐 5.3.5 漏2000-2012 1T3XT BVBA (SPRINGER SBM; licensed version)",
+    "error": ""
+  },
+  {
+    "file": "R38_Neural_Belief-Propagation_Decoders_for_Quantum_Error-Correcting_Codes.pdf",
+    "returncode": 0,
+    "pages": "6",
+    "title": "Neural Belief-Propagation Decoders for Quantum Error-Correcting Codes",
+    "producer": "pdfTeX-1.40.17",
+    "error": ""
+  },
+  {
+    "file": "R39_Neural_Belief_Propagation_Decoding_of_Quantum_LDPC_Codes_Using_Overcomplete_Check_Matrices.pdf",
+    "returncode": 0,
+    "pages": "6",
+    "title": "",
+    "producer": "dvips + GPL Ghostscript GIT PRERELEASE 9.22",
+    "error": ""
+  },
+  {
+    "file": "R40_Quaternary_Neural_Belief_Propagation_Decoding_of_Quantum_LDPC_Codes_With_Overcomplete_Check_Matrices.pdf",
+    "returncode": 0,
+    "pages": "13",
+    "title": "",
+    "producer": "pdfTeX-1.40.24",
+    "error": ""
+  },
+  {
+    "file": "R41_Belief_Propagation_Decoding_of_Quantum_LDPC_Codes_with_Guided_Decimation.pdf",
+    "returncode": 0,
+    "pages": "19",
+    "title": "Belief Propagation Decoding of Quantum LDPC Codes with Guided Decimation",
+    "producer": "pdfTeX-1.40.25",
+    "error": ""
+  },
+  {
+    "file": "R42_Check-Agnosia_based_Post-Processor_for_Message-Passing_Decoding_of_Quantum_LDPC_Codes.pdf",
+    "returncode": 0,
+    "pages": "14",
+    "title": "Check-Agnosia based Post-Processor for Message-Passing Decoding of Quantum LDPC Codes",
+    "producer": "pdfTeX-1.40.25",
+    "error": ""
+  },
+  {
+    "file": "R43_Introducing_Ambiguity_Clustering_An_Accurate_and_Efficient_Decoder_for_qLDPC_Codes.pdf",
+    "returncode": 0,
+    "pages": "19",
+    "title": "",
+    "producer": "pdfTeX-1.40.25",
+    "error": ""
+  },
+  {
+    "file": "R44_Increasing_memory_lifetime_of_quantum_low-density_parity_check_codes_with_sliding-window_noisy_syndrome_decodi.pdf",
+    "returncode": 0,
+    "pages": "5",
+    "title": "Increasing memory lifetime of quantum low-density parity check codes with sliding-window noisy syndrome decoding",
+    "producer": "Acrobat Distiller 10.0.0 (Windows)",
+    "error": ""
+  },
+  {
+    "file": "R45_Cluster_Decomposition_for_Improved_Erasure_Decoding_of_Quantum_LDPC_Codes.pdf",
+    "returncode": 0,
+    "pages": "12",
+    "title": "",
+    "producer": "GPL Ghostscript 10.01.2",
+    "error": ""
+  },
+  {
+    "file": "R46_HyperNQ_A_Hypergraph_Neural_Network_Decoder_for_Quantum_LDPC_Codes.pdf",
+    "returncode": 0,
+    "pages": "6",
+    "title": "HyperNQ: A Hypergraph Neural Network Decoder for Quantum LDPC Codes",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R47_Low_Latency_GNN_Accelerator_for_Quantum_Error_Correction.pdf",
+    "returncode": 0,
+    "pages": "12",
+    "title": "Low Latency GNN Accelerator for Quantum Error Correction",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R48_Neural_Minimum_Weight_Perfect_Matching_for_Quantum_Error_Codes.pdf",
+    "returncode": 0,
+    "pages": "16",
+    "title": "Neural Minimum Weight Perfect Matching for Quantum Error Codes",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R49_Neural_Belief-Matching_Decoding_for_Topological_Quantum_Error_Correction_Codes.pdf",
+    "returncode": 0,
+    "pages": "6",
+    "title": "Neural Belief-Matching Decoding for Topological Quantum Error Correction Codes",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R50_Logical_Neural_Belief_Propagation_for_Linear-Complexity_Decoding_of_Surface_Codes.pdf",
+    "returncode": 0,
+    "pages": "15",
+    "title": "Logical Neural Belief Propagation for Linear-Complexity Decoding of Surface Codes",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R51_Learning_to_Decode_Concatenated_Quantum_Codes_with_Hierarchical_Message_Passing.pdf",
+    "returncode": 0,
+    "pages": "18",
+    "title": "Learning to Decode Concatenated Quantum Codes with Hierarchical Message Passing",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R52_QAdapt_A_Noise-Adaptive_Neural_Pre-Decoding_Framework_for_Quantum_Error_Correction.pdf",
+    "returncode": 0,
+    "pages": "11",
+    "title": "QAdapt: A Noise-Adaptive Neural Pre-Decoding Framework for Quantum Error Correction",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R53_QuantiSpect_A_Structure-Aware_Lightweight_3D_CNN_Pre-Decoder_for_Scalable_Surface_Code_Quantum_Error_Correctio.pdf",
+    "returncode": 0,
+    "pages": "22",
+    "title": "QuantiSpect: A Structure-Aware Lightweight 3D CNN Pre-Decoder for Scalable Surface Code Quantum Error Correction",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R54_Neural_network_decoder_confidence_as_a_learned_proxy_for_the_logical_gap.pdf",
+    "returncode": 0,
+    "pages": "14",
+    "title": "Neural network decoder confidence as a learned proxy for the logical gap",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R55_AI-Enabled_Decoding_of_Qubit_Loss_for_Quantum_Error_-_Correcting_Codes.pdf",
+    "returncode": 0,
+    "pages": "12",
+    "title": "AI-Enabled Decoding of Qubit Loss for Quantum Error-Correcting Codes",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R56_DiffQEC_A_versatile_diffusion_model_for_quantum_error_correction.pdf",
+    "returncode": 0,
+    "pages": "15",
+    "title": "DiffQEC: A versatile diffusion model for quantum error correction",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R57_Parallel_window_decoding_enables_scalable_fault_tolerant_quantum_computation.pdf",
+    "returncode": 0,
+    "pages": "8",
+    "title": "Parallel window decoding enables scalable fault tolerant quantum computation",
+    "producer": "iText庐 5.3.5 漏2000-2012 1T3XT BVBA (SPRINGER SBM; licensed version)",
+    "error": ""
+  },
+  {
+    "file": "R58_Scalable_Surface-Code_Decoders_with_Parallelization_in_Time.pdf",
+    "returncode": 0,
+    "pages": "16",
+    "title": "Scalable Surface-Code Decoders with Parallelization in Time",
+    "producer": "Acrobat Distiller 10.0.0 (Windows)",
+    "error": ""
+  },
+  {
+    "file": "R59_Better_Than_Worst-Case_Decoding_for_Quantum_Error_Correction.pdf",
+    "returncode": 0,
+    "pages": "16",
+    "title": "",
+    "producer": "pdfTeX-1.40.21",
+    "error": ""
+  },
+  {
+    "file": "R60_Promatch_Extending_the_Reach_of_Real-Time_Quantum_Error_Correction_with_Adaptive_Predecoding.pdf",
+    "returncode": 0,
+    "pages": "16",
+    "title": "Promatch: Extending the Reach of Real-Time Quantum Error Correction with Adaptive Predecoding",
+    "producer": "pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) kpathsea version 6.3.5",
+    "error": ""
+  },
+  {
+    "file": "R61_A_real-time,_scalable,_fast_and_resource-efficient_decoder_for_a_quantum_computer.pdf",
+    "returncode": 0,
+    "pages": "14",
+    "title": "A real-time, scalable, fast and resource-efficient decoder for a quantum computer",
+    "producer": "GPL Ghostscript 9.54.0",
+    "error": ""
+  },
+  {
+    "file": "R62_A_scalable_and_real-time_neural_decoder_for_topological_quantum_codes.pdf",
+    "returncode": 0,
+    "pages": "48",
+    "title": "A scalable and real-time neural decoder for topological quantum codes",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R63_Learning_to_Decode_in_Parallel_Self-Coordinating_Neural_Network_for_Real-Time_Quantum_Error_Correction.pdf",
+    "returncode": 0,
+    "pages": "44",
+    "title": "Learning to Decode in Parallel: Self-Coordinating Neural Network for Real-Time Quantum Error Correction",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R64_Latency-Constrained_Hardware-Aware_Quantum_Error_Correction_Co-Design_with_Adaptive_Confidence-Gated_Neural_De.pdf",
+    "returncode": 0,
+    "pages": "30",
+    "title": "Latency-Constrained Hardware-Aware Quantum Error Correction Co-Design with Adaptive Confidence-Gated Neural Decoding for the Rotated Surface Code",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R65_Real-time_decoder_for_a_MegaQuOp_quantum_computer_using_a_single_CPU.pdf",
+    "returncode": 0,
+    "pages": "9",
+    "title": "Real-time decoder for a MegaQuOp quantum computer using a single CPU",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R66_Reducing_Decoding_Latency_in_Quantum_Error_Correction_by_Early_Starting_Clustering.pdf",
+    "returncode": 0,
+    "pages": "21",
+    "title": "Reducing Decoding Latency in Quantum Error Correction by Early Starting Clustering",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R67_Fully_Parallelized_BP_Decoding_for_Quantum_LDPC_Codes_Can_Outperform_BP-OSD.pdf",
+    "returncode": 0,
+    "pages": "14",
+    "title": "Fully Parallelized BP Decoding for Quantum LDPC Codes Can Outperform BP-OSD",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R68_High-Throughput_Normalized_Min-Sum_Belief_Propagation_Decoding_for_Quantum_LDPC_Codes_with_Near-Memory_Process.pdf",
+    "returncode": 0,
+    "pages": "22",
+    "title": "High-Throughput Normalized Min-Sum Belief Propagation Decoding for Quantum LDPC Codes with Near-Memory Processing",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  },
+  {
+    "file": "R69_Streaming_Belief_Propagation_on_Mixed-Alphabet_Tanner_Graphs_for_Practical_Quantum_Memory.pdf",
+    "returncode": 0,
+    "pages": "32",
+    "title": "Streaming Belief Propagation on Mixed-Alphabet Tanner Graphs for Practical Quantum Memory",
+    "producer": "pikepdf 8.15.1",
+    "error": ""
+  }
+]

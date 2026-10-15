@@ -1,0 +1,242 @@
+{
+  "checkpoint": {
+    "architecture": {
+      "check_feature_dim": 3,
+      "edge_feature_dim": 3,
+      "hidden_size": 32,
+      "num_layers": 3,
+      "variable_feature_dim": 6
+    },
+    "checkpoint": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m3\\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\\model_state.pt",
+    "checkpoint_config_sha256": "d4b07dde7e583301d0b52d652524a6fb7fc3ca56a2ae74ac9b7a3f5d2cda6ea6"
+  },
+  "config": {
+    "benchmark": {
+      "decoders": [
+        "mwpm",
+        "bp",
+        "bp_osd",
+        "bp_gnn",
+        "bp_gnn_osd",
+        "bp_gnn_osd_learned_order",
+        "osd_gnn"
+      ],
+      "timed_runs": 3
+    },
+    "decoder": {
+      "damping": 0.0,
+      "max_iterations": 32,
+      "min_sum_scaling": 0.75,
+      "reweight_strengths": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ]
+    },
+    "experiment": {
+      "code": {
+        "distance": 3,
+        "family": "repetition_code",
+        "rounds": 3
+      },
+      "name": "repetition",
+      "noise": {
+        "model": "circuit_level",
+        "physical_error_rate": 0.01
+      },
+      "sampling": {
+        "shots": 4096
+      },
+      "seed": 20261012
+    },
+    "model": {
+      "dropout": 0.0,
+      "hidden_size": 32,
+      "num_layers": 3
+    },
+    "name": "m3_learned_basis_repetition_circuit_level_d3",
+    "schema_version": 1,
+    "splits": {
+      "test_seeds": [
+        301,
+        302
+      ],
+      "test_shots": 16384,
+      "train_seeds": [
+        101,
+        102
+      ],
+      "train_shots": 8192,
+      "validation_seeds": [
+        201
+      ],
+      "validation_shots": 8192
+    },
+    "training": {
+      "batch_size": 1024,
+      "epochs": 15,
+      "learning_rate": 0.002,
+      "max_grad_norm": 1.0,
+      "seed": 7,
+      "torch_threads": 6,
+      "weight_decay": 0.0
+    }
+  },
+  "config_sha256": "d4b07dde7e583301d0b52d652524a6fb7fc3ca56a2ae74ac9b7a3f5d2cda6ea6",
+  "decoders": [
+    {
+      "decoder": "mwpm",
+      "diagnostics": {
+        "num_edges": 65,
+        "num_nodes": 24
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 0.36066894537611915,
+        "mean_total_seconds": 0.002954600000521168,
+        "run_seconds": [
+          0.002954600000521168
+        ],
+        "throughput_shots_per_second": 2772625.7356511867,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.0013427734375,
+      "logical_error_rate_standard_error": 0.00040458951471151,
+      "logical_errors": 11,
+      "prediction_sha256": "d44edcf7fd06c7545288b07ef89e99325f4e1ed8370e83f22026de1b6f872976",
+      "syndrome_consistency_rate": null
+    },
+    {
+      "decoder": "bp",
+      "diagnostics": {
+        "average_final_syndrome_distance": 0.6788330078125,
+        "average_iterations": 12.5262451171875,
+        "converged_shots": 5357,
+        "convergence_rate": 0.6539306640625,
+        "prior_llr_override": false
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 10762.863244628828,
+        "mean_total_seconds": 88.16937569999936,
+        "run_seconds": [
+          88.16937569999936
+        ],
+        "throughput_shots_per_second": 92.91207899524754,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.065673828125,
+      "logical_error_rate_standard_error": 0.0027368465710320908,
+      "logical_errors": 538,
+      "prediction_sha256": "4e141574073804ce5f8b3be5e82dbe04f8c13ca0db18baa7f25905c53772e59f",
+      "syndrome_consistency_rate": 0.6539306640625
+    },
+    {
+      "decoder": "bp_gnn",
+      "diagnostics": {
+        "average_final_syndrome_distance": 0.7230224609375,
+        "average_iterations": 12.9359130859375,
+        "converged_shots": 5306,
+        "convergence_rate": 0.647705078125,
+        "prior_llr_override": true
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 12506.564318847557,
+        "mean_total_seconds": 102.45377489999919,
+        "run_seconds": [
+          102.45377489999919
+        ],
+        "throughput_shots_per_second": 79.95801041002018,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.05419921875,
+      "logical_error_rate_standard_error": 0.002501505001995987,
+      "logical_errors": 444,
+      "prediction_sha256": "b8b462a2df361a93182aec4acfcde7f3fb311852ecc7cb990b22f145e3fb6623",
+      "syndrome_consistency_rate": 0.647705078125
+    },
+    {
+      "decoder": "bp_gnn_osd",
+      "diagnostics": {
+        "average_iterations": 12.9359130859375,
+        "average_osd_rank": 24.0,
+        "converged_shots": 5306,
+        "convergence_rate": 0.647705078125,
+        "forced_osd": false,
+        "osd_order": 0,
+        "osd_ordering_override": false,
+        "osd_rate": 0.352294921875,
+        "osd_shots": 2886,
+        "prior_llr_override": true
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 11821.399523925802,
+        "mean_total_seconds": 96.84090490000017,
+        "run_seconds": [
+          96.84090490000017
+        ],
+        "throughput_shots_per_second": 84.59235287463723,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.0791015625,
+      "logical_error_rate_standard_error": 0.002981971080863589,
+      "logical_errors": 648,
+      "prediction_sha256": "0d2d1f6a13ca9d91e710f1ea002a47228679b2dcc13fa620231a07bf7084562b",
+      "syndrome_consistency_rate": 1.0
+    }
+  ],
+  "environment": {
+    "numpy": "2.5.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.1",
+    "stim": "1.16.0",
+    "torch": "2.14.1+cpu"
+  },
+  "graph": {
+    "num_detectors": 24,
+    "num_edges": 182,
+    "num_errors": 101,
+    "num_observables": 1
+  },
+  "mechanism_prediction": {
+    "all_zeros_accuracy": 0.9904531346689357,
+    "dem_prior_log_loss": 0.05231002367744614,
+    "dem_prior_roc_auc": 0.6584690837489948,
+    "positive_rate": 0.009546865331064356,
+    "test_binary_accuracy": 0.992233427444307,
+    "test_log_loss": 0.025517707122143705,
+    "test_roc_auc": 0.987572391534682
+  },
+  "name": "m3_learned_basis_repetition_circuit_level_d3",
+  "schema_version": 1,
+  "splits": {
+    "test": {
+      "detections_sha256": "f16d9d6c9d1d5950831d2565bec78d9c195e8211934ffa4d4c717bdb14ae9e0b",
+      "mechanism_rate": 0.009546865331064356,
+      "seeds": [
+        301
+      ],
+      "shots": 8192
+    }
+  },
+  "stage": "M3-transfer",
+  "total_seconds": 572.0487207000006,
+  "transfer": {
+    "reweight_strength": 1.0,
+    "source_experiment": {
+      "distance": 3,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 3
+    },
+    "strength_source": "fixed at the source config maximum; not re-selected on target",
+    "target_experiment": {
+      "distance": 5,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 5
+    }
+  }
+}

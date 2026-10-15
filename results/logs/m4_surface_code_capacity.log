@@ -1,0 +1,17 @@
+[18:52:30] START m4_surface_code_capacity
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m4.py", line 61, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m4.py", line 38, in main
+    result = run_m4(config, artifact_dir=output_dir)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m4_pipeline.py", line 123, in run_m4
+    reference = build_reference(config)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m4_pipeline.py", line 70, in build_reference
+    raise ValueError(f"family {family!r} is not DEM-level; use run_m2 instead")
+ValueError: family 'rotated_surface_code' is not DEM-level; use run_m2 instead
+[18:52:38] DONE m4_surface_code_capacity exit=1

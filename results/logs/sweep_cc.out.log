@@ -1,0 +1,31 @@
+d=3 code_capacity p=0.01
+  mwpm        d=3 code_capacity p=0.01: LER=0.00214 (35) 0.1 us/shot
+  union_find  d=3 code_capacity p=0.01: LER=0.06311 (1034) 64.0 us/shot
+  bp          d=3 code_capacity p=0.01: LER=0.00275 (45) 4.8 us/shot
+  bp_osd      d=3 code_capacity p=0.01: LER=0.00311 (51) 5.9 us/shot
+d=3 code_capacity p=0.02
+  mwpm        d=3 code_capacity p=0.02: LER=0.00916 (150) 0.1 us/shot
+  union_find  d=3 code_capacity p=0.02: LER=0.11597 (1900) 61.4 us/shot
+  bp          d=3 code_capacity p=0.02: LER=0.01038 (170) 11.0 us/shot
+  bp_osd      d=3 code_capacity p=0.02: LER=0.01215 (199) 17.5 us/shot
+d=3 code_capacity p=0.05
+  mwpm        d=3 code_capacity p=0.05: LER=0.04877 (799) 0.3 us/shot
+  union_find  d=3 code_capacity p=0.05: LER=0.24231 (3970) 76.9 us/shot
+  bp          d=3 code_capacity p=0.05: LER=0.05243 (859) 33.9 us/shot
+  bp_osd      d=3 code_capacity p=0.05: LER=0.05688 (932) 53.7 us/shot
+d=5 code_capacity p=0.01
+  mwpm        d=5 code_capacity p=0.01: LER=0.00037 (6) 0.5 us/shot
+  union_find  d=5 code_capacity p=0.01: LER=0.22607 (3704) 484.9 us/shot
+  bp          d=5 code_capacity p=0.01: LER=0.00580 (95) 172.2 us/shot
+  bp_osd      d=5 code_capacity p=0.01: LER=0.01062 (174) 227.1 us/shot
+d=5 code_capacity p=0.02
+  mwpm        d=5 code_capacity p=0.02: LER=0.00262 (43) 0.9 us/shot
+  union_find  d=5 code_capacity p=0.02: LER=0.34180 (5600) 689.2 us/shot
+  bp          d=5 code_capacity p=0.02: LER=0.02472 (405) 368.7 us/shot
+  bp_osd      d=5 code_capacity p=0.02: LER=0.04199 (688) 580.2 us/shot
+d=5 code_capacity p=0.05
+  mwpm        d=5 code_capacity p=0.05: LER=0.04016 (658) 2.2 us/shot
+  union_find  d=5 code_capacity p=0.05: LER=0.47565 (7793) 1374.3 us/shot
+  bp          d=5 code_capacity p=0.05: LER=0.13550 (2220) 1560.1 us/shot
+  bp_osd      d=5 code_capacity p=0.05: LER=0.22131 (3626) 2818.8 us/shot
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4\surface_sweep.csv

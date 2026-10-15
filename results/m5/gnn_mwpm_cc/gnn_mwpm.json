@@ -1,0 +1,24 @@
+{
+  "checkpoint": "results\\m4_surface_cc\\m4_learned_basis_rotated_surface_code_code_capacity_d3__d3__code_capacity__p0p05\\model_state.pt",
+  "config": "configs\\m4_rotated_surface_code_code_capacity_d3.json",
+  "decoders": {
+    "bp_gnn": {
+      "ler": 0.05810546875,
+      "logical_errors": 238,
+      "us_per_shot": 12.821435546594984
+    },
+    "mwpm": {
+      "ler": 0.052734375,
+      "logical_errors": 216,
+      "us_per_shot": 0.2960937499629779
+    },
+    "mwpm_gnn": {
+      "ler": 0.31298828125,
+      "logical_errors": 1282,
+      "standard_error": 0.007245462902966544,
+      "us_per_shot": 384.94357910145993
+    }
+  },
+  "reweight_strength": 1.0,
+  "shots": 4096
+}

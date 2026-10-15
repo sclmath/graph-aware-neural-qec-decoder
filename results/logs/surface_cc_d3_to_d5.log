@@ -1,0 +1,11 @@
+[19:16:27] START surface_cc_d3_to_d5
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m3.py", line 101, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m3.py", line 54, in main
+    raise FileExistsError(
+FileExistsError: Result directory already exists: results\m4_surface_cc\m4_learned_basis_rotated_surface_code_code_capacity_d3__from_d3__to_d5__code_capacity__p0p05. Choose another --output-dir/--tag or remove it explicitly.
+[19:16:29] DONE surface_cc_d3_to_d5 exit=1

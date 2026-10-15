@@ -1,0 +1,5 @@
+[m2] generating splits for m4_learned_basis_rotated_surface_code_circuit_level_d3
+[m2] splits ready: train=32768 validation=16384 test=32768 (0.2s)
+[m2] graph: 24 detectors, 219 mechanisms, 564 edges
+[m2] epoch 1/15: train=0.05912 validation=0.02259 (186.0s)
+[m2] epoch 2/15: train=0.01792 validation=0.00991 (275.3s)

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "name": "m1_repetition_circuit_level",
+  "experiment": {
+    "name": "repetition",
+    "seed": 20261003,
+    "code": {
+      "family": "repetition_code",
+      "distance": 3,
+      "rounds": 3
+    },
+    "noise": {
+      "model": "circuit_level",
+      "physical_error_rate": 0.01
+    },
+    "sampling": {
+      "shots": 4096
+    }
+  },
+  "benchmark": {
+    "decoders": [
+      "mwpm",
+      "union_find",
+      "bp",
+      "bp_osd"
+    ],
+    "warmup_runs": 1,
+    "timed_runs": 5,
+    "max_shots": 4096
+  },
+  "decoder_parameters": {
+    "bp": {
+      "max_iterations": 32,
+      "min_sum_scaling": 0.75,
+      "damping": 0.0
+    },
+    "bp_osd": {
+      "max_iterations": 32,
+      "min_sum_scaling": 0.75,
+      "damping": 0.0,
+      "osd_order": 0
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "bp": {
+    "logical_errors": 464,
+    "us_per_shot": 20.34930419925196
+  },
+  "bp_gnn": {
+    "logical_errors": 496,
+    "strength": 1.0,
+    "us_per_shot": 12.156677245966918
+  },
+  "mwpm": {
+    "logical_errors": 455,
+    "num_edges": 35
+  },
+  "mwpm_map_learned_s0.00": {
+    "logical_errors": 455,
+    "us_per_shot": 526.2086059569792
+  },
+  "mwpm_map_learned_s0.25": {
+    "logical_errors": 455,
+    "us_per_shot": 549.3237670899375
+  },
+  "mwpm_map_learned_s0.50": {
+    "logical_errors": 455,
+    "us_per_shot": 532.4417358398837
+  },
+  "mwpm_map_learned_s0.75": {
+    "logical_errors": 451,
+    "us_per_shot": 535.1850463868324
+  },
+  "mwpm_map_learned_s1.00": {
+    "logical_errors": 498,
+    "us_per_shot": 553.709997558549
+  },
+  "mwpm_map_prior_absolute": {
+    "logical_errors": 455,
+    "max_abs_prior_shift": 0.0,
+    "num_edges": 35
+  },
+  "mwpm_naive_raw": {
+    "logical_errors": 588,
+    "num_edges": 43
+  },
+  "mwpm_rebuilt": {
+    "logical_errors": 455,
+    "num_edges": 35
+  },
+  "mwpm_shift_zero": {
+    "logical_errors": 455,
+    "matches_baseline": true,
+    "num_edges": 35
+  }
+}
+mapping: {"ambiguous": 0.0, "ambiguous_fraction": 0.0, "decomposed_instructions": 53.0, "mapped": 53.0, "raw_mechanisms": 53.0, "unique": 53.0, "unique_fraction": 1.0, "unmapped": 0.0}

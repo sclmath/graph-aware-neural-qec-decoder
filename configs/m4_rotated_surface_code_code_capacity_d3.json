@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "name": "m4_learned_basis_rotated_surface_code_code_capacity_d3",
+  "experiment": {
+    "name": "surface",
+    "seed": 20261013,
+    "code": {"family": "rotated_surface_code", "distance": 3, "rounds": 3},
+    "noise": {"model": "code_capacity", "physical_error_rate": 0.05},
+    "sampling": {"shots": 4096}
+  },
+  "splits": {
+    "train_seeds": [101, 102],
+    "validation_seeds": [201],
+    "test_seeds": [301, 302, 303, 304],
+    "train_shots": 8192,
+    "validation_shots": 8192,
+    "test_shots": 8192
+  },
+  "model": {"hidden_size": 32, "num_layers": 3, "dropout": 0.0},
+  "training": {
+    "epochs": 8,
+    "batch_size": 1024,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0,
+    "seed": 7,
+    "max_grad_norm": 1.0,
+    "torch_threads": 6
+  },
+  "decoder": {
+    "max_iterations": 32,
+    "min_sum_scaling": 0.75,
+    "damping": 0.0,
+    "reweight_strengths": [0.0, 0.25, 0.5, 0.75, 1.0]
+  },
+  "benchmark": {
+    "decoders": ["mwpm", "bp", "bp_osd", "bp_gnn", "bp_gnn_osd"],
+    "timed_runs": 1
+  }
+}

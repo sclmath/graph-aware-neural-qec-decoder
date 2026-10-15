@@ -1,0 +1,29 @@
+{
+  "bp": {
+    "logical_error_rate": 0.009429931640625,
+    "logical_errors": 309,
+    "syndrome_consistency_rate": 0.98992919921875
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.009521484375,
+    "logical_errors": 312,
+    "syndrome_consistency_rate": 0.9912109375
+  },
+  "bp_gnn_osd": {
+    "logical_error_rate": 0.010162353515625,
+    "logical_errors": 333,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_learned_order": {
+    "logical_error_rate": 0.009674072265625,
+    "logical_errors": 317,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd": {
+    "logical_error_rate": 0.010101318359375,
+    "logical_errors": 331,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m3_fixed\failure_analysis.json
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m3_fixed\FAILURE_ANALYSIS.md

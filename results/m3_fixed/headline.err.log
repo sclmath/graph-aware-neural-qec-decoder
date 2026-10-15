@@ -1,0 +1,28 @@
+[m2] generating splits for m3_learned_basis_repetition_circuit_level_d3
+[m2] splits ready: train=16384 validation=8192 test=32768 (0.0s)
+[m2] graph: 8 detectors, 21 mechanisms, 34 edges
+[m2] epoch 1/15: train=0.18997 validation=0.10232 (2.2s)
+[m2] epoch 2/15: train=0.08386 validation=0.08059 (2.3s)
+[m2] epoch 3/15: train=0.07275 validation=0.06002 (2.1s)
+[m2] epoch 4/15: train=0.04033 validation=0.03545 (2.1s)
+[m2] epoch 5/15: train=0.03279 validation=0.03273 (2.0s)
+[m2] epoch 6/15: train=0.03040 validation=0.02969 (2.0s)
+[m2] epoch 7/15: train=0.02659 validation=0.02598 (2.0s)
+[m2] epoch 8/15: train=0.02467 validation=0.02522 (2.0s)
+[m2] epoch 9/15: train=0.02420 validation=0.02484 (1.9s)
+[m2] epoch 10/15: train=0.02397 validation=0.02452 (2.1s)
+[m2] epoch 11/15: train=0.02380 validation=0.02408 (2.1s)
+[m2] epoch 12/15: train=0.02210 validation=0.01936 (2.1s)
+[m2] epoch 13/15: train=0.01653 validation=0.01553 (2.0s)
+[m2] epoch 14/15: train=0.01511 validation=0.01541 (2.2s)
+[m2] epoch 15/15: train=0.01477 validation=0.01515 (2.0s)
+[m2] training done: best validation log loss 0.01515 in 31.1s
+[m2] validation sweep: s=0.0:ler=0.01135, s=0.25:ler=0.01135, s=0.5:ler=0.01086, s=0.75:ler=0.01086, s=1.0:ler=0.01086
+[m2] selected reweight strength 1.0
+[m2] evaluating mwpm on 32768 test shots
+[m2] evaluating bp on 32768 test shots
+[m2] evaluating bp_osd on 32768 test shots
+[m2] evaluating bp_gnn on 32768 test shots
+[m2] evaluating bp_gnn_osd on 32768 test shots
+[m2] evaluating bp_gnn_osd_learned_order on 32768 test shots
+[m2] evaluating osd_gnn on 32768 test shots

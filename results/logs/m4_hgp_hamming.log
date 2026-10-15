@@ -1,0 +1,59 @@
+[18:52:38] START m4_hgp_hamming
+[m2] HGP(hamming7,hamming7): 58 qubits, 42 detectors, 174 mechanisms, 480 edges, k=16
+[m2] splits ready: train=16384 validation=16384 test=32768 (14.5s)
+[m2] epoch 1/8: train=0.16952 validation=0.08943 (134.4s)
+[m2] epoch 2/8: train=0.08549 validation=0.08187 (106.0s)
+[m2] epoch 3/8: train=0.06517 validation=0.05725 (121.8s)
+[m2] epoch 4/8: train=0.05393 validation=0.05300 (107.0s)
+[m2] epoch 5/8: train=0.05098 validation=0.05061 (168.6s)
+[m2] epoch 6/8: train=0.04908 validation=0.04925 (104.5s)
+[m2] epoch 7/8: train=0.04766 validation=0.04658 (127.0s)
+[m2] epoch 8/8: train=0.04339 validation=0.04185 (102.6s)
+[m2] training done: best validation log loss 0.04185 in 972.0s
+[m2] validation sweep: s=0.0:ler=0.40094, s=0.25:ler=0.32788, s=0.5:ler=0.30402, s=0.75:ler=0.28998, s=1.0:ler=0.32697
+[m2] evaluating bp on 32768 shots
+[m2] evaluating bp_osd on 32768 shots
+[m2] evaluating bp_gnn on 32768 shots
+[m2] evaluating bp_gnn_osd on 32768 shots
+[
+  {
+    "code": {
+      "k": 16,
+      "name": "HGP(hamming7,hamming7)",
+      "num_detectors": 42,
+      "num_mechanisms": 174,
+      "num_qubits": 58,
+      "num_x_checks": 21,
+      "num_z_checks": 21
+    },
+    "decoders": [
+      {
+        "ler": 0.394866943359375,
+        "logical_errors": 12939,
+        "mean_per_shot_us": 674.3409225463959,
+        "name": "bp"
+      },
+      {
+        "ler": 0.410125732421875,
+        "logical_errors": 13439,
+        "mean_per_shot_us": 973.4518936156956,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.286376953125,
+        "logical_errors": 9384,
+        "mean_per_shot_us": 321.68865356446696,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.29730224609375,
+        "logical_errors": 9742,
+        "mean_per_shot_us": 453.2716674804649,
+        "name": "bp_gnn_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_hgp\\m4_hgp_hamming7x7_code_capacity_p0p05__d3__code_capacity__p0p05",
+    "selected_reweight_strength": 0.75
+  }
+]
+[19:16:27] DONE m4_hgp_hamming exit=0

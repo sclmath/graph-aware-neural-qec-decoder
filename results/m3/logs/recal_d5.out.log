@@ -1,0 +1,21 @@
+{
+  "0.01": {
+    "selected_strength": 1.0,
+    "sweep": [
+      [
+        0.0,
+        530
+      ],
+      [
+        1.0,
+        451
+      ]
+    ],
+    "test": {
+      "bp": 257,
+      "bp_gnn_osd_recalibrated": 274,
+      "bp_gnn_recalibrated": 207
+    }
+  }
+}
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m3\recal_d5

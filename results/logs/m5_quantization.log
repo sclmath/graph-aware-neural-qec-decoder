@@ -1,0 +1,50 @@
+[19:19:41] START m5_quantization
+D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m5_quantization.py:105: DeprecationWarning: torch.ao.quantization is deprecated and will be removed in 2.10. 
+For migrations of users: 
+1. Eager mode quantization (torch.ao.quantization.quantize, torch.ao.quantization.quantize_dynamic), please migrate to use torchao eager mode quantize_ API instead 
+2. FX graph mode quantization (torch.ao.quantization.quantize_fx.prepare_fx,torch.ao.quantization.quantize_fx.convert_fx, please migrate to use torchao pt2e quantization API instead (prepare_pt2e, convert_pt2e) 
+3. pt2e quantization has been migrated to torchao (https://github.com/pytorch/ao/tree/main/torchao/quantization/pt2e) 
+see https://github.com/pytorch/ao/issues/2259 for more details
+  quantized = torch.ao.quantization.quantize_dynamic(
+D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\ao\nn\quantized\modules\utils.py:72: UserWarning: torch.quantize_per_tensor, torch.quantize_per_channel and other quantized tensor creation functions that produce tensors with dtype torch.quint8, torch.qint8, and torch.qint32 are deprecated and will be removed in a future PyTorch release. Please see https://github.com/pytorch/pytorch/issues/184982 for more information. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\aten\src\ATen\quantized\Quantizer.cpp:116.)
+  qweight = torch.quantize_per_tensor(
+{
+  "batch_size": 1024,
+  "config": "configs\\m3_learned_basis_repetition_circuit_level_d3.json",
+  "decoders": {
+    "bp_no_prior": {
+      "logical_error_rate": 0.0087890625,
+      "logical_errors": 144,
+      "syndrome_consistency_rate": 0.99072265625
+    },
+    "float32": {
+      "logical_error_rate": 0.00885009765625,
+      "logical_errors": 145,
+      "syndrome_consistency_rate": 0.99169921875
+    },
+    "int8": {
+      "logical_error_rate": 0.00885009765625,
+      "logical_errors": 145,
+      "syndrome_consistency_rate": 0.99169921875
+    }
+  },
+  "float32": {
+    "inference_seconds": 0.6328730000004725,
+    "mechanism_log_loss": 0.014970603260038245,
+    "microseconds_per_shot": 38.62750244143509,
+    "model_size_mb": 0.061188
+  },
+  "int8_dynamic": {
+    "inference_seconds": 0.752983199998198,
+    "mechanism_log_loss": 0.01496713758805948,
+    "microseconds_per_shot": 45.95844726551501,
+    "model_size_mb": 0.016452
+  },
+  "max_abs_logit_delta": 0.43766772747039795,
+  "shots": 16384,
+  "sign_agreement": 0.9999505905877977,
+  "size_ratio": 0.2688762502451461,
+  "speedup": 0.8404875434166222
+}
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m5\QUANTIZATION.md
+[19:19:49] DONE m5_quantization exit=0

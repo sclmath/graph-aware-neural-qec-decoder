@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "graph-aware-neural-qec-decoder"
+version = "0.1.0"
+description = "Graph-aware neural decoders for quantum error correction"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.0,<3",
+    "stim>=1.16,<2",
+    "pymatching>=2.4,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9,<10",
+]
+ml = [
+    "torch>=2.4",
+]
+
+[project.scripts]
+qec-m0 = "graph_qec.m0:main"
+qec-m1 = "graph_qec.m1:main"
+qec-m2 = "graph_qec.m2:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+pythonpath = ["src"]

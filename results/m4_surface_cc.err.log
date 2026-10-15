@@ -1,0 +1,19 @@
+[m2] generating splits for m4_learned_basis_rotated_surface_code_code_capacity_d3
+[m2] splits ready: train=16384 validation=8192 test=32768 (0.0s)
+[m2] graph: 24 detectors, 53 mechanisms, 98 edges
+[m2] epoch 1/8: train=0.21232 validation=0.12218 (20.2s)
+[m2] epoch 2/8: train=0.10797 validation=0.10100 (20.4s)
+[m2] epoch 3/8: train=0.08465 validation=0.05771 (20.1s)
+[m2] epoch 4/8: train=0.05407 validation=0.05245 (25.5s)
+[m2] epoch 5/8: train=0.05106 validation=0.05040 (20.8s)
+[m2] epoch 6/8: train=0.04982 validation=0.04950 (18.3s)
+[m2] epoch 7/8: train=0.04833 validation=0.04739 (18.9s)
+[m2] epoch 8/8: train=0.04641 validation=0.04530 (23.7s)
+[m2] training done: best validation log loss 0.04530 in 167.9s
+[m2] validation sweep: s=0.0:ler=0.05029, s=0.25:ler=0.04980, s=0.5:ler=0.05054, s=0.75:ler=0.04712, s=1.0:ler=0.04993
+[m2] selected reweight strength 0.75
+[m2] evaluating mwpm on 32768 test shots
+[m2] evaluating bp on 32768 test shots
+[m2] evaluating bp_osd on 32768 test shots
+[m2] evaluating bp_gnn on 32768 test shots
+[m2] evaluating bp_gnn_osd on 32768 test shots

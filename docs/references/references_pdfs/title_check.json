@@ -1,0 +1,546 @@
+[
+  {
+    "id": "R01",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Topological quantum memory",
+    "file": "R01_Topological_quantum_memory.pdf",
+    "first_page": "JOURNAL OF MATHEMATICAL PHYSICS VOLUME 43, NUMBER 9 SEPTEMBER 2002 Topological quantum memorya鈥� Eric Dennisb) Princeton University, Princeton, New Jersey 08544 Alexei Kitaev,c) Andrew Landahl,d) and John Preskille) Institute for Quantum Information, California Institute of Technology, Pasadena, Cal"
+  },
+  {
+    "id": "R02",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Surface codes: Towards practical large-scale quantum computation",
+    "file": "R02_Surface_codes_Towards_practical_large-scale_quantum_computation.pdf",
+    "first_page": "Surface codes: Towards practical large-scale quantum computation Austin G. Fowler Centre for Quantum Computation and Communication Technology, School of Physics, The University of Melbourne, Victoria 3010, Australia Matteo Mariantoni Department of Physics, University of California, Santa Barbara, CA"
+  },
+  {
+    "id": "R03",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Stim: a fast stabilizer circuit simulator",
+    "file": "R03_Stim_a_fast_stabilizer_circuit_simulator.pdf",
+    "first_page": "Stim: a fast stabilizer circuit simulator Craig Gidney Google Inc., Santa Barbara, California 93117, USA arXiv:2103.02202v3 [quant-ph] 18 Jun 2021 June 21, 2021 This paper presents 鈥淪tim\", a fast simulator for quantum stabilizer circuits. The paper explains how Stim works and compares it to existing"
+  },
+  {
+    "id": "R04",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "PyMatching: A Python Package for Decoding Quantum Codes with Minimum-Weight Perfect Matching",
+    "file": "R04_PyMatching_A_Python_Package_for_Decoding_Quantum_Codes_with_Minimum-Weight_Perfect_Matching.pdf",
+    "first_page": "PyMatching: A Python package for decoding quantum codes with minimum-weight perfect matching Oscar Higgott鈭�1 arXiv:2105.13082v2 [quant-ph] 12 Jul 2021 1 Department of Physics & Astronomy, University College London, WC1E 6BT London, United Kingdom July 14, 2021 Abstract This paper introduces PyMatch"
+  },
+  {
+    "id": "R05",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Almost-linear time decoding algorithm for topological codes",
+    "file": "R05_Almost-linear_time_decoding_algorithm_for_topological_codes.pdf",
+    "first_page": "Almost-linear time decoding algorithm for topological codes Nicolas Delfosse1,2,3 and Naomi H. Nickerson4 1 IQIM, California Institute of Technology, Pasadena, CA, USA 2 Department 3 Station of Physics and Astronomy, University of California, Riverside, CA, USA Q Quantum Architectures and Computatio"
+  },
+  {
+    "id": "R06",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Decoding algorithms for surface codes",
+    "file": "R06_Decoding_algorithms_for_surface_codes.pdf",
+    "first_page": "Review on the decoding algorithms for surface codes Antonio deMarti iOlius 1 , Patricio Fuentes2 , Rom谩n Or煤s3,4,5 , Pedro M. Crespo1 , and Josu Etxezarreta Martinez1 1 Department of Basic Sciences, Tecnun - University of Navarra, 20018 San Sebastian, Spain. Inc., Vancouver, British Columbia, Canada"
+  },
+  {
+    "id": "R07",
+    "score": 1.0,
+    "match": "fuzzy",
+    "title": "Quantum Low-Density Parity-Check Codes",
+    "file": "R07_Quantum_Low-Density_Parity-Check_Codes.pdf",
+    "first_page": "Quantum LDPC Codes Nikolas P. Breuckmann鈭� Department of Computer Science, University College London, WC1E 6BT London, United Kingdom Jens Niklas Eberhardt鈥� arXiv:2103.06309v2 [quant-ph] 25 Oct 2021 Mathematical Institute, University of Bonn, Germany (Dated: October 26, 2021) Quantum error correcti"
+  },
+  {
+    "id": "R08",
+    "score": 1.0,
+    "match": "fuzzy",
+    "title": "Quantum LDPC Codes With Positive Rate and Minimum Distance Proportional to the Square Root of the Blocklength",
+    "file": "R08_Quantum_LDPC_Codes_With_Positive_Rate_and_Minimum_Distance_Proportional_to_the_Square_Root_of_the_Blocklength.pdf",
+    "first_page": "Quantum LDPC codes with positive rate and minimum distance proportional to n1/2 arXiv:0903.0566v2 [cs.IT] 11 Jan 2013 Jean-Pierre Tillich鈭� Gilles Z茅mor鈥� January 11, 2013 Abstract The current best asymptotic lower bound on the minimum distance of quantum LDPC codes with fixed non-zero rate is logar"
+  },
+  {
+    "id": "R09",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Degenerate Quantum LDPC Codes With Good Finite Length Performance",
+    "file": "R09_Degenerate_Quantum_LDPC_Codes_With_Good_Finite_Length_Performance.pdf",
+    "first_page": "Degenerate Quantum LDPC Codes With Good Finite Length Performance Pavel Panteleev and Gleb Kalachev arXiv:1904.02703v3 [quant-ph] 12 Nov 2021 Faculty of Mechanics and Mathematics, Moscow State University, GSP-1, Leninskie Gory, Moscow, 119991, Russian Federation We study the performance of medium-le"
+  },
+  {
+    "id": "R10",
+    "score": 1.0,
+    "match": "fuzzy",
+    "title": "Decoding across the quantum low-density parity-check code landscape",
+    "file": "R10_Decoding_across_the_quantum_low-density_parity-check_code_landscape.pdf",
+    "first_page": "Decoding Across the Quantum LDPC Code Landscape Joschka Roffe,1, 鈭� David R White,1 Simon Burton,2 and Earl Campbell1 arXiv:2005.07016v2 [quant-ph] 29 Dec 2020 2 1 University of Sheffield University College London (Dated: January 1, 2021) We show that belief propagation combined with ordered statist"
+  },
+  {
+    "id": "R11",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Combining hard and soft decoders for hypergraph product codes",
+    "file": "R11_Combining_hard_and_soft_decoders_for_hypergraph_product_codes.pdf",
+    "first_page": "Combining hard and soft decoders for hypergraph product codes arXiv:2004.11199v2 [quant-ph] 8 Apr 2021 Antoine Grospellier1 , Lucien Grou猫s1 , Anirudh Krishna2 , and Anthony Leverrier1 1 Inria, 2 Rue Simone IFF, CS 42112, 75589 Paris Cedex 12, France 2 Universit茅 de Sherbrooke, 2500 Boulevard de l鈥橴"
+  },
+  {
+    "id": "R12",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Single-Shot Decoding of Good Quantum LDPC Codes",
+    "file": "R12_Single-Shot_Decoding_of_Good_Quantum_LDPC_Codes.pdf",
+    "first_page": "Single-shot decoding of good quantum LDPC codes arXiv:2306.12470v2 [quant-ph] 11 Apr 2024 Shouzhen Gu,鈭� Eugene Tang,鈥� Libor Caha,鈥� Shin Ho Choe,鈥� Zhiyang He (Sunny),搂 and Aleksander Kubica露 Quantum Tanner codes constitute a family of quantum low-density parity-check (LDPC) codes with good parame"
+  },
+  {
+    "id": "R13",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "High-threshold and low-overhead fault-tolerant quantum memory",
+    "file": "R13_High-threshold_and_low-overhead_fault-tolerant_quantum_memory.pdf",
+    "first_page": "Article High-threshold and low-overhead fault-tolerant quantum memory https://doi.org/10.1038/s41586-024-07107-7 Received: 25 August 2023 Accepted: 23 January 2024 Published online: 27 March 2024 Open access Check for updates Sergey Bravyi1, Andrew W. Cross1, Jay M. Gambetta1, Dmitri Maslov1 鉁�, Pat"
+  },
+  {
+    "id": "R14",
+    "score": 1.0,
+    "match": "fuzzy",
+    "title": "High-rate quantum LDPC codes for long-range-connected neutral atom registers",
+    "file": "R14_High-rate_quantum_LDPC_codes_for_long-range-connected_neutral_atom_registers.pdf",
+    "first_page": "Article https://doi.org/10.1038/s41467-025-56255-5 High-rate quantum LDPC codes for longrange-connected neutral atom registers Received: 4 May 2024 Laura Pecorari 1 , Sven Jandura 1 , Gavin K. Brennen1,2 & Guido Pupillo 1 Accepted: 13 January 2025 1234567890():,; 1234567890():,; Check for updates Hi"
+  },
+  {
+    "id": "R15",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Suppressing quantum errors by scaling a surface code logical qubit",
+    "file": "R15_Suppressing_quantum_errors_by_scaling_a_surface_code_logical_qubit.pdf",
+    "first_page": "Article Suppressing quantum errors by scaling a surface code logical qubit https://doi.org/10.1038/s41586-022-05434-1 Google Quantum AI* Received: 13 July 2022 Accepted: 10 October 2022 Published online: 22 February 2023 Open access Check for updates Practical quantum computing will require error ra"
+  },
+  {
+    "id": "R16",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Quantum error correction below the surface code threshold",
+    "file": "R16_Quantum_error_correction_below_the_surface_code_threshold.pdf",
+    "first_page": "Article Quantum error correction below the surface code threshold https://doi.org/10.1038/s41586-024-08449-y Google Quantum AI and Collaborators* Received: 24 August 2024 Accepted: 25 November 2024 Published online: 9 December 2024 Open access Check for updates Quantum error correction1鈥�4 provides "
+  },
+  {
+    "id": "R17",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Scaling and logic in the colour code on a superconducting quantum processor",
+    "file": "R17_Scaling_and_logic_in_the_colour_code_on_a_superconducting_quantum_processor.pdf",
+    "first_page": "Article Scaling and logic in the colour code on a superconducting quantum processor https://doi.org/10.1038/s41586-025-09061-4 Received: 18 December 2024 Accepted: 23 April 2025 Published online: 26 May 2025 Open access Check for updates Quantum error correction1鈥�4 is essential for bridging the gap"
+  },
+  {
+    "id": "R18",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Neural Decoder for Topological Codes",
+    "file": "R18_Neural_Decoder_for_Topological_Codes.pdf",
+    "first_page": "A Neural Decoder for Topological Codes Giacomo Torlai and Roger G. Melko Department of Physics and Astronomy, University of Waterloo, Ontario N2L 3G1, Canada Perimeter Institute of Theoretical Physics, Waterloo, Ontario N2L 2Y5, Canada (Dated: October 17, 2016) arXiv:1610.04238v1 [quant-ph] 13 Oct 2"
+  },
+  {
+    "id": "R19",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Deep Neural Network Probabilistic Decoder for Stabilizer Codes",
+    "file": "R19_Deep_Neural_Network_Probabilistic_Decoder_for_Stabilizer_Codes.pdf",
+    "first_page": "www.nature.com/scientificreports OPEN Deep Neural Network Probabilistic Decoder for Stabilizer Codes Stefan Krastanov Received: 27 June 2017 Accepted: 22 August 2017 Published: xx xx xxxx 1,2 & Liang Jiang 1,2 Neural networks can efficiently encode the probability distribution of errors in an error "
+  },
+  {
+    "id": "R20",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Decoding small surface codes with feedforward neural networks",
+    "file": "R20_Decoding_small_surface_codes_with_feedforward_neural_networks.pdf",
+    "first_page": "Decoding Small Surface Codes with Feedforward Neural Networks Savvas Varsamopoulos,1, 2 Ben Criger,1, 2 and Koen Bertels1, 2 1 Computer arXiv:1705.00857v1 [quant-ph] 2 May 2017 Engineering, Delft University of Technology, Mekelweg 4, 2628 CD Delft, The Netherlands 2 QuTech, Delft University of Techn"
+  },
+  {
+    "id": "R21",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Machine-learning-assisted correction of correlated qubit errors in a topological code",
+    "file": "R21_Machine-learning-assisted_correction_of_correlated_qubit_errors_in_a_topological_code.pdf",
+    "first_page": "Machine-learning-assisted correction of correlated qubit errors in a topological code P. Baireuther1 , T. E. O鈥橞rien1 , B. Tarasinski2 , and C. W. J. Beenakker1 1 Instituut-Lorentz, 2 QuTech, Universiteit Leiden, P.O. Box 9506, 2300 RA Leiden, The Netherlands Delft University of Technology, P.O. Box"
+  },
+  {
+    "id": "R22",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Neural Network Decoders for Large-Distance 2D Toric Codes",
+    "file": "R22_Neural_Network_Decoders_for_Large-Distance_2D_Toric_Codes.pdf",
+    "first_page": "Neural Network Decoders for Large-Distance 2D Toric Codes Xiaotong Ni QuTech, Delft University of Technology, P.O.Box 5046, 2600 GA Delft, The Netherlands. arXiv:1809.06640v3 [quant-ph] 8 Apr 2020 2020 April 8 We still do not have perfect decoders for topological codes that can satisfy all needs of "
+  },
+  {
+    "id": "R23",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Reinforcement learning decoders for fault-tolerant quantum computation",
+    "file": "R23_Reinforcement_learning_decoders_for_fault-tolerant_quantum_computation.pdf",
+    "first_page": "Reinforcement Learning Decoders for Fault-Tolerant Quantum Computation Ryan Sweke,1 Markus S. Kesselring,1 Evert P. L. van Nieuwenburg,2 and Jens Eisert1, 3 arXiv:1810.07207v1 [quant-ph] 16 Oct 2018 1 Dahlem Center for Complex Quantum Systems, Freie Universita虉t Berlin, 14195 Berlin, Germany 2 Insti"
+  },
+  {
+    "id": "R24",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "A scalable and fast artificial neural network syndrome decoder for surface codes",
+    "file": "R24_A_scalable_and_fast_artificial_neural_network_syndrome_decoder_for_surface_codes.pdf",
+    "first_page": "A scalable and fast artificial neural network syndrome decoder for surface codes Spiro Gicev1 , Lloyd C.L. Hollenberg1 , and Muhammad Usman1,2,3 1 Center for Quantum Computation and Communication Technology, School of Physics, University of Melbourne, Parkville, 3010, VIC, Australia. 2 School of Com"
+  },
+  {
+    "id": "R25",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Learning high-accuracy error decoding for quantum processors",
+    "file": "R25_Learning_high-accuracy_error_decoding_for_quantum_processors.pdf",
+    "first_page": "Article Learning high-accuracy error decoding for quantum processors https://doi.org/10.1038/s41586-024-08148-8 Received: 13 February 2024 Accepted: 2 October 2024 Johannes Bausch1,3 鉁�, Andrew W. Senior1,3 鉁�, Francisco J. H. Heras1,3, Thomas Edlich1,3, Alex Davies1,3, Michael Newman2,3, Cody Jones"
+  },
+  {
+    "id": "R26",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Neural network decoder for near-term surface-code experiments",
+    "file": "R26_Neural_network_decoder_for_near-term_surface-code_experiments.pdf",
+    "first_page": "PHYSICAL REVIEW RESEARCH 7, 013029 (2025) Neural network decoder for near-term surface-code experiments Boris M. Varbanov ,1,* Marc Serra-Peralta ,1,2 David Byfield ,3 and Barbara M. Terhal 1,2 1 2 QuTech, Delft University of Technology, P.O. Box 5046, 2600 GA Delft, The Netherlands Delft Institute "
+  },
+  {
+    "id": "R27",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Artificial neural network syndrome decoding on IBM quantum processors",
+    "file": "R27_Artificial_neural_network_syndrome_decoding_on_IBM_quantum_processors.pdf",
+    "first_page": "PHYSICAL REVIEW RESEARCH 6, L032004 (2024) Letter Artificial neural network syndrome decoding on IBM quantum processors Brhyeton Hall ,1,* Spiro Gicev,1,鈥� and Muhammad Usman 1 1,2,鈥� School of Physics, The University of Melbourne, Parkville, 3010 Victoria, Australia 2 Data61, CSIRO, Research Way, C"
+  },
+  {
+    "id": "R28",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Optimization of Decoder Priors for Accurate Quantum Error Correction",
+    "file": "R28_Optimization_of_Decoder_Priors_for_Accurate_Quantum_Error_Correction.pdf",
+    "first_page": "Optimization of decoder priors for accurate quantum error correction Volodymyr Sivak,鈭� Michael Newman, and Paul Klimov Google Quantum AI Accurate decoding of quantum error-correcting codes is a crucial ingredient in protecting quantum information from decoherence. It requires characterizing the err"
+  },
+  {
+    "id": "R29",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Techniques for combining fast local decoders with global decoders under circuit-level noise",
+    "file": "R29_Techniques_for_combining_fast_local_decoders_with_global_decoders_under_circuit-level_noise.pdf",
+    "first_page": "Techniques for combining fast local decoders with global decoders under circuit-level noise Christopher Chamberland,1, 2, 鈭� Luis Goncalves,1 Prasahnt Sivarajah,1 Eric Peterson,1 and Sebastian Grimberg1 1 arXiv:2208.01178v2 [quant-ph] 28 Sep 2022 2 AWS Center for Quantum Computing, Pasadena, CA 9112"
+  },
+  {
+    "id": "R30",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Fully convolutional 3D neural network decoders for surface codes with syndrome circuit noise",
+    "file": "R30_Fully_convolutional_3D_neural_network_decoders_for_surface_codes_with_syndrome_circuit_noise.pdf",
+    "first_page": "arXiv:2506.16113v1 [quant-ph] 19 Jun 2025 Fully convolutional 3D neural network decoders for surface codes with syndrome circuit noise Spiro Gicev1,2鈭� , Lloyd C. L. Hollenberg1,2 and Muhammad Usman2,3 1 Center for Quantum Computation and Communication Technology, School of Physics, University of Me"
+  },
+  {
+    "id": "R31",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Qubit-centric Transformer for Surface Code Decoding",
+    "file": "R31_Qubit-centric_Transformer_for_Surface_Code_Decoding.pdf",
+    "first_page": "Qubit-centric Transformer for Surface Code Decoding Seong-Joon Park1,2,鈥� , Hee-Youl Kwak3 , and Yongjune Kim4 1 Samsung Electronics Company, Ltd., Suwon 16677, South Korea Institute of Artificial Intelligence, Pohang University of Science and Technology (POSTECH), Pohang 37673, South Korea 3 Depart"
+  },
+  {
+    "id": "R33",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Maximum Likelihood Decoding of Quantum Error Correction Codes",
+    "file": "R33_Maximum_Likelihood_Decoding_of_Quantum_Error_Correction_Codes.pdf",
+    "first_page": "Maximum Likelihood Decoding of Quantum Error Correction Codes Hanyan Cao1 , Ge Yan2 , Yuxuan Du2,3,鈭� , and Feng Pan1,鈭� 1 arXiv:2605.17230v1 [quant-ph] 17 May 2026 Science, Mathematics and Technology Cluster, Singapore University of Technology and Design, 8 Somapah Road, 487372, Singapore 2 College"
+  },
+  {
+    "id": "R34",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Data-driven decoding of quantum error correcting codes using graph neural networks",
+    "file": "R34_Data-driven_decoding_of_quantum_error_correcting_codes_using_graph_neural_networks.pdf",
+    "first_page": "PHYSICAL REVIEW RESEARCH 7, 023181 (2025) Data-driven decoding of quantum error correcting codes using graph neural networks Moritz Lange ,1,* Pontus Havstr枚m ,1 Basudha Srivastava ,1,2 Isak Bengtsson ,3 Valdemar Bergentall,1 Karl Hammar,1 Olivia Heuts,1 Evert van Nieuwenburg,4,鈥� and Mats Granath 1"
+  },
+  {
+    "id": "R35",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Graph Neural Networks for Enhanced Decoding of Quantum LDPC Codes",
+    "file": "R35_Graph_Neural_Networks_for_Enhanced_Decoding_of_Quantum_LDPC_Codes.pdf",
+    "first_page": "Graph Neural Networks for Enhanced Decoding of Quantum LDPC Codes arXiv:2310.17758v2 [quant-ph] 6 Nov 2023 1 Anqi Gong1, Sebastian Cammerer2 , and Joseph M. Renes1 Institute for Theoretical Physics, ETH Z眉rich, 8093 Z眉rich, Switzerland 2 NVIDIA In this work, we propose a fully differentiable iterati"
+  },
+  {
+    "id": "R36",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Decoding Quantum LDPC Codes Using Graph Neural Networks",
+    "file": "R36_Decoding_Quantum_LDPC_Codes_Using_Graph_Neural_Networks.pdf",
+    "first_page": "Decoding Quantum LDPC Codes Using Graph Neural Networks Vukan Ninkovic,鈭椻�� Ognjen Kundacina, 鈥� , Dejan Vukobratovic,鈭� Christian Ha虉ger,鈥� and Alexandre Graell i Amat鈥� 鈭� Faculty of Technical Sciences, University of Novi Sad, Novi Sad, Serbia Institute for Artificial Intelligence Research and Dev"
+  },
+  {
+    "id": "R37",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Machine learning message-passing for the scalable decoding of QLDPC codes",
+    "file": "R37_Machine_learning_message-passing_for_the_scalable_decoding_of_QLDPC_codes.pdf",
+    "first_page": "npj | quantum information Article Published in partnership with The University of New South Wales https://doi.org/10.1038/s41534-025-01033-w Machine learning message-passing for the scalable decoding of QLDPC codes Check for updates 1234567890():,; 1234567890():,; Arshpreet Singh Maan & Alexandru Pa"
+  },
+  {
+    "id": "R38",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Neural Belief-Propagation Decoders for Quantum Error-Correcting Codes",
+    "file": "R38_Neural_Belief-Propagation_Decoders_for_Quantum_Error-Correcting_Codes.pdf",
+    "first_page": "Neural Belief-Propagation Decoders for Quantum Error-Correcting Codes Ye-Hua Liu1 and David Poulin1, 2 arXiv:1811.07835v2 [quant-ph] 7 May 2019 1 D茅partement de Physique & Institut Quantique, Universit茅 de Sherbrooke, J1K 2R1 Sherbrooke, Qu茅bec, Canada 2 Canadian Institute for Advanced Research, M5G"
+  },
+  {
+    "id": "R39",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Neural Belief Propagation Decoding of Quantum LDPC Codes Using Overcomplete Check Matrices",
+    "file": "R39_Neural_Belief_Propagation_Decoding_of_Quantum_LDPC_Codes_Using_Overcomplete_Check_Matrices.pdf",
+    "first_page": "Neural Belief Propagation Decoding of Quantum LDPC Codes Using Overcomplete Check Matrices Sisi Miao鈥� , Alexander Schnerring鈥� , Haizheng Li鈥� , and Laurent Schmalen鈥� arXiv:2212.10245v2 [cs.IT] 21 Mar 2023 鈥� Karlsruhe Institute of Technology (KIT), Communications Engineering Lab (CEL), 76187 Karl"
+  },
+  {
+    "id": "R40",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Quaternary Neural Belief Propagation Decoding of Quantum LDPC Codes With Overcomplete Check Matrices",
+    "file": "R40_Quaternary_Neural_Belief_Propagation_Decoding_of_Quantum_LDPC_Codes_With_Overcomplete_Check_Matrices.pdf",
+    "first_page": "Received 22 January 2025, accepted 2 February 2025, date of publication 5 February 2025, date of current version 10 February 2025. Digital Object Identifier 10.1109/ACCESS.2025.3539475 Quaternary Neural Belief Propagation Decoding of Quantum LDPC Codes With Overcomplete Check Matrices SISI MIAO 1 , "
+  },
+  {
+    "id": "R41",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Belief Propagation Decoding of Quantum LDPC Codes with Guided Decimation",
+    "file": "R41_Belief_Propagation_Decoding_of_Quantum_LDPC_Codes_with_Guided_Decimation.pdf",
+    "first_page": "Belief Propagation Decoding of Quantum LDPC Codes with Guided Decimation arXiv:2312.10950v2 [cs.IT] 21 Jun 2024 Hanwen Yao1,2 , Waleed Abu Laban3 , Christian H盲ger3 , Alexandre Graell i Amat3 , and Henry D. Pfister1,2,4 1 Duke Quantum Center, Duke University, Durham, NC 27701, USA 2 Department of El"
+  },
+  {
+    "id": "R42",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Check-Agnosia based Post-Processor for Message-Passing Decoding of Quantum LDPC Codes",
+    "file": "R42_Check-Agnosia_based_Post-Processor_for_Message-Passing_Decoding_of_Quantum_LDPC_Codes.pdf",
+    "first_page": "Check-Agnosia based Post-Processor for Message-Passing Decoding of Quantum LDPC Codes Julien du Crest1 , Francisco Garcia-Herrero2 , Mehdi Mhalla3 , Valentin Savin4 , and Javier Valls5 1 Universit茅 Grenoble Alpes, Grenoble INP, LIG, F-38000 Grenoble, France of Computer Architecture and Automatics, C"
+  },
+  {
+    "id": "R43",
+    "score": 0.909,
+    "match": "fuzzy",
+    "title": "Introducing Ambiguity Clustering: An Accurate and Efficient Decoder for qLDPC Codes",
+    "file": "R43_Introducing_Ambiguity_Clustering_An_Accurate_and_Efficient_Decoder_for_qLDPC_Codes.pdf",
+    "first_page": "Ambiguity Clustering: an accurate and efficient decoder for qLDPC codes Stasiu Wolanski鈭� Ben Barber鈥� Riverlane, Cambridge, UK arXiv:2406.14527v2 [quant-ph] 3 Jan 2025 3 January 2025 Error correction allows a quantum computer to preserve states long beyond the decoherence time of its physical qubit"
+  },
+  {
+    "id": "R44",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Increasing memory lifetime of quantum low-density parity check codes with sliding-window noisy syndrome decoding",
+    "file": "R44_Increasing_memory_lifetime_of_quantum_low-density_parity_check_codes_with_sliding-window_noisy_syndrome_decodi.pdf",
+    "first_page": "PHYSICAL REVIEW A 110, 012453 (2024) Increasing memory lifetime of quantum low-density parity check codes with sliding-window noisy syndrome decoding Shilin Huang * and Shruti Puri Department of Applied Physics, Yale University, New Haven, Connecticut 06511, USA and Yale Quantum Institute, Yale Univ"
+  },
+  {
+    "id": "R45",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Cluster Decomposition for Improved Erasure Decoding of Quantum LDPC Codes",
+    "file": "R45_Cluster_Decomposition_for_Improved_Erasure_Decoding_of_Quantum_LDPC_Codes.pdf",
+    "first_page": "1 Cluster Decomposition for Improved Erasure Decoding of Quantum LDPC Codes arXiv:2412.08817v1 [cs.IT] 11 Dec 2024 Hanwen Yao, Mert Go虉kduman, and Henry D. Pfister Abstract鈥擶e introduce a new erasure decoder that applies to arbitrary quantum LDPC codes. Dubbed the cluster decoder, it generalizes the"
+  },
+  {
+    "id": "R46",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "HyperNQ: A Hypergraph Neural Network Decoder for Quantum LDPC Codes",
+    "file": "R46_HyperNQ_A_Hypergraph_Neural_Network_Decoder_for_Quantum_LDPC_Codes.pdf",
+    "first_page": "HyperNQ: A Hypergraph Neural Network Decoder for Quantum LDPC Codes arXiv:2511.01741v1 [cs.LG] 3 Nov 2025 鈭� Department of Electrical 鈥� Department of Electrical, Ameya S. Bhave鈭� , Navnil Choudhury鈥� , Kanad Basu鈥� and Computer Engineering, The University of Texas at Dallas, Richardson, TX, USA Com"
+  },
+  {
+    "id": "R47",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Low Latency GNN Accelerator for Quantum Error Correction",
+    "file": "R47_Low_Latency_GNN_Accelerator_for_Quantum_Error_Correction.pdf",
+    "first_page": "arXiv:2603.22149v3 [quant-ph] 8 Jul 2026 Low-Latency GNN Accelerator for Quantum Error Correction Alessio Cicero Luigi Altamura Moritz Lange Chalmers University of Technology and University of Gothenburg Gothenburg, Sweden ciceroa@chalmers.se Chalmers University of Technology and University of Gothe"
+  },
+  {
+    "id": "R48",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Neural Minimum Weight Perfect Matching for Quantum Error Codes",
+    "file": "R48_Neural_Minimum_Weight_Perfect_Matching_for_Quantum_Error_Codes.pdf",
+    "first_page": "Neural Minimum Weight Perfect Matching for Quantum Error Codes Yotam Peled 1 David Zenati 1 Eliya Nachmani 1 1996) provide the mathematical proof of this advantage, signaling a paradigm shift for industries reliant on cryptography (Ekert, 1991; Bennett & Brassard, 2014), chemical simulation (Aspuru-"
+  },
+  {
+    "id": "R49",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Neural Belief-Matching Decoding for Topological Quantum Error Correction Codes",
+    "file": "R49_Neural_Belief-Matching_Decoding_for_Topological_Quantum_Error_Correction_Codes.pdf",
+    "first_page": "Neural Belief-Matching Decoding for Topological Quantum Error Correction Codes Luca Menti , Francisco La虂zaro arXiv:2603.21730v2 [quant-ph] 21 Jul 2026 Institute of Communications and Navigation German Aerospace Center (DLR) email: {Luca.Menti, Francisco.LazaroBlasco}@dlr.de Abstract鈥擰uantum error c"
+  },
+  {
+    "id": "R50",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Logical Neural Belief Propagation for Linear-Complexity Decoding of Surface Codes",
+    "file": "R50_Logical_Neural_Belief_Propagation_for_Linear-Complexity_Decoding_of_Surface_Codes.pdf",
+    "first_page": "Logical Neural Belief Propagation for Linear-Complexity Decoding of Surface Codes Hee-Youl Kwak1 , Seong-Joon Park2 , Dae-Young Yun1 , Eliya Nachmani3 , and Jae-Won Kim4 1 Department of Electrical, Electronic and Computer Engineering, University of Ulsan, Ulsan 44610, South Korea 2 Department of Ele"
+  },
+  {
+    "id": "R51",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Learning to Decode Concatenated Quantum Codes with Hierarchical Message Passing",
+    "file": "R51_Learning_to_Decode_Concatenated_Quantum_Codes_with_Hierarchical_Message_Passing.pdf",
+    "first_page": "Learning to Decode Concatenated Quantum Codes with Hierarchical Message Passing Jiahui Wu,1 Chao Zhang,1 Zipeng Wu,2 and Shilin Huang1, 鈭� 1 arXiv:2608.28571v1 [quant-ph] 28 Aug 2026 Department of Physics, The Hong Kong University of Science and Technology, Clear Water Bay, Kowloon, Hong Kong SAR, C"
+  },
+  {
+    "id": "R52",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "QAdapt: A Noise-Adaptive Neural Pre-Decoding Framework for Quantum Error Correction",
+    "file": "R52_QAdapt_A_Noise-Adaptive_Neural_Pre-Decoding_Framework_for_Quantum_Error_Correction.pdf",
+    "first_page": "QAdapt: A Noise-Adaptive Neural Pre-Decoding Framework for Quantum Error Correction Ran Miao1 , Rui Luo1,2 , Xiaohan Shan1 , Xiaoming Sun3 Beijing Zhongke Qhub Technology Co., Ltd. (Qhub), Beijing, China 2 Center for Quantum Information, Institute for Interdisciplinary Information Sciences, Tsinghua"
+  },
+  {
+    "id": "R53",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "QuantiSpect: A Structure-Aware Lightweight 3D CNN Pre-Decoder for Scalable Surface Code Quantum Error Correction",
+    "file": "R53_QuantiSpect_A_Structure-Aware_Lightweight_3D_CNN_Pre-Decoder_for_Scalable_Surface_Code_Quantum_Error_Correctio.pdf",
+    "first_page": "QuantiSpect: A Structure-Aware Lightweight 3D CNN Pre-Decoder for Scalable Surface Code Quantum Error Correction Pan Gao,1, 鈭� Xu-Sheng Xu,2, 鈭� Ji-Ze Han,3, 鈭� Jing-Wei Wen,3 Ling Qian,3 Xudong Lv,4 Run-Qing Zhang,3, 鈥� Xiao-Xiao Hu,5, 鈥� and Gui-Lu Long1, 6, 7, 8, 搂 1 arXiv:2607.18204v2 [quant-ph]"
+  },
+  {
+    "id": "R54",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Neural network decoder confidence as a learned proxy for the logical gap",
+    "file": "R54_Neural_network_decoder_confidence_as_a_learned_proxy_for_the_logical_gap.pdf",
+    "first_page": "Neural network decoder confidence as a learned proxy for the logical gap David Dentelski鈭� arXiv:2606.08758v3 [quant-ph] 19 Aug 2026 (Dated: August 20, 2026) To utilize quantum error-correcting codes, a decoder must infer the logical sector from the measured syndrome. Beyond producing a hard logical"
+  },
+  {
+    "id": "R55",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "AI-Enabled Decoding of Qubit Loss for Quantum Error - Correcting Codes",
+    "file": "R55_AI-Enabled_Decoding_of_Qubit_Loss_for_Quantum_Error_-_Correcting_Codes.pdf",
+    "first_page": "AI-Enabled Decoding of Qubit Loss for Quantum Error-Correcting Codes Yuqing Wang,1, 鈭� Xiaotian Nie,2, 鈭� Jiale Dai,3 Zhongyi Ni,4 Tao Zhang,3, 2, 鈥� Hui Zhai,3, 鈥� and Linghui Chen5, 2, 搂 1 arXiv:2604.14269v2 [quant-ph] 25 May 2026 Department of Physics and State Key Laboratory of Low Dimensional Q"
+  },
+  {
+    "id": "R56",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "DiffQEC: A versatile diffusion model for quantum error correction",
+    "file": "R56_DiffQEC_A_versatile_diffusion_model_for_quantum_error_correction.pdf",
+    "first_page": "DiffQEC: A versatile diffusion model for quantum error correction arXiv:2604.24640v1 [quant-ph] 27 Apr 2026 Tianyi Xu1,2 , Qinglong Liu1,2 , Maolin Wang1 , Fei Zhang1 , Zhe Zhao1 , Yang Wang3*, Ye Wei1,2* 1 Department of Data Science, City University of Hong Kong, China. of Materials Science, City U"
+  },
+  {
+    "id": "R57",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Parallel window decoding enables scalable fault tolerant quantum computation",
+    "file": "R57_Parallel_window_decoding_enables_scalable_fault_tolerant_quantum_computation.pdf",
+    "first_page": "Article https://doi.org/10.1038/s41467-023-42482-1 Parallel window decoding enables scalable fault tolerant quantum computation Received: 2 August 2023 Accepted: 12 October 2023 1234567890():,; 1234567890():,; Check for updates Luka Skoric1 , Dan E. Browne1,2, Kenton M. Barnes1, Neil I. Gillespie1 &"
+  },
+  {
+    "id": "R58",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Scalable Surface-Code Decoders with Parallelization in Time",
+    "file": "R58_Scalable_Surface-Code_Decoders_with_Parallelization_in_Time.pdf",
+    "first_page": "PRX QUANTUM 4, 040344 (2023) Scalable Surface-Code Decoders with Parallelization in Time Xinyu Tan ,鈥� Fang Zhang,鈥� Rui Chao , Yaoyun Shi, and Jianxin Chen * Quantum Laboratory, DAMO Academy, Bellevue, Washington 98004, USA (Received 29 September 2022; accepted 8 November 2023; published 15 Decembe"
+  },
+  {
+    "id": "R59",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Better Than Worst-Case Decoding for Quantum Error Correction",
+    "file": "R59_Better_Than_Worst-Case_Decoding_for_Quantum_Error_Correction.pdf",
+    "first_page": "Better Than Worst-Case Decoding for Quantum Error Correction Gokul Subramanian Ravi*1 , Jonathan M. Baker1 , Arash Fayyazi2 , Sophia Fuhui Lin1 , Ali Javadi-Abhari3 , Massoud Pedram2 , and Frederic T. Chong1,4 1 University of Chicago of Southern California 3 IBM Quantum 4 Super.tech (a division of C"
+  },
+  {
+    "id": "R60",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Promatch: Extending the Reach of Real-Time Quantum Error Correction with Adaptive Predecoding",
+    "file": "R60_Promatch_Extending_the_Reach_of_Real-Time_Quantum_Error_Correction_with_Adaptive_Predecoding.pdf",
+    "first_page": "arXiv:2404.03136v1 [quant-ph] 4 Apr 2024 Promatch: Extending the Reach of Real-Time Quantum Error Correction with Adaptive Predecoding Narges Alavisamani鈭� Suhas Vittal Ramin Ayanzadeh Georgia Tech Atlanta, Georgia, USA Georgia Tech Atlanta, Georgia, USA Georgia Tech Atlanta, Georgia, USA Poulami Da"
+  },
+  {
+    "id": "R61",
+    "score": 0.833,
+    "match": "fuzzy",
+    "title": "A real-time, scalable, fast and resource-efficient decoder for a quantum computer",
+    "file": "R61_A_real-time,_scalable,_fast_and_resource-efficient_decoder_for_a_quantum_computer.pdf",
+    "first_page": "eprints@whiterose.ac.uk https://eprints.whiterose.ac.uk Universities of Leeds, Sheffield and York Deposited via The University of Sheffield. White Rose Research Online URL for this paper: https://eprints.whiterose.ac.uk/id/eprint/221655/ Version: Accepted Version Article: Barber, B., Barnes, K.M., B"
+  },
+  {
+    "id": "R62",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "A scalable and real-time neural decoder for topological quantum codes",
+    "file": "R62_A_scalable_and_real-time_neural_decoder_for_topological_quantum_codes.pdf",
+    "first_page": "A scalable and real-time neural decoder for topological quantum codes Andrew W. Senior1鈥犫垪, Thomas Edlich1鈥� , Francisco J.H. Heras1鈥�, arXiv:2512.07737v2 [quant-ph] 11 Mar 2026 Lei M. Zhang1 , Oscar Higgott2 , James S. Spencer1 , Taylor Applebaum1 , Sam Blackwell1 , Justin Ledford2 , Akvile虈 Z虒emgu"
+  },
+  {
+    "id": "R63",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Learning to Decode in Parallel: Self-Coordinating Neural Network for Real-Time Quantum Error Correction",
+    "file": "R63_Learning_to_Decode_in_Parallel_Self-Coordinating_Neural_Network_for_Real-Time_Quantum_Error_Correction.pdf",
+    "first_page": "arXiv:2601.09921v1 [quant-ph] 14 Jan 2026 Learning to Decode in Parallel: Self-Coordinating Neural Network for Real-Time Quantum Error Correction Kai Zhang1,3鈥� , Zhengzhong Yi4,5,6鈥� , Shaojun Guo4,5,6 , Linghang Kong2 , Situ Wang1 , Xiaoyu Zhan1 , Tan He4,5,6 , Weiping Lin4,5,6 , Tao Jiang4,5,6 , "
+  },
+  {
+    "id": "R64",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Latency-Constrained Hardware-Aware Quantum Error Correction Co-Design with Adaptive Confidence-Gated Neural Decoding for the Rotated Surface Code",
+    "file": "R64_Latency-Constrained_Hardware-Aware_Quantum_Error_Correction_Co-Design_with_Adaptive_Confidence-Gated_Neural_De.pdf",
+    "first_page": "Latency-Constrained Hardware-Aware Quantum Error Correction Co-Design with Adaptive Confidence-Gated Neural Decoding for the Rotated Surface Code Sumit Chongder 1 1 Department of Physics, Quantum Information and Computation, Indian Institute of Technology Jodhpur, Jodhpur, Rajasthan 342037, India Em"
+  },
+  {
+    "id": "R65",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Real-time decoder for a MegaQuOp quantum computer using a single CPU",
+    "file": "R65_Real-time_decoder_for_a_MegaQuOp_quantum_computer_using_a_single_CPU.pdf",
+    "first_page": "Real-time decoder for a MegaQuOp quantum computer using a single CPU Min Ye, Andrii Maksymov, Nicolas Delfosse arXiv:2608.25027v2 [quant-ph] 3 Sep 2026 IonQ Inc. (Dated: September 4, 2026) As quantum computers advance toward the regime of MegaQuOp machines executing millions of gates, a decoding sys"
+  },
+  {
+    "id": "R66",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Reducing Decoding Latency in Quantum Error Correction by Early Starting Clustering",
+    "file": "R66_Reducing_Decoding_Latency_in_Quantum_Error_Correction_by_Early_Starting_Clustering.pdf",
+    "first_page": "Reducing Decoding Latency in Quantum Error Correction by Early Starting Clustering arXiv:2609.15612v2 [quant-ph] 17 Sep 2026 Tommaso Peduzzi1 , Lukas B枚deker2,3 , Markus M眉ller2,3 , and Luis Colmenarez2,3 1 Department of Physics, University of Basel, Klingelbergstrasse 82, CH-4056 Basel, Switzerland"
+  },
+  {
+    "id": "R67",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Fully Parallelized BP Decoding for Quantum LDPC Codes Can Outperform BP-OSD",
+    "file": "R67_Fully_Parallelized_BP_Decoding_for_Quantum_LDPC_Codes_Can_Outperform_BP-OSD.pdf",
+    "first_page": "arXiv:2507.00254v3 [quant-ph] 10 Feb 2026 Fully Parallelized BP Decoding for Quantum LDPC Codes Can Outperform BP-OSD Ming Wang Ang Li Frank Mueller Department of Computer Science North Carolina State University Raleigh, USA mwang42@ncsu.edu Pacific Northwest National Laboratory Richland, Washington"
+  },
+  {
+    "id": "R68",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "High-Throughput Normalized Min-Sum Belief Propagation Decoding for Quantum LDPC Codes with Near-Memory Processing",
+    "file": "R68_High-Throughput_Normalized_Min-Sum_Belief_Propagation_Decoding_for_Quantum_LDPC_Codes_with_Near-Memory_Process.pdf",
+    "first_page": "High-Throughput Normalized Min-Sum Belief Propagation Decoding for Quantum LDPC Codes with Near-Memory Processing Jeonggeun Seo, Youngsun Han, Leanghok Hour, and Dongmin Kim鈭� arXiv:2608.27901v1 [quant-ph] 28 Aug 2026 Pukyong National University, Busan, Republic of Korea Abstract Real-time quantum e"
+  },
+  {
+    "id": "R69",
+    "score": 1.0,
+    "match": "exact-in-text",
+    "title": "Streaming Belief Propagation on Mixed-Alphabet Tanner Graphs for Practical Quantum Memory",
+    "file": "R69_Streaming_Belief_Propagation_on_Mixed-Alphabet_Tanner_Graphs_for_Practical_Quantum_Memory.pdf",
+    "first_page": "Streaming Belief Propagation on Mixed-Alphabet Tanner Graphs for Practical Quantum Memory arXiv:2409.18689v2 [quant-ph] 2 Sep 2026 Kao-Yueh Kuo1 and Ching-Yi Lai2,3 1 Department of Electrical Engineering, Yuan Ze University, Taoyuan City, Taiwan 2 Institute of Communications Engineering, National Ya"
+  }
+]

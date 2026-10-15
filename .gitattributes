@@ -1,0 +1,8 @@
+# 仓库内统一以 LF 存储，工作区保留本机换行（避免 Windows/macOS 协作者的纯换行 diff）
+* text=auto
+
+# 二进制：禁止换行转换与合并
+*.pdf  binary
+*.png  binary
+*.pt   binary
+*.npz  binary
