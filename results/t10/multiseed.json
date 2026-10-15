@@ -1,0 +1,231 @@
+{
+  "groups": [
+    {
+      "comparisons": [
+        {
+          "a": "bp",
+          "b": "bp_gnn",
+          "deltas": [
+            0.007293701171875
+          ],
+          "mean_delta": 0.007293701171875,
+          "sign_test": {
+            "negative": 0,
+            "p": 1.0,
+            "positive": 1
+          }
+        },
+        {
+          "a": "bp",
+          "b": "bp_osd",
+          "deltas": [
+            -0.003082275390625
+          ],
+          "mean_delta": -0.003082275390625,
+          "sign_test": {
+            "negative": 1,
+            "p": 1.0,
+            "positive": 0
+          }
+        },
+        {
+          "a": "bp_gnn",
+          "b": "bp_gnn_osd",
+          "deltas": [
+            -0.002716064453125
+          ],
+          "mean_delta": -0.002716064453125,
+          "sign_test": {
+            "negative": 1,
+            "p": 1.0,
+            "positive": 0
+          }
+        }
+      ],
+      "distance": 3,
+      "noise_model": "circuit_level",
+      "per_decoder": {
+        "bp": {
+          "mean": 0.040069580078125,
+          "rates": [
+            0.040069580078125
+          ],
+          "seeds": [
+            7
+          ],
+          "standard_error": 0.0
+        },
+        "bp_gnn": {
+          "mean": 0.03277587890625,
+          "rates": [
+            0.03277587890625
+          ],
+          "seeds": [
+            7
+          ],
+          "standard_error": 0.0
+        },
+        "bp_gnn_osd": {
+          "mean": 0.035491943359375,
+          "rates": [
+            0.035491943359375
+          ],
+          "seeds": [
+            7
+          ],
+          "standard_error": 0.0
+        },
+        "bp_osd": {
+          "mean": 0.04315185546875,
+          "rates": [
+            0.04315185546875
+          ],
+          "seeds": [
+            7
+          ],
+          "standard_error": 0.0
+        },
+        "mwpm": {
+          "mean": 0.016937255859375,
+          "rates": [
+            0.016937255859375
+          ],
+          "seeds": [
+            7
+          ],
+          "standard_error": 0.0
+        }
+      },
+      "physical_error_rate": 0.005,
+      "seeds": [
+        7
+      ],
+      "selected_strengths": [
+        0.75
+      ],
+      "test_shots_per_seed": 32768
+    },
+    {
+      "comparisons": [
+        {
+          "a": "bp",
+          "b": "bp_gnn",
+          "deltas": [
+            0.0390625,
+            0.04248046875
+          ],
+          "mean_delta": 0.040771484375,
+          "sign_test": {
+            "negative": 0,
+            "p": 0.5,
+            "positive": 2
+          }
+        },
+        {
+          "a": "bp",
+          "b": "bp_osd",
+          "deltas": [
+            -0.03271484375,
+            -0.0362548828125
+          ],
+          "mean_delta": -0.03448486328125,
+          "sign_test": {
+            "negative": 2,
+            "p": 0.5,
+            "positive": 0
+          }
+        },
+        {
+          "a": "bp_gnn",
+          "b": "bp_gnn_osd",
+          "deltas": [
+            -0.01611328125,
+            -0.022705078125
+          ],
+          "mean_delta": -0.0194091796875,
+          "sign_test": {
+            "negative": 2,
+            "p": 0.5,
+            "positive": 0
+          }
+        }
+      ],
+      "distance": 5,
+      "noise_model": "circuit_level",
+      "per_decoder": {
+        "bp": {
+          "mean": 0.1031494140625,
+          "rates": [
+            0.103515625,
+            0.102783203125
+          ],
+          "seeds": [
+            7,
+            7
+          ],
+          "standard_error": 0.00036621093749999995
+        },
+        "bp_gnn": {
+          "mean": 0.0623779296875,
+          "rates": [
+            0.064453125,
+            0.060302734375
+          ],
+          "seeds": [
+            7,
+            7
+          ],
+          "standard_error": 0.0020751953124999996
+        },
+        "bp_gnn_osd": {
+          "mean": 0.081787109375,
+          "rates": [
+            0.08056640625,
+            0.0830078125
+          ],
+          "seeds": [
+            7,
+            7
+          ],
+          "standard_error": 0.001220703125
+        },
+        "bp_osd": {
+          "mean": 0.13763427734375,
+          "rates": [
+            0.13623046875,
+            0.1390380859375
+          ],
+          "seeds": [
+            7,
+            7
+          ],
+          "standard_error": 0.00140380859375
+        },
+        "mwpm": {
+          "mean": 0.01165771484375,
+          "rates": [
+            0.0107421875,
+            0.0125732421875
+          ],
+          "seeds": [
+            7,
+            7
+          ],
+          "standard_error": 0.00091552734375
+        }
+      },
+      "physical_error_rate": 0.005,
+      "seeds": [
+        7,
+        7
+      ],
+      "selected_strengths": [
+        1.0,
+        1.0
+      ],
+      "test_shots_per_seed": 2048
+    }
+  ],
+  "results_dir": "results\\m4_surface",
+  "runs": 3
+}
