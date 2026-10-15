@@ -24,6 +24,9 @@ SUPPORTED_BENCHMARK_DECODERS = frozenset(
         "bp_gnn_osd_learned_order",
         "osd_bp",
         "osd_gnn",
+        "bp_osd_cs",
+        "bp_gnn_osd_cs",
+        "bp_gnn_osd_cs_learned_order",
     }
 )
 
@@ -199,6 +202,7 @@ class ReweightConfig:
     min_sum_scaling: float
     damping: float
     reweight_strengths: tuple[float, ...]
+    osd_combination_sweep: int = 0
 
     def __post_init__(self) -> None:
         _int(self.max_iterations, "decoder.max_iterations", minimum=1)
@@ -210,6 +214,7 @@ class ReweightConfig:
             raise ValueError("decoder.damping must be in [0, 1)")
         if 0.0 not in self.reweight_strengths:
             raise ValueError("decoder.reweight_strengths must include 0.0 (the BP baseline)")
+        _int(self.osd_combination_sweep, "decoder.osd_combination_sweep", minimum=0)
 
     @classmethod
     def from_dict(cls, payload: Mapping[str, Any]) -> "ReweightConfig":
@@ -221,6 +226,11 @@ class ReweightConfig:
             reweight_strengths=_float_sequence(
                 payload.get("reweight_strengths"), "decoder.reweight_strengths"
             ),
+            osd_combination_sweep=_int(
+                payload.get("osd_combination_sweep", 0),
+                "decoder.osd_combination_sweep",
+                minimum=0,
+            ),
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -229,6 +239,7 @@ class ReweightConfig:
             "min_sum_scaling": self.min_sum_scaling,
             "damping": self.damping,
             "reweight_strengths": list(self.reweight_strengths),
+            "osd_combination_sweep": self.osd_combination_sweep,
         }
 
 

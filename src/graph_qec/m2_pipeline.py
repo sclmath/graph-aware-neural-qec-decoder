@@ -553,6 +553,14 @@ def run_m2(
         osd_order=0,
         force_osd=True,
     )
+    bp_osd_cs_decoder = BPOSDDecoder(
+        reference.raw_dem,
+        max_iterations=config.decoder.max_iterations,
+        min_sum_scaling=config.decoder.min_sum_scaling,
+        damping=config.decoder.damping,
+        osd_order=0,
+        combination_sweep_order=config.decoder.osd_combination_sweep,
+    )
     decoders: list[dict[str, Any]] = []
     decode_functions: dict[str, Callable[[np.ndarray], DecodeResult]] = {
         "mwpm": MWPMDecoder(reference.matching_dem).decode_batch,
@@ -569,6 +577,13 @@ def run_m2(
         "osd_bp": forced_osd_decoder.decode_batch,
         "osd_gnn": lambda detections: forced_osd_decoder.decode_batch(
             detections, osd_ordering_llr=test_logits
+        ),
+        "bp_osd_cs": bp_osd_cs_decoder.decode_batch,
+        "bp_gnn_osd_cs": lambda detections: bp_osd_cs_decoder.decode_batch(
+            detections, prior_llr=test_priors
+        ),
+        "bp_gnn_osd_cs_learned_order": lambda detections: bp_osd_cs_decoder.decode_batch(
+            detections, prior_llr=test_priors, osd_ordering_llr=test_logits
         ),
     }
 

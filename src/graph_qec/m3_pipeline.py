@@ -52,6 +52,9 @@ TRANSFER_DECODERS = (
     "bp_gnn",
     "bp_gnn_osd",
     "bp_gnn_osd_learned_order",
+    "bp_osd_cs",
+    "bp_gnn_osd_cs",
+    "bp_gnn_osd_cs_learned_order",
 )
 
 
@@ -196,6 +199,14 @@ def run_transfer_evaluation(
         damping=config.decoder.damping,
         osd_order=0,
     )
+    bp_osd_cs_decoder = BPOSDDecoder(
+        reference.raw_dem,
+        max_iterations=config.decoder.max_iterations,
+        min_sum_scaling=config.decoder.min_sum_scaling,
+        damping=config.decoder.damping,
+        osd_order=0,
+        combination_sweep_order=config.decoder.osd_combination_sweep,
+    )
     decode_functions: dict[str, Callable[[np.ndarray], DecodeResult]] = {
         "mwpm": MWPMDecoder(reference.matching_dem).decode_batch,
         "union_find": UnionFindDecoder(reference.matching_dem).decode_batch,
@@ -206,6 +217,13 @@ def run_transfer_evaluation(
             detections, prior_llr=priors
         ),
         "bp_gnn_osd_learned_order": lambda detections: bp_osd_decoder.decode_batch(
+            detections, prior_llr=priors, osd_ordering_llr=logits
+        ),
+        "bp_osd_cs": bp_osd_cs_decoder.decode_batch,
+        "bp_gnn_osd_cs": lambda detections: bp_osd_cs_decoder.decode_batch(
+            detections, prior_llr=priors
+        ),
+        "bp_gnn_osd_cs_learned_order": lambda detections: bp_osd_cs_decoder.decode_batch(
             detections, prior_llr=priors, osd_ordering_llr=logits
         ),
     }

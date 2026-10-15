@@ -21,13 +21,27 @@ class _BPState:
     syndrome_distance: int
 
 
-def _osd0_correction(
+def _osd_correction(
     check_matrix: np.ndarray,
     syndrome: np.ndarray,
     posterior_llr: np.ndarray,
     bp_correction: np.ndarray,
+    combination_sweep_order: int = 0,
+    weight_llr: np.ndarray | None = None,
 ) -> tuple[np.ndarray, int]:
-    """Returns an OSD-0 correction and the rank of the selected basis."""
+    """Returns an OSD correction and the rank of the selected basis.
+
+    ``combination_sweep_order == 0`` is classic OSD-0: the columns are sorted by
+    descending posterior reliability, Gaussian elimination picks a pivot basis,
+    and the non-pivot columns keep the BP hard decision.
+
+    For ``combination_sweep_order = lam > 0`` the decoder additionally sweeps
+    every subset of the ``lam`` least reliable non-pivot columns (a
+    combination sweep, i.e. OSD-CS(lam)) and keeps the candidate of smallest
+    soft weight ``sum_i |posterior_llr_i|``. The sweep is what lets the decoder
+    look past the per-mechanism marginal: it explores *which bits form a
+    solvable basis*, not just how likely each bit is.
+    """
 
     num_checks, num_errors = check_matrix.shape
     reliability_order = np.argsort(-np.abs(posterior_llr), kind="stable")
@@ -62,12 +76,11 @@ def _osd0_correction(
             break
 
     correction = np.ascontiguousarray(bp_correction, dtype=np.uint8).copy()
-    pivot_original_columns = np.asarray(
-        [reliability_order[column] for column in pivot_columns], dtype=np.int64
-    )
+    rank = len(pivot_rows)
+    pivot_columns_array = np.asarray(pivot_columns, dtype=np.int64)
     nonpivot_columns = np.setdiff1d(
         np.arange(num_errors, dtype=np.int64),
-        pivot_columns,
+        pivot_columns_array,
         assume_unique=False,
     )
     residual = (
@@ -80,7 +93,83 @@ def _osd0_correction(
         original_column = int(reliability_order[ordered_column])
         correction[original_column] = int(residual[pivot_row])
 
-    return correction, len(pivot_rows)
+    if combination_sweep_order <= 0 or rank == 0 or nonpivot_columns.size == 0:
+        return correction, rank
+
+    # ---- combination sweep (OSD-CS) -----------------------------------------
+    order = min(int(combination_sweep_order), int(nonpivot_columns.size), 12)
+    weight_source = posterior_llr if weight_llr is None else weight_llr
+    weights = np.abs(np.asarray(weight_source, dtype=np.float64))
+    nonpivot_weights = weights[reliability_order[nonpivot_columns]]
+    sweep_order = np.argsort(nonpivot_weights, kind="stable")[:order]
+    sweep_positions = nonpivot_columns[sweep_order]
+
+    pivot_rows_array = np.asarray(pivot_rows, dtype=np.int64)
+    base_nonpivot = correction[reliability_order[nonpivot_columns]].astype(np.int64)
+    pivot_block = matrix[np.ix_(pivot_rows_array, nonpivot_columns)].astype(np.int64)
+    base_pivot = (
+        transformed_syndrome[pivot_rows_array].astype(np.int64)
+        ^ (pivot_block @ base_nonpivot)
+    ) % 2
+
+    sweep_block = matrix[np.ix_(pivot_rows_array, sweep_positions)].astype(np.uint8)
+
+    # Weight change for flipping one non-pivot bit.
+    nonpivot_delta = np.where(
+        base_nonpivot[sweep_order] == 0,
+        weights[reliability_order[sweep_positions]],
+        -weights[reliability_order[sweep_positions]],
+    )
+    # Weight change for flipping one pivot bit.
+    pivot_delta = np.where(
+        base_pivot == 0,
+        weights[reliability_order[pivot_columns_array]],
+        -weights[reliability_order[pivot_columns_array]],
+    )
+
+    best_delta = np.zeros(rank, dtype=np.uint8)
+    best_gray = 0
+    best_change = 0.0
+    current_delta = np.zeros(rank, dtype=np.uint8)
+    subset_change = 0.0
+    previous_gray = 0
+    for step in range(1, 1 << order):
+        gray = step ^ (step >> 1)
+        changed_bit = (gray ^ previous_gray).bit_length() - 1
+        current_delta = current_delta ^ sweep_block[:, changed_bit]
+        if (gray >> changed_bit) & 1:
+            subset_change += float(nonpivot_delta[changed_bit])
+        else:
+            subset_change -= float(nonpivot_delta[changed_bit])
+        pivot_change = float(pivot_delta[current_delta.astype(bool)].sum())
+        total_change = subset_change + pivot_change
+        if total_change < best_change:
+            best_change = total_change
+            best_delta = current_delta.copy()
+            best_gray = gray
+        previous_gray = gray
+
+    if best_gray:
+        best_nonpivot = base_nonpivot.copy()
+        for bit in range(order):
+            if (best_gray >> bit) & 1:
+                best_nonpivot[sweep_order[bit]] ^= 1
+        best_pivot = base_pivot ^ best_delta.astype(np.int64)
+        correction[reliability_order[nonpivot_columns]] = best_nonpivot.astype(np.uint8)
+        correction[reliability_order[pivot_columns_array]] = best_pivot.astype(np.uint8)
+
+    return correction, rank
+
+
+def _osd0_correction(
+    check_matrix: np.ndarray,
+    syndrome: np.ndarray,
+    posterior_llr: np.ndarray,
+    bp_correction: np.ndarray,
+) -> tuple[np.ndarray, int]:
+    """Backwards-compatible OSD-0 entry point."""
+
+    return _osd_correction(check_matrix, syndrome, posterior_llr, bp_correction, 0)
 
 
 class BPDecoder(Decoder):
@@ -304,7 +393,7 @@ class BPDecoder(Decoder):
 
 
 class BPOSDDecoder(BPDecoder):
-    """BP followed by OSD-0 only for shots where BP does not converge."""
+    """BP followed by OSD-0 / OSD-CS for shots where BP does not converge."""
 
     name = "bp_osd"
 
@@ -316,11 +405,15 @@ class BPOSDDecoder(BPDecoder):
         min_sum_scaling: float = 0.75,
         damping: float = 0.0,
         osd_order: int = 0,
+        combination_sweep_order: int = 0,
         force_osd: bool = False,
     ) -> None:
-        if osd_order != 0:
-            raise ValueError("M1 currently supports OSD order 0 only")
-        self.osd_order = osd_order
+        if int(osd_order) < 0:
+            raise ValueError("osd_order must be non-negative")
+        if int(combination_sweep_order) < 0:
+            raise ValueError("combination_sweep_order must be non-negative")
+        self.osd_order = int(osd_order)
+        self.combination_sweep_order = int(combination_sweep_order)
         self.force_osd = bool(force_osd)
         super().__init__(
             detector_error_model,
@@ -372,11 +465,12 @@ class BPOSDDecoder(BPDecoder):
                 if osd_ordering_llr is None
                 else osd_ordering_llr[shot]
             )
-            correction, rank = _osd0_correction(
+            correction, rank = _osd_correction(
                 self.system.check_matrix,
                 detections[shot],
                 ordering,
                 output.corrections[shot],
+                self.combination_sweep_order,
             )
             corrections[shot] = correction
             osd_shots += 1
@@ -398,6 +492,7 @@ class BPOSDDecoder(BPDecoder):
                 if osd_shots
                 else 0.0,
                 "osd_order": self.osd_order,
+                "combination_sweep_order": self.combination_sweep_order,
                 "prior_llr_override": prior_llr is not None,
                 "osd_ordering_override": osd_ordering_llr is not None,
                 "forced_osd": self.force_osd,

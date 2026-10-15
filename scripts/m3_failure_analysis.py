@@ -32,20 +32,7 @@ from graph_qec.m3_pipeline import load_reweighting_checkpoint, target_experiment
 from graph_qec.models import graph_to_tensors, predict_logits
 
 
-def mcnemar(b: int, c: int) -> dict[str, float]:
-    """Two-sided McNemar test, normal approximation plus an exact binomial p."""
-
-    if b + c == 0:
-        return {"b": 0, "c": 0, "z": 0.0, "p_normal": 1.0, "p_exact": 1.0}
-    z = (b - c) / math.sqrt(b + c)
-    tail = sum(math.comb(b + c, k) for k in range(0, min(b, c) + 1)) / 2.0 ** (b + c)
-    return {
-        "b": int(b),
-        "c": int(c),
-        "z": float(z),
-        "p_normal": float(math.erfc(abs(z) / math.sqrt(2.0))),
-        "p_exact": float(min(1.0, 2.0 * tail)),
-    }
+from graph_qec.stats import mcnemar  # noqa: E402  (shared with the T8 study)
 
 
 def _logical_errors(corrections: np.ndarray, observables: np.ndarray, system: DEMSystem) -> np.ndarray:
