@@ -153,7 +153,10 @@ $env:PYTHONPATH = "src"
   - 验收：✅ 新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表
 - [x] **T9 · 消融补全：图特征组合 + top-k 候选规模**　（P1，2026-10-15 完成）
   - top-k：OSD-CS 的 λ ∈ {0,2,4,6,8} 扫描（见 T8）——表面码单调、repetition 非单调（λ=4 最优）
-  - 图特征组合：`scripts/t9_feature_ablation.py`（置零特征列 + 同 seed 重训）；repetition d=3 上显式坐标/时间特征冗余（ΔLER < 0.0002），但只留 DEM 先验会让 LER 恶化 2.5×（0.00952 → 0.02371）而 AUC 仍有 0.986
+  - 图特征组合：`scripts/t9_feature_ablation.py`（置零特征列 + 同 seed 重训，架构不变）
+    - repetition d=3：显式坐标/时间特征**冗余**（ΔLER < 0.0002）；只留 DEM 先验时 LER 恶化 2.5×（0.00952 → 0.02371）而 AUC 仍有 0.986
+    - 表面码 d=3：显式坐标/时间特征**有害**——置零后 LER 反而降 **24%**（0.03455 → 0.02615），AUC 几乎不动；只留 DEM 先验恶化 91%
+    - 结论：GNN 会从位置特征里学到不可迁移的先验；去掉它们是**零成本**的精度改进（需多种子复核，单 seed 方向性结论）
   - 产出：`results/t9/`、`docs/FINAL_REPORT.md` 4.8 节
   - 依据：`README.md` 7.2 列出 7 类消融，当前 3 类有数据
   - 依赖：T8（top-k 需要候选集机制）

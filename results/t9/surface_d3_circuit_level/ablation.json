@@ -1,0 +1,96 @@
+{
+  "config": "results\\m4_surface\\m4_learned_basis_rotated_surface_code_circuit_level_d3__d3__circuit_level__p0p005\\config.json",
+  "rows": [
+    {
+      "arm": "all",
+      "best_validation_log_loss": 0.008645533176604658,
+      "logical_error_rate": 0.0345458984375,
+      "logical_errors": 1132,
+      "masked_check": [],
+      "masked_edge": [],
+      "masked_variable": [],
+      "mechanism_auc": 0.9931408168108784,
+      "shots": 32768
+    },
+    {
+      "arm": "no_check_features",
+      "best_validation_log_loss": 0.008757996140047908,
+      "logical_error_rate": 0.02972412109375,
+      "logical_errors": 974,
+      "masked_check": [
+        0,
+        1,
+        2
+      ],
+      "masked_edge": [],
+      "masked_variable": [],
+      "mechanism_auc": 0.9932454399688264,
+      "shots": 32768
+    },
+    {
+      "arm": "no_variable_geometry",
+      "best_validation_log_loss": 0.008850672282278538,
+      "logical_error_rate": 0.026153564453125,
+      "logical_errors": 857,
+      "masked_check": [],
+      "masked_edge": [],
+      "masked_variable": [
+        4,
+        5
+      ],
+      "mechanism_auc": 0.993326377978541,
+      "shots": 32768
+    },
+    {
+      "arm": "no_check_geometry",
+      "best_validation_log_loss": 0.008572762366384268,
+      "logical_error_rate": 0.03173828125,
+      "logical_errors": 1040,
+      "masked_check": [
+        1,
+        2
+      ],
+      "masked_edge": [],
+      "masked_variable": [],
+      "mechanism_auc": 0.9933704530638121,
+      "shots": 32768
+    },
+    {
+      "arm": "no_edge_degree",
+      "best_validation_log_loss": 0.008667703601531684,
+      "logical_error_rate": 0.034393310546875,
+      "logical_errors": 1127,
+      "masked_check": [],
+      "masked_edge": [
+        1,
+        2
+      ],
+      "masked_variable": [],
+      "mechanism_auc": 0.9929885422197183,
+      "shots": 32768
+    },
+    {
+      "arm": "prior_only",
+      "best_validation_log_loss": 0.00933728739619255,
+      "logical_error_rate": 0.066162109375,
+      "logical_errors": 2168,
+      "masked_check": [
+        0,
+        1,
+        2
+      ],
+      "masked_edge": [
+        1,
+        2
+      ],
+      "masked_variable": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "mechanism_auc": 0.9921147764178813,
+      "shots": 32768
+    }
+  ]
+}
