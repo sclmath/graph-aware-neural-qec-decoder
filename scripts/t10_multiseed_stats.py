@@ -173,7 +173,29 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
             markdown.append("")
 
+    # Also emit a sweep-shaped file (across-seed mean per point) so that
+    # scripts/threshold_estimate.py can consume the T6 curve directly.
+    sweep_records = []
+    for group in summary["groups"]:
+        for name, entry in group["per_decoder"].items():
+            sweep_records.append(
+                {
+                    "distance": group["distance"],
+                    "noise_model": group["noise_model"],
+                    "physical_error_rate": group["physical_error_rate"],
+                    "decoder": name,
+                    "shots": group["test_shots_per_seed"] * len(group["seeds"]),
+                    "logical_error_rate": entry["mean"],
+                    "logical_error_rate_standard_error": entry["standard_error"],
+                }
+            )
+
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    with (args.output_dir / "surface_sweep_mean.json").open(
+        "w", encoding="utf-8", newline="\n"
+    ) as handle:
+        json.dump(sweep_records, handle, indent=2, sort_keys=True)
+        handle.write("\n")
     with (args.output_dir / "multiseed.json").open("w", encoding="utf-8", newline="\n") as handle:
         json.dump(summary, handle, indent=2, sort_keys=True)
         handle.write("\n")

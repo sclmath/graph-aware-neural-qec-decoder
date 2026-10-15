@@ -1,0 +1,92 @@
+[
+  {
+    "decoder": "bp",
+    "distance": 3,
+    "logical_error_rate": 0.040069580078125,
+    "logical_error_rate_standard_error": 0.0,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.005,
+    "shots": 32768
+  },
+  {
+    "decoder": "bp_gnn",
+    "distance": 3,
+    "logical_error_rate": 0.03277587890625,
+    "logical_error_rate_standard_error": 0.0,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.005,
+    "shots": 32768
+  },
+  {
+    "decoder": "bp_gnn_osd",
+    "distance": 3,
+    "logical_error_rate": 0.035491943359375,
+    "logical_error_rate_standard_error": 0.0,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.005,
+    "shots": 32768
+  },
+  {
+    "decoder": "bp_osd",
+    "distance": 3,
+    "logical_error_rate": 0.04315185546875,
+    "logical_error_rate_standard_error": 0.0,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.005,
+    "shots": 32768
+  },
+  {
+    "decoder": "mwpm",
+    "distance": 3,
+    "logical_error_rate": 0.016937255859375,
+    "logical_error_rate_standard_error": 0.0,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.005,
+    "shots": 32768
+  },
+  {
+    "decoder": "bp",
+    "distance": 5,
+    "logical_error_rate": 0.10369873046875,
+    "logical_error_rate_standard_error": 0.0003645115736321801,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.005,
+    "shots": 8192
+  },
+  {
+    "decoder": "bp_gnn",
+    "distance": 5,
+    "logical_error_rate": 0.0650634765625,
+    "logical_error_rate_standard_error": 0.001835795728471774,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.005,
+    "shots": 8192
+  },
+  {
+    "decoder": "bp_gnn_osd",
+    "distance": 5,
+    "logical_error_rate": 0.081939697265625,
+    "logical_error_rate_standard_error": 0.0005115678288037174,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.005,
+    "shots": 8192
+  },
+  {
+    "decoder": "bp_osd",
+    "distance": 5,
+    "logical_error_rate": 0.137115478515625,
+    "logical_error_rate_standard_error": 0.0009153577859480551,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.005,
+    "shots": 8192
+  },
+  {
+    "decoder": "mwpm",
+    "distance": 5,
+    "logical_error_rate": 0.012542724609375,
+    "logical_error_rate_standard_error": 0.0006637134756754012,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.005,
+    "shots": 8192
+  }
+]
