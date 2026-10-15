@@ -154,12 +154,13 @@
 
 | decoder | code-capacity LER | circuit-level LER | circuit-level µs/shot |
 |---|---:|---:|---:|
-| mwpm | 0.00049 | **0.00952** | 0.1 |
-| union_find | 0.00049 | 0.01294 | 33.4 |
-| bp | 0.00049 | 0.01294 | 2.3 |
-| bp_osd | 0.00049 | 0.01489 | 3.9 |
+| mwpm | 0.00049 | 0.00952 | 0.1 |
+| union_find | 0.00049 | **0.00903** | 10.7 |
+| bp | 0.00049 | 0.01294 | 3.8 |
+| bp_osd | 0.00049 | 0.01489 | 6.6 |
 
-- 码容量下四个解码器完全一致；线路级下 MWPM 仍是最强基线，BP 与 Union-Find 打平
+- 码容量下四个解码器完全一致；线路级下 **Union-Find 追平并略优于 MWPM**（0.00903 vs 0.00952，37 vs 39 个逻辑错误），BP 系仍落后
+- Union-Find 于 2026-10-15 重写为忠实的加权实现（half-edge 生长 + peeling，见 `docs/T18_UNION_FIND_ANALYSIS.md`）
 - 产出：`results/m1/`、`docs/M1_BASELINE_DECODERS_AND_BENCHMARK.md`
 
 ### M2：GNN 重加权（已完成）

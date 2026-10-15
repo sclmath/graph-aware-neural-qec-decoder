@@ -59,26 +59,26 @@
         "num_nodes": 8
       },
       "latency": {
-        "mean_per_shot_microseconds": 0.0203076171875,
-        "mean_total_seconds": 8.318e-05,
+        "mean_per_shot_microseconds": 0.0347412109375,
+        "mean_total_seconds": 0.00014230000000000002,
         "run_seconds": [
-          8.69e-05,
-          8.36e-05,
-          8.19e-05,
-          8.2e-05,
-          8.15e-05
+          0.000157,
+          0.0001409,
+          0.0001405,
+          0.0001398,
+          0.0001333
         ],
-        "throughput_shots_per_second": 49242606.39576821,
+        "throughput_shots_per_second": 28784258.608573433,
         "timed_runs": 5
       },
       "logical_error_rate": 0.0,
       "logical_error_rate_standard_error": 0.0,
       "logical_errors": 0,
       "memory": {
-        "peak_python_bytes": 103871,
-        "peak_rss_bytes": 81096704,
-        "peak_rss_delta_bytes": 8192,
-        "start_rss_bytes": 81088512
+        "peak_python_bytes": 102936,
+        "peak_rss_bytes": 79106048,
+        "peak_rss_delta_bytes": 65536,
+        "start_rss_bytes": 79040512
       },
       "parameters": {},
       "prediction_sha256": "29b47f87b1f19ecd1230ca9dd2f0ce7b00d5bd3e729c2fca75d5a40e05101eea",
@@ -87,31 +87,32 @@
     {
       "decoder": "union_find",
       "diagnostics": {
+        "algorithm": "weighted_union_find_halfedge",
         "num_edges": 9,
         "num_nodes": 8,
         "unresolved_shots": 0
       },
       "latency": {
-        "mean_per_shot_microseconds": 11.1768798828125,
-        "mean_total_seconds": 0.0457805,
+        "mean_per_shot_microseconds": 6.1395068359375,
+        "mean_total_seconds": 0.025147419999999997,
         "run_seconds": [
-          0.0451365,
-          0.0446146,
-          0.0473492,
-          0.0453813,
-          0.0464209
+          0.0265331,
+          0.0216609,
+          0.0228979,
+          0.028669,
+          0.0259762
         ],
-        "throughput_shots_per_second": 89470.40770633785,
+        "throughput_shots_per_second": 162879.53197584485,
         "timed_runs": 5
       },
       "logical_error_rate": 0.0,
       "logical_error_rate_standard_error": 0.0,
       "logical_errors": 0,
       "memory": {
-        "peak_python_bytes": 103663,
-        "peak_rss_bytes": 81117184,
-        "peak_rss_delta_bytes": 28672,
-        "start_rss_bytes": 81088512
+        "peak_python_bytes": 102768,
+        "peak_rss_bytes": 79114240,
+        "peak_rss_delta_bytes": 24576,
+        "start_rss_bytes": 79089664
       },
       "parameters": {},
       "prediction_sha256": "29b47f87b1f19ecd1230ca9dd2f0ce7b00d5bd3e729c2fca75d5a40e05101eea",
@@ -130,26 +131,26 @@
         "syndrome_consistent_shots": 4096
       },
       "latency": {
-        "mean_per_shot_microseconds": 0.10303710937499999,
-        "mean_total_seconds": 0.00042204,
+        "mean_per_shot_microseconds": 0.188408203125,
+        "mean_total_seconds": 0.00077172,
         "run_seconds": [
-          0.0004454,
-          0.0004399,
-          0.0004233,
-          0.000405,
-          0.0003966
+          0.0008292,
+          0.0008501,
+          0.00071,
+          0.0007633,
+          0.000706
         ],
-        "throughput_shots_per_second": 9705241.209364042,
+        "throughput_shots_per_second": 5307624.5270305285,
         "timed_runs": 5
       },
       "logical_error_rate": 0.0,
       "logical_error_rate_standard_error": 0.0,
       "logical_errors": 0,
       "memory": {
-        "peak_python_bytes": 791690,
-        "peak_rss_bytes": 81117184,
-        "peak_rss_delta_bytes": 0,
-        "start_rss_bytes": 81117184
+        "peak_python_bytes": 791315,
+        "peak_rss_bytes": 79826944,
+        "peak_rss_delta_bytes": 69632,
+        "start_rss_bytes": 79757312
       },
       "parameters": {
         "damping": 0.0,
@@ -164,6 +165,7 @@
       "diagnostics": {
         "average_iterations": 0.02001953125,
         "average_osd_rank": 0.0,
+        "combination_sweep_order": 0,
         "converged_shots": 4096,
         "convergence_rate": 1.0,
         "engine": "batched_min_sum",
@@ -177,26 +179,26 @@
         "syndrome_consistent_shots": 4096
       },
       "latency": {
-        "mean_per_shot_microseconds": 0.098388671875,
-        "mean_total_seconds": 0.000403,
+        "mean_per_shot_microseconds": 0.12482910156249998,
+        "mean_total_seconds": 0.0005112999999999999,
         "run_seconds": [
-          0.0004225,
-          0.0004124,
-          0.0003968,
-          0.0003934,
-          0.0003899
+          0.0005201,
+          0.0004767,
+          0.0004944,
+          0.00047,
+          0.0005953
         ],
-        "throughput_shots_per_second": 10163771.712158808,
+        "throughput_shots_per_second": 8010952.474085665,
         "timed_runs": 5
       },
       "logical_error_rate": 0.0,
       "logical_error_rate_standard_error": 0.0,
       "logical_errors": 0,
       "memory": {
-        "peak_python_bytes": 791306,
-        "peak_rss_bytes": 81145856,
-        "peak_rss_delta_bytes": 28672,
-        "start_rss_bytes": 81117184
+        "peak_python_bytes": 790755,
+        "peak_rss_bytes": 80220160,
+        "peak_rss_delta_bytes": 90112,
+        "start_rss_bytes": 80130048
       },
       "parameters": {
         "damping": 0.0,

@@ -32,13 +32,12 @@ result.diagnostics   # 迭代次数、收敛率、OSD 触发率、图规模等
 
 ### 3.2 Union-Find
 
-`UnionFindDecoder` 直接解析分解 DEM 的 graphlike component：
+`UnionFindDecoder` 直接解析分解 DEM 的 graphlike component，并实现 **Delfosse–Nickerson 的加权 Union-Find**（2026-10-15 重写，见 `docs/T18_UNION_FIND_ANALYSIS.md`）：
 
-- 单 detector target 连接到虚拟 boundary；
-- 双 detector target 形成内部边；
-- 权重为 `log((1-p)/p)`；
-- 保留每个 component 的 observable fault mask；
-- 按权重增长并合并奇偶性为奇的 cluster。
+- 单 detector target 连接到虚拟 boundary；双 detector target 形成内部边；权重为 `log((1-p)/p)`；保留每个 component 的 observable fault mask；
+- **half-edge 生长**：每个缺陷是 parity 为 1 的 cluster，前沿按权重逐半条边推进；两条前沿在同一条边上相遇即融合（因此簇会在中途相遇，而不是等一方先撞到 boundary 后冻结）；
+- 簇的缺陷数为偶或触到 boundary 即冻结；融合后重新变奇的簇会解冻并从延迟的前沿继续；
+- 对生长出的边集 ε' 跑 **erasure peeling（带 syndrome 翻转）**；peeling 若停在 2-core 上，则用该 core 最小生成森林上的 T-join 收尾。
 
 这里不直接使用 PyMatching 合并后的 `edges()`，因为平行边合并只保留部分 `fault_ids`，会给 Union-Find 引入不必要的 logical-label 丢失。
 
@@ -141,7 +140,7 @@ M1 只实现 OSD-0；更高阶 OSD（OSD-λ / combination sweep）见 `docs/ROAD
 | Decoder | Logical errors | LER | Mean per-shot | Throughput | RSS delta | Python peak |
 |---|---:|---:|---:|---:|---:|---:|
 | MWPM | 2 | 0.000488 | 0.030 us | 33,673,134 shot/s | 20 KiB | 104,127 B |
-| Union-Find | 2 | 0.000488 | 12.095 us | 82,682 shot/s | 24 KiB | 103,663 B |
+| Union-Find | 2 | 0.000488 | 6.468 us | 154,608 shot/s | 28 KiB | 103,152 B |
 | BP | 2 | 0.000488 | 0.310 us | 3,222,659 shot/s | 52 KiB | 1,143,487 B |
 | BP+OSD-0 | 2 | 0.000488 | 0.287 us | 3,490,889 shot/s | 44 KiB | 1,143,359 B |
 
@@ -151,8 +150,8 @@ M1 只实现 OSD-0；更高阶 OSD（OSD-λ / combination sweep）见 `docs/ROAD
 
 | Decoder | Logical errors | LER | Mean per-shot | Throughput | RSS delta | Python peak |
 |---|---:|---:|---:|---:|---:|---:|
-| MWPM | 39 | 0.009521 | 0.124 us | 8,085,594 shot/s | 36 KiB | 104,211 B |
-| Union-Find | 53 | 0.012939 | 33.370 us | 29,967 shot/s | 36 KiB | 103,855 B |
+| MWPM | 39 | 0.009521 | 0.138 us | 7,268,855 shot/s | 36 KiB | 104,211 B |
+| Union-Find | 37 | 0.009033 | 10.677 us | 93,656 shot/s | 36 KiB | 103,855 B |
 | BP | 53 | 0.012939 | 2.334 us | 428,478 shot/s | 1.88 MiB | 5,592,025 B |
 | BP+OSD-0 | 61 | 0.014893 | 3.868 us | 258,507 shot/s | 1.97 MiB | 5,591,913 B |
 

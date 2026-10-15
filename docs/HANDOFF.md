@@ -74,15 +74,15 @@ Start-Process -FilePath $py -ArgumentList @('-m','graph_qec.m2',
 
 **验收**：新增解码器 + 单测 + 对照表（至少 d=3 repetition 与表面码 d=3 两个配置）；`docs/M3_HYBRID_DECODER.md` 增补小节。
 
-### WP3 · T18 修正 Union-Find 的 peeling（P1，路线已定案）
+### WP3 · T18 修正 Union-Find 的 peeling（P1，**2026-10-15 已完成**）
 
 `src/graph_qec/decoders/union_find.py` 的 `_decode_shot` 只累加合并边的 `fault_mask`，**缺少标准 Union-Find 的 peeling 步骤**，因此在表面码上失效（d=3 码容量 p=0.01：0.06311 vs MWPM 0.00214；d=5 为 0.226-0.476）。
 
 **已定路线：修实现，不降级**（2026-10-15 决策，记录于 `docs/ROADMAP_TODO.md` 第 6.1 节）。不采用「把 Union-Find 限定为 repetition code 专用基线」的路线，因此它保持 P1。
 
-**待做**：在 `_decode_shot` 中加入标准 Union-Find 的 peeling——簇内对生成树自叶向根剥离，只保留真正的 correction。改完必须重跑 `results/m1/`（repetition）与表面码扫描，并更新受影响的文档数字（`README.md`、M1 文档、`results/m4/SURFACE_BASELINE_TABLE.md`——该表当前不含 union_find 列）。工作量 8-12 人日。
+**已完成（2026-10-15）**：重写为忠实的加权 Union-Find（half-edge 生长 + 前沿中途相遇 + 冻结/解冻 + erasure peeling + 2-core T-join 收尾）。修复了 3 个实现缺陷（boundary 标志、解冻、漏加入 ε' 的边）。`results/m1/` 与表面码扫描已重跑（`scripts/t18_rerun.ps1`），文档数字已更新。
 
-**验收**：新增测试断言表面码 d=3 码容量 p=0.01 的 Union-Find LER 与 MWPM 同量级；所有引用了 Union-Find 的表格重新生成。
+**验收**：✅ 表面码 d=3 码容量 p=0.01 的 Union-Find LER 与 MWPM 完全一致（0.00214 vs 0.00214）；`tests/test_union_find_t18.py` 6 项断言（syndrome 一致性 + 基线追踪）。
 
 ### WP4 · T10 多种子统计稳健性（P1，依赖 WP1）
 
@@ -98,7 +98,7 @@ Start-Process -FilePath $py -ArgumentList @('-m','graph_qec.m2',
 3. **噪声率在 JSON 里的路径是 `experiment.noise.physical_error_rate`**，不是 `experiment.physical_error_rate`。改错路径会让不同 p 跑出**完全相同**的数字（已踩过一次，靠"p=0.001 与 p=0.01 结果逐位相同"才发现）。
 4. **不要在 `results/*.json` 里做含反斜杠的路径替换**（`results\m3_fixed\` → `results\m3\` 会破坏 JSON 转义）。要改目录名就替换纯名字（`m3_fixed` → `m3`），改完用 Python 全量 `json.loads` 校验。
 5. **torch 动态量化会把 `nn.Linear` 换成 `weight` 为可调用对象的模块**，GNN 前向的快路径对非 `nn.Linear` 层会自动回退到 concat 实现（`tests/test_gnn_forward_equivalence.py::test_forward_falls_back_for_non_linear_message_layers` 锁定）。不要删掉这个分支——删掉会让 `scripts/m5_quantization.py` 崩溃。
-6. **交付范围内不得引用 `union_find` 的表面码数字**（T18）；`results/m4/README.md` 与 `docs/ROADMAP_TODO.md` 已声明。
+6. ~~**交付范围内不得引用 `union_find` 的表面码数字**（T18）~~ **已于 2026-10-15 解除**：Union-Find 重写后表面码比值 1.00-1.41× MWPM，`results/m4/surface_sweep.json` 的该列可安全引用。
 7. **耗时预算先看实测**：BP 在表面码线路级为 d=3 242 µs/shot、d=5 8.1 ms/shot、d=7 46.9 ms/shot、d=9 127.9 ms/shot（`docs/BP_IMPLEMENTATION.md` 第 4 节）；GNN 前向 d=5 7.8 ms/shot、d=7 27.7-35.3 ms/shot（`results/m5/GNN_PERF.md`）。开新实验前先用 `scripts/probe_cpu_budget.py` 标定。
 8. **提交时排除进行中的结果目录**（`git add` 指定路径，或确认目录为空），避免把半成品写进交付。
 9. **统计纪律**：任何百分比结论都要给 shots、seed 数与标准误；2048 shots 的标准误约 0.005-0.008，只够给方向。

@@ -173,16 +173,16 @@ $env:PYTHONPATH = "src"
   - 现状：局部性映射覆盖 262/286（91.6%）；逐 shot 重建匹配图 2.8-2.9 ms/shot
   - 工作量：编码 5-8 人日；算力 0.5 h
   - 备注：PyMatching 2.4 公开接口不支持只换边权（`decode(z, weights=...)` 被静默忽略），需走 `MatchingGraph` / `decode_to_edges_array` 或自实现
-- [ ] **T18 · 修正 Union-Find 解码器的 peeling**　（P1，2026-10-15 定案）
+- [x] **T18 · 修正 Union-Find 解码器**　（P1，2026-10-15 完成）
   - 现象：`UnionFindDecoder` 在表面码上严重失效——d=3 码容量 p=0.01 为 0.06311（MWPM 0.00214），d=5 为 0.22607-0.47565（接近随机）
   - 根因：`src/graph_qec/decoders/union_find.py` 的 `_decode_shot` 只把合并边的 `fault_mask` 累加进输出，**缺少标准 Union-Find 解码器的 peeling 步骤**（簇内对生成树自叶向根剥离，只保留真正的 correction）；该实现在 repetition d=3 的机构上恰好接近可用（0.01294），因此一直未被发现
   - 影响：`results/m4/surface_sweep.json` 中的 `union_find` 列不可用；`results/m4/SURFACE_BASELINE_TABLE.md` 已不含该列，但仍需显式声明
   - **决策（2026-10-15）：修实现，不降级**——不采用「把 Union-Find 限定为 repetition code 专用基线」的路线，因此 T18 保持 P1；修复后必须重跑所有引用它的结果，不能只在文档里缩小适用范围
-  - 工作量：修正 + 单元测试 8-12 人日；算力 1 h（重跑表面码扫描与 M1 基线）
-  - **2026-10-15 进展（部分完成）**：补齐 T-join peeling，恢复 correction 的 syndrome 一致性（旧实现约 97% 的含缺陷 shot 产出违反 `H·c = s` 的 correction）。表面码 d=5 码容量 LER 0.219 → **0.0117**，d=3 0.067 → 0.054；全部配置严格不劣化。新增 `tests/test_union_find_t18.py`（5 项，逐 shot 断言 `H·c = s`）
-  - **仍未达标**：表面码 LER 仍比 MWPM 差 9-50×。根因是 greedy growth 的**边界短视**（等权重时缺陷先被 boundary 终止，链内边再也进不了候选集），不是 peeling。最小反例、已实测的 6 种变体与忠实实现所需的 3 条改动见 `docs/T18_UNION_FIND_ANALYSIS.md`
-  - **需要决策**：继续按忠实加权 Union-Find 实现（8-12 人日），或改用其它近似解码器（见分析文档第 6 节）
-  - 验收：⚠️ 断言测试已加（syndrome 一致性），但「LER 与 MWPM 同量级」未达成；`results/m1/` 与表面码扫描的重跑推迟到实现定案之后
+  - **完成（2026-10-15）**：按分析文档的路线重写为 **忠实的加权 Union-Find**（`src/graph_qec/decoders/union_find.py`）：half-edge 生长 + 前沿中途相遇融合 + 冻结/解冻 + erasure peeling（带 syndrome 翻转）+ 2-core T-join 收尾。**关键决策由用户于 2026-10-15 拍板：按分析文档实现忠实版本**
+  - 修复过程中定位到 3 个具体实现缺陷：① 簇覆盖 boundary 节点时从未置 boundary 标志；② 冻结的簇在融合后重新变奇时从未解冻；③ 前沿抵达已覆盖顶点时漏把穿越的边加入 ε'。三者都写进了 `docs/T18_UNION_FIND_ANALYSIS.md`
+  - **结果**：表面码 d=3 码容量 0.06311 → **0.00214（= MWPM）**；d=3 线路级 0.07068 → 0.01685（MWPM 0.01599）；d=5 码容量 0.22607 → **0.00049**（MWPM 0.00037）；全部 10 个扫描点比值 1.00-1.41×。M1 repetition 上 union_find 37 vs mwpm 39（**略优**）
+  - 产出：`results/m1/`（重跑）、`results/m4/surface_sweep.{json,csv}`（重跑）、`scripts/t18_rerun.ps1`、`tests/test_union_find_t18.py`（6 项）、`docs/T18_UNION_FIND_ANALYSIS.md`
+  - 验收：✅ 表面码 d=3 码容量 p=0.01 的 Union-Find LER 与 MWPM **完全一致**（0.00214 vs 0.00214，16384 shots），单测已断言；所有引用 Union-Find 的表格已重新生成
 
 - [ ] **T17 · 技术报告（集成 M0-M5 + 局限性 + 复现说明）**　（P1）
   - 工作量：3-5 人日；依赖 T6-T11 收敛
