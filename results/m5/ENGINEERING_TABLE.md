@@ -82,6 +82,11 @@
 | m4_learned_basis_rotated_surface_code_circuit_level_d3__d3__circuit_level__p0p005 | bp_osd | 0.0431519 | 751.105 | 1,331 | - | 4.08786 | 0.0974121 | 1 |
 | m4_learned_basis_rotated_surface_code_circuit_level_d3__d3__circuit_level__p0p005 | bp_gnn | 0.0327759 | 422.765 | 2,365 | - | 2.461 | - | 0.946167 |
 | m4_learned_basis_rotated_surface_code_circuit_level_d3__d3__circuit_level__p0p005 | bp_gnn_osd | 0.0354919 | 444.516 | 2,250 | - | 2.461 | 0.053833 | 1 |
+| m4_rotated_surface_code_circuit_level_d5__d5__circuit_level__p0p005 | mwpm | 0.0107422 | 3.20063 | 312,438 | - | - | - | - |
+| m4_rotated_surface_code_circuit_level_d5__d5__circuit_level__p0p005 | bp | 0.103516 | 10,268 | 97.388 | - | 15.4116 | - | 0.578613 |
+| m4_rotated_surface_code_circuit_level_d5__d5__circuit_level__p0p005 | bp_osd | 0.13623 | 12,724 | 78.5917 | - | 15.4116 | 0.421387 | 1 |
+| m4_rotated_surface_code_circuit_level_d5__d5__circuit_level__p0p005 | bp_gnn | 0.0644531 | 5,767 | 173.396 | - | 8.76318 | - | 0.76709 |
+| m4_rotated_surface_code_circuit_level_d5__d5__circuit_level__p0p005 | bp_gnn_osd | 0.0805664 | 6,377 | 156.819 | - | 8.76318 | 0.23291 | 1 |
 | m4_learned_basis_rotated_surface_code_code_capacity_d3__d3__code_capacity__p0p05 | mwpm | 0.0507812 | 0.381763 | 2,619,428 | - | - | - | - |
 | m4_learned_basis_rotated_surface_code_code_capacity_d3__d3__code_capacity__p0p05 | bp | 0.053894 | 114.189 | 8,757 | - | 2.82269 | - | 0.952423 |
 | m4_learned_basis_rotated_surface_code_code_capacity_d3__d3__code_capacity__p0p05 | bp_osd | 0.0609741 | 132.627 | 7,540 | - | 2.82269 | 0.0475769 | 1 |

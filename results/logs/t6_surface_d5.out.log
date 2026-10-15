@@ -1,0 +1,34 @@
+[
+  {
+    "config_sha256": "584a3bd830c53b64e8c3d94a9f36231aa3cc8845c2d877f1655d1148aaf8681c",
+    "decoders": [
+      {
+        "ler": 0.0107421875,
+        "mean_per_shot_us": 3.2006347652213663,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.103515625,
+        "mean_per_shot_us": 10268.200830077845,
+        "name": "bp"
+      },
+      {
+        "ler": 0.13623046875,
+        "mean_per_shot_us": 12723.982080078855,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.064453125,
+        "mean_per_shot_us": 5767.145166014842,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.08056640625,
+        "mean_per_shot_us": 6376.792382811303,
+        "name": "bp_gnn_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_surface\\m4_rotated_surface_code_circuit_level_d5__d5__circuit_level__p0p005",
+    "selected_reweight_strength": 1.0
+  }
+]

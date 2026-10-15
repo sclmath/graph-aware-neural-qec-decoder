@@ -1,3 +1,15 @@
 [m2] generating splits for m4_rotated_surface_code_circuit_level_d5
 [m2] splits ready: train=16384 validation=2048 test=2048 (0.2s)
 [m2] graph: 120 detectors, 1677 mechanisms, 5004 edges
+[m2] epoch 1/4: train=0.02044 validation=0.00609 (259.9s)
+[m2] epoch 2/4: train=0.00583 validation=0.00589 (262.9s)
+[m2] epoch 3/4: train=0.00555 validation=0.00519 (279.5s)
+[m2] epoch 4/4: train=0.00462 validation=0.00447 (296.2s)
+[m2] training done: best validation log loss 0.00447 in 1098.4s
+[m2] validation sweep: s=0.0:ler=0.09766, s=0.25:ler=0.08057, s=0.5:ler=0.07031, s=0.75:ler=0.06152, s=1.0:ler=0.06152
+[m2] selected reweight strength 1.0
+[m2] evaluating mwpm on 2048 test shots
+[m2] evaluating bp on 2048 test shots
+[m2] evaluating bp_osd on 2048 test shots
+[m2] evaluating bp_gnn on 2048 test shots
+[m2] evaluating bp_gnn_osd on 2048 test shots
