@@ -142,7 +142,7 @@ $env:PYTHONPATH = "src"
   - **2026-10-16 夜间完成**：共 16 个运行——d=5 覆盖 p ∈ {0.003, 0.005, 0.008} × 3 seeds（8192 test shots/seed）；d=7 覆盖 p ∈ {0.003, 0.005} × 3 seeds 与 p=0.008 × 1 seed（4096/seed）
     - d=5：−43.4% / −37.1% / −32.8%；d=7：−32.6% / −25.1% / −15.6%（都随 p 升高而下降）
     - 同 p 下 d=5 的增益在三个噪声率上都高于 d=7
-    - **规律修正**：收益在 BP 强度"中等"时最大——码距轴非单调（−18.2% → −37.1% → −25.1%），噪声率轴单调下降。"BP 越弱收益越大"只是码距轴现象
+    - **规律修正**：收益在 BP 强度"中等"时最大——码距轴非单调（**d=3 −29.0% ± 2.4%（3 seeds）** → d=5 −37.1% → d=7 −25.1%），噪声率轴单调下降。"BP 越弱收益越大"只是码距轴现象
     - **2026-10-16 下午起在补齐残点**（`scripts/session3_seeds.ps1 -Chain D`，预算 480 min，按价值排序、完成即跳过、可断点续跑）：① d=7 p=0.008 的 s2/s3；② d=5 p=0.01 × 3 seeds；③ d=7 p=0.01 × 3 seeds。补完后需重跑 `scripts/t10_multiseed_stats.py` 与 `scripts/threshold_estimate.py`，并把 `docs/FINAL_REPORT.md` 4.6/4.7 的表格换掉
   - 仍未排期：p=0.002 × {d=5, d=7} × 3 seeds（低噪声端，属最末优先级）
   - 验收：✅ `results/m4_surface/` 的 d=5/d=7 `bp` vs `bp_gnn` 对照表（含均值 ± 标准误、shots 与 seed 数）；Pareto 图由 `results/t10/MULTISEED.md` 支撑
@@ -158,7 +158,7 @@ $env:PYTHONPATH = "src"
   - 依据：M2 的 OSD 排序无改善、M3 的 OSD-0 回退无 Pareto 窗口、M5 的 MWPM 边权重无收益——三条结论都指向「学习目标应从逐机制边际改为候选基质量」
   - **已完成**：OSD-CS(λ)（combination sweep）——对 λ 个最不可靠的非 pivot 列枚举全部子集，按 `Σ|posterior LLR|` 取最优；Gray 码枚举 + 增量权重。新增解码器 `bp_osd_cs` / `bp_gnn_osd_cs` / `bp_gnn_osd_cs_learned_order`，`decoder.osd_combination_sweep` 配置项，4 项单测（`tests/test_osd_combination_sweep.py`），研究脚本 `scripts/t8_osd_cs_study.py`
   - **结果（repetition d=3 电路级 p=0.01，32768 shots）**：`bp` 309 → OSD-0 331（确认 M3 的负结果）→ **OSD-CS(4) 247**；OSD-0 vs OSD-CS(4)：救回 126 / 弄坏 42，McNemar z=6.48，p<1e-6。在 288 个 BP+GNN 未收敛 shot 上，OSD-0 把 154 变成 175（弄坏），OSD-CS(4) 降到 91（MWPM 83）
-  - **结论**：M3 的负结果的正面出口——把学习目标从「逐机制边际」换成「候选基质量」后，OSD 回退从「有害」变成「显著有益」；而 DEM 先验与学习先验在 λ=4 上打平（247 vs 249，p=0.53），说明**候选集选对之后，逐机制边际不再提供额外信息**
+  - **结论**：M3 的负结果的正面出口——把学习目标从「逐机制边际」换成「候选基质量」后，OSD 回退从「有害」变成「显著有益」；而 DEM 先验与学习先验在 λ=4 上**在种子噪声内不可区分**（单 seed 曾写「打平 247 vs 249，p=0.53」，**3 seeds 复核后已撤回**），说明**候选集选对之后，逐机制边际不再提供额外信息**
   - 未完成（转 P2 强化）：learning-to-rank（数据驱动的候选排序）；见第 7 节
   - 产出：`results/t8/`、`docs/T8_OSD_CANDIDATE_SET.md`
   - **2026-10-16 补种子（P1 收口）**：d=7 三个噪声率各补到 **3 份独立测试集 × 1024 shots = 3072 shots**（`scripts/t8_osd_cs_study.py --seed-offset 10/20`，输出 `results/t8/d7_p0p00{3,5,8}_probe_s{10,20}/`；汇总脚本 `scripts/t8_d7_multiseed.py` → `results/t8/D7_MULTISEED.md`）
