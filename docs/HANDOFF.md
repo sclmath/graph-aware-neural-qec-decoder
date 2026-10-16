@@ -57,6 +57,8 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 .\.venv\Scripts\python.exe scripts\engineering_table.py
 ```
 
+注意：2026-10-16 补的**表面码 d=3 线路级 p=0.005 的 s10/s20** 两个运行也在 `results/m4_surface/` 里，重跑 `t10_multiseed_stats.py` 会自动把 d=3 那一格从 1 seed 变成 3 seeds（`results/t10/surface_sweep_mean.json` 与 `results/m4/THRESHOLD.md` 因此都要一起重生成，4.7 的阈值结论要复核一遍）。
+
 然后把 `docs/FINAL_REPORT.md` 的 4.6 表（d=5/d=7 各一行新噪声率、d=7 p=0.008 去掉 † 单 seed 标注）与 4.7 的阈值结论换成新数字，并在 `docs/ROADMAP_TODO.md` 的 T6 条目里勾掉残点。
 
 **仍未排期**：p=0.002 × {d=5, d=7} × 3 seeds（约 3.5 h）。它是低噪声端，价值在于检验「增益是否在低噪声端继续上升」——目前噪声率轴上 d=5 的增益在 p=0.003 处最大（−43.4%），没有低端拐点的证据。

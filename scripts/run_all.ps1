@@ -25,6 +25,10 @@ $env:PYTHONPATH = Join-Path $PWD 'src'
 $env:PYTHONUTF8 = '1'
 
 $smoke = 'results\smoke'
+# M0/M1 的目标目录已存在时会显式抛 FileExistsError（这是刻意的保护，见 HANDOFF 第 4 节），
+# 所以 smoke 每次必须先清空自己的临时目录——它被 .gitignore 排除、只由本脚本写入。
+# 用 Python 的 shutil 而不是 Remove-Item -Recurse（本机策略会拒绝后者）。
+& $py -c "import shutil, pathlib; shutil.rmtree(pathlib.Path('results/smoke'), ignore_errors=True)"
 New-Item -ItemType Directory -Force -Path $smoke | Out-Null
 New-Item -ItemType Directory -Force -Path 'results\logs' | Out-Null
 
