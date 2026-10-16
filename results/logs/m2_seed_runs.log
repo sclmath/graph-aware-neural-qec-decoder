@@ -1,0 +1,112 @@
+[2026-10-16 13:01:50] m2 seed runs start (pid 4840) base=m4_learned_basis_rotated_surface_code_circuit_level_d3 out=results\m4_surface
+[2026-10-16 13:01:50] m4_learned_basis_rotated_surface_code_circuit_level_d3_s10 start
+[m2] generating splits for m4_learned_basis_rotated_surface_code_circuit_level_d3_s10
+[m2] splits ready: train=16384 validation=8192 test=32768 (0.1s)
+[m2] graph: 24 detectors, 219 mechanisms, 564 edges
+[m2] epoch 1/8: train=0.24257 validation=0.03486 (50.2s)
+[m2] epoch 2/8: train=0.03044 validation=0.02504 (41.8s)
+[m2] epoch 3/8: train=0.02243 validation=0.02146 (41.7s)
+[m2] epoch 4/8: train=0.01974 validation=0.01592 (42.2s)
+[m2] epoch 5/8: train=0.01124 validation=0.01034 (41.8s)
+[m2] epoch 6/8: train=0.00968 validation=0.00963 (42.2s)
+[m2] epoch 7/8: train=0.00940 validation=0.00950 (41.8s)
+[m2] epoch 8/8: train=0.00927 validation=0.00935 (42.2s)
+[m2] training done: best validation log loss 0.00935 in 343.8s
+[m2] validation sweep: s=0.0:ler=0.04346, s=0.25:ler=0.04211, s=0.5:ler=0.03357, s=0.75:ler=0.02966, s=1.0:ler=0.04028
+[m2] selected reweight strength 0.75
+[m2] evaluating mwpm on 32768 test shots
+[m2] evaluating bp on 32768 test shots
+[m2] evaluating bp_osd on 32768 test shots
+[m2] evaluating bp_gnn on 32768 test shots
+[m2] evaluating bp_gnn_osd on 32768 test shots
+[
+  {
+    "config_sha256": "c4aef56b50eebfa1878173a7d4f932688883b7a52b89b434753c6dbcde967132",
+    "decoders": [
+      {
+        "ler": 0.017425537109375,
+        "mean_per_shot_us": 0.2983337403783537,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.04217529296875,
+        "mean_per_shot_us": 321.69879760735046,
+        "name": "bp"
+      },
+      {
+        "ler": 0.045013427734375,
+        "mean_per_shot_us": 361.2134155273061,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.027313232421875,
+        "mean_per_shot_us": 159.83765869131972,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.032318115234375,
+        "mean_per_shot_us": 180.86178894050065,
+        "name": "bp_gnn_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_surface\\m4_learned_basis_rotated_surface_code_circuit_level_d3_s10__d3__circuit_level__p0p005",
+    "selected_reweight_strength": 0.75
+  }
+]
+[2026-10-16 13:10:22] m4_learned_basis_rotated_surface_code_circuit_level_d3_s10 exit=0
+[2026-10-16 13:10:22] m4_learned_basis_rotated_surface_code_circuit_level_d3_s20 start
+[m2] generating splits for m4_learned_basis_rotated_surface_code_circuit_level_d3_s20
+[m2] splits ready: train=16384 validation=8192 test=32768 (0.1s)
+[m2] graph: 24 detectors, 219 mechanisms, 564 edges
+[m2] epoch 1/8: train=0.32314 validation=0.03519 (41.3s)
+[m2] epoch 2/8: train=0.03377 validation=0.02381 (42.3s)
+[m2] epoch 3/8: train=0.02271 validation=0.02180 (41.9s)
+[m2] epoch 4/8: train=0.01950 validation=0.01428 (41.9s)
+[m2] epoch 5/8: train=0.01083 validation=0.00980 (41.8s)
+[m2] epoch 6/8: train=0.00959 validation=0.00939 (41.5s)
+[m2] epoch 7/8: train=0.00932 validation=0.00921 (42.9s)
+[m2] epoch 8/8: train=0.00913 validation=0.00899 (46.5s)
+[m2] training done: best validation log loss 0.00899 in 340.1s
+[m2] validation sweep: s=0.0:ler=0.04150, s=0.25:ler=0.03760, s=0.5:ler=0.03101, s=0.75:ler=0.02808, s=1.0:ler=0.02686
+[m2] selected reweight strength 1.0
+[m2] evaluating mwpm on 32768 test shots
+[m2] evaluating bp on 32768 test shots
+[m2] evaluating bp_osd on 32768 test shots
+[m2] evaluating bp_gnn on 32768 test shots
+[m2] evaluating bp_gnn_osd on 32768 test shots
+[
+  {
+    "config_sha256": "99b9de97d7febf4155eef99e4a01bb00954afb64d026498cea94763e3cf05a5b",
+    "decoders": [
+      {
+        "ler": 0.01751708984375,
+        "mean_per_shot_us": 0.301446533512717,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.042236328125,
+        "mean_per_shot_us": 327.5145874024332,
+        "name": "bp"
+      },
+      {
+        "ler": 0.04595947265625,
+        "mean_per_shot_us": 378.3453613284138,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.02825927734375,
+        "mean_per_shot_us": 166.36246032675217,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.03155517578125,
+        "mean_per_shot_us": 195.21014709500406,
+        "name": "bp_gnn_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_surface\\m4_learned_basis_rotated_surface_code_circuit_level_d3_s20__d3__circuit_level__p0p005",
+    "selected_reweight_strength": 1.0
+  }
+]
+[2026-10-16 13:19:01] m4_learned_basis_rotated_surface_code_circuit_level_d3_s20 exit=0
+[2026-10-16 13:19:01] m2 seed runs finished

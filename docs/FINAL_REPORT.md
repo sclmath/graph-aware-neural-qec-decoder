@@ -153,11 +153,11 @@
 
 † p=0.008 只有一个 seed（预算耗尽），只作方向性参考。
 
-（合并了 M4 的 d=3 点作对照：p=0.005 时 `bp` 0.04007 → `bp_gnn` 0.03278，**−18.2%**。）
+（合并了 M4 的 d=3 点作对照：p=0.005 时 `bp` → `bp_gnn`，**3 seeds 复核为 −29.0% ± 2.4%**——单 seed 曾给出 −18.2%，是三个 seed 里最小的那个；见 `results/m4_surface/D3_MULTISEED.md`。）
 
 **五条读数：**
 
-1. **同一噪声率下，增益与码距的关系不是单调的**：p=0.005 时 d=3 **−18.2%** → d=5 **−37.1%** → d=7 **−25.1%**，峰值在 d=5。而且**在三个噪声率上 d=5 的增益都高于 d=7**（−43.4 vs −32.6、−37.1 vs −25.1、−32.8 vs −15.6），所以"码距越大增益越大"在 d>5 之后明确失效。d=3 上 BP 已接近最优故无空间；d=7 上 BP 已越过"仍可用"的边界（收敛率 0.118-0.121、平均迭代 28.9/32），学习先验能把收敛率提到 0.166-0.298、迭代降到 23.5-27.6，但换不来同比例的精度——**局部推断本身失效时，单纯给边际重加权救不回来**；此时需要的是第 4 条那条路（换候选集），它在 d=7 上把总增益从 −25.1% 拉到 **−40.3%**。
+1. **同一噪声率下，增益与码距的关系不是单调的**：p=0.005 时 d=3 **−29.0% ± 2.4%**（3 seeds，逐 seed −18.2% / −35.3% / −33.1%）→ d=5 **−37.1%** → d=7 **−25.1%**，峰值在 d=5——但 d=3 → d=5 的差距比单 seed 读数小得多（−29% vs −37%），**曲线比原先以为的平坦**。而且**在三个噪声率上 d=5 的增益都高于 d=7**（−43.4 vs −32.6、−37.1 vs −25.1、−32.8 vs −15.6），所以"码距越大增益越大"在 d>5 之后明确失效。d=3 上 BP 本来已接近饱和（收敛率 0.90）却仍拿到 −29%，说明"BP 还够用就没有空间"的直觉不成立；d=7 上 BP 已越过"仍可用"的边界（收敛率 0.118-0.121、平均迭代 28.9/32），学习先验能把收敛率提到 0.166-0.298、迭代降到 23.5-27.6，但换不来同比例的精度——**局部推断本身失效时，单纯给边际重加权救不回来**；此时需要的是第 4 条那条路（换候选集），它在 d=7 上把总增益从 −25.1% 拉到 **−40.3%**。
 2. **同一码距下，增益随噪声率升高而单调下降**：d=5 **−43.4% → −37.1% → −32.8%**；d=7 **−32.6% → −25.1% → −15.6%**（p=0.003→0.005→0.008）。两个码距、两个方向（码距与噪声率）合起来给出一条清晰的规律：**增益在"BP 仍能工作但已经吃力"时最大**。这与"BP 越弱收益越大"表面上矛盾——修正后的说法是：**收益在 BP 强度属于"中等"时最大，BP 接近最优（d=3）或噪声率高到使机制判别本身变糊时都会缩小**。跨码距的 HGP/表面码结果给出的"越弱越有用"是**码距轴**上的现象，不能外推到**噪声率轴**。
 3. **OSD-0 在全部 5 个表面码点上都比不开更差**：`bp_osd` 比 `bp` 差 22.5-44.5%，`bp_gnn_osd` 比 `bp_gnn` 差 26.2-39.2%。这与 T8 的发现一致，也把"OSD 该不该开"这个问题彻底改写为"**候选基选得对不对**"。
 4. **d=7 上"换候选集"的收益已实测**（T8 探针；**每个噪声率 3 份独立测试集 × 1024 shots = 3072 shots**，`results/t8/d7_p0p00{3,5,8}_probe{,_s10,_s20}/`，汇总见 `results/t8/D7_MULTISEED.md`，由 `scripts/t8_d7_multiseed.py` 生成）：
@@ -329,10 +329,15 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 .\.venv\Scripts\python.exe scripts\t9_multiseed.py --prefix repetition_d3 --output results\t9\REPETITION_D3_MULTISEED.md
 .\.venv\Scripts\python.exe scripts\t8_repetition_multiseed.py --output results\t8\REPETITION_D3_MULTISEED.md
 
-# 8) M2 旗舰表的多种子复核（repetition d=3）
+# 8) 旗舰表的多种子复核（repetition d=3 与表面码 d=3）
 .\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --write-configs
-.\scripts\m2_headline_seeds.ps1          # 跑种子偏移 10/20 的 M2
+.\scripts\m2_headline_seeds.ps1 -BaseConfig configs\m2_learned_basis_repetition_circuit_level_d3.json -OutDir results\m2
 .\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --aggregate
+# 表面码 d=3（同一工具换 --base-config/--out-dir；产物 results\m4_surface\D3_MULTISEED.md）
+$base = 'results\m4_surface\m4_learned_basis_rotated_surface_code_circuit_level_d3__d3__circuit_level__p0p005\config.json'
+.\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --write-configs --base-config $base --offsets 10 20
+.\scripts\m2_headline_seeds.ps1 -BaseConfig $base -OutDir results\m4_surface
+.\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --aggregate --base-config $base --out-dir results\m4_surface --output results\m4_surface\D3_MULTISEED.md
 
 # 9) 工程性能表（T11）
 .\.venv\Scripts\python.exe scripts\engineering_table.py

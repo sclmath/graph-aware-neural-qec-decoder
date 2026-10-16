@@ -184,6 +184,7 @@ $env:PYTHONPATH = "src"
 - [x] **T10 · 多种子统计稳健性**　（P1，2026-10-16 完成；repetition d=5 的强度复核仍未做）
   - 产出：`results/t10/MULTISEED.md` + `multiseed.json` + `surface_sweep_mean.json`（跨 seed 均值 ± 标准误、逐 seed 值、配对 Δ 与符号检验）
   - 修正了一处数据质量问题：p=0.005 组曾混入 2048-shot 的历史单点，加了 `--min-test-shots` 过滤
+  - **2026-10-16 补测 2**：表面码 d=3 线路级 p=0.005 的锚点也补到 3 seeds（`scripts/m2_headline_multiseed.py` 换 `--base-config`，产物 `results/m4_surface/D3_MULTISEED.md`）：`bp` 0.04149 → `bp_gnn` 0.02945，**Δ = −0.01204 ± 0.00239（−29.0%）**，三个 seed 同号；单 seed 曾给 −18.2%（三个 seed 里最小）→ 4.6 节的「码距轴」读数已按此更新（峰值仍在 d=5，但曲线更平坦）
   - **2026-10-16 补测**：M2 旗舰表（repetition d=3 同分布，效应量最小的一张表）补到 3 seeds / 98304 shots：`bp_gnn` vs `bp` 的配对 ΔLER = +0.00009 / −0.00098 / +0.00003（均值 −0.00028 ± 0.00035，符号翻转）→ 「无收益」结论被误差棒确认；`mwpm` vs `bp_gnn` = +0.00288 ± 0.00034（三 seed 同号）。工具：`scripts/m2_headline_multiseed.py`（`--write-configs` / `--aggregate`）+ `scripts/m2_headline_seeds.ps1`；产物 `results/m2/HEADLINE_MULTISEED.md`
   - 范围：对 4 个关键结论（d=5/d=7 的 `bp` vs `bp_gnn`、HGP 跨尺寸迁移、MWPM 边权结论）给出 3 seeds 的均值 ± 标准误与配对检验；并在 repetition d=5 的目标分布验证集上复核先验插值强度（当前 d=5 评测沿用源配置上限 1.00）
   - 工作量：编码 1 人日；算力并入 T6
