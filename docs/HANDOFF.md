@@ -71,6 +71,14 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 - **仍属单 seed**：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5）、4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂、T8 的 repetition/表面码 d=3 两个 OSD-CS 研究（效应量大，优先级低）；
 - 做法可直接复用本轮的两个工具：`scripts/t9_feature_ablation.py --seed-offset N --merge`（消融）与 `scripts/t9_multiseed.py --prefix <系列>`（跨 seed 汇总）。
 
+**具体可做的一步（成本约 15 min）**：T8 的 d=7 OSD-CS 探针目前是「3 份独立测试集 × 同一个 checkpoint」——只压 LER 估计误差。T6 网格跑完 d=7 的 s2/s3 后会留下它们各自的 `model_state.pt`，用它们重跑探针即可把它升级成「模型 + 数据都换」：
+
+```powershell
+$run = 'results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p008'
+.\.venv\Scripts\python.exe scripts\t8_osd_cs_study.py --config $run\config.json --checkpoint $run\model_state.pt `
+    --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p008_probe_s2model
+```
+
 **验收**：相关表格全部标注 shots、seed 数与跨 seed 标准误。
 
 ### WP3 · P2 强化项 T12-T15（不做仍可交付）
