@@ -61,9 +61,10 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 
 **仍未排期**：p=0.002 × {d=5, d=7} × 3 seeds（约 3.5 h）。它是低噪声端，价值在于检验「增益是否在低噪声端继续上升」——目前噪声率轴上 d=5 的增益在 p=0.003 处最大（−43.4%），没有低端拐点的证据。
 
-### WP2 · HGP 与跨码距迁移的 seed 数（P2，未解决问题 7 的剩余部分）
+### WP2 · 剩下的单 seed 结论（P2，未解决问题 7 的剩余部分）
 
-- `docs/FINAL_REPORT.md` 第 7 节列出的「仍属单 seed」项：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5）、4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂；
+- 已完成：T9 repetition 消融（3 seeds / 98304 shots）、T8 d=7 OSD-CS 探针（每点 3 份测试集）、M2 旗舰表（3 seeds / 98304 shots，`results/m2/HEADLINE_MULTISEED.md`）；
+- **仍属单 seed**：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5）、4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂、T8 的 repetition/表面码 d=3 两个 OSD-CS 研究（效应量大，优先级低）；
 - 做法可直接复用本轮的两个工具：`scripts/t9_feature_ablation.py --seed-offset N --merge`（消融）与 `scripts/t9_multiseed.py --prefix <系列>`（跨 seed 汇总）。
 
 **验收**：相关表格全部标注 shots、seed 数与跨 seed 标准误。

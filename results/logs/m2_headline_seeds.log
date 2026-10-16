@@ -1,0 +1,140 @@
+[2026-10-16 12:54:15] m2 headline seeds start (pid 20636)
+wrote configs\m2_headline_seed10.json
+wrote configs\m2_headline_seed20.json
+[2026-10-16 12:54:16] offset 10 start -> results\m2\m2_learned_basis_repetition_circuit_level_d3_s10__d3__circuit_level__p0p01
+[m2] generating splits for m2_learned_basis_repetition_circuit_level_d3_s10
+[m2] splits ready: train=16384 validation=8192 test=32768 (0.0s)
+[m2] graph: 8 detectors, 21 mechanisms, 34 edges
+[m2] epoch 1/15: train=0.33092 validation=0.11066 (2.9s)
+[m2] epoch 2/15: train=0.08881 validation=0.07898 (3.4s)
+[m2] epoch 3/15: train=0.07363 validation=0.06695 (3.4s)
+[m2] epoch 4/15: train=0.04756 validation=0.03384 (2.9s)
+[m2] epoch 5/15: train=0.03196 validation=0.03206 (3.3s)
+[m2] epoch 6/15: train=0.03063 validation=0.03122 (3.6s)
+[m2] epoch 7/15: train=0.03002 validation=0.03067 (3.0s)
+[m2] epoch 8/15: train=0.02921 validation=0.02961 (3.3s)
+[m2] epoch 9/15: train=0.02736 validation=0.02722 (3.9s)
+[m2] epoch 10/15: train=0.02428 validation=0.02575 (3.2s)
+[m2] epoch 11/15: train=0.02333 validation=0.02500 (3.1s)
+[m2] epoch 12/15: train=0.02304 validation=0.02518 (3.7s)
+[m2] epoch 13/15: train=0.02312 validation=0.02523 (3.0s)
+[m2] epoch 14/15: train=0.02273 validation=0.02444 (3.1s)
+[m2] epoch 15/15: train=0.02161 validation=0.02159 (3.8s)
+[m2] training done: best validation log loss 0.02159 in 49.7s
+[m2] validation sweep: s=0.0:ler=0.01050, s=1.0:ler=0.00952
+[m2] selected reweight strength 1.0
+[m2] evaluating mwpm on 32768 test shots
+[m2] evaluating union_find on 32768 test shots
+[m2] evaluating bp on 32768 test shots
+[m2] evaluating bp_osd on 32768 test shots
+[m2] evaluating osd_bp on 32768 test shots
+[m2] evaluating osd_gnn on 32768 test shots
+[
+  {
+    "config_sha256": "6f945f588d263435f349b8898bd49762553f2b8952e6fd2cb1493bd83042fe37",
+    "decoders": [
+      {
+        "ler": 0.007049560546875,
+        "mean_per_shot_us": 0.12073211652641191,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.007476806640625,
+        "mean_per_shot_us": 11.204864502012413,
+        "name": "union_find"
+      },
+      {
+        "ler": 0.01031494140625,
+        "mean_per_shot_us": 2.908688354397171,
+        "name": "bp"
+      },
+      {
+        "ler": 0.01068115234375,
+        "mean_per_shot_us": 4.781668091036195,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.01068115234375,
+        "mean_per_shot_us": 164.13116455060717,
+        "name": "osd_bp"
+      },
+      {
+        "ler": 0.0101318359375,
+        "mean_per_shot_us": 149.65071105943474,
+        "name": "osd_gnn"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m2\\m2_learned_basis_repetition_circuit_level_d3_s10__d3__circuit_level__p0p01",
+    "selected_reweight_strength": 1.0
+  }
+]
+[2026-10-16 12:55:50] offset 10 exit=0
+[2026-10-16 12:55:50] offset 20 start -> results\m2\m2_learned_basis_repetition_circuit_level_d3_s20__d3__circuit_level__p0p01
+[m2] generating splits for m2_learned_basis_repetition_circuit_level_d3_s20
+[m2] splits ready: train=16384 validation=8192 test=32768 (0.0s)
+[m2] graph: 8 detectors, 21 mechanisms, 34 edges
+[m2] epoch 1/15: train=0.35290 validation=0.11543 (3.3s)
+[m2] epoch 2/15: train=0.09018 validation=0.08294 (2.8s)
+[m2] epoch 3/15: train=0.07517 validation=0.07031 (3.2s)
+[m2] epoch 4/15: train=0.05299 validation=0.03585 (3.6s)
+[m2] epoch 5/15: train=0.03265 validation=0.03368 (3.0s)
+[m2] epoch 6/15: train=0.03143 validation=0.03279 (3.2s)
+[m2] epoch 7/15: train=0.03076 validation=0.03196 (3.7s)
+[m2] epoch 8/15: train=0.02907 validation=0.02803 (3.2s)
+[m2] epoch 9/15: train=0.02450 validation=0.02592 (2.8s)
+[m2] epoch 10/15: train=0.02415 validation=0.02596 (3.8s)
+[m2] epoch 11/15: train=0.02375 validation=0.02539 (3.3s)
+[m2] epoch 12/15: train=0.02358 validation=0.02478 (3.0s)
+[m2] epoch 13/15: train=0.02243 validation=0.02227 (3.6s)
+[m2] epoch 14/15: train=0.01693 validation=0.01671 (3.5s)
+[m2] epoch 15/15: train=0.01464 validation=0.01604 (2.9s)
+[m2] training done: best validation log loss 0.01604 in 49.0s
+[m2] validation sweep: s=0.0:ler=0.01123, s=1.0:ler=0.01086
+[m2] selected reweight strength 1.0
+[m2] evaluating mwpm on 32768 test shots
+[m2] evaluating union_find on 32768 test shots
+[m2] evaluating bp on 32768 test shots
+[m2] evaluating bp_osd on 32768 test shots
+[m2] evaluating osd_bp on 32768 test shots
+[m2] evaluating osd_gnn on 32768 test shots
+[
+  {
+    "config_sha256": "0d7a0ca603645cb81c04b556d32bd7c55f514257d64702ec9fe5dc40ee05be99",
+    "decoders": [
+      {
+        "ler": 0.007537841796875,
+        "mean_per_shot_us": 0.1649353029709033,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.00836181640625,
+        "mean_per_shot_us": 11.147644042974747,
+        "name": "union_find"
+      },
+      {
+        "ler": 0.010955810546875,
+        "mean_per_shot_us": 3.2063095094514438,
+        "name": "bp"
+      },
+      {
+        "ler": 0.011138916015625,
+        "mean_per_shot_us": 5.113626098562918,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.011138916015625,
+        "mean_per_shot_us": 165.62650909413003,
+        "name": "osd_bp"
+      },
+      {
+        "ler": 0.010711669921875,
+        "mean_per_shot_us": 150.48150482166454,
+        "name": "osd_gnn"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m2\\m2_learned_basis_repetition_circuit_level_d3_s20__d3__circuit_level__p0p01",
+    "selected_reweight_strength": 1.0
+  }
+]
+[2026-10-16 12:57:23] offset 20 exit=0
+[2026-10-16 12:57:23] m2 headline seeds finished

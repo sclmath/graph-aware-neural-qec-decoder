@@ -80,6 +80,19 @@
 
 结论：d=3 repetition 上**学习先验无显著收益**（+21% 迭代节省），但把 OSD 排序换成学习 logits 有正收益（0.01016 → 0.00967，McNemar z=+2.26，p=0.024）。跨码距迁移（d=3 → d=5）`bp` 0.05078 → `bp_gnn` **0.01709（−66%）**。
 
+**多种子复核（2026-10-16 补测，`results/m2/HEADLINE_MULTISEED.md`，由 `scripts/m2_headline_multiseed.py` 生成）**：这张表的效应量是全报告最小的（`bp` 0.00943 vs `bp_gnn` 0.00952，差 0.0001 量级），所以又补了两个 seed（`--write-configs` 只移动 `training.seed` 与三个 split seed 列表，`scripts/m2_headline_seeds.ps1` 重跑 M2），每个 seed 32768 test shots、合计 98304 shots：
+
+| 种子偏移 | mwpm | bp | `osd_gnn` | bp_osd | bp_gnn |
+|---:|---:|---:|---:|---:|---:|
+| 0（旗舰） | 0.00662 | 0.00943 | 0.00974 | 0.01010 | 0.00952 |
+| 10 | 0.00705 | 0.01031 | 0.01013 | 0.01068 | 0.00934 |
+| 20 | 0.00754 | 0.01096 | 0.01071 | 0.01114 | 0.01099 |
+
+- **`bp_gnn` 相对 `bp` 的配对 ΔLER：+0.00009 / −0.00098 / +0.00003，均值 −0.00028 ± 0.00035（符号翻转）**——"学习先验在同分布 d=3 repetition 上没有收益"这句话现在有误差棒支撑，单 seed 那次的 +0.00009 落在噪声里（口径纪律见 4.8.1 与第 7 节）。
+- `mwpm` 相对 `bp_gnn` 稳定领先 **+0.00288 ± 0.00034**（三个 seed 同号），是本表唯一跨 seed 稳健的差异。
+- 口径：`bp_gnn` 列取自 T9 消融的 `all` 臂（同一 splits、同一训练种子；种子偏移 0 与旗舰值逐位一致），其余列取自同一批 `graph_qec.m2` 运行的 `results.json`；`osd_gnn` 是本运行里学习排序 OSD 的解码器名，与表中 `bp_gnn_osd_learned_order` 的协议不同，不直接等价。
+
+
 ### 4.4 OSD 候选集学习（T8）
 
 | 配置（32768 shots） | bp | OSD-0 | OSD-CS | bp+GNN | bp+GNN+OSD-CS | mwpm |
@@ -268,7 +281,7 @@ README 7.2 列出 7 类消融，当前状态：
 4. **HGP 只做到 code-capacity、小码（[[13,1,3]]、[[58,16,3]]）。** 结构化量子 LDPC（非 HGP）未实现（`docs/ROADMAP_TODO.md` F1）。
 5. **BP+OSD 的 OSD 触发策略仍是"未收敛就触发"。** M3 已证明不存在"只救不伤"的阈值，T8 说明正确的解法是换候选集而不是换阈值；但**何时该触发 OSD-CS** 仍以"未收敛"为唯一判据。
 6. **d=9 是 BP 的失能区**（收敛率 0.000，128 ms/shot），交付内未处理。
-7. **小规模统计功效是本次交付最真实的风险**：本次交付又消灭了两处单 seed 结论——T9 的 repetition 消融（3 seeds / 98304 shots，见 4.8.1）与 T8 的 d=7 OSD-CS 探针（每个噪声率 3 份独立测试集，见 4.6 第 4 条）；**仍属单 seed 或小 shots 量级**的是：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5），以及 4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂。**这不是理论担忧——T9 的"位置特征有害（−24%）"就是被 3 seeds 复核直接推翻的一个实例**（见 4.8.1），种子间散布在 32768 shots 下仍有 ±15%。后续任何消融/迁移结论都应至少 3 seeds。**口径纪律**：跨 seed 的推断必须用种子的实测散布（`scripts/t9_multiseed.py` 的配对表）；把所有 seed 的 shot 直接求和会把种子间散布当成二项噪声，从而高估显著性。
+7. **小规模统计功效是本次交付最真实的风险**：本次交付又消灭了三处单 seed 结论——M2 旗舰表（见 4.3 的多种子复核）、T9 的 repetition 消融（3 seeds / 98304 shots，见 4.8.1）与 T8 的 d=7 OSD-CS 探针（每个噪声率 3 份独立测试集，见 4.6 第 4 条）；**仍属单 seed 或小 shots 量级**的是：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5），以及 4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂。**这不是理论担忧——T9 的"位置特征有害（−24%）"就是被 3 seeds 复核直接推翻的一个实例**（见 4.8.1），种子间散布在 32768 shots 下仍有 ±15%。后续任何消融/迁移结论都应至少 3 seeds。**口径纪律**：跨 seed 的推断必须用种子的实测散布（`scripts/t9_multiseed.py` 的配对表）；把所有 seed 的 shot 直接求和会把种子间散布当成二项噪声，从而高估显著性。
 
 ## 8. 复现说明
 
@@ -300,7 +313,12 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 .\.venv\Scripts\python.exe scripts\t8_d7_multiseed.py --json results\t8\d7_multiseed.json --output results\t8\D7_MULTISEED.md
 .\.venv\Scripts\python.exe scripts\t9_multiseed.py --prefix repetition_d3 --output results\t9\REPETITION_D3_MULTISEED.md
 
-# 8) 工程性能表（T11）
+# 8) M2 旗舰表的多种子复核（repetition d=3）
+.\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --write-configs
+.\scripts\m2_headline_seeds.ps1          # 跑种子偏移 10/20 的 M2
+.\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --aggregate
+
+# 9) 工程性能表（T11）
 .\.venv\Scripts\python.exe scripts\engineering_table.py
 ```
 
