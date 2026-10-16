@@ -164,7 +164,10 @@ $env:PYTHONPATH = "src"
   - **2026-10-16 补种子（P1 收口）**：d=7 三个噪声率各补到 **3 份独立测试集 × 1024 shots = 3072 shots**（`scripts/t8_osd_cs_study.py --seed-offset 10/20`，输出 `results/t8/d7_p0p00{3,5,8}_probe_s{10,20}/`；汇总脚本 `scripts/t8_d7_multiseed.py` → `results/t8/D7_MULTISEED.md`）
     - 结果：`bp_gnn_osd_cs4` 相对 `bp_gnn` 为 **−34.9%（z=−5.39）/ −11.6%（z=−2.67）/ −1.9%（n.s.）**；相对 OSD-0 三个点全部 −42.3% / −25.0% / −17.7%（z=−9.5 / −9.2 / −9.1）
     - 口径：只换测试集种子、共用同一 checkpoint → 压的是 LER 估计误差，不含模型种子方差
-  - 验收：✅ 新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表 + d=7 多种子汇总
+  - **2026-10-16 补种子（repetition d=3 全研究，3 seeds / 98304 shots）**：`scripts/t8_repetition_multiseed.py` → `results/t8/REPETITION_D3_MULTISEED.md`。两个新 seed 复用 M2 旗舰表的 s10/s20 运行（模型与 splits 都换）
+    - `bp_osd_cs0 → bp_osd_cs4`：**−0.00279 ± 0.00012**（z=−12.23）→ 主结论更硬
+    - `bp_osd_cs4 → bp_gnn_osd_cs4`：**+0.00055 ± 0.00043**（逐 seed +0.00006/+0.00140/+0.00018）→ **单 seed 的「打平（p=0.53）」要撤回**，改为「种子噪声内不可区分」
+  - 验收：✅ 新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表 + d=7 与 repetition 的多种子汇总
 - [x] **T9 · 消融补全：图特征组合 + top-k 候选规模**　（P1，2026-10-15 完成）
   - top-k：OSD-CS 的 λ ∈ {0,2,4,6,8} 扫描（见 T8）——表面码单调、repetition 非单调（λ=4 最优）
   - 图特征组合：`scripts/t9_feature_ablation.py`（置零特征列 + 同 seed 重训，架构不变）

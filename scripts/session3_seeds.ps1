@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory = $true)][ValidateSet('A', 'B', 'C', 'D')][string]$Chain
+    [Parameter(Mandatory = $true)][ValidateSet('A', 'B', 'C', 'D', 'F')][string]$Chain
 )
 $ErrorActionPreference = 'Continue'
 Set-Location (Split-Path $PSScriptRoot -Parent)
@@ -11,6 +11,19 @@ $log = "results\logs\session3_chain$Chain.log"
 function Write-Log([string]$message) {
     $line = "[{0}] {1}" -f (Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), $message
     Add-Content -Path $log -Value $line -Encoding utf8
+}
+
+function Invoke-RepetitionStudy([int]$offset) {
+    # Independent seed for the T8 repetition d=3 OSD-CS study: reuse the M2 run
+    # that was trained with the same seed shift (model + splits both differ from
+    # the original study), and evaluate on that run's own test split.
+    $run = "results\m2\m2_learned_basis_repetition_circuit_level_d3_s{0}__d3__circuit_level__p0p01" -f $offset
+    $out = "results\t8\repetition_d3_seed{0}" -f $offset
+    if (Test-Path (Join-Path $out 'STUDY.md')) { Write-Log "skip t8 repetition offset $offset (exists)"; return }
+    if (-not (Test-Path (Join-Path $run 'model_state.pt'))) { Write-Log "missing checkpoint for offset $offset ($run)"; return }
+    Write-Log "t8 repetition offset $offset start"
+    & $py scripts\t8_osd_cs_study.py --config (Join-Path $run 'config.json') --checkpoint (Join-Path $run 'model_state.pt') --sweeps 0 4 --output-dir $out 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
+    Write-Log "t8 repetition offset $offset exit=$LASTEXITCODE"
 }
 
 function Invoke-Probe([string]$p, [int]$offset) {
@@ -44,6 +57,9 @@ if ($Chain -eq 'A') {
     foreach ($off in 10, 20) {
         Invoke-T9 $off @('no_check_features', 'no_check_geometry', 'no_edge_degree') -Merge
     }
+} elseif ($Chain -eq 'F') {
+    # T8 repetition d=3 study, independent seeds (needs the M2 headline seeds).
+    foreach ($off in 10, 20) { Invoke-RepetitionStudy $off }
 } else {
     # T6 residual noise-rate points, in value order (the grid skips finished
     # points itself, so this is resumable).  Budget 8 h: covers d=7 p=0.008 x2

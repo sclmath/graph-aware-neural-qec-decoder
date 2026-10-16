@@ -1,0 +1,94 @@
+[2026-10-16 12:58:42] chain F start (pid 11648)
+[2026-10-16 12:58:42] t8 repetition offset 10 start
+{
+  "bp": {
+    "logical_error_rate": 0.01031494140625,
+    "logical_errors": 338,
+    "standard_error": 0.0005581577021307371,
+    "syndrome_consistency_rate": 0.98968505859375
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.00933837890625,
+    "logical_errors": 306,
+    "standard_error": 0.0005313411452617905,
+    "syndrome_consistency_rate": 0.992828369140625
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.0091552734375,
+    "logical_errors": 300,
+    "standard_error": 0.0005261547477082262,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.009124755859375,
+    "logical_errors": 299,
+    "standard_error": 0.0005252851802261706,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.01068115234375,
+    "logical_errors": 350,
+    "standard_error": 0.000567874318586598,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.007720947265625,
+    "logical_errors": 253,
+    "standard_error": 0.00048353424509416635,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.007049560546875,
+    "logical_errors": 231,
+    "standard_error": 0.0004621892511723523,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-16 12:58:49] t8 repetition offset 10 exit=0
+[2026-10-16 12:58:49] t8 repetition offset 20 start
+{
+  "bp": {
+    "logical_error_rate": 0.010955810546875,
+    "logical_errors": 359,
+    "standard_error": 0.0005750493769702363,
+    "syndrome_consistency_rate": 0.989410400390625
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.010986328125,
+    "logical_errors": 360,
+    "standard_error": 0.000575840840266989,
+    "syndrome_consistency_rate": 0.9908447265625
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.011688232421875,
+    "logical_errors": 383,
+    "standard_error": 0.0005937401737655047,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.00848388671875,
+    "logical_errors": 278,
+    "standard_error": 0.0005066666876275603,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.011138916015625,
+    "logical_errors": 365,
+    "standard_error": 0.0005797812151974089,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.00830078125,
+    "logical_errors": 272,
+    "standard_error": 0.0005012155110777311,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.007537841796875,
+    "logical_errors": 247,
+    "standard_error": 0.0004778103136804224,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-16 12:58:56] t8 repetition offset 20 exit=0
+[2026-10-16 12:58:56] chain F finished

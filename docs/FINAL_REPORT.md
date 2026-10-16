@@ -103,7 +103,22 @@
 - OSD-0 在两个配置上都**有害**（McNemar z=−1.73 / −3.19）；OSD-CS 把它变成**显著有益**（`bp_osd_cs0 → bp_osd_cs8`：835 救回 / 242 弄坏，z=18.07）
 - 收益集中在未收敛 shot：表面码 1521/32768 个未收敛 shot 上，`bp_gnn` 764 错 → OSD-0 **955 错（弄坏）** → OSD-CS(8) **259 错**（MWPM 参考 209）
 - `bp_gnn_osd_cs8` 距 MWPM 仅 **+13%**（`bp` 差 +137%）
-- 机制洞见：repetition 上 DEM 先验与学习先验在 λ=4 打平（247 vs 249，p=0.53）→ **候选集选对后，逐机制边际不再提供增量**；表面码上学习先验仍有 −24%（BP 越弱越有用）
+- 机制洞见（**已按 3 seeds 修正**，见下）：repetition 上 DEM 先验与学习先验在 λ=4 上**在种子噪声内不可区分**，所以"候选集选对之后逐机制边际不再提供增量"作为**方向性**结论仍成立，但**不能再写成"两者等价/打平"**；表面码上学习先验仍有 −24%（BP 越弱越有用）
+
+**repetition 配置的多种子复核（2026-10-16 补测，`results/t8/REPETITION_D3_MULTISEED.md`）**：这张表里唯一"小差异"结论是 λ=4 上 DEM 先验与学习先验的打平，于是把整个 OSD-CS 研究在两个额外 seed 上重跑（用该 seed 自己训练的模型与 splits，**模型与数据方差都换**，3 × 32768 = 98304 shots）：
+
+| 配对 | 逐 seed ΔLER | 跨 seed 均值 ± SE | 相对 | 合并 McNemar |
+|---|---|---:|---:|---|
+| `bp_osd_cs0` → `bp_osd_cs4`（换候选集） | −0.00256 / −0.00296 / −0.00284 | **−0.00279 ± 0.00012** | −26.2% | z=−12.23 (p=2e-34) |
+| `bp` → `bp_osd_cs4` | −0.00189 / −0.00259 / −0.00266 | −0.00238 ± 0.00024 | −23.3% | z=−10.40 (p=2e-25) |
+| `bp_gnn` → `bp_gnn_osd_cs4` | −0.00192 / −0.00021 / −0.00250 | −0.00155 ± 0.00069 | −15.5% | z=−7.17 (p=8e-13) |
+| `bp` → `bp_osd_cs0`（OSD-0 有害） | +0.00067 / +0.00037 / +0.00018 | +0.00041 ± 0.00014 | +4.0% | z=+1.85 (p=0.065) |
+| `bp_osd_cs4` → `bp_gnn_osd_cs4`（先验之争） | +0.00006 / +0.00140 / +0.00018 | **+0.00055 ± 0.00043** | +7.0% | z=+3.58 (p=3e-4) |
+
+- **主结论更硬了**：把目标从"逐机制边际"换成"候选基质量"带来 −26.2%（跨 seed SE 仅 0.00012，三个 seed 同向），远大于任何种子效应。
+- **"打平"这句要撤回**：单 seed 的 247 vs 249（p=0.53）在 3 seeds 下变成 **+0.00055 ± 0.00043**（学习先验略差），且三个 seed 的 Δ 从 +0.00006 到 +0.00140，散布与效应同量级。正确写法是"**两者在种子噪声内不可区分**，λ=4 上选哪个先验不影响结论量级"。
+- 表面码配置上学习先验仍好 −24%，与 repetition 的方向相反 → **λ=4 上的先验之争是配置/种子依赖的，不宜作为普遍结论**。
+
 
 ### 4.5 Union-Find 重写（T18）
 
@@ -281,7 +296,7 @@ README 7.2 列出 7 类消融，当前状态：
 4. **HGP 只做到 code-capacity、小码（[[13,1,3]]、[[58,16,3]]）。** 结构化量子 LDPC（非 HGP）未实现（`docs/ROADMAP_TODO.md` F1）。
 5. **BP+OSD 的 OSD 触发策略仍是"未收敛就触发"。** M3 已证明不存在"只救不伤"的阈值，T8 说明正确的解法是换候选集而不是换阈值；但**何时该触发 OSD-CS** 仍以"未收敛"为唯一判据。
 6. **d=9 是 BP 的失能区**（收敛率 0.000，128 ms/shot），交付内未处理。
-7. **小规模统计功效是本次交付最真实的风险**：本次交付又消灭了三处单 seed 结论——M2 旗舰表（见 4.3 的多种子复核）、T9 的 repetition 消融（3 seeds / 98304 shots，见 4.8.1）与 T8 的 d=7 OSD-CS 探针（每个噪声率 3 份独立测试集，见 4.6 第 4 条）；**仍属单 seed 或小 shots 量级**的是：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5），以及 4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂。**这不是理论担忧——T9 的"位置特征有害（−24%）"就是被 3 seeds 复核直接推翻的一个实例**（见 4.8.1），种子间散布在 32768 shots 下仍有 ±15%。后续任何消融/迁移结论都应至少 3 seeds。**口径纪律**：跨 seed 的推断必须用种子的实测散布（`scripts/t9_multiseed.py` 的配对表）；把所有 seed 的 shot 直接求和会把种子间散布当成二项噪声，从而高估显著性。
+7. **小规模统计功效是本次交付最真实的风险**：本次交付又消灭了四处单 seed 结论——M2 旗舰表（4.3）、T8 的 d=7 探针与 repetition d=3 研究（4.4 与 4.6 第 4 条）、T9 的 repetition 消融（4.8.1）；**其中两处是「小差异」型结论，做多种子后都被改写**（λ=4 上的「打平」→「不可区分」、bp vs bp_gnn 的 +0.00009 → −0.00028 ± 0.00035）；T9 的 repetition 消融（3 seeds / 98304 shots，见 4.8.1）与 T8 的 d=7 OSD-CS 探针（每个噪声率 3 份独立测试集，见 4.6 第 4 条）；**仍属单 seed 或小 shots 量级**的是：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5），以及 4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂。**这不是理论担忧——T9 的"位置特征有害（−24%）"就是被 3 seeds 复核直接推翻的一个实例**（见 4.8.1），种子间散布在 32768 shots 下仍有 ±15%。后续任何消融/迁移结论都应至少 3 seeds。**口径纪律**：跨 seed 的推断必须用种子的实测散布（`scripts/t9_multiseed.py` 的配对表）；把所有 seed 的 shot 直接求和会把种子间散布当成二项噪声，从而高估显著性。
 
 ## 8. 复现说明
 
@@ -312,6 +327,7 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 # 7) 多种子汇总（d=7 OSD-CS 探针、T9 消融）
 .\.venv\Scripts\python.exe scripts\t8_d7_multiseed.py --json results\t8\d7_multiseed.json --output results\t8\D7_MULTISEED.md
 .\.venv\Scripts\python.exe scripts\t9_multiseed.py --prefix repetition_d3 --output results\t9\REPETITION_D3_MULTISEED.md
+.\.venv\Scripts\python.exe scripts\t8_repetition_multiseed.py --output results\t8\REPETITION_D3_MULTISEED.md
 
 # 8) M2 旗舰表的多种子复核（repetition d=3）
 .\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --write-configs

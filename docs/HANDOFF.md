@@ -63,7 +63,8 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 
 ### WP2 · 剩下的单 seed 结论（P2，未解决问题 7 的剩余部分）
 
-- 已完成：T9 repetition 消融（3 seeds / 98304 shots）、T8 d=7 OSD-CS 探针（每点 3 份测试集）、M2 旗舰表（3 seeds / 98304 shots，`results/m2/HEADLINE_MULTISEED.md`）；
+- 已完成：T9 repetition 消融、T8 d=7 OSD-CS 探针（每点 3 份测试集）、T8 repetition d=3 研究、M2 旗舰表（都是 3 seeds / 98304 shots 量级：`results/{m2/HEADLINE_MULTISEED.md,t8/D7_MULTISEED.md,t8/REPETITION_D3_MULTISEED.md,t9/REPETITION_D3_MULTISEED.md}`）；
+- **本轮又撤回了两个单 seed 结论**（都属「小差异」型）：T9/T8 的「λ=4 上 DEM 先验与学习先验打平」→ +0.00055 ± 0.00043（不可区分）；M2 旗舰表的 bp vs bp_gnn → −0.00028 ± 0.00035（符号翻转）。这说明**凡结论涉及 <0.001 量级的差异，必须 3 seeds**；
 - **仍属单 seed**：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5）、4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂、T8 的 repetition/表面码 d=3 两个 OSD-CS 研究（效应量大，优先级低）；
 - 做法可直接复用本轮的两个工具：`scripts/t9_feature_ablation.py --seed-offset N --merge`（消融）与 `scripts/t9_multiseed.py --prefix <系列>`（跨 seed 汇总）。
 
