@@ -25,7 +25,7 @@
 # 0) 环境：CPU-only torch（torch.cuda.is_available() == False），i5-12400 / 16 GB
 $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 
-# 1) 回归测试（期望 62 passed，约 6 s）
+# 1) 回归测试（期望 72 passed，约 8-13 s）
 .\.venv\Scripts\python.exe -m pytest -q
 
 # 2) 端到端 smoke（期望 18 s 全绿；产出写进 results/smoke/，已在 .gitignore 中）
