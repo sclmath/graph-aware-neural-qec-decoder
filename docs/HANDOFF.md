@@ -3,6 +3,9 @@
 - **交接时间**：2026-10-16 下午（第二次刷新）
 - **交接时仓库状态**：HEAD = 2026-10-16 下午的多种子提交（`git log --oneline -1`）；`pytest` **72 项全过**；工作区只应剩下正在跑的结果目录
 - **正在运行的后台任务**：`scripts/session3_seeds.ps1 -Chain D` —— T6 残点补齐（d=7 p=0.008 的 s2/s3 → d=5 p=0.01 ×3 → d=7 p=0.01 ×3），启动于 2026-10-16 12:43，预算 480 min。看 `results/logs/t6_progress.log`（网格进度）与 `results/logs/session3_chainD.log`（链日志），存活看 `Get-Process python`
+- **关机守卫（2026-10-16 21:08 起在跑）**：`scripts/shutdown_when_done.ps1 -Watch` 以 detached 进程守望本仓库的 python 进程；当 `results/logs/t6_progress.log` 末行出现网格收尾行（grid finished / stopping）**且**已无本仓库 python 进程时，执行 `shutdown.exe /s /t 300`（另设 23:30 硬兜底）。日志 `results/logs/shutdown_watch.log`（含 PID 与每轮心跳）。
+  - 取消方式：关机指令有 300 s 宽限，期间 `shutdown /a` 即可；或 `Stop-Process -Id <watcher pid>`；已发出后想避免重启再触发，删 `results/logs/shutdown_issued.flag`。
+  - 注意：日期参数必须整体加引号传给 `Start-Process`（`'"2026-10-16 23:30"'`），否则空格会把参数拆开、把截止时间变成已过期而**立即关机**——2026-10-16 21:06 踩过一次（已 `shutdown /a` 中止），脚本现已内置「拒绝过去的截止时间」防呆。
 - **交付目标**：第一阶段成果（CPU-only）。范围、出口标准与优先级定义见 `docs/ROADMAP_TODO.md` 第 0 与 2.0 节；第二阶段（GPU）为未来展望，不排期
 - **本文内容**：最新状态 + 下一步工作包（第 3 节）+ 环境入口与操作纪律（第 2、4 节）
 
