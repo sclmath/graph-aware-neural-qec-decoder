@@ -1,0 +1,98 @@
+{
+  "config": "configs\\m2_learned_basis_repetition_circuit_level_d3.json",
+  "note": "all / no_variable_geometry / prior_only \u7684\u6570\u503c\u6765\u81ea\u9996\u8f6e\u8fd0\u884c\uff08\u635f\u574f\u7684 --merge \u8986\u76d6\u4e86\u5b83\u4eec\uff0c\u6309 results/logs/session3_chainB.log \u6062\u590d\uff09",
+  "rows": [
+    {
+      "arm": "all",
+      "best_validation_log_loss": null,
+      "logical_error_rate": 0.01099,
+      "logical_errors": 360,
+      "masked_check": [],
+      "masked_edge": [],
+      "masked_variable": [],
+      "mechanism_auc": 0.9856,
+      "shots": 32768
+    },
+    {
+      "arm": "no_check_features",
+      "best_validation_log_loss": 0.016009410261176527,
+      "logical_error_rate": 0.01104736328125,
+      "logical_errors": 362,
+      "masked_check": [
+        0,
+        1,
+        2
+      ],
+      "masked_edge": [],
+      "masked_variable": [],
+      "mechanism_auc": 0.9849633378868576,
+      "shots": 32768
+    },
+    {
+      "arm": "no_variable_geometry",
+      "best_validation_log_loss": null,
+      "logical_error_rate": 0.01105,
+      "logical_errors": 362,
+      "masked_check": [],
+      "masked_edge": [],
+      "masked_variable": [
+        4,
+        5
+      ],
+      "mechanism_auc": 0.9856,
+      "shots": 32768
+    },
+    {
+      "arm": "no_check_geometry",
+      "best_validation_log_loss": 0.0159871659707278,
+      "logical_error_rate": 0.01104736328125,
+      "logical_errors": 362,
+      "masked_check": [
+        1,
+        2
+      ],
+      "masked_edge": [],
+      "masked_variable": [],
+      "mechanism_auc": 0.9849635040671483,
+      "shots": 32768
+    },
+    {
+      "arm": "no_edge_degree",
+      "best_validation_log_loss": 0.017265859991312027,
+      "logical_error_rate": 0.010467529296875,
+      "logical_errors": 343,
+      "masked_check": [],
+      "masked_edge": [
+        1,
+        2
+      ],
+      "masked_variable": [],
+      "mechanism_auc": 0.9840630108589188,
+      "shots": 32768
+    },
+    {
+      "arm": "prior_only",
+      "best_validation_log_loss": null,
+      "logical_error_rate": 0.02371,
+      "logical_errors": 777,
+      "masked_check": [
+        0,
+        1,
+        2
+      ],
+      "masked_edge": [
+        1,
+        2
+      ],
+      "masked_variable": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "mechanism_auc": 0.984,
+      "shots": 32768
+    }
+  ],
+  "seed_offset": 20
+}

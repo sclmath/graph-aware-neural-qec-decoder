@@ -1,0 +1,140 @@
+[2026-10-16 12:10:22] chain A start (pid 9168)
+[2026-10-16 12:10:22] probe p0p003 offset 20 start
+{
+  "bp": {
+    "logical_error_rate": 0.1708984375,
+    "logical_errors": 175,
+    "standard_error": 0.0117631310255176,
+    "syndrome_consistency_rate": 0.33203125
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.099609375,
+    "logical_errors": 102,
+    "standard_error": 0.009358701844120158,
+    "syndrome_consistency_rate": 0.5849609375
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.1025390625,
+    "logical_errors": 105,
+    "standard_error": 0.009479871931493621,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.0703125,
+    "logical_errors": 72,
+    "standard_error": 0.007989779380836705,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.21875,
+    "logical_errors": 224,
+    "standard_error": 0.012918707573557571,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.142578125,
+    "logical_errors": 146,
+    "standard_error": 0.010926315856445344,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0,
+    "logical_errors": 0,
+    "standard_error": 0.0,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-16 12:18:49] probe p0p003 offset 20 exit=0
+[2026-10-16 12:18:49] probe p0p005 offset 20 start
+{
+  "bp": {
+    "logical_error_rate": 0.25390625,
+    "logical_errors": 260,
+    "standard_error": 0.01360139390730298,
+    "syndrome_consistency_rate": 0.1220703125
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.1708984375,
+    "logical_errors": 175,
+    "standard_error": 0.0117631310255176,
+    "syndrome_consistency_rate": 0.2900390625
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.2138671875,
+    "logical_errors": 219,
+    "standard_error": 0.012813567547402082,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.16015625,
+    "logical_errors": 164,
+    "standard_error": 0.011460965750047729,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.2841796875,
+    "logical_errors": 291,
+    "standard_error": 0.01409446342125891,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.2353515625,
+    "logical_errors": 241,
+    "standard_error": 0.013256823292088668,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0078125,
+    "logical_errors": 8,
+    "standard_error": 0.0027513251146446885,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-16 12:30:12] probe p0p005 offset 20 exit=0
+[2026-10-16 12:30:12] probe p0p008 offset 20 start
+{
+  "bp": {
+    "logical_error_rate": 0.353515625,
+    "logical_errors": 362,
+    "standard_error": 0.014939406516697768,
+    "syndrome_consistency_rate": 0.009765625
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.302734375,
+    "logical_errors": 310,
+    "standard_error": 0.014357539436316727,
+    "syndrome_consistency_rate": 0.0556640625
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.3818359375,
+    "logical_errors": 391,
+    "standard_error": 0.015182395436328707,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.298828125,
+    "logical_errors": 306,
+    "standard_error": 0.014304510485284617,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.396484375,
+    "logical_errors": 406,
+    "standard_error": 0.015286473908381242,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.3759765625,
+    "logical_errors": 385,
+    "standard_error": 0.015136687986281112,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0576171875,
+    "logical_errors": 59,
+    "standard_error": 0.007281816448231325,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-16 12:43:20] probe p0p008 offset 20 exit=0
+[2026-10-16 12:43:20] chain A finished

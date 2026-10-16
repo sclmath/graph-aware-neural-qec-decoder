@@ -1,9 +1,10 @@
 # 交接说明（HANDOFF）
 
-- **交接时间**：2026-10-15
-- **交接时仓库状态**：HEAD = `994a889`，工作区 clean，`pytest` **62 项全过**，追踪文件 296 个
+- **交接时间**：2026-10-16 下午（第二次刷新）
+- **交接时仓库状态**：HEAD = 2026-10-16 下午的多种子提交（`git log --oneline -1`）；`pytest` **72 项全过**；工作区只应剩下正在跑的结果目录
+- **正在运行的后台任务**：`scripts/session3_seeds.ps1 -Chain D` —— T6 残点补齐（d=7 p=0.008 的 s2/s3 → d=5 p=0.01 ×3 → d=7 p=0.01 ×3），启动于 2026-10-16 12:43，预算 480 min。看 `results/logs/t6_progress.log`（网格进度）与 `results/logs/session3_chainD.log`（链日志），存活看 `Get-Process python`
 - **交付目标**：第一阶段成果（CPU-only）。范围、出口标准与优先级定义见 `docs/ROADMAP_TODO.md` 第 0 与 2.0 节；第二阶段（GPU）为未来展望，不排期
-- **本文内容**：把上一轮汇报的「建议的下一步」展开成 4 个可执行工作包（第 3 节），并固化环境入口、耗时预算与操作纪律（第 2、4 节）
+- **本文内容**：最新状态 + 下一步工作包（第 3 节）+ 环境入口与操作纪律（第 2、4 节）
 
 ---
 
@@ -39,57 +40,44 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 
 ## 3. 下一步工作包
 
-### WP1 · T6 补齐表面码 d=5 / d=7 学习重加权（P1，算力密集，建议先做）
+> P0 与 P1（T1-T11、T17、T18）已全部完成，交付出口标准 1-6 全部达成。剩下的都是「把 P1 的残点补满」与「P2 强化」。
 
-**已有**：表面码 d=5 线路级 p=0.005 单点（2048 shots、1 seed）：`bp` 0.10352 → `bp_gnn` **0.06445（-38%）**，迭代 -43%，延迟 1.78× 更快；对照 d=3 的 -18%，**增益随码距增长**（`docs/M4_HGP_AND_SURFACE.md` 第 7.4 节）。
+### WP1 · T6 残点补齐（**进行中**，唯一阻塞交付表格收口的项）
 
-**待做**：把单点扩成曲线。
+**已跑**：d=5 p ∈ {0.003, 0.005, 0.008} × 3 seeds（8192 shots/seed）；d=7 p ∈ {0.003, 0.005} × 3 seeds 与 p=0.008 × 1 seed（4096/seed）。16 个点，`results/m4_surface/`。
 
-| 步 | 内容 | 配置改动 | 实测耗时（单点） |
-|---|---|---|---|
-| WP1a | d=5 线路级 p=0.003 与 p=0.008，各 1 seed | 复制 `configs/m4_rotated_surface_code_circuit_level_d5.json`，改 `experiment.name` 与 `experiment.noise.physical_error_rate` | 训练 18 min + 评测 5 min |
-| WP1b | d=7 线路级 p=0.005，1 seed | 用 `configs/m4_rotated_surface_code_circuit_level_d7.json`（batch 需 ≤128，epochs 2） | 训练约 25 min + 评测约 10 min |
-| WP1c | 补齐 5 个噪声率 × 3 seeds | 在每个配置上追加 seed 变体：改 `training.seed`（7/17/27）与 `splits.test_seeds`（301/302/303） | d=5 约 1.2 h/点，d=7 约 2 h/点 |
+**进行中**（`scripts/session3_seeds.ps1 -Chain D`，12:43 启动，预算 480 min）：d=7 p=0.008 s2/s3 → d=5 p=0.01 ×3 → d=7 p=0.01 ×3。网格自身按「结果目录存在即跳过」续跑，重复执行命令是安全的。
 
-**命令模板**（M2 管线；注意 M4 的 `graph_qec.m4` 只支持 code_capacity 的 DEM 级码族，表面码线路级必须走 M2）：
+**跑完后的收口动作（三步，均为秒级）**：
 
 ```powershell
-$py = ".\.venv\Scripts\python.exe"
-Start-Process -FilePath $py -ArgumentList @('-m','graph_qec.m2',
-  '--config','configs\m4_rotated_surface_code_circuit_level_d5.json',
-  '--output-dir','results\m4_surface') -WorkingDirectory $PWD -WindowStyle Hidden `
-  -RedirectStandardOutput 'results\logs\t6_surface_d5.out.log' `
-  -RedirectStandardError  'results\logs\t6_surface_d5.err.log'
+$env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
+.\.venv\Scripts\python.exe scripts\t10_multiseed_stats.py --results-dir results\m4_surface --output-dir results\t10
+.\.venv\Scripts\python.exe scripts\threshold_estimate.py --inputs results\t10\surface_sweep_mean.json results\m4\surface_sweep.json results\m4_threshold\surface_sweep.json --output results\m4\THRESHOLD.md
+.\.venv\Scripts\python.exe scripts\engineering_table.py
 ```
 
-**验收**：`results/m4_surface/` 中出现 d=5 与 d=7 的 LER-p 曲线数据（含 3 seeds 的均值 ± 标准误）；`docs/M4_HGP_AND_SURFACE.md` 增补对应小节；`results/m5/ENGINEERING_TABLE.md` 重新生成。
+然后把 `docs/FINAL_REPORT.md` 的 4.6 表（d=5/d=7 各一行新噪声率、d=7 p=0.008 去掉 † 单 seed 标注）与 4.7 的阈值结论换成新数字，并在 `docs/ROADMAP_TODO.md` 的 T6 条目里勾掉残点。
 
-**注意**：p=0.005 之外的噪声率需要**重新训练**（GNN 的边特征含 p，跨噪声率评测属于 M3 的迁移路径，不是同分布结果）；若要测迁移，用 `graph_qec.m3 --target-physical-error-rate`，但必须在文档里标明是迁移而非同分布。
+**仍未排期**：p=0.002 × {d=5, d=7} × 3 seeds（约 3.5 h）。它是低噪声端，价值在于检验「增益是否在低噪声端继续上升」——目前噪声率轴上 d=5 的增益在 p=0.003 处最大（−43.4%），没有低端拐点的证据。
 
-### WP2 · T8 OSD 候选集学习（P1，纯 CPU，性价比最高）
+### WP2 · HGP 与跨码距迁移的 seed 数（P2，未解决问题 7 的剩余部分）
 
-**动机（三条独立证据指向同一结论）**：M2 用学习边际做 OSD 排序无改善；M3 的 OSD-0 回退在 d=3 上 67 修好/88 弄坏、且 288 个未收敛 shot 的残余重量全为 1（不存在只救不伤的阈值窗口）；M5 把学习后验接进 MWPM 无 LER 收益。共同的解释是：**逐机制边际回答「每个机制是否发生」，而候选基选择需要「哪些位构成可解的基」**。
+- `docs/FINAL_REPORT.md` 第 7 节列出的「仍属单 seed」项：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5）、4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂；
+- 做法可直接复用本轮的两个工具：`scripts/t9_feature_ablation.py --seed-offset N --merge`（消融）与 `scripts/t9_multiseed.py --prefix <系列>`（跨 seed 汇总）。
 
-**做法建议**：先实现 OSD-λ（combination sweep），再考虑 learning-to-rank；在 `src/graph_qec/m2_config.py` 的 `SUPPORTED_BENCHMARK_DECODERS` 注册新解码器名，加单测，与 `bp`/`bp_gnn`/`bp_gnn_osd` 做 McNemar 配对检验。
+**验收**：相关表格全部标注 shots、seed 数与跨 seed 标准误。
 
-**验收**：新增解码器 + 单测 + 对照表（至少 d=3 repetition 与表面码 d=3 两个配置）；`docs/M3_HYBRID_DECODER.md` 增补小节。
+### WP3 · P2 强化项 T12-T15（不做仍可交付）
 
-### WP3 · T18 修正 Union-Find 的 peeling（P1，**2026-10-15 已完成**）
+T12 真零样本迁移（移除边特征里的 p）、T13 多噪声率训练课程、T14 HGP 换种子码 + 跨族迁移、T15 精确机制映射 + 每边一次建图。详见 `docs/ROADMAP_TODO.md` 第 2.2 节，合计 11-17 人日。
 
-`src/graph_qec/decoders/union_find.py` 的 `_decode_shot` 只累加合并边的 `fault_mask`，**缺少标准 Union-Find 的 peeling 步骤**，因此在表面码上失效（d=3 码容量 p=0.01：0.06311 vs MWPM 0.00214；d=5 为 0.226-0.476）。
+### WP4 · 交付收口（每次改动后都做）
 
-**已定路线：修实现，不降级**（2026-10-15 决策，记录于 `docs/ROADMAP_TODO.md` 第 6.1 节）。不采用「把 Union-Find 限定为 repetition code 专用基线」的路线，因此它保持 P1。
-
-**已完成（2026-10-15）**：重写为忠实的加权 Union-Find（half-edge 生长 + 前沿中途相遇 + 冻结/解冻 + erasure peeling + 2-core T-join 收尾）。修复了 3 个实现缺陷（boundary 标志、解冻、漏加入 ε' 的边）。`results/m1/` 与表面码扫描已重跑（`scripts/t18_rerun.ps1`），文档数字已更新。
-
-**验收**：✅ 表面码 d=3 码容量 p=0.01 的 Union-Find LER 与 MWPM 完全一致（0.00214 vs 0.00214）；`tests/test_union_find_t18.py` 6 项断言（syndrome 一致性 + 基线追踪）。
-
-### WP4 · T10 多种子统计稳健性（P1，依赖 WP1）
-
-- 对 4 个关键结论给出 3 seeds 的均值 ± 标准误与配对检验：d=5/d=7 表面码的 `bp` vs `bp_gnn`、HGP 跨尺寸迁移、MWPM 边权结论；
-- 另需补：**repetition d=5 的先验强度在目标分布验证集上复核**（当前 `results/m3/m2_d5_eval/` 沿用源配置上限 1.00，未在 d=5 验证集上重选）。
-
-**验收**：相关表格全部标注 shots 与 seed 数，并给出标准误。
+1. `pytest -q`（期望 72 passed）；
+2. `scripts/run_all.ps1`（端到端 smoke，约 18 s）；
+3. 表格/图全部由脚本生成，`docs/FINAL_REPORT.md` 里的数字与 `results/` 一致；
+4. 提交时 `git add` 指定路径，避免把正在跑的结果目录写进提交。
 
 ## 4. 已知坑与操作纪律
 
@@ -102,6 +90,9 @@ Start-Process -FilePath $py -ArgumentList @('-m','graph_qec.m2',
 7. **耗时预算先看实测**：BP 在表面码线路级为 d=3 242 µs/shot、d=5 8.1 ms/shot、d=7 46.9 ms/shot、d=9 127.9 ms/shot（`docs/BP_IMPLEMENTATION.md` 第 4 节）；GNN 前向 d=5 7.8 ms/shot、d=7 27.7-35.3 ms/shot（`results/m5/GNN_PERF.md`）。开新实验前先用 `scripts/probe_cpu_budget.py` 标定。
 8. **提交时排除进行中的结果目录**（`git add` 指定路径，或确认目录为空），避免把半成品写进交付。
 9. **统计纪律**：任何百分比结论都要给 shots、seed 数与标准误；2048 shots 的标准误约 0.005-0.008，只够给方向。
+10. **长跑一律用 detached 进程**：`Start-Process -WindowStyle Hidden`（`scripts/session3_seeds.ps1 -Chain A|B|C|D` 就是模板）。会话/窗口退出会带走前台子进程——2026-10-16 12:00 的「意外退出」就是这样丢掉了三条链的各一半进度。
+11. **脚本必须可续跑**：T6 网格是「结果目录存在即跳过」，T9 消融用 `--merge` 把同一 seed 的多次测量合并进一个 `ablation.json`（`--merge` 的写入口径在 2026-10-16 修过一次，务必保留 `"rows": merged_rows` 这一处）。重放任何长跑命令都是安全的。
+12. **跨 seed 的推断口径**：种子是重复单位。把各 seed 的 shot 直接求和（pooled）会把种子间散布（32768 shots 下 ±15%）当成二项噪声、高估显著性——见 `scripts/t9_multiseed.py` 里「跨 seed 配对」与「合并口径」两张表。只有「多份独立测试集 × 同一模型」的场景（如 d=7 OSD-CS 探针）才适合 pooled 口径，且必须在文档里写明它不含模型种子方差。
 
 ## 5. 未决事项（需决策）
 
@@ -110,13 +101,15 @@ Start-Process -FilePath $py -ArgumentList @('-m','graph_qec.m2',
 | D1 | 是否绑定远端仓库（GitHub 私有等） | **阻塞 T1 的 CI 首次运行**；当前无远端，本地磁盘故障即丢全部结果 |
 | D2 | `LICENSE` 未确定 | 交付物缺一项 |
 | D3 | 参考文献 PDF 策略（当前不入库，可由 `scripts/download_references.py` 重建） | 若要求离线自洽需改用 Git LFS |
-| — | 是否启动 d=7（WP1b） | 单点约 35 min，3 seeds 全网格约 10 h |
+| D4 | T6 低噪声端 p=0.002 × {d=5, d=7} × 3 seeds 是否要做 | 约 3.5 h；不做则 LER-p 曲线的低端停在 p=0.003，缺少「低噪声下增益是否继续上升」的检验 |
 
 ## 6. 接手检查清单
 
-- [ ] `git log --oneline -1` 确认在 `994a889` 或其后
-- [ ] `pytest -q` 期望 62 passed
-- [ ] `.\scripts\run_all.ps1 -SkipTests` 期望 18 s 全绿
-- [ ] 读 `docs/ROADMAP_TODO.md` 第 0 与 2.0 节，确认交付范围与优先级定义
-- [ ] 读第 4 节的 9 条纪律（尤其 batch 与结果目录两条）
-- [ ] 确认 D1-D3 的决策状态（第 5 节）
+- [ ] `git log --oneline -1` 确认在 2026-10-16 下午的提交或其后
+- [ ] `pytest -q` 期望 72 passed（约 8 s）
+- [ ] `Get-Process python` + `results/logs/t6_progress.log` 确认后台任务 Chain D 是否还在跑
+- [ ] `.\scripts
+un_all.ps1 -SkipTests` 期望 18 s 全绿
+- [ ] 读 `docs/ROADMAP_TODO.md` 第 0 与 2.0 节、`docs/FINAL_REPORT.md` 第 4.6/4.8 节与第 7 节
+- [ ] 读第 4 节的 12 条纪律（尤其 batch、结果目录、跨 seed 口径三条）
+- [ ] 确认 D1-D4 的决策状态（第 5 节）

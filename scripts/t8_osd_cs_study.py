@@ -18,6 +18,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import json
 from pathlib import Path
 from typing import Any, Sequence
@@ -98,6 +99,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--tag", type=str, default=None)
     parser.add_argument(
+        "--seed-offset",
+        type=int,
+        default=0,
+        help="Shift the training seed and every split seed, so the same study "
+        "can be repeated over independent seeds.",
+    )
+    parser.add_argument(
         "--test-shots",
         type=int,
         default=None,
@@ -107,6 +115,22 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     config = M2Config.from_json_file(args.config)
+    if args.seed_offset:
+        offset = args.seed_offset
+        config = dataclasses.replace(
+            config,
+            training=dataclasses.replace(
+                config.training, seed=config.training.seed + offset
+            ),
+            splits=dataclasses.replace(
+                config.splits,
+                train_seeds=tuple(seed + offset for seed in config.splits.train_seeds),
+                validation_seeds=tuple(
+                    seed + offset for seed in config.splits.validation_seeds
+                ),
+                test_seeds=tuple(seed + offset for seed in config.splits.test_seeds),
+            ),
+        )
     test_shots = config.splits.test_shots if args.test_shots is None else args.test_shots
     test_split, reference = generate_split(
         config, config.splits.test_seeds, test_shots
@@ -192,6 +216,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "checkpoint": None if args.checkpoint is None else str(args.checkpoint),
         "shots": int(detections.shape[0]),
         "test_shots_override": args.test_shots,
+        "seed_offset": args.seed_offset,
         "test_seeds": list(config.splits.test_seeds),
         "reweight_strength": strength,
         "sweeps": sorted(set(args.sweeps)),

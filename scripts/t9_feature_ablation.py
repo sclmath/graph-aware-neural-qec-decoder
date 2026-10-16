@@ -118,6 +118,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--torch-threads", type=int, default=3)
     parser.add_argument("--max-epochs", type=int, default=None)
     parser.add_argument(
+        "--merge",
+        action="store_true",
+        help="Merge the freshly measured arms into an existing ablation.json "
+        "instead of overwriting it (used to complete a seed in several passes).",
+    )
+    parser.add_argument(
         "--seed-offset",
         type=int,
         default=0,
@@ -176,6 +182,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     observables = test_split.observables
 
     rows: list[dict[str, Any]] = []
+    existing_rows: list[dict[str, Any]] = []
+    if args.merge:
+        ablation_path = args.output_dir / "ablation.json"
+        if ablation_path.exists():
+            stored = json.loads(ablation_path.read_text(encoding="utf-8"))
+            existing_rows = list(stored.get("rows", []))
+
     for arm in args.arms:
         masked = _mask(graph, ARMS[arm])
         model, history = train_reweighting_model(config, masked, train_split, validation_split)
@@ -206,10 +219,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             flush=True,
         )
 
+    if args.merge:
+        fresh = {row["arm"] for row in rows}
+        existing_rows = [
+            row for row in existing_rows if row["arm"] not in fresh
+        ]
+    merged_rows = existing_rows + rows
+
     args.output_dir.mkdir(parents=True, exist_ok=True)
     with (args.output_dir / "ablation.json").open("w", encoding="utf-8", newline="\n") as handle:
         json.dump(
-            {"config": str(args.config), "seed_offset": args.seed_offset, "rows": rows},
+            {"config": str(args.config), "seed_offset": args.seed_offset, "rows": merged_rows},
             handle,
             indent=2,
             sort_keys=True,
@@ -218,14 +238,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     markdown = [
         "# T9 · 图特征组合消融",
         "",
-        f"- 配置：`{args.config}`；测试集 {rows[0]['shots']} shots",
+        f"- 配置：`{args.config}`；测试集 {merged_rows[0]['shots']} shots",
         "- 做法：把对应特征列**置零**后用同一 seed 重训，架构不变，因此比较的是该组特征携带的**信息量**",
         "",
         "| 消融臂 | 机制 AUC | bp_gnn LER | 逻辑错误 | Δ LER（相对 all） |",
         "|---|---:|---:|---:|---:|",
     ]
-    baseline = next((row["logical_error_rate"] for row in rows if row["arm"] == "all"), None)
-    for row in rows:
+    baseline = next(
+        (row["logical_error_rate"] for row in merged_rows if row["arm"] == "all"), None
+    )
+    for row in merged_rows:
         delta = "" if baseline is None else f"{row['logical_error_rate'] - baseline:+.5f}"
         markdown.append(
             f"| {row['arm']} | {row['mechanism_auc']:.4f} | {row['logical_error_rate']:.5f} "

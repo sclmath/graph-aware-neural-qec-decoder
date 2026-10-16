@@ -93,3 +93,21 @@
 [2026-10-16 06:45:24] [16/30] d7_p0p008_s1: done in 67.7 min
 [2026-10-16 06:45:24] [17/30] d7_p0p008_s2: budget 720 min reached (735.7 min elapsed, 16 runs); stopping
 [2026-10-16 06:45:24] grid finished: 16 runs executed, 30 points in plan
+[2026-10-16 12:00:45] [1/3] d5_p0p01_s1: start -> m4_rotated_surface_code_circuit_level_d5_s1__d5__circuit_level__p0p01
+[2026-10-16 12:43:48] [1/30] d5_p0p005_s1: skip (result exists)
+[2026-10-16 12:43:48] [2/30] d5_p0p005_s2: skip (result exists)
+[2026-10-16 12:43:48] [3/30] d5_p0p005_s3: skip (result exists)
+[2026-10-16 12:43:48] [4/30] d7_p0p005_s1: skip (result exists)
+[2026-10-16 12:43:48] [5/30] d7_p0p005_s2: skip (result exists)
+[2026-10-16 12:43:48] [6/30] d7_p0p005_s3: skip (result exists)
+[2026-10-16 12:43:48] [7/30] d5_p0p003_s1: skip (result exists)
+[2026-10-16 12:43:48] [8/30] d5_p0p003_s2: skip (result exists)
+[2026-10-16 12:43:48] [9/30] d5_p0p003_s3: skip (result exists)
+[2026-10-16 12:43:48] [10/30] d7_p0p003_s1: skip (result exists)
+[2026-10-16 12:43:48] [11/30] d7_p0p003_s2: skip (result exists)
+[2026-10-16 12:43:48] [12/30] d7_p0p003_s3: skip (result exists)
+[2026-10-16 12:43:48] [13/30] d5_p0p008_s1: skip (result exists)
+[2026-10-16 12:43:48] [14/30] d5_p0p008_s2: skip (result exists)
+[2026-10-16 12:43:48] [15/30] d5_p0p008_s3: skip (result exists)
+[2026-10-16 12:43:48] [16/30] d7_p0p008_s1: skip (result exists)
+[2026-10-16 12:43:48] [17/30] d7_p0p008_s2: start -> m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p008

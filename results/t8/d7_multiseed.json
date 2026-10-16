@@ -1,0 +1,98 @@
+{
+  "p=0.003": {
+    "bp": {
+      "logical_error_rate": 0.16276041666666666,
+      "logical_errors": 500,
+      "shots": 3072,
+      "standard_error": 0.0066602214148366225
+    },
+    "bp_gnn": {
+      "logical_error_rate": 0.08854166666666667,
+      "logical_errors": 272,
+      "shots": 3072,
+      "standard_error": 0.005125445862546437
+    },
+    "bp_gnn_osd_cs0": {
+      "logical_error_rate": 0.09993489583333333,
+      "logical_errors": 307,
+      "shots": 3072,
+      "standard_error": 0.005411092256669942
+    },
+    "bp_gnn_osd_cs4": {
+      "logical_error_rate": 0.0576171875,
+      "logical_errors": 177,
+      "shots": 3072,
+      "standard_error": 0.0042041586865758
+    },
+    "mwpm": {
+      "logical_error_rate": 0.0013020833333333333,
+      "logical_errors": 4,
+      "shots": 3072,
+      "standard_error": 0.0006506176733513159
+    }
+  },
+  "p=0.005": {
+    "bp": {
+      "logical_error_rate": 0.2421875,
+      "logical_errors": 744,
+      "shots": 3072,
+      "standard_error": 0.007729406334244988
+    },
+    "bp_gnn": {
+      "logical_error_rate": 0.17740885416666666,
+      "logical_errors": 545,
+      "shots": 3072,
+      "standard_error": 0.0068923774847695065
+    },
+    "bp_gnn_osd_cs0": {
+      "logical_error_rate": 0.20930989583333334,
+      "logical_errors": 643,
+      "shots": 3072,
+      "standard_error": 0.0073398540938053
+    },
+    "bp_gnn_osd_cs4": {
+      "logical_error_rate": 0.15690104166666666,
+      "logical_errors": 482,
+      "shots": 3072,
+      "standard_error": 0.006562080958609912
+    },
+    "mwpm": {
+      "logical_error_rate": 0.010416666666666666,
+      "logical_errors": 32,
+      "shots": 3072,
+      "standard_error": 0.0018318080529659431
+    }
+  },
+  "p=0.008": {
+    "bp": {
+      "logical_error_rate": 0.349609375,
+      "logical_errors": 1074,
+      "shots": 3072,
+      "standard_error": 0.008603359398522172
+    },
+    "bp_gnn": {
+      "logical_error_rate": 0.3024088541666667,
+      "logical_errors": 929,
+      "shots": 3072,
+      "standard_error": 0.008286805115732461
+    },
+    "bp_gnn_osd_cs0": {
+      "logical_error_rate": 0.3603515625,
+      "logical_errors": 1107,
+      "shots": 3072,
+      "standard_error": 0.008662101547770957
+    },
+    "bp_gnn_osd_cs4": {
+      "logical_error_rate": 0.2965494791666667,
+      "logical_errors": 911,
+      "shots": 3072,
+      "standard_error": 0.00824052260184463
+    },
+    "mwpm": {
+      "logical_error_rate": 0.0537109375,
+      "logical_errors": 165,
+      "shots": 3072,
+      "standard_error": 0.004067547853196564
+    }
+  }
+}

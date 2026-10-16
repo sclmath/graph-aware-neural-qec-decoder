@@ -1,0 +1,240 @@
+[2026-10-16 12:10:22] chain B start (pid 20200)
+[2026-10-16 12:10:22] t9 repetition offset 10 start
+[m2] epoch 1/15: train=0.33092 validation=0.11066 (7.0s)
+[m2] epoch 2/15: train=0.08881 validation=0.07898 (8.2s)
+[m2] epoch 3/15: train=0.07363 validation=0.06695 (6.5s)
+[m2] epoch 4/15: train=0.04756 validation=0.03384 (6.1s)
+[m2] epoch 5/15: train=0.03196 validation=0.03206 (6.7s)
+[m2] epoch 6/15: train=0.03063 validation=0.03122 (6.8s)
+[m2] epoch 7/15: train=0.03002 validation=0.03067 (7.1s)
+[m2] epoch 8/15: train=0.02921 validation=0.02961 (4.4s)
+[m2] epoch 9/15: train=0.02736 validation=0.02722 (3.8s)
+[m2] epoch 10/15: train=0.02428 validation=0.02575 (3.6s)
+[m2] epoch 11/15: train=0.02333 validation=0.02500 (3.7s)
+[m2] epoch 12/15: train=0.02304 validation=0.02517 (3.8s)
+[m2] epoch 13/15: train=0.02311 validation=0.02529 (3.8s)
+[m2] epoch 14/15: train=0.02275 validation=0.02447 (4.2s)
+[m2] epoch 15/15: train=0.02168 validation=0.02184 (4.2s)
+all                    AUC=0.9836  LER=0.00934 (306/32768)
+[m2] epoch 1/15: train=0.31464 validation=0.10945 (3.9s)
+[m2] epoch 2/15: train=0.08751 validation=0.07869 (4.0s)
+[m2] epoch 3/15: train=0.07351 validation=0.06633 (4.0s)
+[m2] epoch 4/15: train=0.04626 validation=0.03294 (4.0s)
+[m2] epoch 5/15: train=0.03142 validation=0.03166 (4.2s)
+[m2] epoch 6/15: train=0.03036 validation=0.03103 (4.3s)
+[m2] epoch 7/15: train=0.02919 validation=0.02916 (4.3s)
+[m2] epoch 8/15: train=0.02539 validation=0.02606 (4.2s)
+[m2] epoch 9/15: train=0.02352 validation=0.02515 (4.4s)
+[m2] epoch 10/15: train=0.02306 validation=0.02500 (3.9s)
+[m2] epoch 11/15: train=0.02298 validation=0.02488 (4.1s)
+[m2] epoch 12/15: train=0.02308 validation=0.02504 (4.1s)
+[m2] epoch 13/15: train=0.02313 validation=0.02538 (3.8s)
+[m2] epoch 14/15: train=0.02297 validation=0.02488 (3.8s)
+[m2] epoch 15/15: train=0.02297 validation=0.02493 (3.8s)
+no_variable_geometry   AUC=0.9827  LER=0.01254 (411/32768)
+[m2] epoch 1/15: train=0.31679 validation=0.10937 (3.2s)
+[m2] epoch 2/15: train=0.08783 validation=0.07832 (3.2s)
+[m2] epoch 3/15: train=0.07023 validation=0.05838 (3.2s)
+[m2] epoch 4/15: train=0.03860 validation=0.03337 (3.2s)
+[m2] epoch 5/15: train=0.03166 validation=0.03142 (3.1s)
+[m2] epoch 6/15: train=0.03060 validation=0.03140 (3.2s)
+[m2] epoch 7/15: train=0.03043 validation=0.03131 (3.0s)
+[m2] epoch 8/15: train=0.03034 validation=0.03124 (3.2s)
+[m2] epoch 9/15: train=0.03026 validation=0.03119 (3.2s)
+[m2] epoch 10/15: train=0.03018 validation=0.03116 (2.5s)
+[m2] epoch 11/15: train=0.03010 validation=0.03100 (2.5s)
+[m2] epoch 12/15: train=0.02995 validation=0.03093 (2.5s)
+[m2] epoch 13/15: train=0.02977 validation=0.03067 (2.5s)
+[m2] epoch 14/15: train=0.02944 validation=0.03019 (2.6s)
+[m2] epoch 15/15: train=0.02881 validation=0.02916 (2.5s)
+prior_only             AUC=0.9801  LER=0.02231 (731/32768)
+[2026-10-16 12:13:40] t9 repetition offset 10 exit=0
+[2026-10-16 12:13:40] t9 repetition offset 20 start
+[m2] epoch 1/15: train=0.35290 validation=0.11543 (2.5s)
+[m2] epoch 2/15: train=0.09018 validation=0.08294 (2.5s)
+[m2] epoch 3/15: train=0.07517 validation=0.07031 (2.6s)
+[m2] epoch 4/15: train=0.05299 validation=0.03585 (2.6s)
+[m2] epoch 5/15: train=0.03265 validation=0.03368 (3.1s)
+[m2] epoch 6/15: train=0.03143 validation=0.03279 (3.2s)
+[m2] epoch 7/15: train=0.03076 validation=0.03196 (3.2s)
+[m2] epoch 8/15: train=0.02907 validation=0.02803 (3.1s)
+[m2] epoch 9/15: train=0.02450 validation=0.02592 (3.2s)
+[m2] epoch 10/15: train=0.02415 validation=0.02596 (3.3s)
+[m2] epoch 11/15: train=0.02375 validation=0.02539 (3.2s)
+[m2] epoch 12/15: train=0.02358 validation=0.02478 (3.2s)
+[m2] epoch 13/15: train=0.02243 validation=0.02227 (3.2s)
+[m2] epoch 14/15: train=0.01693 validation=0.01671 (3.1s)
+[m2] epoch 15/15: train=0.01464 validation=0.01605 (3.2s)
+all                    AUC=0.9856  LER=0.01099 (360/32768)
+[m2] epoch 1/15: train=0.33695 validation=0.11576 (3.1s)
+[m2] epoch 2/15: train=0.09044 validation=0.08322 (3.1s)
+[m2] epoch 3/15: train=0.07471 validation=0.06705 (2.9s)
+[m2] epoch 4/15: train=0.04471 validation=0.03560 (3.1s)
+[m2] epoch 5/15: train=0.03208 validation=0.03276 (3.2s)
+[m2] epoch 6/15: train=0.03081 validation=0.03194 (3.2s)
+[m2] epoch 7/15: train=0.02934 validation=0.02942 (3.8s)
+[m2] epoch 8/15: train=0.02566 validation=0.02597 (3.5s)
+[m2] epoch 9/15: train=0.02407 validation=0.02524 (3.3s)
+[m2] epoch 10/15: train=0.02328 validation=0.02433 (3.1s)
+[m2] epoch 11/15: train=0.01981 validation=0.01757 (3.1s)
+[m2] epoch 12/15: train=0.01539 validation=0.01659 (2.9s)
+[m2] epoch 13/15: train=0.01488 validation=0.01621 (2.5s)
+[m2] epoch 14/15: train=0.01456 validation=0.01602 (2.6s)
+[m2] epoch 15/15: train=0.01427 validation=0.01576 (2.6s)
+no_variable_geometry   AUC=0.9856  LER=0.01105 (362/32768)
+[m2] epoch 1/15: train=0.32371 validation=0.11031 (2.6s)
+[m2] epoch 2/15: train=0.09045 validation=0.08155 (2.6s)
+[m2] epoch 3/15: train=0.07282 validation=0.06068 (2.8s)
+[m2] epoch 4/15: train=0.03931 validation=0.03505 (2.8s)
+[m2] epoch 5/15: train=0.03188 validation=0.03278 (2.5s)
+[m2] epoch 6/15: train=0.03116 validation=0.03270 (2.6s)
+[m2] epoch 7/15: train=0.03099 validation=0.03259 (2.8s)
+[m2] epoch 8/15: train=0.03088 validation=0.03246 (3.9s)
+[m2] epoch 9/15: train=0.03070 validation=0.03223 (3.9s)
+[m2] epoch 10/15: train=0.03042 validation=0.03182 (4.0s)
+[m2] epoch 11/15: train=0.02990 validation=0.03115 (3.6s)
+[m2] epoch 12/15: train=0.02904 validation=0.03001 (3.2s)
+[m2] epoch 13/15: train=0.02821 validation=0.02905 (3.1s)
+[m2] epoch 14/15: train=0.02700 validation=0.02809 (3.2s)
+[m2] epoch 15/15: train=0.02592 validation=0.02655 (3.1s)
+prior_only             AUC=0.9840  LER=0.02371 (777/32768)
+[2026-10-16 12:16:08] t9 repetition offset 20 exit=0
+[2026-10-16 12:16:08] probe p0p003 offset 10 start
+{
+  "bp": {
+    "logical_error_rate": 0.1650390625,
+    "logical_errors": 169,
+    "standard_error": 0.011600493757554614,
+    "syndrome_consistency_rate": 0.3525390625
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.083984375,
+    "logical_errors": 86,
+    "standard_error": 0.00866763690108679,
+    "syndrome_consistency_rate": 0.587890625
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.1015625,
+    "logical_errors": 104,
+    "standard_error": 0.00943975338338926,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.0517578125,
+    "logical_errors": 53,
+    "standard_error": 0.0069230523367540975,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.1865234375,
+    "logical_errors": 191,
+    "standard_error": 0.012172765322187333,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.1162109375,
+    "logical_errors": 119,
+    "standard_error": 0.010014928091265257,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0009765625,
+    "logical_errors": 1,
+    "standard_error": 0.0009760855463695969,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-16 12:24:00] probe p0p003 offset 10 exit=0
+[2026-10-16 12:24:00] probe p0p005 offset 10 start
+{
+  "bp": {
+    "logical_error_rate": 0.251953125,
+    "logical_errors": 258,
+    "standard_error": 0.013566702538793565,
+    "syndrome_consistency_rate": 0.11328125
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.1962890625,
+    "logical_errors": 201,
+    "standard_error": 0.012412178465548113,
+    "syndrome_consistency_rate": 0.283203125
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.2314453125,
+    "logical_errors": 237,
+    "standard_error": 0.013179884494740628,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.1787109375,
+    "logical_errors": 183,
+    "standard_error": 0.011972190200671137,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.326171875,
+    "logical_errors": 334,
+    "standard_error": 0.014650344724472636,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.2705078125,
+    "logical_errors": 277,
+    "standard_error": 0.013881942796916439,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0087890625,
+    "logical_errors": 9,
+    "standard_error": 0.002916784482801634,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-16 12:36:23] probe p0p005 offset 10 exit=0
+[2026-10-16 12:36:23] probe p0p008 offset 10 start
+{
+  "bp": {
+    "logical_error_rate": 0.3408203125,
+    "logical_errors": 349,
+    "standard_error": 0.014812032794827365,
+    "syndrome_consistency_rate": 0.013671875
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.30078125,
+    "logical_errors": 308,
+    "standard_error": 0.014331179460700443,
+    "syndrome_consistency_rate": 0.0537109375
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.3564453125,
+    "logical_errors": 365,
+    "standard_error": 0.01496715321913737,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.302734375,
+    "logical_errors": 310,
+    "standard_error": 0.014357539436316727,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.40234375,
+    "logical_errors": 412,
+    "standard_error": 0.015324079067071053,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.365234375,
+    "logical_errors": 374,
+    "standard_error": 0.015046744428248352,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0546875,
+    "logical_errors": 56,
+    "standard_error": 0.007105289165456664,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-16 12:49:29] probe p0p008 offset 10 exit=0
+[2026-10-16 12:49:29] chain B finished

@@ -143,7 +143,8 @@ $env:PYTHONPATH = "src"
     - d=5：−43.4% / −37.1% / −32.8%；d=7：−32.6% / −25.1% / −15.6%（都随 p 升高而下降）
     - 同 p 下 d=5 的增益在三个噪声率上都高于 d=7
     - **规律修正**：收益在 BP 强度"中等"时最大——码距轴非单调（−18.2% → −37.1% → −25.1%），噪声率轴单调下降。"BP 越弱收益越大"只是码距轴现象
-    - 未完成（转后续）：p=0.01 与 p=0.002、以及 d=7 p=0.008 的另外 2 个 seed（d=7 单点 49.7-92.2 min，评测被 OSD-0 主导，预算不足）
+    - **2026-10-16 下午起在补齐残点**（`scripts/session3_seeds.ps1 -Chain D`，预算 480 min，按价值排序、完成即跳过、可断点续跑）：① d=7 p=0.008 的 s2/s3；② d=5 p=0.01 × 3 seeds；③ d=7 p=0.01 × 3 seeds。补完后需重跑 `scripts/t10_multiseed_stats.py` 与 `scripts/threshold_estimate.py`，并把 `docs/FINAL_REPORT.md` 4.6/4.7 的表格换掉
+  - 仍未排期：p=0.002 × {d=5, d=7} × 3 seeds（低噪声端，属最末优先级）
   - 验收：✅ `results/m4_surface/` 的 d=5/d=7 `bp` vs `bp_gnn` 对照表（含均值 ± 标准误、shots 与 seed 数）；Pareto 图由 `results/t10/MULTISEED.md` 支撑
   - 依据：第 1.3 节第 1、2 条
   - 工作量：编码 1-2 人日；算力约 18 h（隔夜 + 1 天）
@@ -160,14 +161,19 @@ $env:PYTHONPATH = "src"
   - **结论**：M3 的负结果的正面出口——把学习目标从「逐机制边际」换成「候选基质量」后，OSD 回退从「有害」变成「显著有益」；而 DEM 先验与学习先验在 λ=4 上打平（247 vs 249，p=0.53），说明**候选集选对之后，逐机制边际不再提供额外信息**
   - 未完成（转 P2 强化）：learning-to-rank（数据驱动的候选排序）；见第 7 节
   - 产出：`results/t8/`、`docs/T8_OSD_CANDIDATE_SET.md`
-  - 验收：✅ 新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表
+  - **2026-10-16 补种子（P1 收口）**：d=7 三个噪声率各补到 **3 份独立测试集 × 1024 shots = 3072 shots**（`scripts/t8_osd_cs_study.py --seed-offset 10/20`，输出 `results/t8/d7_p0p00{3,5,8}_probe_s{10,20}/`；汇总脚本 `scripts/t8_d7_multiseed.py` → `results/t8/D7_MULTISEED.md`）
+    - 结果：`bp_gnn_osd_cs4` 相对 `bp_gnn` 为 **−34.9%（z=−5.39）/ −11.6%（z=−2.67）/ −1.9%（n.s.）**；相对 OSD-0 三个点全部 −42.3% / −25.0% / −17.7%（z=−9.5 / −9.2 / −9.1）
+    - 口径：只换测试集种子、共用同一 checkpoint → 压的是 LER 估计误差，不含模型种子方差
+  - 验收：✅ 新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表 + d=7 多种子汇总
 - [x] **T9 · 消融补全：图特征组合 + top-k 候选规模**　（P1，2026-10-15 完成）
   - top-k：OSD-CS 的 λ ∈ {0,2,4,6,8} 扫描（见 T8）——表面码单调、repetition 非单调（λ=4 最优）
   - 图特征组合：`scripts/t9_feature_ablation.py`（置零特征列 + 同 seed 重训，架构不变）
     - repetition d=3：显式坐标/时间特征**冗余**（ΔLER < 0.0002）；只留 DEM 先验时 LER 恶化 2.5×（0.00952 → 0.02371）而 AUC 仍有 0.986
     - 表面码 d=3：**单 seed 看到的"置零位置特征降 24%"经 3 seeds 复核后不成立**（种子 7/17/27 的 Δ 为 −24.3% / +2.3% / +14.5%，均值 −2.5%，符号翻转）→ 正确说法是"冗余"而非"有害"
     - 结论：① 显式坐标/时间特征在 GNN 里**冗余**（两种码族、3 seeds 一致）；② 但**图结构特征整体不可省**——只留 DEM 先验时 repetition 恶化 2.5×、表面码恶化 91%，且 AUC 仍高达 0.986，再次印证"判别好 ≠ 当先验好用"
-    - **方法学教训**：32768 shots 下种子间散布仍有 ±15%，单 seed 消融不足以支撑结论；已写入 `docs/FINAL_REPORT.md` 4.8.1
+    - **2026-10-16 补种子**：repetition d=3 的 6 条臂全部补到 **3 seeds（98304 shots）**（`scripts/t9_multiseed.py` 跨 seed 配对汇总 → `results/t9/REPETITION_D3_MULTISEED.md`；补跑用 `scripts/t9_feature_ablation.py --seed-offset 10/20 --merge` 分两次合并进同一目录）
+      - 坐标/时间特征：ΔLER **+0.00113 ± 0.00104**（t≈1.1，不显著）→ 「冗余」；只留 DEM 先验：ΔLER **+0.01329 ± 0.00045**（t≈30，恶化 133%）→ 「图结构特征不可省」
+    - **方法学教训（两条）**：① 32768 shots 下种子间散布仍有 ±15%，单 seed 消融不足以支撑结论；② 跨 seed 推断必须用种子的实测散布，把各 seed 的 shot 直接求和会把种子间散布当成二项噪声、高估显著性（见 `scripts/t9_multiseed.py` 的两张表）；均已写入 `docs/FINAL_REPORT.md` 4.8.1
   - 产出：`results/t9/`、`docs/FINAL_REPORT.md` 4.8 节
   - 依据：`README.md` 7.2 列出 7 类消融，当前 3 类有数据
   - 依赖：T8（top-k 需要候选集机制）

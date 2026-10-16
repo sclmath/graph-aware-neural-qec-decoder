@@ -27,6 +27,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from typing import Sequence
 
 REPO = Path(__file__).resolve().parents[1]
 CONFIG_DIR = REPO / "configs" / "t6"
@@ -105,10 +106,13 @@ def build_config(distance: int, p: float, seed_index: int) -> dict:
     }
 
 
-def build_plan(only: str | None) -> list[tuple[int, float, int]]:
+def build_plan(
+    only: str | None, rates: Sequence[float] | None = None
+) -> list[tuple[int, float, int]]:
     distances = {"d5": (5,), "d7": (7,), None: (5, 7)}[only]
+    selected = tuple(RATES) if not rates else tuple(rates)
     plan: list[tuple[int, float, int]] = []
-    for p in RATES:
+    for p in selected:
         for distance in distances:
             for seed_index in (1, 2, 3):
                 plan.append((distance, p, seed_index))
@@ -136,12 +140,19 @@ def log(message: str) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--only", choices=["d5", "d7"], default=None)
+    parser.add_argument(
+        "--rates",
+        type=float,
+        nargs="+",
+        default=None,
+        help="Restrict the grid to these physical error rates (subset of RATES).",
+    )
     parser.add_argument("--print-plan", action="store_true")
     parser.add_argument("--budget-minutes", type=float, default=780.0)
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
 
-    plan = build_plan(args.only)
+    plan = build_plan(args.only, args.rates)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     if args.print_plan:

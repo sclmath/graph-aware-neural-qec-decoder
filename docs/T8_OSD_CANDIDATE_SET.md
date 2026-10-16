@@ -4,8 +4,8 @@
 - **状态**：**完成**（OSD-CS 部分；数据驱动的 learning-to-rank 见第 7 节）
 - **代码**：`src/graph_qec/decoders/bp.py`（`_osd_correction`）、`src/graph_qec/m2_config.py`、`src/graph_qec/m2_pipeline.py`、`src/graph_qec/m3_pipeline.py`
 - **测试**：`tests/test_osd_combination_sweep.py`（4 项）
-- **脚本**：`scripts/t8_osd_cs_study.py`
-- **产物**：`results/t8/repetition_d3_circuit_level/`、`results/t8/surface_d3_circuit_level/`
+- **脚本**：`scripts/t8_osd_cs_study.py`（`--seed-offset` 可换独立测试集）、`scripts/t8_d7_multiseed.py`（多种子汇总）
+- **产物**：`results/t8/repetition_d3_circuit_level/`、`results/t8/surface_d3_circuit_level/`、`results/t8/d7_p0p00{3,5,8}_probe{,_s10,_s20}/`、`results/t8/D7_MULTISEED.md`
 
 ---
 
@@ -63,6 +63,24 @@
 
 配对检验：`bp → bp_osd_cs0` 451/552（z=-3.19，**p=0.0014**）；`bp_osd_cs0 → bp_osd_cs8` 835/242（**z=18.07**）；`bp_gnn → bp_gnn_osd_cs8` 558/53（**z=20.43**）。三者全部 p<1e-6（除 `bp` 对 OSD-0 为 p=0.0014）。
 
+### 3.3 旋转表面码 d=7，线路级 p = 0.003 / 0.005 / 0.008（每个 p 3 份独立测试集 × 1024 shots）
+
+d=7 上 BP 已接近失效（收敛率 0.118-0.121、平均迭代 28.9/32），是检验「候选集杠杆」最强的场景。为控制成本这里用 1024-shot 探针，**每个噪声率 3 份独立测试集**（`--seed-offset 0/10/20`，共用同一 checkpoint；汇总 `results/t8/D7_MULTISEED.md`）：
+
+| d=7 p | mwpm | bp | bp_gnn | OSD-0<br>`bp_gnn_osd_cs0` | **OSD-CS(4)**<br>`bp_gnn_osd_cs4` | Δ(cs4 vs gnn) | Δ(cs4 vs OSD-0) | Δ(cs4 vs bp) |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0.003 | 0.00130 | 0.16276 | 0.08854 | 0.09993 | **0.05762** | **−34.9%**（z=−5.39） | −42.3%（z=−9.48） | **−64.6%** |
+| 0.005 | 0.01042 | 0.24219 | 0.17741 | 0.20931 | **0.15690** | **−11.6%**（z=−2.67） | −25.0%（z=−9.22） | **−35.2%** |
+| 0.008 | 0.05371 | 0.34961 | 0.30241 | 0.36035 | 0.29655 | −1.9%（n.s.） | −17.7%（z=−9.10） | −15.2% |
+
+三条读数：
+
+1. **OSD-0 在高噪声率上已显著有害**：`bp_gnn_osd_cs0` 比 `bp_gnn` 差 +12.9% / +18.0% / +19.2%（z=+1.81 / +4.09 / +6.19）——把 3.1/3.2 的负结果推到了 d=7。
+2. **OSD-CS(4) 在三个点上都把 OSD-0 的伤害翻成收益，且证据很强**：相对 OSD-0 为 −42.3% / −25.0% / −17.7%，z=−9.5 / −9.2 / −9.1。
+3. **但收益随噪声率迅速衰减**（相对 `bp_gnn` −34.9% → −11.6% → −1.9%），与 FINAL_REPORT 4.6 第 2 条「噪声率轴」规律一致：噪声率越高，机制判别本身越糊，候选集能救回的份额越小。
+
+**口径**：三份测试集只换测试集种子、共用同一份模型权重，因此压的是 **LER 估计**误差而不是模型种子方差；同 p 的多份测试集相互独立，逐 shot 错误可直接汇总，故用 pooled 标准误与 pooled McNemar。
+
 ## 4. 关键结论
 
 1. **OSD 回退从「有害」变成「显著有益」。** 两个配置上 OSD-0 都让 LER 变差（repetition z=-1.73、表面码 z=-3.19），而 OSD-CS(4) 让 repetition 从 0.00943 降到 0.00754（-20%），OSD-CS(8) 让表面码从 0.04007 降到 0.02505（-37%）。这正是 T8 要提供的**正面出口**。
@@ -93,5 +111,5 @@
 
 - 本项只做了**候选集机制**（OSD-CS），没有做**数据驱动的候选排序**（learning-to-rank）。后者列为 P2 强化项。
 - OSD-CS 的目标函数仍用 BP posterior；第 6 节说明它是可改进的代理。
-- 未在 d=5/d=7 表面码与 HGP 上复测（算力受限，T6 占用了本窗口的 CPU）。按 M4 的规律（BP 越弱收益越大），预期在这些配置上收益更大，属于后续工作。
+- **d=7 已补测**（第 3.3 节：三个噪声率、每个 p 3 份独立测试集，OSD-CS 相对 `bp_gnn` 为 −34.9% / −11.6% / −1.9%）；**d=5 与 HGP 仍未复测**（算力受限）。注意 d=7 的结果说明「BP 越弱收益越大」在**噪声率轴**上并不成立：p 越高收益反而越小，两个轴要分开说。
 - OSD-CS 的实现是逐 shot 的 Python 循环 + numpy 小算子；若要走低延迟路线需要批量化和位运算重写。
