@@ -1,0 +1,31 @@
+{
+  "config": "results\\m4_surface\\m4_learned_basis_rotated_surface_code_circuit_level_d3__d3__circuit_level__p0p005\\config.json",
+  "rows": [
+    {
+      "arm": "all",
+      "best_validation_log_loss": 0.009349971893243492,
+      "logical_error_rate": 0.03863525390625,
+      "logical_errors": 1266,
+      "masked_check": [],
+      "masked_edge": [],
+      "masked_variable": [],
+      "mechanism_auc": 0.9923759647593574,
+      "shots": 32768
+    },
+    {
+      "arm": "no_variable_geometry",
+      "best_validation_log_loss": 0.009506276692263782,
+      "logical_error_rate": 0.039520263671875,
+      "logical_errors": 1295,
+      "masked_check": [],
+      "masked_edge": [],
+      "masked_variable": [
+        4,
+        5
+      ],
+      "mechanism_auc": 0.991657437945305,
+      "shots": 32768
+    }
+  ],
+  "seed_offset": 10
+}

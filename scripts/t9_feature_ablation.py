@@ -117,6 +117,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--arms", nargs="+", default=list(ARMS))
     parser.add_argument("--torch-threads", type=int, default=3)
     parser.add_argument("--max-epochs", type=int, default=None)
+    parser.add_argument(
+        "--seed-offset",
+        type=int,
+        default=0,
+        help="Shift the training seed and every split seed by this amount, so "
+        "the same arm set can be repeated over independent seeds.",
+    )
     args = parser.parse_args(argv)
 
     config = M2Config.from_json_file(args.config)
@@ -129,6 +136,22 @@ def main(argv: Sequence[str] | None = None) -> int:
         config = dataclasses.replace(
             config,
             training=dataclasses.replace(config.training, epochs=args.max_epochs),
+        )
+    if args.seed_offset:
+        offset = args.seed_offset
+        config = dataclasses.replace(
+            config,
+            training=dataclasses.replace(
+                config.training, seed=config.training.seed + offset
+            ),
+            splits=dataclasses.replace(
+                config.splits,
+                train_seeds=tuple(seed + offset for seed in config.splits.train_seeds),
+                validation_seeds=tuple(
+                    seed + offset for seed in config.splits.validation_seeds
+                ),
+                test_seeds=tuple(seed + offset for seed in config.splits.test_seeds),
+            ),
         )
 
     train_split, reference = generate_split(
@@ -185,7 +208,12 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     with (args.output_dir / "ablation.json").open("w", encoding="utf-8", newline="\n") as handle:
-        json.dump({"config": str(args.config), "rows": rows}, handle, indent=2, sort_keys=True)
+        json.dump(
+            {"config": str(args.config), "seed_offset": args.seed_offset, "rows": rows},
+            handle,
+            indent=2,
+            sort_keys=True,
+        )
         handle.write("\n")
     markdown = [
         "# T9 · 图特征组合消融",
