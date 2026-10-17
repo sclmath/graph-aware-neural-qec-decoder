@@ -168,6 +168,7 @@ $env:PYTHONPATH = "src"
     - `bp_osd_cs0 → bp_osd_cs4`：**−0.00279 ± 0.00012**（z=−12.23）→ 主结论更硬
     - `bp_osd_cs4 → bp_gnn_osd_cs4`：**+0.00055 ± 0.00043**（逐 seed +0.00006/+0.00140/+0.00018）→ **单 seed 的「打平（p=0.53）」要撤回**，改为「种子噪声内不可区分」
   - 验收：✅ 新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表 + d=7 与 repetition 的多种子汇总
+  - **2026-10-17 排期（`session4_seeds.ps1 -Stage probes,probes-extra`）**：把 d=7 探针升级为「模型 + 数据都换」（用 T6 网格 s2/s3 各自的 checkpoint；汇总 `scripts/t8_d7_model_seeds.py` → `results/t8/D7_MODEL_SEEDS.md`，与只换测试集的 `D7_MULTISEED.md` 分口径并列），并补 p=0.01 这一新噪声率点的 3 份测试集
 - [x] **T9 · 消融补全：图特征组合 + top-k 候选规模**　（P1，2026-10-15 完成）
   - top-k：OSD-CS 的 λ ∈ {0,2,4,6,8} 扫描（见 T8）——表面码单调、repetition 非单调（λ=4 最优）
   - 图特征组合：`scripts/t9_feature_ablation.py`（置零特征列 + 同 seed 重训，架构不变）
@@ -181,6 +182,7 @@ $env:PYTHONPATH = "src"
   - 依据：`README.md` 7.2 列出 7 类消融，当前 3 类有数据
   - 依赖：T8（top-k 需要候选集机制）
   - 工作量：编码 3 人日；算力 1 h
+  - **2026-10-17 排期（`session4_seeds.ps1 -Stage ablation`）**：表面码 d=3 剩余 3 条臂 (`no_check_features` / `no_check_geometry` / `no_edge_degree`) × {s10,s20}，把 4.8.1 的表面码表补齐到 3 seeds（汇总 `scripts/t9_multiseed.py --prefix surface_d3` → `results/t9/SURFACE_D3_MULTISEED.md`）
 - [x] **T10 · 多种子统计稳健性**　（P1，2026-10-16 完成；repetition d=5 的强度复核仍未做）
   - 产出：`results/t10/MULTISEED.md` + `multiseed.json` + `surface_sweep_mean.json`（跨 seed 均值 ± 标准误、逐 seed 值、配对 Δ 与符号检验）
   - 修正了一处数据质量问题：p=0.005 组曾混入 2048-shot 的历史单点，加了 `--min-test-shots` 过滤
@@ -188,6 +190,7 @@ $env:PYTHONPATH = "src"
   - **2026-10-16 补测**：M2 旗舰表（repetition d=3 同分布，效应量最小的一张表）补到 3 seeds / 98304 shots：`bp_gnn` vs `bp` 的配对 ΔLER = +0.00009 / −0.00098 / +0.00003（均值 −0.00028 ± 0.00035，符号翻转）→ 「无收益」结论被误差棒确认；`mwpm` vs `bp_gnn` = +0.00288 ± 0.00034（三 seed 同号）。工具：`scripts/m2_headline_multiseed.py`（`--write-configs` / `--aggregate`）+ `scripts/m2_headline_seeds.ps1`；产物 `results/m2/HEADLINE_MULTISEED.md`
   - 范围：对 4 个关键结论（d=5/d=7 的 `bp` vs `bp_gnn`、HGP 跨尺寸迁移、MWPM 边权结论）给出 3 seeds 的均值 ± 标准误与配对检验；并在 repetition d=5 的目标分布验证集上复核先验插值强度（当前 d=5 评测沿用源配置上限 1.00）
   - 工作量：编码 1 人日；算力并入 T6
+  - **2026-10-17 排期（`session4_seeds.ps1 -Stage extra`）**：本条目自带的两项遗留——HGP 跨尺寸迁移与 M3 跨码距迁移 (d=3 → d=5)——各补到 3 seeds（复用 `results/m2` 的 s10/s20 checkpoint；HGP 侧源模型换 seed 重训、目标测试集同步换 seed）
 - [x] **T11 · CPU 工程性能表**　（P1，2026-10-15 完成）
   - 依据：`README.md` 8.2
   - 产出：`scripts/engineering_table.py` 从 `results/` 自动生成 `results/m5/ENGINEERING_TABLE.md`（95 行：M1 六个配置 + M2/M3/M4 运行记录，含 LER、µs/shot、shot/s、峰值 RSS delta、BP 平均迭代、OSD 触发比例、syndrome 一致率、模型规模）

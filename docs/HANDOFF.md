@@ -1,10 +1,13 @@
 # 交接说明（HANDOFF）
 
-- **交接时间**：2026-10-16 下午（第二次刷新）
-- **交接时仓库状态**：HEAD = 2026-10-16 下午的多种子提交（`git log --oneline -1`）；`pytest` **72 项全过**；工作区只应剩下正在跑的结果目录
-- **正在运行的后台任务**：`scripts/session3_seeds.ps1 -Chain D` —— T6 残点补齐（d=7 p=0.008 的 s2/s3 → d=5 p=0.01 ×3 → d=7 p=0.01 ×3），启动于 2026-10-16 12:43，预算 480 min。看 `results/logs/t6_progress.log`（网格进度）与 `results/logs/session3_chainD.log`（链日志），存活看 `Get-Process python`
-- **关机守卫（2026-10-16 21:08 起在跑）**：`scripts/shutdown_when_done.ps1 -Watch` 以 detached 进程守望本仓库的 python 进程；当 `results/logs/t6_progress.log` 末行出现网格收尾行（grid finished / stopping）**且**已无本仓库 python 进程时，执行 `shutdown.exe /s /t 300`（另设 23:30 硬兜底）。日志 `results/logs/shutdown_watch.log`（含 PID 与每轮心跳）。
-  - 取消方式：关机指令有 300 s 宽限，期间 `shutdown /a` 即可；或 `Stop-Process -Id <watcher pid>`；已发出后想避免重启再触发，删 `results/logs/shutdown_issued.flag`。
+- **交接时间**：2026-10-17 上午（第三次刷新；上一轮夜间任务已收尾，本批结果尚未提交）
+- **交接时仓库状态**：HEAD = 2026-10-16 下午的多种子提交；`pytest` **72 项全过**（2026-10-17 08:41 复核）；
+  工作区剩：T6 网格 **24/30 点**的 8 个结果目录（`results/m4_surface/`，未提交）与若干日志改动（`git status --short` 可见）
+- **正在运行的后台任务**：**无**。2026-10-16 的 `scripts/session3_seeds.ps1 -Chain D` 已跑完计划内的 8 个点（d=7 p=0.008 的 s2/s3、d=5 p=0.01 ×3、d=7 p=0.01 ×3），21:13 因 480 min 预算到时停止；关机守望随后按条件关机。**下一批实验（T6 残点 6 个 + 三组种子补点）等 2026-10-17 晚间命令**，用 `scripts/session4_seeds.ps1` 一条命令跑完，见第 3 节 WP1
+- **关机守卫**：两种做法（无人值守选一种即可）——
+  1. `scripts\session4_seeds.ps1 -ShutdownAfter`：整条链跑完后自己执行 `shutdown.exe /s /t 300`，不需要守望进程；
+  2. `scripts\shutdown_when_done.ps1 -Watch`：以 detached 进程守望本仓库的 python 进程（2026-10-16 用过一次，正常触发）；
+  - 取消方式：关机指令有 300 s 宽限，期间 `shutdown /a` 即可；或 `Stop-Process -Id <watcher pid>`。要用守望模式，先确保 `results/logs/shutdown_issued.flag` 不存在（本环境拒绝 PowerShell 的 `Remove-Item`，按仓库惯例用 `git clean -f -- results/logs/shutdown_issued.flag`；该文件已于 2026-10-17 上午清掉）。
   - 注意：日期参数必须整体加引号传给 `Start-Process`（`'"2026-10-16 23:30"'`），否则空格会把参数拆开、把截止时间变成已过期而**立即关机**——2026-10-16 21:06 踩过一次（已 `shutdown /a` 中止），脚本现已内置「拒绝过去的截止时间」防呆。
 - **交付目标**：第一阶段成果（CPU-only）。范围、出口标准与优先级定义见 `docs/ROADMAP_TODO.md` 第 0 与 2.0 节；第二阶段（GPU）为未来展望，不排期
 - **本文内容**：最新状态 + 下一步工作包（第 3 节）+ 环境入口与操作纪律（第 2、4 节）
@@ -39,17 +42,23 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 
 # 4) 工程性能表重新生成
 .\.venv\Scripts\python.exe scripts\engineering_table.py
+
+# 5) 夜间续跑链（Session 4）：T6 残点 + T8/T9 种子补点 + 迁移多种子 + 表格重生成
+pwsh -File scripts\session4_seeds.ps1 -Stage all -DryRun     # 预演：只打印将执行的命令，不跑实验
+Start-Process -WindowStyle Hidden pwsh -ArgumentList '-NoProfile','-File','scripts\session4_seeds.ps1','-Stage','all'
+# 末尾加 '-ShutdownAfter' 可在整条链跑完后自动关机（300 s 宽限，shutdown /a 可取消）
 ```
 
 ## 3. 下一步工作包
 
 > P0 与 P1（T1-T11、T17、T18）已全部完成，交付出口标准 1-6 全部达成。剩下的都是「把 P1 的残点补满」与「P2 强化」。
 
-### WP1 · T6 残点补齐（**进行中**，唯一阻塞交付表格收口的项）
+### WP1 · T6 补满 30 点 + 收口（**24/30 已落盘；余 6 点排在 2026-10-17 晚间**）
 
-**已跑**：d=5 p ∈ {0.003, 0.005, 0.008} × 3 seeds（8192 shots/seed）；d=7 p ∈ {0.003, 0.005} × 3 seeds 与 p=0.008 × 1 seed（4096/seed）。16 个点，`results/m4_surface/`。
+**已跑 24 点**（`results/m4_surface/`）：d=5 p ∈ {0.003, 0.005, 0.008, 0.01} × 3 seeds（8192 test shots/seed）、
+d=7 p ∈ {0.003, 0.005, 0.008, 0.01} × 3 seeds（4096/seed）。其中最近 8 个点由 `session3_seeds.ps1 -Chain D` 在 2026-10-16 夜间补上。
 
-**进行中**（`scripts/session3_seeds.ps1 -Chain D`，12:43 启动，预算 480 min）：d=7 p=0.008 s2/s3 → d=5 p=0.01 ×3 → d=7 p=0.01 ×3。网格自身按「结果目录存在即跳过」续跑，重复执行命令是安全的。
+**上一轮**（`session3_seeds.ps1 -Chain D`，2026-10-16 12:43 启动，预算 480 min）：按计划跑完 8 个点后于 21:13 收尾。网格按「结果目录存在即跳过」续跑，重复执行命令是安全的。
 
 **跑完后的收口动作（三步，均为秒级）**：
 
@@ -62,19 +71,44 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 
 注意：2026-10-16 补的**表面码 d=3 线路级 p=0.005 的 s10/s20** 两个运行也在 `results/m4_surface/` 里，重跑 `t10_multiseed_stats.py` 会自动把 d=3 那一格从 1 seed 变成 3 seeds（`results/t10/surface_sweep_mean.json` 与 `results/m4/THRESHOLD.md` 因此都要一起重生成，4.7 的阈值结论要复核一遍）。
 
-然后把 `docs/FINAL_REPORT.md` 的 4.6 表（d=5/d=7 各一行新噪声率、d=7 p=0.008 去掉 † 单 seed 标注）与 4.7 的阈值结论换成新数字，并在 `docs/ROADMAP_TODO.md` 的 T6 条目里勾掉残点。
 
-**仍未排期**：p=0.002 × {d=5, d=7} × 3 seeds（约 3.5 h）。它是低噪声端，价值在于检验「增益是否在低噪声端继续上升」——目前噪声率轴上 d=5 的增益在 p=0.003 处最大（−43.4%），没有低端拐点的证据。
+**2026-10-17 晚间窗口（12 h，无人值守）**：`p=0.002` 已获批（D4 已决），与三项单 seed 补齐一起排成一条链 `scripts/session4_seeds.ps1`（幂等、按「输出已存在即跳过」续跑；日志 `results/logs/session4.log`）：
+
+| 槽 | 内容 | 机器时间 | 依据（均为实测） |
+|---|---|---|---|
+| `grid` | T6 残点 6 个：d=5/d=7 p=0.002 × 3 seeds | **3.2-3.8 h** | 训练 ~17 min/点（与 p 无关）+ 评测随 BP 平均迭代缩放；同点跨 seed ±30% |
+| `postprocess` | `t10_multiseed_stats` → `threshold_estimate` → `engineering_table` | < 1 min | 上一轮实测 0.1 min |
+| `probes` | T8 d=7 OSD-CS 探针升级为「模型 + 数据都换」：p ∈ {0.003,0.005,0.008} × {s2,s3}（6 次） | 约 1 h | 单次探针 8-13 min（chainA/B 日志） |
+| `probes-extra` | T8 d=7 p=0.01 探针 × 3 份测试集（新噪声率点） | 约 12 min | 同上 |
+| `ablation` | 表面码 d=3 剩余 3 条臂 × {s10,s20}（`--merge` 进已有 `ablation.json`） | 约 0.7 h | repetition 同款 3.5 min/次，表面码估 5-8 min/次 |
+| `extra` | M3 跨码距 d=3→d=5 多种子 + HGP 跨尺寸迁移多种子（源模型换 seed 重训、目标测试集同步换 seed） | 约 0.6 h | rep3x3 训练 617 s/seed、迁移 183 s、M3 迁移 31 s |
+| `aggregate` | 重生成 `results/t8/{D7_MULTISEED,D7_MODEL_SEEDS}.md`、`results/t9/SURFACE_D3_MULTISEED.md`、`results/m5/ENGINEERING_TABLE.md` | < 1 min | — |
+
+合计 **约 5.5-6.5 h**，12 h 窗口留 ~5 h 余量（吸收波动与一次失败重跑）。执行与预演见第 2 节第 5 项。
+
+**跑完后的收口（人工，1-1.5 h）**：§4.6 表补 p=0.01/p=0.002 两行、去掉 d=7 p=0.008 的单 seed 标注；§4.7 阈值复核（低端多一个点）；
+T8 第 4 条换成模型种子口径（新增 `D7_MODEL_SEEDS.md`）；4.8.1 表面码表升级到 3 seeds；同步 README 第 9-15 节与 `docs/ROADMAP_TODO.md` 的 T6/T10 条目；最后 `pytest` + `run_all.ps1` + 提交。
 
 ### WP2 · 剩下的单 seed 结论（P2，未解决问题 7 的剩余部分）
 
 - 已完成：T9 repetition 消融、T8 d=7 OSD-CS 探针（每点 3 份测试集）、T8 repetition d=3 研究、M2 旗舰表（都是 3 seeds / 98304 shots 量级：`results/{m2/HEADLINE_MULTISEED.md,t8/D7_MULTISEED.md,t8/REPETITION_D3_MULTISEED.md,t9/REPETITION_D3_MULTISEED.md}`）；
 - 本轮还补了两处：表面码 d=3 线路级 p=0.005 的锚点（−18.2% 单 seed → **−29.0% ± 2.4%**，3 seeds）与 T8 repetition 研究；`scripts/m2_headline_multiseed.py` 现在对任意 M2/M4 配置通用（`--base-config` / `--out-dir` / `--output`，配套 `scripts/m2_headline_seeds.ps1 -BaseConfig -OutDir`）
 - **本轮又撤回了两个单 seed 结论**（都属「小差异」型）：T9/T8 的「λ=4 上 DEM 先验与学习先验打平」→ +0.00055 ± 0.00043（不可区分）；M2 旗舰表的 bp vs bp_gnn → −0.00028 ± 0.00035（符号翻转）。这说明**凡结论涉及 <0.001 量级的差异，必须 3 seeds**；
-- **仍属单 seed**：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5）、4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂、T8 的 repetition/表面码 d=3 两个 OSD-CS 研究（效应量大，优先级低）；
+- **仍属单 seed**：HGP 跨尺寸迁移、跨码距迁移（d=3 → d=5）、4.8.1 表面码表里除 `all`/`no_variable_geometry` 之外的三条臂、T8 的 repetition/表面码 d=3 两个 OSD-CS 研究（效应量大，优先级低）；**其中前三项已排进 2026-10-17 晚间的 `session4_seeds.ps1`**；
 - 做法可直接复用本轮的两个工具：`scripts/t9_feature_ablation.py --seed-offset N --merge`（消融）与 `scripts/t9_multiseed.py --prefix <系列>`（跨 seed 汇总）。
 
-**具体可做的一步（成本约 15 min）**：T8 的 d=7 OSD-CS 探针目前是「3 份独立测试集 × 同一个 checkpoint」——只压 LER 估计误差。T6 网格跑完 d=7 的 s2/s3 后会留下它们各自的 `model_state.pt`，用它们重跑探针即可把它升级成「模型 + 数据都换」：
+**已升级为脚本（`probes` 槽）**：T8 的 d=7 OSD-CS 探针原本是「3 份独立测试集 × 同一个 checkpoint」（只压 LER 估计误差）。
+T6 网格跑完 d=7 的 s2/s3 后会留下它们各自的 `model_state.pt`，`session4_seeds.ps1` 会用它们把探针升级成「模型 + 数据都换」
+（6 次，约 1 h）；汇总脚本是本轮新写的 `scripts/t8_d7_model_seeds.py` → `results/t8/D7_MODEL_SEEDS.md`
+（种子是重复单位：给逐 seed Δ 与跨 seed 均值 ± SE；只换测试集的旧口径 `D7_MULTISEED.md` 保持不变、不混口径）。
+
+```powershell
+# 单点等价命令（脚本内部就是这么调的）
+$run = 'results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p008'
+.\.venv\Scripts\python.exe scripts\t8_osd_cs_study.py --config $run\config.json --checkpoint $run\model_state.pt `
+    --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p008_probe_s2model
+.\.venv\Scripts\python.exe scripts\t8_d7_model_seeds.py --probe-root results\t8 --output results\t8\D7_MODEL_SEEDS.md
+```
 
 ```powershell
 $run = 'results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p008'
@@ -82,7 +116,7 @@ $run = 'results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s2__d7__circ
     --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p008_probe_s2model
 ```
 
-**验收**：相关表格全部标注 shots、seed 数与跨 seed 标准误。
+**验收**：相关表格全部标注 shots、seed 数与跨 seed 标准误；迁移结论必须给出 3 seeds 的配对 Δ（种子是重复单位，不复用 pooled 口径）。
 
 ### WP3 · P2 强化项 T12-T15（不做仍可交付）
 
@@ -117,15 +151,15 @@ T12 真零样本迁移（移除边特征里的 p）、T13 多噪声率训练课�
 | D1 | 是否绑定远端仓库（GitHub 私有等） | **阻塞 T1 的 CI 首次运行**；当前无远端，本地磁盘故障即丢全部结果 |
 | D2 | `LICENSE` 未确定 | 交付物缺一项 |
 | D3 | 参考文献 PDF 策略（当前不入库，可由 `scripts/download_references.py` 重建） | 若要求离线自洽需改用 Git LFS |
-| D4 | T6 低噪声端 p=0.002 × {d=5, d=7} × 3 seeds 是否要做 | 约 3.5 h；不做则 LER-p 曲线的低端停在 p=0.003，缺少「低噪声下增益是否继续上升」的检验 |
+| D4 | ~~T6 低噪声端 p=0.002 × {d=5, d=7} × 3 seeds 是否要做~~ **已决（2026-10-17）：做**，排在当晚 12 h 窗口的第一槽 | 约 3.5 h；做完 T6 网格即 30/30 完整，LER-p 曲线低端有拐点证据 |
 
 ## 6. 接手检查清单
 
-- [ ] `git log --oneline -1` 确认在 2026-10-16 下午的提交或其后
+- [ ] `git log --oneline -1` 确认在本轮（2026-10-17 上午）的提交或其后
 - [ ] `pytest -q` 期望 72 passed（约 8 s）
-- [ ] `Get-Process python` + `results/logs/t6_progress.log` 确认后台任务 Chain D 是否还在跑
-- [ ] `.\scripts
-un_all.ps1 -SkipTests` 期望 18 s 全绿
+- [ ] `Get-Process python` 确认没有遗留的后台进程；看 `results/logs/session4.log` 末行确认续跑链状态
+- [ ] `pwsh -File scripts\session4_seeds.ps1 -Stage all -DryRun` 预演一遍：应打印 6 个待补点与各槽命令
+- [ ] `.\scripts\run_all.ps1 -SkipTests` 期望 18 s 全绿
 - [ ] 读 `docs/ROADMAP_TODO.md` 第 0 与 2.0 节、`docs/FINAL_REPORT.md` 第 4.6/4.8 节与第 7 节
 - [ ] 读第 4 节的 12 条纪律（尤其 batch、结果目录、跨 seed 口径三条）
 - [ ] 确认 D1-D4 的决策状态（第 5 节）
