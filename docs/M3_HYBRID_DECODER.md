@@ -235,11 +235,4 @@ syndrome 一致率：
 
 ---
 
-## 附：T8 补充（2026-10-15）
-
-本节结论 2「OSD-0 回退换不来免费的 syndrome 一致」在 T8 中得到了**正面出口**：把候选基从「OSD-0 的固定 pivot 基」换成 **OSD-CS(λ)** 的组合扫描后，同一批未收敛 shot 上回退从「弄坏」变成「修好」——
-
-- 同一 288 个未收敛 shot：`bp_gnn` 154 错 → OSD-0 175 错（-21 净损失）→ OSD-CS(4) **91 错**（净改进 63，MWPM 参考 83）；
-- 全测试集（32768 shots）：`bp` 0.00943 → `bp_osd_cs4` **0.00754**（McNemar z=5.03，p<1e-6）。
-
-即：**瓶颈从来不是「OSD 该不该开」，而是「候选基选得对不对」。** 详见 `docs/T8_OSD_CANDIDATE_SET.md`。
+> T8 的 OSD-CS 正面出口已独立成篇：见 `docs/T8_OSD_CANDIDATE_SET.md`；完整数字见 `docs/FINAL_REPORT.md` §4.4。

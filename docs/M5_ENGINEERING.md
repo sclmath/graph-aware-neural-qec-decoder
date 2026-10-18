@@ -19,14 +19,7 @@
 - 每轮迭代后把已收敛的 shot 从活动集合中**压缩掉**（gather/scatter），因此容易收敛的 shot（repetition d=3 上 98%）只跑一两轮；
 - 自适应 shot 切块（默认 4M 元素预算）以限制内存峰值：d=3 repetition 一次吃完 32768 shot，表面码按几千 shot 分块。
 
-| 场景 | 标量实现 | 向量化实现 | 加速 |
-|---|---:|---:|---:|
-| repetition d=3 circuit-level（32768 shots） | 205 µs/shot | **1.9 µs/shot** | ~107× |
-| repetition d=5 circuit-level | ~11 ms/shot | ~0.5 ms/shot | ~20× |
-| surface d=3 circuit-level（564 edges） | 18.5 ms/shot | **0.54 ms/shot** | ~34× |
-| surface d=3 code-capacity（98 edges） | ~3 ms/shot | 4.4 µs/shot | ~600× |
-
-解锁的后果：M3 headline 整条管线降到 55 s；M4 的多噪声率 / 多码距扫描从"算力不可及"变成分钟级；BP 从"比 MWPM 慢 2000 倍"变成"慢 2–5 倍"。
+实测加速约 20–600×（按图规模）；d=3 repetition 从 205 µs/shot 降到 1.9 µs/shot。逐场景数字、内存预算与解锁的扫描规模见 `docs/BP_IMPLEMENTATION.md` §4。
 
 等价性（`tests/test_batched_bp.py`）：对 repetition 与表面码两种 DEM，标量参考实现与向量化引擎在 corrections / iterations / converged / syndrome_distance 上**逐 shot 完全一致**，后验 LLR 差异 ≤ 1e-12（高 check 度时为浮点求和顺序差异，量级 1e-15）。
 
@@ -62,23 +55,9 @@
 
 GPU 的延迟、吞吐与峰值显存对比属于后续工作，见 `docs/ROADMAP_TODO.md` 第 7 节。
 
-## 5. 把学习后验喂给 MWPM 的对照实验（`scripts/m5_gnn_mwpm.py`）
+## 5. 把学习后验喂给 MWPM 的对照实验
 
-M4 的结论之一是对**可匹配码**应该修正 MWPM 的边权重而不是 BP 的先验。本节记录把学习后验直接接进 MWPM 的对照实验（`results/m5/gnn_mwpm_cc/`），结论是**反例**，而反例的原因具有方法论意义：
-
-做法是"逐 shot 用学习到的机制后验概率重建 DEM，再建匹配图解码"。结果：
-
-| decoder | LER（d=3 表面码，码容量 p=0.05，4096 shots） |
-|---|---:|
-| mwpm（stim 分解后的 DEM） | 0.0527 |
-| mwpm + GNN 后验（重建 DEM） | 0.3130 |
-| bp + GNN 先验 | 0.0581 |
-
-这看起来是"学习后验毁了 MWPM"，但**控制实验**证明它是实现问题而不是科学结论：用**相同的重建代码但喂回 DEM 自己的先验概率**，MWPM 同样从 0.0439 退化到 **0.0679**——重建本身就把匹配图弄坏了。
-
-原因：重建 DEM 时每个机制被写成一条 `error(p) D... L...`，于是 **Y 误差变成 4-detector 超边**（翻转 2 个 X-check + 2 个 Z-check），而 PyMatching 只能处理图状（≤2 detector）误差。Stim 的 `decompose_errors=True` 会用 `^` 把这类机制拆成两条 graphlike 指令并保留相关性，重写会丢掉这个分解，匹配图因此缺边。
-
-正确的做法是把学习后验映射到 **Stim 分解后的指令**上（而不是重写原始 DEM）。该路径的完整实现与对照实验见 `docs/M5_DECOMPOSED_MWPM.md`。
+逐 shot 用学习后验重建 DEM 会丢掉 Stim 的 `^` 分解，MWPM 因此从 0.0439 退化到 0.0679；这属于实现问题，不能用来评价学习后验。保分解 + 相对重加权的完整阶梯实验、映射覆盖率与结论见 `docs/M5_DECOMPOSED_MWPM.md`。
 
 ## 6. 结论
 

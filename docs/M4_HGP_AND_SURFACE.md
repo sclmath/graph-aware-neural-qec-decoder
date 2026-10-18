@@ -42,18 +42,9 @@ H_Z = [I_{n_1} \otimes H_2 \mid H_1^T \otimes I_{m_2}],$$
 
 误差模型（code-capacity）：每个比特独立施加 X / Y / Z，各以 $p/3$ 概率；Z 误差翻转 X-check 与逻辑 X observable，X 误差翻转 Z-check 与逻辑 Z observable，Y 误差两者都翻转。DEM 直接构造，不经过 Stim 线路，因此**没有 matching 分解**——MWPM / Union-Find 对 HGP 不可用，这正是需要 BP / BP+GNN 的原因。
 
-## 4. 图结构对比（`results/m4/GRAPH_STRUCTURE.md`）
+## 4. 图结构对比
 
-| code | noise | detectors | mechanisms | edges | check 度 max/mean | variable 度 max/mean | 4-圈 | 可匹配 |
-|---|---|---:|---:|---:|---|---|---:|---|
-| repetition d=3 | circuit-level p=0.01 | 8 | 21 | 34 | 5 / 4.25 | 2 / 1.62 | 0 | 是 |
-| surface d=3 | code-capacity p=0.005 | 24 | 53 | 98 | 7 / 4.08 | 4 / 1.85 | 28 | 是 |
-| surface d=3 | circuit-level p=0.005 | 24 | 219 | 564 | **48 / 23.50** | 4 / 2.58 | 1956 | 是 |
-| surface d=5 | circuit-level p=0.005 | 120 | 1677 | 5004 | **80 / 41.70** | 4 / 2.98 | 26046 | 是 |
-| **HGP(rep3,rep3)** [[13,1,3]] | code-capacity p=0.05 | 12 | 39 | 80 | 8 / 6.67 | 4 / 2.05 | 30 | **否** |
-| **HGP(hamming7,hamming7)** [[58,16,3]] | code-capacity p=0.05 | 42 | 174 | 480 | 14 / 11.43 | 8 / 2.76 | 576 | **否** |
-
-三条结构结论（这正是 M4 想回答的问题）：
+完整表见 `results/m4/GRAPH_STRUCTURE.md`，摘要见 `docs/FINAL_REPORT.md` §4.2。三条结构结论：
 
 1. **表面码的"稀疏几何"只存在于码容量层面**。码容量 DEM 的 check 度 ≤ 7；一旦进入线路级噪声，同一个 detector 会被跨轮次的众多机制触发，check 度飙到 48（d=3）甚至 80（d=5），平均度 23.5 / 41.7，4-圈数量 1956 / 26046。也就是说**线路级表面码在 DEM 层面是一个稠密超图**，BP 的收敛率因此掉到 90% 左右——这解释了第 5 节里 BP 远差于 MWPM。
 2. **HGP 的 DEM 比码容量表面码更稠密**（平均 check 度 6.67 / 11.43 vs 4.08），4-圈也更多（每边 0.375 / 1.2 vs 0.29）。这些 4-圈是 BP 的经典失效源。
@@ -234,14 +225,12 @@ d=5 上的增益更大：`bp` 0.04736 → `bp_gnn` **0.01367（-71%）**，平�
 
 训练约束：d=5 的 `batch_size` 必须降到 128——1024 时 (1024, 5004, 32) 的逐边激活在 16 GB 机器上内存耗尽，进程被系统终止。
 
-## 8. 结论与下一步
+## 8. 结论与后续
 
-1. **表面码支持已补齐**（`rotated_surface_code`），MWPM / Union-Find / BP / BP+OSD / BP+GNN 全链路可用，`results/m4/surface_sweep.csv` 给出一条 LER–p 基线曲线；
-2. **HGP 构造与 DEM 建模可用**（两个小码、辛配对逻辑算符、独立机制采样），且明确记录 HGP **不可匹配**，MWPM 不适用；
-3. **图结构对比给出了机制解释**：线路级表面码 DEM 是稠密超图（check 度最大 48/80），而非匹配码的几何稀疏性；HGP 的 4-圈密度更高；
-4. **学习重加权在 BP「中等强度」的地方最有效**（2026-10-16 用 3 seeds 修正）：表面码线路级 d=3 为 **-29% ± 2% LER**（3 seeds）、d=5 为 **-37%**（3 seeds，最大）、d=7 回落到 **-25%**（3 seeds）——**码距轴非单调，峰值在 d=5**；HGP -3% LER、-30% 迭代；d=3 repetition 无显著差异（3 seeds 复核，Δ = -0.00028 ± 0.00035，见第 7.4 节）；
-5. 交付范围内的后续实验（见 `docs/ROADMAP_TODO.md`）：
-   - OSD 侧的重点不是「是否回退」而是「候选集质量」：OSD-λ / OSD-CS、或让 GNN 直接输出候选基排序（learning-to-rank，T8）；
-   - 表面码 d=5/d=7 上把「BP 弱 → GNN 有增益」的规律量化成 LER–延迟 Pareto 曲线（T6）；
-   - 把 HGP 换到更实用的种子码（[n,k,d] 更好的码、含参数扫描），并做 HGP ↔ 表面码的同噪声模型跨族迁移（T14）；
-   - 与 MWPM 的差距（2×）说明：对可匹配码，学习重加权应该做成 **MWPM 的边权重修正**，而不是 BP 的先验修正（完整对照见 `docs/M5_DECOMPOSED_MWPM.md`）。
+- 表面码支持已补齐，MWPM / Union-Find / BP / BP+OSD / BP+GNN 全链路可用。
+- HGP 构造与 DEM 建模可用；HGP 不可匹配，MWPM / Union-Find 不适用，BP 系是唯一通用选择。
+- 图结构解释了失效边界：线路级表面码 DEM 是稠密超图，HGP 的 4-圈密度更高。
+- 学习重加权在 BP 强度中等时最有效；码距轴峰值在 d=5，详见 `docs/FINAL_REPORT.md` §4.6。
+- 后续重点：OSD 候选集与 learning-to-rank（T8/T8-LTR）、HGP 跨族迁移（T14）、以及把学习后验用于 MWPM 边权修正（见 `docs/M5_DECOMPOSED_MWPM.md`）。
+
+> 完整结果、统计口径与适用范围见 `docs/FINAL_REPORT.md` §4.2/§4.3/§4.6；任务与工时见 `docs/ROADMAP_TODO.md` §2.2。

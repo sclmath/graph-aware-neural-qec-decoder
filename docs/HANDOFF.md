@@ -1,9 +1,9 @@
 # 交接说明（HANDOFF）
 
-- **交接时间**：2026-10-18 下午（本地收口版，第五次刷新）
-- **交接时仓库状态**：HEAD = `b56a1ef`（2026-10-18 上午收口提交）；工作区干净；`pytest` **72 项全过**（Python 3.12.1，约 10 s）
+- **交接时间**：2026-10-18 下午（本地收口 + Phase 1 文档整理）
+- **交接时仓库状态**：HEAD = 本地收口提交（2026-10-18，`git log -1` 可查）；工作区干净；`pytest` **72 项全过**（Python 3.12.1，约 10 s）
 - **交付状态**：第一阶段 P0/P1（T1-T11、T17、T18）全部完成，出口标准 1-6 已在本地核验；D1 暂不接远端，本地 Git bundle + SHA256 快照见 `docs/DELIVERY_LOCAL.md`
-- **夜间任务结果（2026-10-17 19:11 → 10-18 00:39，5.46 h）**：`session4_seeds.ps1 -Stage all -ShutdownAfter` 的 7 个槽里 **6 个全绿**——`grid` 30/30（208.5 min）、`postprocess`、`probes` ×6、`probes-extra` ×3、`ablation` ×2、`aggregate`；`extra` 的 HGP 部分**入口用错**（`graph_qec.m2`，应为 `graph_qec.m4`），已于 2026-10-18 08:21-08:48 修复并补跑完成。**关机按计划执行**（00:38:59 发出，08:18:45 已重新开机）。
+- **最近一次全链结果**：2026-10-17/18 的 `session4_seeds.ps1 -Stage all` 已完成并修复 HGP 入口；详细记录见 `docs/archive/COMPLETED_TASKS.md` 与 `results/logs/session4.log`。
 - **当前后台任务**：无（08:48 全部收尾）。
 - **本地收口记录**：`docs/DELIVERY_LOCAL.md`；快照写入 `artifacts/delivery/`（本地目录，不入库）。
 - **关机守卫**：两种做法（无人值守选一种即可）——
@@ -11,7 +11,7 @@
   2. `scripts\shutdown_when_done.ps1 -Watch`：以 detached 进程守望本仓库的 python 进程（2026-10-16 用过一次）。
   - 取消：300 s 宽限内 `shutdown /a`，或杀守望进程（PID 见 `results/logs/shutdown_watch.log`）。用守望模式前必须让 `results/logs/shutdown_issued.flag` 不存在（本环境拒绝 `Remove-Item`，按仓库惯例用 `git clean -f -- results/logs/shutdown_issued.flag`）；日期参数整体加引号（`'"2026-10-18 23:30"'`）。
 - **交付目标**：第一阶段成果（CPU-only）。范围、出口标准与优先级定义见 `docs/ROADMAP_TODO.md` 第 0 与 2.0 节；第二阶段（GPU）为未来展望，不排期
-- **本文内容**：最新状态 + 下一步工作包（第 3 节）+ 环境入口与操作纪律（第 2、4 节）
+- **本文内容**：最新状态、环境入口、已知坑与下一步；任务和决策的主源分别在 `docs/ROADMAP_TODO.md` §2.2 与 §6.2。
 
 ---
 
@@ -19,13 +19,16 @@
 
 | 文件 | 读它解决什么问题 |
 |---|---|
-| `docs/ROADMAP_TODO.md` | 交付范围（第 0 节）、优先级定义（2.0 节）、待办 T1-T18、CPU 算力预算实测（第 1 节） |
-| `README.md` 第 9-15 节 | 各里程碑的**唯一口径**结论与数字 |
-| `docs/BP_IMPLEMENTATION.md` | BP 算法规范、批量化设计、随码距的实测 µs/shot（决定扫描能开到多大） |
-| `results/m5/GNN_PERF.md` | GNN 前向实测成本与 T5 的遗留问题（未达标的优化目标） |
-| `results/m5/ENGINEERING_TABLE.md` | 全部已测量的延迟/吞吐/内存/迭代数（由脚本生成，勿手改） |
-| `results/m4/THRESHOLD.md` | 阈值估计现状（BP 系线路级阈值在 0.003 以下；MWPM 0.005-0.008） |
-| `results/t8/D7_MODEL_SEEDS.md`、`results/t9/SURFACE_D3_MULTISEED.md` | 模型种子口径的 OSD-CS 探针与表面码消融的 3-seed 汇总（种子是重复单位） |
+| `docs/INDEX.md` | 文档地图、唯一事实源与维护规则 |
+| `docs/FINAL_REPORT.md` | 科学结论、LER、阈值、延迟、统计口径与未解决问题 |
+| `docs/ROADMAP_TODO.md` | 未完成任务（T12–T15、T8-LTR）、优先级、工时与未来展望 |
+| `docs/archive/COMPLETED_TASKS.md` | T1–T11、T17、T18 的完成历史与原始验收信息 |
+| `docs/DELIVERY_LOCAL.md` | 本地交付快照、校验值与恢复方式 |
+| `docs/BP_IMPLEMENTATION.md` | BP 算法规范、批量化设计与实测 µs/shot |
+| `results/m5/GNN_PERF.md` | GNN 前向实测成本与 T5 遗留问题 |
+| `results/m5/ENGINEERING_TABLE.md` | 全部已测量的延迟/吞吐/内存/迭代数（生成物，勿手改） |
+| `results/m4/THRESHOLD.md` | 阈值估计现状 |
+| `results/t8/D7_MODEL_SEEDS.md`、`results/t9/SURFACE_D3_MULTISEED.md` | 模型种子口径的 OSD-CS 探针与表面码消融汇总 |
 
 ## 2. 环境与验证入口
 
@@ -51,51 +54,25 @@ Start-Process -WindowStyle Hidden pwsh -ArgumentList '-NoProfile','-File','scrip
 # 末尾加 '-ShutdownAfter' 可在整条链跑完后自动关机（300 s 宽限，shutdown /a 可取消）
 ```
 
-## 3. 下一步工作包
+## 3. 当前状态与下一步
 
-> P0 与 P1（T1-T11、T17、T18）已全部完成，交付出口标准 1-6 全部达成；**T6 的 30/30 点与三项单 seed 补点已于 2026-10-18 收口**。剩下的只有 P2 强化项（T12-T15，不做仍可交付）与三项待决策（D1-D3）。
+> P0 与 P1（T1–T11、T17、T18）已全部完成，出口标准 1–6 已在本地核验；当前没有阻塞项。已完成任务的详细叙事见 `docs/archive/COMPLETED_TASKS.md`。
 
-### WP1 · T6 补满 30 点 + 收口（**已完成，2026-10-18**）
+### 3.1 剩余可选工作
 
-- **30/30 点**：最后 6 点（d=5/d=7 p=0.002 × 3 seeds）由 `session4_seeds.ps1 -Stage grid` 于 2026-10-17 19:11→22:40 跑完（208.5 min）；全网格累计壁钟约 24 h。
-- **收口脚本已重生成**：`results/t10/{MULTISEED.md,surface_sweep_mean.json}`、`results/m4/THRESHOLD.md`、`results/m5/ENGINEERING_TABLE.md`。
-- **结论**：d=5 噪声率轴出现低端拐点（p=0.003 峰值 **−43.4%**，p=0.002 回落到 −37.4%）；d=7 单调下降（−38.2% → −9.9%，峰值在区间下沿）；OSD-0 在 10 个点全部更差（+10.4% ~ +60.5%）。T6 表格与阈值结论已写入 `FINAL_REPORT` §4.6/§4.7 与 `README` 第 9-15 节。
-- **重放命令**：`pwsh -File scripts\session4_seeds.ps1 -Stage all`（幂等；全部输出存在时各槽秒级跳过）。
+1. **统计补强（1–2 人日 + 1–3 h CPU）**：T8 表面码 d=3 OSD-CS 补 3 seeds；表面码 d=3→d=5 码容量迁移补 3 seeds；T10 repetition d=5 先验强度复核。当前仍属单 seed 的范围见 `docs/FINAL_REPORT.md` §7 第 7 条。
+2. **P2 强化项**：T12、T13、T14、T15 与 T8 learning-to-rank，见 `docs/ROADMAP_TODO.md` §2.2；合计 14–22 人日 + 6.5–7.5 h CPU（含 T8-LTR 估算）。
+3. **推荐顺序**：统计补强 → T12/T13 → T8-LTR → T14 → T15。
 
+### 3.2 每次改动后的验证
 
-### WP2 · 剩下的单 seed 结论（P2，未解决问题 7 的剩余部分）
+```powershell
+$env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
+.\.venv\Scripts\python.exe -m pytest -q
+.\scripts\run_all.ps1
+```
 
-- 已完成：T9 repetition 消融、T8 d=7 OSD-CS 探针（每点 3 份测试集）、T8 repetition d=3 研究、M2 旗舰表（都是 3 seeds / 98304 shots 量级：`results/{m2/HEADLINE_MULTISEED.md,t8/D7_MULTISEED.md,t8/REPETITION_D3_MULTISEED.md,t9/REPETITION_D3_MULTISEED.md}`）；
-- 本轮还补了两处：表面码 d=3 线路级 p=0.005 的锚点（−18.2% 单 seed → **−29.0% ± 2.4%**，3 seeds）与 T8 repetition 研究；`scripts/m2_headline_multiseed.py` 现在对任意 M2/M4 配置通用（`--base-config` / `--out-dir` / `--output`，配套 `scripts/m2_headline_seeds.ps1 -BaseConfig -OutDir`）
-- **本轮又撤回了两个单 seed 结论**（都属「小差异」型）：T9/T8 的「λ=4 上 DEM 先验与学习先验打平」→ +0.00055 ± 0.00043（不可区分）；M2 旗舰表的 bp vs bp_gnn → −0.00028 ± 0.00035（符号翻转）。这说明**凡结论涉及 <0.001 量级的差异，必须 3 seeds**；
-- **仍属单 seed**：T8 的 repetition/表面码 d=3 两个 OSD-CS 研究（效应量大，优先级低）、表面码 d=3→d=5 的码容量迁移（−12%，未做多种子）、T10 的 repetition d=5 先验强度复核（未做）；
-- **2026-10-18 起不再是单 seed**：HGP 跨尺寸迁移（3 seeds，但**结论被推翻**，见下）、M3 跨码距迁移（3 seeds，稳健）、4.8.1 表面码全部 5 条臂（3 seeds）、T8 的 d=7 探针（3 个模型 seed）；
-- 做法可直接复用本轮的两个工具：`scripts/t9_feature_ablation.py --seed-offset N --merge`（消融）与 `scripts/t9_multiseed.py --prefix <系列>`（跨 seed 汇总）。
-
-**已完成（`probes` 槽，2026-10-17 夜间）**：6 次模型种子探针（6.5-9.5 min/次）→ `results/t8/D7_MODEL_SEEDS.md`（`scripts/t8_d7_model_seeds.py`；与只换测试集的 `D7_MULTISEED.md` 分口径）。
-- OSD-0 相对 `bp_gnn` 恶化 **+43.0%±14.0% / +34.7%±12.2% / +15.8%±2.4%**（p=0.003/0.005/0.008，3 个模型 seed 全部同号）
-- OSD-CS 对 OSD-0 的修补 **−41.7%±3.8% / −26.2%±1.1% / −14.9%±1.8%**（9 个 (p, seed) 组合全部成立）
-- 但 **CS 相对 `bp_gnn` 的净增益只有 p=0.003 有方向**（−15.7%±13.3%，n.s.），p≥0.005 归零 → **旧口径的 −34.9%/−11.6%/−1.9% 是单模型效应**
-- 另补 d=7 p=0.01 的 3 份测试集（cs4 比 `bp_gnn` 差 +8.4%）
-
-**迁移多种子（`extra` 槽，2026-10-18 上午补跑）**：
-- **M3 跨码距 d=3→d=5 稳健**：−66.3% / −68.0% / −71.0%（三个种子同号）
-- **HGP 跨尺寸迁移不稳健**：−11.4% / +4.9% / +12.5%（均值 **+2.0% ± 7.1%**）→ **单 seed 的 −11% 已撤回**
-- **HGP 源域** [[13,1,3]]：−3.1% / −5.9% / −9.7%（同号，效应小）
-
-
-**验收**：相关表格全部标注 shots、seed 数与跨 seed 标准误；迁移结论必须给出 3 seeds 的配对 Δ（种子是重复单位，不复用 pooled 口径）。
-
-### WP3 · P2 强化项 T12-T15（不做仍可交付）
-
-T12 真零样本迁移（移除边特征里的 p）、T13 多噪声率训练课程、T14 HGP 换种子码 + 跨族迁移、T15 精确机制映射 + 每边一次建图。详见 `docs/ROADMAP_TODO.md` 第 2.2 节，合计 11-17 人日。
-
-### WP4 · 交付收口（每次改动后都做）
-
-1. `pytest -q`（期望 72 passed）；
-2. `scripts/run_all.ps1`（端到端 smoke，约 18 s）；
-3. 表格/图全部由脚本生成，`docs/FINAL_REPORT.md` 里的数字与 `results/` 一致；
-4. 提交时 `git add` 指定路径，避免把正在跑的结果目录写进提交。
+根因分析与历史命令见 `docs/FINAL_REPORT.md` §8 与 `docs/archive/COMPLETED_TASKS.md`。
 
 ## 4. 已知坑与操作纪律
 
@@ -116,16 +93,13 @@ T12 真零样本迁移（移除边特征里的 p）、T13 多噪声率训练课�
 
 ## 5. 决策事项
 
-| 编号 | 事项 | 结论 |
-|---|---|---|
-| D1 | 远端仓库 | **已决（2026-10-18）：暂不绑定远端**；本地交付用 Git bundle + SHA256 快照备份，CI 首跑继续挂起，不阻塞本地收口 |
-| D2 | LICENSE | **已决（2026-10-18）：暂不声明**；当前仅本地/内部使用，对外分发前再定 MIT / Apache-2.0 |
-| D3 | 参考文献 PDF | **已决（2026-10-18）：保持不入库**；按 manifest + `scripts/download_references.py` 重建，不启用 Git LFS |
-| D4 | T6 低噪声端补点 | **已决（2026-10-17）：做**；30/30 点已完成，LER-p 曲线低端拐点证据已写入报告 |
+D1–D3 已于 2026-10-18 在本地收口时决定：**暂不接远端**（本地 Git bundle + SHA256 快照）、**暂不声明 LICENSE**（仅本地/内部使用）、**参考文献 PDF 不入库**（按 manifest 重建）。D4 的 T6 低噪声补点已完成。
+
+> 决策主源见 `docs/ROADMAP_TODO.md` §6.2；本地快照与校验值见 `docs/DELIVERY_LOCAL.md`。
 
 ## 6. 接手检查清单
 
-- [x] `git log --oneline -1` 确认在 `b56a1ef` 或其后的本地收口提交
+- [x] `git log --oneline -1` 确认在本地收口提交或其后的文档整理提交
 - [x] `pytest -q`：72 passed（约 10 s）
 - [x] `Get-Process python` 确认没有遗留的后台进程；`results/logs/session4.log` 末行应为 `session4 finished`（其中 00:38 的 HGP 失败记录是历史，已修复补跑）
 - [x] `pwsh -File scripts\session4_seeds.ps1 -Stage all -DryRun` 预演：`grid plan` 显示 **0 pending / 30 points**，各槽均为 `skip (result exists)`

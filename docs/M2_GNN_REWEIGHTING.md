@@ -10,7 +10,7 @@ M2 在 M1 的经典基线之上引入图神经网络，研究"学习到的 error
 - 保持配置驱动、固定随机种子、按 seed 切分训练/验证/测试，杜绝信息泄漏；
 - 记录 LER、收敛率、平均 BP 迭代次数、syndrome 一致率、单 shot 延迟和模型规模。
 
-结论先说：在 repetition code（d=3，circuit-level，p=0.01）上，**把学习到的机制边际接回解码器不会在 LER 上超过经典基线**，但会显著改善收敛行为（平均迭代 -21%），并且模型学到的是真正的 syndrome 条件后验（机制 AUC 0.62 → 0.99）。学习先验的 LER 收益在 BP 明显退化的大图上兑现（见 `docs/M3_HYBRID_DECODER.md`、`docs/M4_HGP_AND_SURFACE.md`）。
+> 结论摘要：d=3 repetition 上学习先验没有显著 LER 收益，但平均迭代 −21%；大图上的收益见 M3/M4。完整结论见 §8，数字主源见 `docs/FINAL_REPORT.md` §4.3。
 
 ## 2. 图表示
 

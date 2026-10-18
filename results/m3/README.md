@@ -12,4 +12,4 @@
 | `SUMMARY.md` / `sweep.csv` | 自动汇总（`scripts/summarize_m3.py`、`scripts/plot_m3_results.py`） |
 | `figures/` | 5 张图：噪声外推、码距外推、LER–延迟 Pareto、LES–一致性权衡、强度重标定 |
 
-核心结论：d=3 repetition 上学习先验无显著 LER 收益（`bp` 0.00943 vs `bp_gnn` 0.00952，z=-0.77，p=0.44），但平均迭代 -21%；d=5 上收益显著（d=3 训练模型迁移到 d=5：0.05078 → 0.01709，-66%）。详见 `docs/M3_HYBRID_DECODER.md`。
+> 方法与结论见 `docs/M3_HYBRID_DECODER.md`；完整数字以 `docs/FINAL_REPORT.md` 为准。本文件只做目录导航。

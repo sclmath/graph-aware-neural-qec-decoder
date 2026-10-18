@@ -21,6 +21,7 @@
 
 ## 2. 交付物入口
 
+- 文档索引：`docs/INDEX.md`
 - 技术报告：`docs/FINAL_REPORT.md`
 - 交接说明：`docs/HANDOFF.md`
 - 范围与待办：`docs/ROADMAP_TODO.md`
@@ -29,10 +30,11 @@
 - CPU 工程性能表：`results/m5/ENGINEERING_TABLE.md`
 - 模型种子口径的 d=7 OSD-CS 探针：`results/t8/D7_MODEL_SEEDS.md`
 - 表面码 d=3 消融（3 seeds）：`results/t9/SURFACE_D3_MULTISEED.md`
+- 结果目录索引：`results/README.md`
 
 ## 3. 本地快照
 
-收口提交完成后生成以下本地文件（目录 `artifacts/delivery/` 已加入 `.gitignore`，不重复入库）：
+本地快照包含以下文件（目录 `artifacts/delivery/` 已加入 `.gitignore`，不重复入库）：
 
 ```text
 artifacts/delivery/qec-decoder-phase1-20261018.bundle   # git bundle --all
@@ -60,38 +62,12 @@ Get-Content .\artifacts\delivery\SHA256SUMS.txt
 
 ## 4. 本地收口决策
 
-| 编号 | 决策 |
-|---|---|
-| D1 | 暂不绑定远端；使用本地 Git bundle + SHA256 快照。CI 首跑挂起，不阻塞本地交付。 |
-| D2 | 暂不声明 LICENSE；当前仅本地/内部使用，对外分发前再定 MIT / Apache-2.0。 |
-| D3 | 参考文献 PDF 保持不入库；按 `docs/references/references_pdfs/manifest.*` 重建，不启用 Git LFS。 |
+D1–D3 已固化：暂不绑定远端、暂不声明 LICENSE、参考文献 PDF 不入库。决策正文见 `docs/ROADMAP_TODO.md` §6.2，交接摘要见 `docs/HANDOFF.md` §5。
 
 ## 5. 剩余可选工作
 
-这些项不影响本次交付，按价值排序：
-
-| 项目 | 人日 | CPU 算力 | 说明 |
-|---|---:|---:|---|
-| 统计补强 | 1-2 | 1-3 h | T8 表面码 d=3 OSD-CS、d=3→d=5 码容量迁移、T10 repetition d=5 先验强度复核 |
-| T8 learning-to-rank | 3-5 | 2-3 h | 对应 `FINAL_REPORT` 未解决问题第 1 条 |
-| T12 真零样本迁移 | 2 | 1 h | 移除边特征中的 p |
-| T13 多噪声率训练课程 | 1-2 | 1 h | 与 T12 可共用改动 |
-| T14 HGP 换种子码 + 跨族迁移 | 3-5 | 2 h | 依赖 HGP 码生成器 |
-| T15 精确机制映射 + 每边一次建图 | 5-8 | 0.5 h | 最大工程项；涉及 PyMatching 图接口 |
+统计补强与 P2 强化项（T12–T15、T8 learning-to-rank）不阻塞本次交付，任务、工时与优先级见 `docs/ROADMAP_TODO.md` §2.2。当前仍属单 seed 的范围见 `docs/FINAL_REPORT.md` §7 第 7 条。
 
 ## 6. 复现入口
 
-```powershell
-$env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
-
-# 回归 + 端到端 smoke
-.\.venv\Scripts\python.exe -m pytest -q
-.\scripts\run_all.ps1
-
-# T6 网格计划（应为 0 pending / 30 points）
-.\.venv\Scripts\python.exe scripts\t6_surface_grid.py --print-plan
-
-# 数值表重新生成
-.\.venv\Scripts\python.exe scripts\t10_multiseed_stats.py --results-dir results\m4_surface --output-dir results\t10
-.\.venv\Scripts\python.exe scripts\engineering_table.py
-```
+环境、单测、端到端 smoke、CPU 预算与工程性能表的命令见 `docs/HANDOFF.md` §2；完整复现流程见 `docs/FINAL_REPORT.md` §8。
