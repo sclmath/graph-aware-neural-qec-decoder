@@ -1,7 +1,8 @@
 # Graph-Aware Neural QEC Decoder · 第一阶段技术报告（T17）
 
-- **日期**：2026-10-15
-- **状态**：**完成**。第 4.6 节覆盖 d=5 三个噪声率、d=7 两个噪声率（各 3 seeds）；第 4.7 节含线路级与码容量的阈值结论。
+- **日期**：2026-10-18（本地收口刷新）
+- **状态**：**完成（本地收口）**。第 4.6 节覆盖 5 个噪声率 × {d=5, d=7} × 3 seeds（30/30 点）；第 4.7 节含线路级与码容量的阈值结论。
+- **本地收口**：D1 暂不接远端，CI 首跑挂起；本地验证与快照见 `docs/DELIVERY_LOCAL.md`。
 - **交付环境**：Intel i5-12400（6C/12T）/ 16 GB / CPU-only PyTorch（`torch.cuda.is_available() == False`）
 - **代码**：`src/graph_qec/`；测试：`pytest` **72 项全绿**；所有表格中的数字均可由仓库内脚本复现
 
@@ -27,9 +28,9 @@
 
 | 出口标准（`docs/ROADMAP_TODO.md` 第 0.1 节） | 状态 |
 |---|---|
-| `pytest` 全绿，CI 在干净环境可复现 | ✅ 72 项全绿；`.github/workflows/ci.yml`（3.10/3.12 矩阵） |
-| `scripts/run_all.ps1` 小规模模式端到端跑通 | ✅ 18 s |
-| d=3/5/7 的 LER-p 曲线与阈值估计，显式标注 shots 与 seed 数 | 🔶 d=3/5 完成；d=7 曲线由 T6 网格产出；阈值见 4.7 |
+| `pytest` 全绿，CI 在干净环境可复现 | ✅ 本地 72 项全绿；`.github/workflows/ci.yml`（3.10/3.12 矩阵）就位。**D1 暂不接远端，CI 首跑挂起** |
+| `scripts/run_all.ps1` 小规模模式端到端跑通 | ✅ 本地实测约 26 s（含单测；`-SkipTests` 约 21 s） |
+| d=3/5/7 的 LER-p 曲线与阈值估计，显式标注 shots 与 seed 数 | 🔶 d=3/5/7 曲线与 30/30 网格完成；d=3/5 阈值已定位，d=7 阈值在采样区间外（见 4.7） |
 | 学习重加权在至少一个噪声区间改善精度或延迟，且给出配对检验 | ✅ 见 4.3 / 4.6（McNemar + 多种子标准误） |
 | 所有图表由脚本自动生成 | ✅ |
 | `docs/FINAL_REPORT.md` 写清适用范围、计算成本与未解决问题 | ✅ 本文第 5-7 节 |
@@ -291,8 +292,8 @@ README 7.2 列出 7 类消融，当前状态：
 | 项目 | 实测 |
 |---|---|
 | 交付环境 | Intel i5-12400（6C/12T）/ 16 GB / CPU-only |
-| 回归测试 | `pytest -q` 约 8 s（72 项） |
-| 端到端 smoke | `scripts/run_all.ps1` 约 18 s |
+| 回归测试 | `pytest -q` 约 10 s（72 项，本地 Python 3.12.1） |
+| 端到端 smoke | `scripts/run_all.ps1` 约 26 s（含单测；`-SkipTests` 约 21 s） |
 | 单点 M2 训练 + 评测（表面码 d=5，8192 test shots） | 20-48 min（随 p；训练 ~17-21 min） |
 | 单点 M2 训练 + 评测（表面码 d=7，4096 test shots） | **42-92 min**（随 p；训练 17-18 min，评测 25-74 min） |
 | T6 全网格（30 点） | **约 24 h 累计壁钟**（16 + 8 + 6 点三批；最后一批 208.5 min） |
@@ -323,7 +324,7 @@ $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 # 1) 回归测试（72 项）
 .\.venv\Scripts\python.exe -m pytest -q
 
-# 2) 端到端 smoke（约 18 s）
+# 2) 端到端 smoke（约 26 s，含单测）
 .\scripts\run_all.ps1
 
 # 3) 经典基线 + 表面码扫描（T18 重跑，生成 results/m1 与 results/m4/surface_sweep.*）

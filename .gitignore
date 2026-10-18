@@ -21,5 +21,8 @@ Thumbs.db
 # ===== 运行期临时文件 =====
 *.tmp
 
+# ===== 本地交付快照（git bundle / zip / checksums，不入库）=====
+artifacts/delivery/
+
 # ===== 端到端 smoke 产出（scripts/run_all.ps1 生成，可随时重建）=====
 results/smoke/

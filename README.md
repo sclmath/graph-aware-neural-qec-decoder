@@ -170,7 +170,7 @@
 - 学习 logits 通过固定的转换函数接入 BP 先验（LLR 约定见 `docs/M2_GNN_REWEIGHTING.md`）；把同一份预测用作 OSD-0 候选基排序则无改善，这一负结果直接指向 M3 与交付清单中的候选集学习（T8）
 - 产出：`src/graph_qec/graph_features.py`、`src/graph_qec/models/`、`src/graph_qec/m2*.py`、`configs/m2_*.json`、`results/m2/`、`scripts/summarize_m2.py`、`scripts/plot_m2_results.py`
 
-### M3：混合解码器与失效边界（已完成主体）
+### M3：混合解码器与失效边界（已完成）
 
 同分布 headline（repetition d=3，circuit-level p=0.01，32768 shots）：
 
@@ -194,7 +194,7 @@
 6. 机制后验在噪声偏移下保持校准：AUC 0.973-0.998，log loss 始终低于 DEM 先验。
 - 产出：`results/m3/`、`docs/M3_HYBRID_DECODER.md`
 
-### M4：旋转表面码与 HGP（已完成主体）
+### M4：旋转表面码与 HGP（已完成）
 
 - **旋转表面码支持**：`rotated_surface_code` 家族下 MWPM / Union-Find / BP / BP+OSD / BP+GNN 全链路可用
 - **小型 HGP 码构造**：`src/graph_qec/codes/hgp.py`（Tillich-Zémor 超图积、辛配对逻辑算符基、code-capacity DEM、检测器坐标嵌入），两个码 [[13,1,3]] 与 [[58,16,3]]
@@ -276,13 +276,13 @@
 
 ## 10. 交付范围
 
-本次交付为**第一阶段成果**：在 CPU-only 环境下完成上述码族、噪声模型与统计规模下的全部实验、代码与报告。范围与出口标准见 `docs/ROADMAP_TODO.md`。
+本次交付为**第一阶段成果**：在 CPU-only 环境下完成上述码族、噪声模型与统计规模下的全部实验、代码与报告。范围与出口标准见 `docs/ROADMAP_TODO.md`；本地收口记录、验证结果与快照校验值见 `docs/DELIVERY_LOCAL.md`。
 
 需要 GPU 或属于新研究方向的内容作为**未来展望**记录，不纳入本次交付：GPU 批处理与量化迁移、d=7 的 32768 shots x 3 seeds 大规模扫描、GPU 延迟/显存/吞吐对比、d=9、时序编码器、端到端可微 BP。
 
 ## 11. 交付物
 
-- 可复现代码仓库（含 CI）
+- 可复现代码仓库（含 CI 配置；因 D1 暂不接远端，CI 首跑挂起）
 - 配置文件驱动的数据生成、训练和解码脚本
 - 基线与混合解码器实现
 - 单元测试和端到端 smoke test
@@ -297,12 +297,12 @@
 
 | 条目 | 状态 |
 |---|---|
-| Repetition code 与表面码 d=3、5、7 | rep d=3/5 与表面码 d=3 已完成；d=5/d=7 表面码在交付清单 T6 |
+| Repetition code 与表面码 d=3、5、7 | rep d=3/5 与表面码 d=3/5/7 均已完成（T6 30/30 点，3 seeds） |
 | Code-capacity 与 circuit-level noise | 已完成 |
 | MWPM 与 BP+OSD 基线 | 已完成 |
 | GNN 边权重预测 | 已完成 |
-| 至少一个噪声外推实验 | 已完成（噪声率外推 4 点 + 跨码距 d=3→d=5） |
-| 单 shot 延迟与峰值内存测试 | CPU 部分已完成；完整对比表见 T11 |
+| 至少一个噪声外推实验 | 已完成（5 个噪声率点 p=0.002-0.01 + 跨码距 d=3→d=5） |
+| 单 shot 延迟与峰值内存测试 | CPU 部分已完成；完整对比表见 T11 / `results/m5/ENGINEERING_TABLE.md` |
 
 ## 13. 计算资源
 

@@ -1,9 +1,11 @@
 # 交接说明（HANDOFF）
 
-- **交接时间**：2026-10-18 上午（第四次刷新；夜间全链已跑完，工作区待提交）
-- **交接时仓库状态**：HEAD = `1a4b827`（2026-10-17 上午的收口准备）；本轮 30/30 数据、T8/T9 补点、迁移结果与文档改动**尚未提交**；`pytest` **72 项全过**
+- **交接时间**：2026-10-18 下午（本地收口版，第五次刷新）
+- **交接时仓库状态**：HEAD = `b56a1ef`（2026-10-18 上午收口提交）；工作区干净；`pytest` **72 项全过**（Python 3.12.1，约 10 s）
+- **交付状态**：第一阶段 P0/P1（T1-T11、T17、T18）全部完成，出口标准 1-6 已在本地核验；D1 暂不接远端，本地 Git bundle + SHA256 快照见 `docs/DELIVERY_LOCAL.md`
 - **夜间任务结果（2026-10-17 19:11 → 10-18 00:39，5.46 h）**：`session4_seeds.ps1 -Stage all -ShutdownAfter` 的 7 个槽里 **6 个全绿**——`grid` 30/30（208.5 min）、`postprocess`、`probes` ×6、`probes-extra` ×3、`ablation` ×2、`aggregate`；`extra` 的 HGP 部分**入口用错**（`graph_qec.m2`，应为 `graph_qec.m4`），已于 2026-10-18 08:21-08:48 修复并补跑完成。**关机按计划执行**（00:38:59 发出，08:18:45 已重新开机）。
 - **当前后台任务**：无（08:48 全部收尾）。
+- **本地收口记录**：`docs/DELIVERY_LOCAL.md`；快照写入 `artifacts/delivery/`（本地目录，不入库）。
 - **关机守卫**：两种做法（无人值守选一种即可）——
   1. `scripts\session4_seeds.ps1 -ShutdownAfter`：整条链跑完后自己执行 `shutdown.exe /s /t 300`（**已实测成功**）；
   2. `scripts\shutdown_when_done.ps1 -Watch`：以 detached 进程守望本仓库的 python 进程（2026-10-16 用过一次）。
@@ -31,10 +33,10 @@
 # 0) 环境：CPU-only torch（torch.cuda.is_available() == False），i5-12400 / 16 GB
 $env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
 
-# 1) 回归测试（期望 72 passed，约 8-13 s）
+# 1) 回归测试（期望 72 passed，约 10 s）
 .\.venv\Scripts\python.exe -m pytest -q
 
-# 2) 端到端 smoke（期望 18 s 全绿；产出写进 results/smoke/，已在 .gitignore 中）
+# 2) 端到端 smoke（本地实测约 26 s 全绿，含单测；-SkipTests 约 21 s。产出写进 results/smoke/，已在 .gitignore 中）
 .\scripts\run_all.ps1              # 加 -SkipTests 可跳过单测；加 -Full 会跑 M2 训练与 M3 扫描
 
 # 3) CPU 预算实测（决定新实验规模时先跑它，约 40 s）
@@ -112,22 +114,22 @@ T12 真零样本迁移（移除边特征里的 p）、T13 多噪声率训练课�
 13. **HGP（DEM-level / M4 码族）必须用 `graph_qec.m4`，不能用 `graph_qec.m2`**——后者在 `build_circuit` 处报 `'hgp_rep3x3' is a detector-error-model-level code family (M4); it has no Stim circuit`（2026-10-18 00:38 的四条 HGP 命令因此全失败）。失败留下的**空结果目录**会让重跑抛 `FileExistsError`，先用 `git clean -fdq -- <dir>` 清掉。
 14. **`session4_seeds.ps1 -ShutdownAfter` 已实测**（19:11 启动 → 00:38:59 发出关机 → 00:44 关机）：无人值守优先用它；`-DryRun` 可先预演整条链。若改守望模式，先删 `results/logs/shutdown_issued.flag`，且等 python 进程起来后再启动守望。
 
-## 5. 未决事项（需决策）
+## 5. 决策事项
 
-| 编号 | 事项 | 影响 |
+| 编号 | 事项 | 结论 |
 |---|---|---|
-| D1 | 是否绑定远端仓库（GitHub 私有等） | **阻塞 T1 的 CI 首次运行**；当前无远端，本地磁盘故障即丢全部结果 |
-| D2 | `LICENSE` 未确定 | 交付物缺一项 |
-| D3 | 参考文献 PDF 策略（当前不入库，可由 `scripts/download_references.py` 重建） | 若要求离线自洽需改用 Git LFS |
-| D4 | ~~T6 低噪声端 p=0.002 × {d=5, d=7} × 3 seeds 是否要做~~ **已决（2026-10-17）：做**，排在当晚 12 h 窗口的第一槽 | 约 3.5 h；做完 T6 网格即 30/30 完整，LER-p 曲线低端有拐点证据 |
+| D1 | 远端仓库 | **已决（2026-10-18）：暂不绑定远端**；本地交付用 Git bundle + SHA256 快照备份，CI 首跑继续挂起，不阻塞本地收口 |
+| D2 | LICENSE | **已决（2026-10-18）：暂不声明**；当前仅本地/内部使用，对外分发前再定 MIT / Apache-2.0 |
+| D3 | 参考文献 PDF | **已决（2026-10-18）：保持不入库**；按 manifest + `scripts/download_references.py` 重建，不启用 Git LFS |
+| D4 | T6 低噪声端补点 | **已决（2026-10-17）：做**；30/30 点已完成，LER-p 曲线低端拐点证据已写入报告 |
 
 ## 6. 接手检查清单
 
-- [ ] `git log --oneline -1` 确认在本轮（2026-10-18 上午）的提交或其后
-- [ ] `pytest -q` 期望 72 passed（约 8 s）
-- [ ] `Get-Process python` 确认没有遗留的后台进程；`results/logs/session4.log` 末行应为 `session4 finished`（其中 00:38 的 HGP 失败记录是历史，已修复补跑）
-- [ ] `pwsh -File scripts\session4_seeds.ps1 -Stage all -DryRun` 预演：`grid plan` 应显示 **0 pending / 30 points**，各槽应打印 `skip (result exists)`
-- [ ] `.\scripts\run_all.ps1 -SkipTests` 期望 18 s 全绿
-- [ ] 读 `docs/ROADMAP_TODO.md` 第 0 与 2.0 节、`docs/FINAL_REPORT.md` 第 4.6/4.8 节与第 7 节
-- [ ] 读第 4 节的 12 条纪律（尤其 batch、结果目录、跨 seed 口径三条）
-- [ ] 确认 D1-D4 的决策状态（第 5 节）
+- [x] `git log --oneline -1` 确认在 `b56a1ef` 或其后的本地收口提交
+- [x] `pytest -q`：72 passed（约 10 s）
+- [x] `Get-Process python` 确认没有遗留的后台进程；`results/logs/session4.log` 末行应为 `session4 finished`（其中 00:38 的 HGP 失败记录是历史，已修复补跑）
+- [x] `pwsh -File scripts\session4_seeds.ps1 -Stage all -DryRun` 预演：`grid plan` 显示 **0 pending / 30 points**，各槽均为 `skip (result exists)`
+- [x] `.\scripts\run_all.ps1 -SkipTests`：全绿，本地实测约 21 s
+- [x] 读 `docs/ROADMAP_TODO.md` 第 0 与 2.0 节、`docs/FINAL_REPORT.md` 第 4.6/4.8 节与第 7 节
+- [x] 读第 4 节的 12 条纪律（尤其 batch、结果目录、跨 seed 口径三条）
+- [x] 确认 D1-D4 的决策状态（第 5 节）
