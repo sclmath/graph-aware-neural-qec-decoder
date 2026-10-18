@@ -111,3 +111,57 @@
 [2026-10-16 12:43:48] [15/30] d5_p0p008_s3: skip (result exists)
 [2026-10-16 12:43:48] [16/30] d7_p0p008_s1: skip (result exists)
 [2026-10-16 12:43:48] [17/30] d7_p0p008_s2: start -> m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p008
+[2026-10-16 14:06:21] [17/30] d7_p0p008_s2: done in 82.6 min
+[2026-10-16 14:06:21] [18/30] d7_p0p008_s3: start -> m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p008
+[2026-10-16 15:20:34] [18/30] d7_p0p008_s3: done in 74.2 min
+[2026-10-16 15:20:34] [19/30] d5_p0p01_s1: start -> m4_rotated_surface_code_circuit_level_d5_s1__d5__circuit_level__p0p01
+[2026-10-16 16:08:53] [19/30] d5_p0p01_s1: done in 48.3 min
+[2026-10-16 16:08:53] [20/30] d5_p0p01_s2: start -> m4_rotated_surface_code_circuit_level_d5_s2__d5__circuit_level__p0p01
+[2026-10-16 16:53:37] [20/30] d5_p0p01_s2: done in 44.7 min
+[2026-10-16 16:53:37] [21/30] d5_p0p01_s3: start -> m4_rotated_surface_code_circuit_level_d5_s3__d5__circuit_level__p0p01
+[2026-10-16 17:34:34] [21/30] d5_p0p01_s3: done in 41.0 min
+[2026-10-16 17:34:34] [22/30] d7_p0p01_s1: start -> m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p01
+[2026-10-16 18:47:43] [22/30] d7_p0p01_s1: done in 73.2 min
+[2026-10-16 18:47:43] [23/30] d7_p0p01_s2: start -> m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p01
+[2026-10-16 20:02:27] [23/30] d7_p0p01_s2: done in 74.7 min
+[2026-10-16 20:02:27] [24/30] d7_p0p01_s3: start -> m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p01
+[2026-10-16 21:13:42] [24/30] d7_p0p01_s3: done in 71.2 min
+[2026-10-16 21:13:42] [25/30] d5_p0p002_s1: budget 480 min reached (509.9 min elapsed, 8 runs); stopping
+[2026-10-16 21:13:42] grid finished: 8 runs executed, 30 points in plan
+[2026-10-17 19:11:31] [1/30] d5_p0p005_s1: skip (result exists)
+[2026-10-17 19:11:31] [2/30] d5_p0p005_s2: skip (result exists)
+[2026-10-17 19:11:31] [3/30] d5_p0p005_s3: skip (result exists)
+[2026-10-17 19:11:31] [4/30] d7_p0p005_s1: skip (result exists)
+[2026-10-17 19:11:31] [5/30] d7_p0p005_s2: skip (result exists)
+[2026-10-17 19:11:31] [6/30] d7_p0p005_s3: skip (result exists)
+[2026-10-17 19:11:31] [7/30] d5_p0p003_s1: skip (result exists)
+[2026-10-17 19:11:31] [8/30] d5_p0p003_s2: skip (result exists)
+[2026-10-17 19:11:31] [9/30] d5_p0p003_s3: skip (result exists)
+[2026-10-17 19:11:31] [10/30] d7_p0p003_s1: skip (result exists)
+[2026-10-17 19:11:31] [11/30] d7_p0p003_s2: skip (result exists)
+[2026-10-17 19:11:31] [12/30] d7_p0p003_s3: skip (result exists)
+[2026-10-17 19:11:31] [13/30] d5_p0p008_s1: skip (result exists)
+[2026-10-17 19:11:31] [14/30] d5_p0p008_s2: skip (result exists)
+[2026-10-17 19:11:31] [15/30] d5_p0p008_s3: skip (result exists)
+[2026-10-17 19:11:31] [16/30] d7_p0p008_s1: skip (result exists)
+[2026-10-17 19:11:31] [17/30] d7_p0p008_s2: skip (result exists)
+[2026-10-17 19:11:31] [18/30] d7_p0p008_s3: skip (result exists)
+[2026-10-17 19:11:31] [19/30] d5_p0p01_s1: skip (result exists)
+[2026-10-17 19:11:31] [20/30] d5_p0p01_s2: skip (result exists)
+[2026-10-17 19:11:31] [21/30] d5_p0p01_s3: skip (result exists)
+[2026-10-17 19:11:31] [22/30] d7_p0p01_s1: skip (result exists)
+[2026-10-17 19:11:31] [23/30] d7_p0p01_s2: skip (result exists)
+[2026-10-17 19:11:31] [24/30] d7_p0p01_s3: skip (result exists)
+[2026-10-17 19:11:31] [25/30] d5_p0p002_s1: start -> m4_rotated_surface_code_circuit_level_d5_s1__d5__circuit_level__p0p002
+[2026-10-17 19:34:03] [25/30] d5_p0p002_s1: done in 22.5 min
+[2026-10-17 19:34:03] [26/30] d5_p0p002_s2: start -> m4_rotated_surface_code_circuit_level_d5_s2__d5__circuit_level__p0p002
+[2026-10-17 19:56:20] [26/30] d5_p0p002_s2: done in 22.3 min
+[2026-10-17 19:56:20] [27/30] d5_p0p002_s3: start -> m4_rotated_surface_code_circuit_level_d5_s3__d5__circuit_level__p0p002
+[2026-10-17 20:18:58] [27/30] d5_p0p002_s3: done in 22.6 min
+[2026-10-17 20:18:58] [28/30] d7_p0p002_s1: start -> m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p002
+[2026-10-17 21:01:29] [28/30] d7_p0p002_s1: done in 42.5 min
+[2026-10-17 21:01:29] [29/30] d7_p0p002_s2: start -> m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p002
+[2026-10-17 21:53:04] [29/30] d7_p0p002_s2: done in 51.6 min
+[2026-10-17 21:53:04] [30/30] d7_p0p002_s3: start -> m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p002
+[2026-10-17 22:40:04] [30/30] d7_p0p002_s3: done in 47.0 min
+[2026-10-17 22:40:04] grid finished: 6 runs executed, 30 points in plan

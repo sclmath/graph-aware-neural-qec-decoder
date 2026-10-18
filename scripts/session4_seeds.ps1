@@ -174,7 +174,9 @@ function Invoke-ExtraStage {
         $runDir = Get-FinishedRun 'results\m4_hgp' "m4_hgp_rep3x3_code_capacity_p0p05_s$offset"
         if (-not $runDir) {
             if (-not $DryRun -and -not (Test-Path $src)) { Write-Log "skip hgp transfer s$offset (missing config $src)"; continue }
-            Invoke-Step -Argv @('-m', 'graph_qec.m2', '--config', $src, '--output-dir', 'results\m4_hgp') -Label "train hgp rep3x3 s$offset" | Out-Null
+            # HGP 是 DEM-level（M4）码族，必须走 graph_qec.m4；graph_qec.m2 会在 build_circuit 处报
+            # "has no Stim circuit"（2026-10-18 00:38 的首次尝试即因此失败）。
+            Invoke-Step -Argv @('-m', 'graph_qec.m4', '--config', $src, '--output-dir', 'results\m4_hgp') -Label "train hgp rep3x3 s$offset" | Out-Null
             if (-not $DryRun) { $runDir = Get-FinishedRun 'results\m4_hgp' "m4_hgp_rep3x3_code_capacity_p0p05_s$offset" }
         } else {
             Write-Log "skip train hgp rep3x3 s$offset (exists: $($runDir.Name))"

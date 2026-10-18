@@ -1,0 +1,132 @@
+{
+  "checkpoint": {
+    "architecture": {
+      "check_feature_dim": 3,
+      "edge_feature_dim": 3,
+      "hidden_size": 64,
+      "num_layers": 3,
+      "variable_feature_dim": 6
+    },
+    "checkpoint": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_hgp\\m4_hgp_rep3x3_code_capacity_p0p05_s20__d3__code_capacity__p0p05\\model_state.pt",
+    "checkpoint_config_sha256": "1366e9e94aa42fe56600613caebb6ae77f454efd17630820e7fa8fd30618e119"
+  },
+  "decoders": [
+    {
+      "decoder": "bp",
+      "diagnostics": {
+        "average_final_syndrome_distance": 0.74761962890625,
+        "average_iterations": 13.7481689453125,
+        "converged_shots": 21248,
+        "convergence_rate": 0.6484375,
+        "engine": "batched_min_sum",
+        "prior_llr_override": false
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 1503.498107910159,
+        "mean_total_seconds": 49.26662600000009,
+        "run_seconds": [
+          49.26662600000009
+        ],
+        "throughput_shots_per_second": 665.11556931055,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.404144287109375,
+      "logical_error_rate_standard_error": 0.0027109019399810565,
+      "logical_errors": 13243,
+      "prediction_sha256": "5e22069b00400c60756ab6e43412347bcedbb6cd086be1bb0987e1253c8b240f",
+      "syndrome_consistency_rate": 0.6484375
+    },
+    {
+      "decoder": "bp_gnn",
+      "diagnostics": {
+        "average_final_syndrome_distance": 0.77728271484375,
+        "average_iterations": 13.771881103515625,
+        "converged_shots": 20102,
+        "convergence_rate": 0.61346435546875,
+        "engine": "batched_min_sum",
+        "prior_llr_override": true
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 1514.1169250488251,
+        "mean_total_seconds": 49.6145833999999,
+        "run_seconds": [
+          49.6145833999999
+        ],
+        "throughput_shots_per_second": 660.450975388016,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.45458984375,
+      "logical_error_rate_standard_error": 0.0027507207735146307,
+      "logical_errors": 14896,
+      "prediction_sha256": "29375418ddb09cdbcd7a175a54871fc411a67d8d744521e13c4e0fc65dd30040",
+      "syndrome_consistency_rate": 0.61346435546875
+    },
+    {
+      "decoder": "bp_gnn_osd",
+      "diagnostics": {
+        "average_iterations": 13.771881103515625,
+        "average_osd_rank": 42.0,
+        "combination_sweep_order": 0,
+        "converged_shots": 20102,
+        "convergence_rate": 0.61346435546875,
+        "engine": "batched_min_sum",
+        "forced_osd": false,
+        "osd_order": 0,
+        "osd_ordering_override": false,
+        "osd_rate": 0.38653564453125,
+        "osd_shots": 12666,
+        "prior_llr_override": true
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 1154.0479858398455,
+        "mean_total_seconds": 37.81584440000006,
+        "run_seconds": [
+          37.81584440000006
+        ],
+        "throughput_shots_per_second": 866.5150949267166,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.471527099609375,
+      "logical_error_rate_standard_error": 0.0027576536667663033,
+      "logical_errors": 15451,
+      "prediction_sha256": "8428b15a8475a02236877e04d2766ef1c44cb14c14ea23761c786958f46dc78c",
+      "syndrome_consistency_rate": 1.0
+    }
+  ],
+  "graph": {
+    "num_detectors": 42,
+    "num_edges": 480,
+    "num_errors": 174
+  },
+  "name": "m4_hgp_rep3x3_code_capacity_p0p05_s20->m4_hgp_hamming7x7_code_capacity_p0p05_s20",
+  "reweight_strength": 1.0,
+  "schema_version": 1,
+  "source": {
+    "family": "hgp_rep3x3",
+    "noise_model": "code_capacity",
+    "num_qubits": 13,
+    "physical_error_rate": 0.05
+  },
+  "splits": {
+    "test": {
+      "detections_sha256": "9f9176879fe24514fd3b6aeea8b2bd5658098460b5612ce5261f5e4343e5a7bb",
+      "mechanism_rate": 0.016700832323096264,
+      "seeds": [
+        321,
+        322,
+        323,
+        324
+      ],
+      "shots": 32768
+    }
+  },
+  "stage": "M4-transfer",
+  "target": {
+    "family": "hgp_hamming7x7",
+    "k": 16,
+    "noise_model": "code_capacity",
+    "num_qubits": 58,
+    "physical_error_rate": 0.05
+  },
+  "total_seconds": 395.5605759
+}

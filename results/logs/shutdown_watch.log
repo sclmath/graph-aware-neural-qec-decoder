@@ -135,3 +135,32 @@
 2026-10-16 07:17:31 waiting (sentinel=False deadline=False running=0)
 2026-10-16 07:22:31 waiting (sentinel=False deadline=False running=0)
 2026-10-16 07:27:31 waiting (sentinel=False deadline=False running=0)
+2026-10-16 21:02:51 waiting (python=2)
+2026-10-16 21:03:34 waiting (python=4)
+2026-10-16 21:03:53 watcher started (pid 13832), hard deadline 10/16/2026 23:30:00, poll 60s, grace 300s
+2026-10-16 21:04:59 waiting (python=4)
+2026-10-16 21:05:16 waiting (python=4)
+2026-10-16 21:05:16 waiting (python=4)
+2026-10-16 21:05:25 waiting (python=4) sentinel=results\logs\test_done.marker exists=True cwd=D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder
+2026-10-16 21:05:37 DEBUG: sentinel=[results\logs\test_done.marker] exists=True hard=False
+2026-10-16 21:05:37 ready (sentinel) but -Watch not given: refusing to shut down
+2026-10-16 21:05:55 ready (sentinel) but -Watch not given: refusing to shut down
+2026-10-16 21:05:55 waiting (python=4, sentinel exists=False)
+2026-10-16 21:06:00 watcher started (pid 20096), cwd D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder, sentinel results\logs\test_done.marker exists=True, hard deadline 10/16/2026 23:30:00, poll 60s, grace 300s
+2026-10-16 21:06:00 conditions met (sentinel); issuing shutdown in 300 s
+2026-10-16 21:06:00 dry run: no shutdown issued
+2026-10-16 21:06:07 watcher started (pid 9448), cwd D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder, sentinel 23:30 exists=False, hard deadline 10/16/2026 00:00:00, poll 60s, grace 300s
+2026-10-16 21:06:07 conditions met (hard deadline); issuing shutdown in 300 s
+2026-10-16 21:06:07 shutdown.exe issued (cancel with: shutdown /a)
+2026-10-16 21:06:41 refusing past hard deadline 10/16/2026 00:00:00 (pass -AllowPastDeadline to use it): deadline trigger disabled
+2026-10-16 21:06:41 waiting (python=4, sentinel exists=False)
+2026-10-16 21:06:46 watcher started (pid 17660), cwd D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder, sentinel results\DONE exists=False, hard deadline 10/16/2026 23:30:00, poll 60s, grace 300s
+2026-10-16 21:08:27 watcher started (pid 9652), cwd D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder, sentinel results\DONE exists=False, hard deadline 10/16/2026 23:30:00, poll 60s, grace 300s
+2026-10-16 21:08:27 waiting (python=4, sentinel exists=False, deadline 10/16/2026 23:30:00, ignore-deadline=)
+2026-10-16 21:09:27 waiting (python=4, sentinel exists=False, deadline 10/16/2026 23:30:00, ignore-deadline=)
+2026-10-16 21:10:27 waiting (python=4, sentinel exists=False, deadline 10/16/2026 23:30:00, ignore-deadline=)
+2026-10-16 21:11:27 waiting (python=4, sentinel exists=False, deadline 10/16/2026 23:30:00, ignore-deadline=)
+2026-10-16 21:12:28 waiting (python=4, sentinel exists=False, deadline 10/16/2026 23:30:00, ignore-deadline=)
+2026-10-16 21:13:28 waiting (python=4, sentinel exists=False, deadline 10/16/2026 23:30:00, ignore-deadline=)
+2026-10-16 21:14:28 conditions met (grid finished and no python running); issuing shutdown in 300 s
+2026-10-16 21:14:28 shutdown.exe issued (cancel with: shutdown /a)

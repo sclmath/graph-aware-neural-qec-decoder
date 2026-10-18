@@ -1,0 +1,8 @@
+[m2] epoch 1/8: train=0.28141 validation=0.03154 (108.0s)
+[m2] epoch 2/8: train=0.03322 validation=0.02476 (126.6s)
+[m2] epoch 3/8: train=0.02264 validation=0.02148 (126.5s)
+[m2] epoch 4/8: train=0.01903 validation=0.01477 (132.4s)
+[m2] epoch 5/8: train=0.01120 validation=0.00978 (118.7s)
+[m2] epoch 6/8: train=0.00951 validation=0.00937 (118.9s)
+[m2] epoch 7/8: train=0.00936 validation=0.00934 (86.8s)
+[m2] epoch 8/8: train=0.00932 validation=0.00931 (87.8s)

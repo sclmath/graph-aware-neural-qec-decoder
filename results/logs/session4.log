@@ -44,3 +44,1237 @@
 [2026-10-17 08:50:25] DRY-RUN  engineering table :: scripts\engineering_table.py --results-dir results --output results\m5\ENGINEERING_TABLE.md
 [2026-10-17 08:50:25] DRY-RUN shutdown.exe /s /t 300
 [2026-10-17 08:50:25] session4 finished
+[2026-10-17 19:11:31] session4 start (pid 21864) stages=grid,postprocess,probes,probes-extra,ablation,extra,aggregate dryrun=False shutdownAfter=True
+[2026-10-17 19:11:31] --- stage grid ---
+[2026-10-17 19:11:31] grid plan: 6 pending / 30 points
+[2026-10-17 19:11:31]   pending: d=5 p=0.002  seed=1  [pending]
+[2026-10-17 19:11:31]   pending: d=5 p=0.002  seed=2  [pending]
+[2026-10-17 19:11:31]   pending: d=5 p=0.002  seed=3  [pending]
+[2026-10-17 19:11:31]   pending: d=7 p=0.002  seed=1  [pending]
+[2026-10-17 19:11:31]   pending: d=7 p=0.002  seed=2  [pending]
+[2026-10-17 19:11:31]   pending: d=7 p=0.002  seed=3  [pending]
+[2026-10-17 19:11:31] t6 grid start :: python scripts\t6_surface_grid.py --budget-minutes 480
+[2026-10-17 19:11:31] [1/30] d5_p0p005_s1: skip (result exists)
+[2026-10-17 19:11:31] [2/30] d5_p0p005_s2: skip (result exists)
+[2026-10-17 19:11:31] [3/30] d5_p0p005_s3: skip (result exists)
+[2026-10-17 19:11:31] [4/30] d7_p0p005_s1: skip (result exists)
+[2026-10-17 19:11:31] [5/30] d7_p0p005_s2: skip (result exists)
+[2026-10-17 19:11:31] [6/30] d7_p0p005_s3: skip (result exists)
+[2026-10-17 19:11:31] [7/30] d5_p0p003_s1: skip (result exists)
+[2026-10-17 19:11:31] [8/30] d5_p0p003_s2: skip (result exists)
+[2026-10-17 19:11:31] [9/30] d5_p0p003_s3: skip (result exists)
+[2026-10-17 19:11:31] [10/30] d7_p0p003_s1: skip (result exists)
+[2026-10-17 19:11:31] [11/30] d7_p0p003_s2: skip (result exists)
+[2026-10-17 19:11:31] [12/30] d7_p0p003_s3: skip (result exists)
+[2026-10-17 19:11:31] [13/30] d5_p0p008_s1: skip (result exists)
+[2026-10-17 19:11:31] [14/30] d5_p0p008_s2: skip (result exists)
+[2026-10-17 19:11:31] [15/30] d5_p0p008_s3: skip (result exists)
+[2026-10-17 19:11:31] [16/30] d7_p0p008_s1: skip (result exists)
+[2026-10-17 19:11:31] [17/30] d7_p0p008_s2: skip (result exists)
+[2026-10-17 19:11:31] [18/30] d7_p0p008_s3: skip (result exists)
+[2026-10-17 19:11:31] [19/30] d5_p0p01_s1: skip (result exists)
+[2026-10-17 19:11:31] [20/30] d5_p0p01_s2: skip (result exists)
+[2026-10-17 19:11:31] [21/30] d5_p0p01_s3: skip (result exists)
+[2026-10-17 19:11:31] [22/30] d7_p0p01_s1: skip (result exists)
+[2026-10-17 19:11:31] [23/30] d7_p0p01_s2: skip (result exists)
+[2026-10-17 19:11:31] [24/30] d7_p0p01_s3: skip (result exists)
+[2026-10-17 19:11:31] [25/30] d5_p0p002_s1: start -> m4_rotated_surface_code_circuit_level_d5_s1__d5__circuit_level__p0p002
+[2026-10-17 19:34:03] [25/30] d5_p0p002_s1: done in 22.5 min
+[2026-10-17 19:34:03] [26/30] d5_p0p002_s2: start -> m4_rotated_surface_code_circuit_level_d5_s2__d5__circuit_level__p0p002
+[2026-10-17 19:56:20] [26/30] d5_p0p002_s2: done in 22.3 min
+[2026-10-17 19:56:20] [27/30] d5_p0p002_s3: start -> m4_rotated_surface_code_circuit_level_d5_s3__d5__circuit_level__p0p002
+[2026-10-17 20:18:58] [27/30] d5_p0p002_s3: done in 22.6 min
+[2026-10-17 20:18:58] [28/30] d7_p0p002_s1: start -> m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p002
+[2026-10-17 21:01:29] [28/30] d7_p0p002_s1: done in 42.5 min
+[2026-10-17 21:01:29] [29/30] d7_p0p002_s2: start -> m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p002
+[2026-10-17 21:53:04] [29/30] d7_p0p002_s2: done in 51.6 min
+[2026-10-17 21:53:04] [30/30] d7_p0p002_s3: start -> m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p002
+[2026-10-17 22:40:04] [30/30] d7_p0p002_s3: done in 47.0 min
+[2026-10-17 22:40:04] grid finished: 6 runs executed, 30 points in plan
+[2026-10-17 22:40:04] t6 grid done (208.5 min)
+[2026-10-17 22:40:04] --- stage postprocess ---
+[2026-10-17 22:40:04] t10 multiseed start :: python scripts\t10_multiseed_stats.py --results-dir results\m4_surface --output-dir results\t10 --min-test-shots 4096
+aggregated 33 runs into 11 (distance, p) groups
+  d=3 p=0.005: 3 seeds
+  d=5 p=0.002: 3 seeds
+  d=5 p=0.003: 3 seeds
+  d=5 p=0.005: 3 seeds
+  d=5 p=0.008: 3 seeds
+  d=5 p=0.01: 3 seeds
+  d=7 p=0.002: 3 seeds
+  d=7 p=0.003: 3 seeds
+  d=7 p=0.005: 3 seeds
+  d=7 p=0.008: 3 seeds
+  d=7 p=0.01: 3 seeds
+[2026-10-17 22:40:05] t10 multiseed done (0 min)
+[2026-10-17 22:40:05] threshold estimate start :: python scripts\threshold_estimate.py --inputs results\t10\surface_sweep_mean.json results\m4\surface_sweep.json results\m4_threshold\surface_sweep.json --output results\m4\THRESHOLD.md
+wrote results\m4\THRESHOLD.md
+[2026-10-17 22:40:05] threshold estimate done (0 min)
+[2026-10-17 22:40:05] engineering table start :: python scripts\engineering_table.py --results-dir results --output results\m5\ENGINEERING_TABLE.md
+wrote results\m5\ENGINEERING_TABLE.md (272 rows)
+[2026-10-17 22:40:05] engineering table done (0 min)
+[2026-10-17 22:40:05] --- stage probes (T8 d=7, model seeds) ---
+[2026-10-17 22:40:05] probe p0p003 s2model start :: python scripts\t8_osd_cs_study.py --config results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p003\config.json --checkpoint results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p003\model_state.pt --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p003_probe_s2model
+{
+  "bp": {
+    "logical_error_rate": 0.1533203125,
+    "logical_errors": 157,
+    "standard_error": 0.011259249421434997,
+    "syndrome_consistency_rate": 0.3232421875
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.0986328125,
+    "logical_errors": 101,
+    "standard_error": 0.009317761768438746,
+    "syndrome_consistency_rate": 0.443359375
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.162109375,
+    "logical_errors": 166,
+    "standard_error": 0.011517222393326152,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.1064453125,
+    "logical_errors": 109,
+    "standard_error": 0.009637710152275526,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.216796875,
+    "logical_errors": 222,
+    "standard_error": 0.012876971556807846,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.1279296875,
+    "logical_errors": 131,
+    "standard_error": 0.010437859394830077,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0009765625,
+    "logical_errors": 1,
+    "standard_error": 0.0009760855463695969,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-17 22:46:34] probe p0p003 s2model done (6.5 min)
+[2026-10-17 22:46:34] probe p0p003 s3model start :: python scripts\t8_osd_cs_study.py --config results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p003\config.json --checkpoint results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p003\model_state.pt --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p003_probe_s3model
+{
+  "bp": {
+    "logical_error_rate": 0.15234375,
+    "logical_errors": 156,
+    "standard_error": 0.011229805304791918,
+    "syndrome_consistency_rate": 0.337890625
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.1201171875,
+    "logical_errors": 123,
+    "standard_error": 0.010159328800989324,
+    "syndrome_consistency_rate": 0.3583984375
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.177734375,
+    "logical_errors": 182,
+    "standard_error": 0.011946530735923899,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.099609375,
+    "logical_errors": 102,
+    "standard_error": 0.009358701844120158,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.1826171875,
+    "logical_errors": 187,
+    "standard_error": 0.01207351142196172,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.125,
+    "logical_errors": 128,
+    "standard_error": 0.010334966058846057,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.001953125,
+    "logical_errors": 2,
+    "standard_error": 0.001379718573664223,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-17 22:53:11] probe p0p003 s3model done (6.6 min)
+[2026-10-17 22:53:11] probe p0p005 s2model start :: python scripts\t8_osd_cs_study.py --config results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p005\config.json --checkpoint results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p005\model_state.pt --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p005_probe_s2model
+{
+  "bp": {
+    "logical_error_rate": 0.2587890625,
+    "logical_errors": 265,
+    "standard_error": 0.01368654689997752,
+    "syndrome_consistency_rate": 0.1181640625
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.197265625,
+    "logical_errors": 202,
+    "standard_error": 0.012435454377683692,
+    "syndrome_consistency_rate": 0.185546875
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.283203125,
+    "logical_errors": 290,
+    "standard_error": 0.014079819715914361,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.21484375,
+    "logical_errors": 220,
+    "standard_error": 0.012834809581680044,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.30078125,
+    "logical_errors": 308,
+    "standard_error": 0.014331179460700443,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.2646484375,
+    "logical_errors": 271,
+    "standard_error": 0.013785807141540839,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.01171875,
+    "logical_errors": 12,
+    "standard_error": 0.003363031570790017,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-17 23:02:32] probe p0p005 s2model done (9.3 min)
+[2026-10-17 23:02:32] probe p0p005 s3model start :: python scripts\t8_osd_cs_study.py --config results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p005\config.json --checkpoint results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p005\model_state.pt --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p005_probe_s3model
+{
+  "bp": {
+    "logical_error_rate": 0.2724609375,
+    "logical_errors": 279,
+    "standard_error": 0.013913304918196118,
+    "syndrome_consistency_rate": 0.115234375
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.1875,
+    "logical_errors": 192,
+    "standard_error": 0.012197261715621872,
+    "syndrome_consistency_rate": 0.1787109375
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.28125,
+    "logical_errors": 288,
+    "standard_error": 0.014050287665955234,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.2060546875,
+    "logical_errors": 211,
+    "standard_error": 0.012639694158375155,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.3212890625,
+    "logical_errors": 329,
+    "standard_error": 0.014592860010933505,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.2431640625,
+    "logical_errors": 249,
+    "standard_error": 0.013406042437513838,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0078125,
+    "logical_errors": 8,
+    "standard_error": 0.0027513251146446885,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-17 23:12:00] probe p0p005 s3model done (9.5 min)
+[2026-10-17 23:12:00] probe p0p008 s2model start :: python scripts\t8_osd_cs_study.py --config results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p008\config.json --checkpoint results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p008\model_state.pt --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p008_probe_s2model
+{
+  "bp": {
+    "logical_error_rate": 0.3466796875,
+    "logical_errors": 355,
+    "standard_error": 0.01487227134160425,
+    "syndrome_consistency_rate": 0.0166015625
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.3359375,
+    "logical_errors": 344,
+    "standard_error": 0.014759911132999844,
+    "syndrome_consistency_rate": 0.03125
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.3828125,
+    "logical_errors": 392,
+    "standard_error": 0.01518978538115457,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.3388671875,
+    "logical_errors": 347,
+    "standard_error": 0.014791395062876713,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.416015625,
+    "logical_errors": 426,
+    "standard_error": 0.01540300500675579,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.3720703125,
+    "logical_errors": 381,
+    "standard_error": 0.015104906431256825,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0439453125,
+    "logical_errors": 45,
+    "standard_error": 0.006405420831193287,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-17 23:20:51] probe p0p008 s2model done (8.8 min)
+[2026-10-17 23:20:51] probe p0p008 s3model start :: python scripts\t8_osd_cs_study.py --config results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p008\config.json --checkpoint results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s3__d7__circuit_level__p0p008\model_state.pt --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p008_probe_s3model
+{
+  "bp": {
+    "logical_error_rate": 0.3681640625,
+    "logical_errors": 377,
+    "standard_error": 0.0150720692367582,
+    "syndrome_consistency_rate": 0.0244140625
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.2978515625,
+    "logical_errors": 305,
+    "standard_error": 0.014291059582840642,
+    "syndrome_consistency_rate": 0.056640625
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.359375,
+    "logical_errors": 368,
+    "standard_error": 0.014994289582796961,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.296875,
+    "logical_errors": 304,
+    "standard_error": 0.014277530778528755,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.42578125,
+    "logical_errors": 436,
+    "standard_error": 0.015451902983419906,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.36328125,
+    "logical_errors": 372,
+    "standard_error": 0.015029527688438404,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.04296875,
+    "logical_errors": 44,
+    "standard_error": 0.006337083668172564,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-17 23:29:48] probe p0p008 s3model done (9 min)
+[2026-10-17 23:29:48] --- stage probes-extra (T8 d=7 p=0.01, test splits) ---
+[2026-10-17 23:29:48] probe p0p01 offset 0 start :: python scripts\t8_osd_cs_study.py --config results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p01\config.json --checkpoint results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p01\model_state.pt --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p01_probe
+{
+  "bp": {
+    "logical_error_rate": 0.3798828125,
+    "logical_errors": 389,
+    "standard_error": 0.015167420537739515,
+    "syndrome_consistency_rate": 0.0048828125
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.3466796875,
+    "logical_errors": 355,
+    "standard_error": 0.01487227134160425,
+    "syndrome_consistency_rate": 0.02734375
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.3876953125,
+    "logical_errors": 397,
+    "standard_error": 0.015225763821585777,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.369140625,
+    "logical_errors": 378,
+    "standard_error": 0.015080377874914291,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.431640625,
+    "logical_errors": 442,
+    "standard_error": 0.015478279761794724,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.4189453125,
+    "logical_errors": 429,
+    "standard_error": 0.015418324934423777,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0927734375,
+    "logical_errors": 95,
+    "standard_error": 0.00906608370922578,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-17 23:38:32] probe p0p01 offset 0 done (8.7 min)
+[2026-10-17 23:38:32] probe p0p01 offset 10 start :: python scripts\t8_osd_cs_study.py --config results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p01\config.json --checkpoint results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p01\model_state.pt --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p01_probe_s10 --seed-offset 10
+{
+  "bp": {
+    "logical_error_rate": 0.412109375,
+    "logical_errors": 422,
+    "standard_error": 0.015381707062144132,
+    "syndrome_consistency_rate": 0.001953125
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.314453125,
+    "logical_errors": 322,
+    "standard_error": 0.014509303224358543,
+    "syndrome_consistency_rate": 0.015625
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.375,
+    "logical_errors": 384,
+    "standard_error": 0.015128841196122723,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.3349609375,
+    "logical_errors": 343,
+    "standard_error": 0.014749275268514292,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.4482421875,
+    "logical_errors": 459,
+    "standard_error": 0.015541059805814567,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.4287109375,
+    "logical_errors": 439,
+    "standard_error": 0.01546536798785836,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.0986328125,
+    "logical_errors": 101,
+    "standard_error": 0.009317761768438746,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-17 23:47:33] probe p0p01 offset 10 done (9 min)
+[2026-10-17 23:47:33] probe p0p01 offset 20 start :: python scripts\t8_osd_cs_study.py --config results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p01\config.json --checkpoint results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p01\model_state.pt --sweeps 0 4 --test-shots 1024 --output-dir results\t8\d7_p0p01_probe_s20 --seed-offset 20
+{
+  "bp": {
+    "logical_error_rate": 0.3916015625,
+    "logical_errors": 401,
+    "standard_error": 0.015253386494748066,
+    "syndrome_consistency_rate": 0.001953125
+  },
+  "bp_gnn": {
+    "logical_error_rate": 0.337890625,
+    "logical_errors": 346,
+    "standard_error": 0.014780970879272303,
+    "syndrome_consistency_rate": 0.0205078125
+  },
+  "bp_gnn_osd_cs0": {
+    "logical_error_rate": 0.423828125,
+    "logical_errors": 434,
+    "standard_error": 0.015442618251321226,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_gnn_osd_cs4": {
+    "logical_error_rate": 0.37890625,
+    "logical_errors": 388,
+    "standard_error": 0.015159835391346186,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs0": {
+    "logical_error_rate": 0.4267578125,
+    "logical_errors": 437,
+    "standard_error": 0.015456452876316348,
+    "syndrome_consistency_rate": 1.0
+  },
+  "bp_osd_cs4": {
+    "logical_error_rate": 0.4150390625,
+    "logical_errors": 425,
+    "standard_error": 0.01539777400901622,
+    "syndrome_consistency_rate": 1.0
+  },
+  "mwpm": {
+    "logical_error_rate": 0.1005859375,
+    "logical_errors": 103,
+    "standard_error": 0.00939936452084651,
+    "syndrome_consistency_rate": 1.0
+  }
+}
+[2026-10-17 23:56:18] probe p0p01 offset 20 done (8.8 min)
+[2026-10-17 23:56:18] --- stage ablation (surface d=3, missing arms) ---
+[2026-10-17 23:56:19] ablation results\t9\surface_d3_seed10: still missing no_check_features, no_check_geometry, no_edge_degree
+[2026-10-17 23:56:19] surface ablation seed10 start :: python scripts\t9_feature_ablation.py --config results\m4_surface\m4_learned_basis_rotated_surface_code_circuit_level_d3__d3__circuit_level__p0p005\config.json --output-dir results\t9\surface_d3_seed10 --arms no_check_features no_check_geometry no_edge_degree --torch-threads 2 --seed-offset 10 --merge
+[m2] epoch 1/8: train=0.24380 validation=0.03278 (46.9s)
+[m2] epoch 2/8: train=0.02943 validation=0.02496 (46.8s)
+[m2] epoch 3/8: train=0.02254 validation=0.02175 (47.0s)
+[m2] epoch 4/8: train=0.02051 validation=0.01832 (47.5s)
+[m2] epoch 5/8: train=0.01276 validation=0.01010 (47.4s)
+[m2] epoch 6/8: train=0.00973 validation=0.00965 (46.9s)
+[m2] epoch 7/8: train=0.00947 validation=0.00956 (46.8s)
+[m2] epoch 8/8: train=0.00935 validation=0.00943 (46.7s)
+no_check_features      AUC=0.9922  LER=0.04041 (1324/32768)
+[m2] epoch 1/8: train=0.24365 validation=0.03284 (47.2s)
+[m2] epoch 2/8: train=0.02947 validation=0.02481 (47.1s)
+[m2] epoch 3/8: train=0.02228 validation=0.02129 (47.1s)
+[m2] epoch 4/8: train=0.01862 validation=0.01275 (46.8s)
+[m2] epoch 5/8: train=0.01026 validation=0.01018 (46.6s)
+[m2] epoch 6/8: train=0.00957 validation=0.00959 (46.6s)
+[m2] epoch 7/8: train=0.00932 validation=0.00936 (46.6s)
+[m2] epoch 8/8: train=0.00907 validation=0.00903 (46.6s)
+no_check_geometry      AUC=0.9928  LER=0.02780 (911/32768)
+[m2] epoch 1/8: train=0.24006 validation=0.03529 (47.2s)
+[m2] epoch 2/8: train=0.02997 validation=0.02421 (46.6s)
+[m2] epoch 3/8: train=0.02248 validation=0.02189 (46.7s)
+[m2] epoch 4/8: train=0.02099 validation=0.01946 (47.1s)
+[m2] epoch 5/8: train=0.01425 validation=0.00995 (46.4s)
+[m2] epoch 6/8: train=0.00976 validation=0.00959 (47.1s)
+[m2] epoch 7/8: train=0.00945 validation=0.00952 (46.7s)
+[m2] epoch 8/8: train=0.00933 validation=0.00942 (46.6s)
+no_edge_degree         AUC=0.9922  LER=0.03937 (1290/32768)
+[2026-10-18 00:17:01] surface ablation seed10 done (20.7 min)
+[2026-10-18 00:17:01] ablation results\t9\surface_d3_seed20: still missing no_check_features, no_check_geometry, no_edge_degree
+[2026-10-18 00:17:01] surface ablation seed20 start :: python scripts\t9_feature_ablation.py --config results\m4_surface\m4_learned_basis_rotated_surface_code_circuit_level_d3__d3__circuit_level__p0p005\config.json --output-dir results\t9\surface_d3_seed20 --arms no_check_features no_check_geometry no_edge_degree --torch-threads 2 --seed-offset 20 --merge
+[m2] epoch 1/8: train=0.32661 validation=0.03277 (47.3s)
+[m2] epoch 2/8: train=0.03291 validation=0.02363 (46.8s)
+[m2] epoch 3/8: train=0.02244 validation=0.02141 (47.0s)
+[m2] epoch 4/8: train=0.01906 validation=0.01476 (47.3s)
+[m2] epoch 5/8: train=0.01118 validation=0.00970 (46.6s)
+[m2] epoch 6/8: train=0.00962 validation=0.00946 (47.1s)
+[m2] epoch 7/8: train=0.00934 validation=0.00924 (46.9s)
+[m2] epoch 8/8: train=0.00913 validation=0.00893 (47.4s)
+no_check_features      AUC=0.9929  LER=0.02646 (867/32768)
+[m2] epoch 1/8: train=0.32591 validation=0.03303 (47.4s)
+[m2] epoch 2/8: train=0.03294 validation=0.02352 (46.6s)
+[m2] epoch 3/8: train=0.02237 validation=0.02130 (46.4s)
+[m2] epoch 4/8: train=0.01910 validation=0.01497 (46.6s)
+[m2] epoch 5/8: train=0.01122 validation=0.00973 (46.9s)
+[m2] epoch 6/8: train=0.00968 validation=0.00949 (46.6s)
+[m2] epoch 7/8: train=0.00938 validation=0.00928 (46.7s)
+[m2] epoch 8/8: train=0.00921 validation=0.00909 (46.6s)
+no_check_geometry      AUC=0.9925  LER=0.02658 (871/32768)
+[m2] epoch 1/8: train=0.32251 validation=0.03501 (47.0s)
+[m2] epoch 2/8: train=0.03375 validation=0.02373 (46.7s)
+[m2] epoch 3/8: train=0.02253 validation=0.02152 (46.9s)
+[m2] epoch 4/8: train=0.01921 validation=0.01450 (46.3s)
+[m2] epoch 5/8: train=0.01068 validation=0.00976 (46.4s)
+[m2] epoch 6/8: train=0.00960 validation=0.00947 (46.3s)
+[m2] epoch 7/8: train=0.00939 validation=0.00934 (46.5s)
+[m2] epoch 8/8: train=0.00928 validation=0.00922 (46.7s)
+no_edge_degree         AUC=0.9919  LER=0.03287 (1077/32768)
+[2026-10-18 00:37:40] surface ablation seed20 done (20.6 min)
+[2026-10-18 00:37:40] --- stage extra (transfer multi-seeds) ---
+[2026-10-18 00:37:40] m3 transfer d3->d5 s10 start :: python -m graph_qec.m3 --config configs\m3_learned_basis_repetition_circuit_level_d3.json --checkpoint results\m2\m2_learned_basis_repetition_circuit_level_d3_s10__d3__circuit_level__p0p01\model_state.pt --output-dir results\m3 --tag m3_learned_basis_repetition_circuit_level_d3_s10__from_d3__to_d5__circuit_level__p0p01 --target-distance 5 --target-rounds 5 --test-seeds 311 312 --test-shots 16384 --decoders mwpm bp bp_osd bp_gnn bp_gnn_osd --timed-runs 1
+[m2] transfer evaluation: m3_learned_basis_repetition_circuit_level_d3 -> d5 circuit_level p=0.01 (16384 shots/seed)
+[m2] target graph: 24 detectors, 101 mechanisms, 182 edges
+[m2] evaluating mwpm on 32768 shots
+[m2] evaluating bp on 32768 shots
+[m2] evaluating bp_osd on 32768 shots
+[m2] evaluating bp_gnn on 32768 shots
+[m2] evaluating bp_gnn_osd on 32768 shots
+{
+  "decoders": [
+    {
+      "ler": 0.00140380859375,
+      "logical_errors": 46,
+      "name": "mwpm",
+      "status": "ok",
+      "us_per_shot": 0.3703582764913449
+    },
+    {
+      "ler": 0.054656982421875,
+      "logical_errors": 1791,
+      "name": "bp",
+      "status": "ok",
+      "us_per_shot": 96.30227050783091
+    },
+    {
+      "ler": 0.064300537109375,
+      "logical_errors": 2107,
+      "name": "bp_osd",
+      "status": "ok",
+      "us_per_shot": 144.47073974599434
+    },
+    {
+      "ler": 0.01751708984375,
+      "logical_errors": 574,
+      "name": "bp_gnn",
+      "status": "ok",
+      "us_per_shot": 38.58719787586118
+    },
+    {
+      "ler": 0.025054931640625,
+      "logical_errors": 821,
+      "name": "bp_gnn_osd",
+      "status": "ok",
+      "us_per_shot": 58.309164428838045
+    }
+  ],
+  "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m3\\m3_learned_basis_repetition_circuit_level_d3_s10__from_d3__to_d5__circuit_level__p0p01",
+  "transfer": {
+    "reweight_strength": 1.0,
+    "source_experiment": {
+      "distance": 3,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 3
+    },
+    "strength_source": "fixed at the source config maximum; not re-selected on target",
+    "target_experiment": {
+      "distance": 5,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 5
+    }
+  }
+}
+[2026-10-18 00:38:15] m3 transfer d3->d5 s10 done (0.6 min)
+[2026-10-18 00:38:15] m3 transfer d3->d5 s20 start :: python -m graph_qec.m3 --config configs\m3_learned_basis_repetition_circuit_level_d3.json --checkpoint results\m2\m2_learned_basis_repetition_circuit_level_d3_s20__d3__circuit_level__p0p01\model_state.pt --output-dir results\m3 --tag m3_learned_basis_repetition_circuit_level_d3_s20__from_d3__to_d5__circuit_level__p0p01 --target-distance 5 --target-rounds 5 --test-seeds 321 322 --test-shots 16384 --decoders mwpm bp bp_osd bp_gnn bp_gnn_osd --timed-runs 1
+[m2] transfer evaluation: m3_learned_basis_repetition_circuit_level_d3 -> d5 circuit_level p=0.01 (16384 shots/seed)
+[m2] target graph: 24 detectors, 101 mechanisms, 182 edges
+[m2] evaluating mwpm on 32768 shots
+[m2] evaluating bp on 32768 shots
+[m2] evaluating bp_osd on 32768 shots
+[m2] evaluating bp_gnn on 32768 shots
+[m2] evaluating bp_gnn_osd on 32768 shots
+{
+  "decoders": [
+    {
+      "ler": 0.001434326171875,
+      "logical_errors": 47,
+      "name": "mwpm",
+      "status": "ok",
+      "us_per_shot": 0.3660675049754758
+    },
+    {
+      "ler": 0.05364990234375,
+      "logical_errors": 1758,
+      "name": "bp",
+      "status": "ok",
+      "us_per_shot": 96.82553710943509
+    },
+    {
+      "ler": 0.067718505859375,
+      "logical_errors": 2219,
+      "name": "bp_osd",
+      "status": "ok",
+      "us_per_shot": 148.82517700187668
+    },
+    {
+      "ler": 0.01556396484375,
+      "logical_errors": 510,
+      "name": "bp_gnn",
+      "status": "ok",
+      "us_per_shot": 31.35110778829109
+    },
+    {
+      "ler": 0.021942138671875,
+      "logical_errors": 719,
+      "name": "bp_gnn_osd",
+      "status": "ok",
+      "us_per_shot": 46.71203308115324
+    }
+  ],
+  "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m3\\m3_learned_basis_repetition_circuit_level_d3_s20__from_d3__to_d5__circuit_level__p0p01",
+  "transfer": {
+    "reweight_strength": 1.0,
+    "source_experiment": {
+      "distance": 3,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 3
+    },
+    "strength_source": "fixed at the source config maximum; not re-selected on target",
+    "target_experiment": {
+      "distance": 5,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 5
+    }
+  }
+}
+[2026-10-18 00:38:49] m3 transfer d3->d5 s20 done (0.6 min)
+[2026-10-18 00:38:49] write rep3x3 seed configs start :: python scripts\m2_headline_multiseed.py --write-configs --base-config configs\m4_hgp_rep3x3_code_capacity_p0p05.json
+wrote configs\m4_hgp_rep3x3_code_capacity_p0p05_s10.json
+wrote configs\m4_hgp_rep3x3_code_capacity_p0p05_s20.json
+[2026-10-18 00:38:49] write rep3x3 seed configs done (0 min)
+[2026-10-18 00:38:49] write hamming7x7 seed configs start :: python scripts\m2_headline_multiseed.py --write-configs --base-config configs\m4_hgp_hamming7x7_code_capacity_p0p05.json
+wrote configs\m4_hgp_hamming7x7_code_capacity_p0p05_s10.json
+wrote configs\m4_hgp_hamming7x7_code_capacity_p0p05_s20.json
+[2026-10-18 00:38:49] write hamming7x7 seed configs done (0 min)
+[2026-10-18 00:38:49] train hgp rep3x3 s10 start :: python -m graph_qec.m2 --config configs\m4_hgp_rep3x3_code_capacity_p0p05_s10.json --output-dir results\m4_hgp
+[m2] generating splits for m4_hgp_rep3x3_code_capacity_p0p05_s10
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m2.py", line 133, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m2.py", line 110, in main
+    result = run_m2(config, artifact_dir=output_dir)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m2_pipeline.py", line 436, in run_m2
+    train_split, reference = generate_split(
+                             ^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m2_pipeline.py", line 100, in generate_split
+    dataset = generate_dataset(_split_experiment(config, seed, shots, experiment))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\data_pipeline.py", line 73, in generate_dataset
+    circuit = build_circuit(config)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\circuits.py", line 82, in build_circuit
+    raise ValueError(
+ValueError: 'hgp_rep3x3' is a detector-error-model-level code family (M4); it has no Stim circuit. Build its dataset with graph_qec.m4 instead.
+[2026-10-18 00:38:51] train hgp rep3x3 s10 FAILED exit=1 (0 min) - see the log above
+[2026-10-18 00:38:51] hgp transfer s10 start :: python scripts\m4_transfer.py --source-config configs\m4_hgp_rep3x3_code_capacity_p0p05_s10.json --target-config configs\m4_hgp_hamming7x7_code_capacity_p0p05_s10.json --checkpoint results\m4_hgp\m4_hgp_rep3x3_code_capacity_p0p05_s10__d3__code_capacity__p0p05\model_state.pt --output-dir results\m4 --tag hgp_rep3x3_s10_to_hgp_hamming7x7
+Traceback (most recent call last):
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m4_transfer.py", line 84, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m4_transfer.py", line 42, in main
+    result = run_dem_transfer(
+             ^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m4_pipeline.py", line 332, in run_dem_transfer
+    model, checkpoint_metadata = load_reweighting_checkpoint(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m3_pipeline.py", line 98, in load_reweighting_checkpoint
+    payload = torch.load(Path(checkpoint_path), map_location="cpu", weights_only=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'results\\m4_hgp\\m4_hgp_rep3x3_code_capacity_p0p05_s10__d3__code_capacity__p0p05\\model_state.pt'
+[2026-10-18 00:38:54] hgp transfer s10 FAILED exit=1 (0 min) - see the log above
+[2026-10-18 00:38:54] train hgp rep3x3 s20 start :: python -m graph_qec.m2 --config configs\m4_hgp_rep3x3_code_capacity_p0p05_s20.json --output-dir results\m4_hgp
+[m2] generating splits for m4_hgp_rep3x3_code_capacity_p0p05_s20
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m2.py", line 133, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m2.py", line 110, in main
+    result = run_m2(config, artifact_dir=output_dir)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m2_pipeline.py", line 436, in run_m2
+    train_split, reference = generate_split(
+                             ^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m2_pipeline.py", line 100, in generate_split
+    dataset = generate_dataset(_split_experiment(config, seed, shots, experiment))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\data_pipeline.py", line 73, in generate_dataset
+    circuit = build_circuit(config)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\circuits.py", line 82, in build_circuit
+    raise ValueError(
+ValueError: 'hgp_rep3x3' is a detector-error-model-level code family (M4); it has no Stim circuit. Build its dataset with graph_qec.m4 instead.
+[2026-10-18 00:38:56] train hgp rep3x3 s20 FAILED exit=1 (0 min) - see the log above
+[2026-10-18 00:38:56] hgp transfer s20 start :: python scripts\m4_transfer.py --source-config configs\m4_hgp_rep3x3_code_capacity_p0p05_s20.json --target-config configs\m4_hgp_hamming7x7_code_capacity_p0p05_s20.json --checkpoint results\m4_hgp\m4_hgp_rep3x3_code_capacity_p0p05_s20__d3__code_capacity__p0p05\model_state.pt --output-dir results\m4 --tag hgp_rep3x3_s20_to_hgp_hamming7x7
+Traceback (most recent call last):
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m4_transfer.py", line 84, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\scripts\m4_transfer.py", line 42, in main
+    result = run_dem_transfer(
+             ^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m4_pipeline.py", line 332, in run_dem_transfer
+    model, checkpoint_metadata = load_reweighting_checkpoint(
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\src\graph_qec\m3_pipeline.py", line 98, in load_reweighting_checkpoint
+    payload = torch.load(Path(checkpoint_path), map_location="cpu", weights_only=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\serialization.py", line 1565, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\serialization.py", line 795, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Lib\site-packages\torch\serialization.py", line 776, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'results\\m4_hgp\\m4_hgp_rep3x3_code_capacity_p0p05_s20__d3__code_capacity__p0p05\\model_state.pt'
+[2026-10-18 00:38:58] hgp transfer s20 FAILED exit=1 (0 min) - see the log above
+[2026-10-18 00:38:58] --- stage aggregate ---
+[2026-10-18 00:38:58] t8 d7 test-split table start :: python scripts\t8_d7_multiseed.py --probe-root results\t8 --output results\t8\D7_MULTISEED.md --json results\t8\d7_multiseed.json
+# T8 路 d=7 OSD-CS 鎺㈤拡鐨勫绉嶅瓙姹囨€?
+
+鐢?`scripts/t8_d7_multiseed.py` 鑷姩鐢熸垚锛屽嬁鎵嬫敼銆傛瘡涓洰褰?= 涓€浠?*鐙珛 seed
+鍋忕Щ**鐨?1024-shot 娴嬭瘯闆嗭紱鍚屼竴鐐圭殑澶氫唤娴嬭瘯闆嗙浉浜掔嫭绔嬶紝閫?shot 閿欒鍙洿鎺?
+姹囨€绘眰鍜岋紙鍥犳鏍囧噯璇笌 McNemar 閮芥槸 pooled 鍙ｅ緞锛夈€?
+
+## p = 0.003銆€锛? 浠芥祴璇曢泦锛宻eed offset 0, 10, 20锛屽叡 3072 shots锛?
+
+| decoder | LER锛坧ooled锛?| 鏍囧噯璇?| 閿欒鏁?| 鐩稿 bp_gnn |
+|---|---:|---:|---:|---:|
+| `mwpm` | 0.00130 | 0.00065 | 4 | -98.5% |
+| `bp` | 0.16276 | 0.00666 | 500 | +83.8% |
+| `bp_gnn` | 0.08854 | 0.00513 | 272 | 鈥?|
+| `bp_gnn_osd_cs0` | 0.09993 | 0.00541 | 307 | +12.9% |
+| `bp_gnn_osd_cs4` | 0.05762 | 0.00420 | 177 | -34.9% |
+
+| 閰嶅姣旇緝锛坧ooled McNemar锛?| 鍙?A 閿?| 鍙?B 閿?| z | p锛堝弻渚э級 |
+|---|---:|---:|---:|---:|
+| `bp_gnn` vs `bp_gnn_osd_cs0` | 169 | 204 | +1.81 | 0.0700 |
+| `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 159 | 29 | -9.48 | 0.0000 |
+| `bp_gnn` vs `bp_gnn_osd_cs4` | 203 | 108 | -5.39 | 0.0000 |
+
+| 鍗曚唤娴嬭瘯闆?| seed offset | shots | bp | bp_gnn | `bp_gnn_osd_cs0` | `bp_gnn_osd_cs4` | 鏈敹鏁?shot |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `d7_p0p003_probe` | 0 | 1024 | 0.15234 | 0.08203 | 0.09570 | 0.05078 | 387 |
+| `d7_p0p003_probe_s10` | 10 | 1024 | 0.16504 | 0.08398 | 0.10156 | 0.05176 | 422 |
+| `d7_p0p003_probe_s20` | 20 | 1024 | 0.17090 | 0.09961 | 0.10254 | 0.07031 | 425 |
+
+## p = 0.005銆€锛? 浠芥祴璇曢泦锛宻eed offset 0, 10, 20锛屽叡 3072 shots锛?
+
+| decoder | LER锛坧ooled锛?| 鏍囧噯璇?| 閿欒鏁?| 鐩稿 bp_gnn |
+|---|---:|---:|---:|---:|
+| `mwpm` | 0.01042 | 0.00183 | 32 | -94.1% |
+| `bp` | 0.24219 | 0.00773 | 744 | +36.5% |
+| `bp_gnn` | 0.17741 | 0.00689 | 545 | 鈥?|
+| `bp_gnn_osd_cs0` | 0.20931 | 0.00734 | 643 | +18.0% |
+| `bp_gnn_osd_cs4` | 0.15690 | 0.00656 | 482 | -11.6% |
+
+| 閰嶅姣旇緝锛坧ooled McNemar锛?| 鍙?A 閿?| 鍙?B 閿?| z | p锛堝弻渚э級 |
+|---|---:|---:|---:|---:|
+| `bp_gnn` vs `bp_gnn_osd_cs0` | 238 | 336 | +4.09 | 0.0000 |
+| `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 233 | 72 | -9.22 | 0.0000 |
+| `bp_gnn` vs `bp_gnn_osd_cs4` | 309 | 246 | -2.67 | 0.0075 |
+
+| 鍗曚唤娴嬭瘯闆?| seed offset | shots | bp | bp_gnn | `bp_gnn_osd_cs0` | `bp_gnn_osd_cs4` | 鏈敹鏁?shot |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `d7_p0p005_probe` | 0 | 1024 | 0.22070 | 0.16504 | 0.18262 | 0.13184 | 701 |
+| `d7_p0p005_probe_s10` | 10 | 1024 | 0.25195 | 0.19629 | 0.23145 | 0.17871 | 734 |
+| `d7_p0p005_probe_s20` | 20 | 1024 | 0.25391 | 0.17090 | 0.21387 | 0.16016 | 727 |
+
+## p = 0.008銆€锛? 浠芥祴璇曢泦锛宻eed offset 0, 10, 20锛屽叡 3072 shots锛?
+
+| decoder | LER锛坧ooled锛?| 鏍囧噯璇?| 閿欒鏁?| 鐩稿 bp_gnn |
+|---|---:|---:|---:|---:|
+| `mwpm` | 0.05371 | 0.00407 | 165 | -82.2% |
+| `bp` | 0.34961 | 0.00860 | 1074 | +15.6% |
+| `bp_gnn` | 0.30241 | 0.00829 | 929 | 鈥?|
+| `bp_gnn_osd_cs0` | 0.36035 | 0.00866 | 1107 | +19.2% |
+| `bp_gnn_osd_cs4` | 0.29655 | 0.00824 | 911 | -1.9% |
+
+| 閰嶅姣旇緝锛坧ooled McNemar锛?| 鍙?A 閿?| 鍙?B 閿?| z | p锛堝弻渚э級 |
+|---|---:|---:|---:|---:|
+| `bp_gnn` vs `bp_gnn_osd_cs0` | 324 | 502 | +6.19 | 0.0000 |
+| `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 330 | 134 | -9.10 | 0.0000 |
+| `bp_gnn` vs `bp_gnn_osd_cs4` | 432 | 414 | -0.62 | 0.5360 |
+
+| 鍗曚唤娴嬭瘯闆?| seed offset | shots | bp | bp_gnn | `bp_gnn_osd_cs0` | `bp_gnn_osd_cs4` | 鏈敹鏁?shot |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `d7_p0p008_probe` | 0 | 1024 | 0.35449 | 0.30371 | 0.34277 | 0.28809 | 952 |
+| `d7_p0p008_probe_s10` | 10 | 1024 | 0.34082 | 0.30078 | 0.35645 | 0.30273 | 969 |
+| `d7_p0p008_probe_s20` | 20 | 1024 | 0.35352 | 0.30273 | 0.38184 | 0.29883 | 967 |
+
+## p = 0.01銆€锛? 浠芥祴璇曢泦锛宻eed offset 0, 10, 20锛屽叡 3072 shots锛?
+
+| decoder | LER锛坧ooled锛?| 鏍囧噯璇?| 閿欒鏁?| 鐩稿 bp_gnn |
+|---|---:|---:|---:|---:|
+| `mwpm` | 0.09733 | 0.00535 | 299 | -70.8% |
+| `bp` | 0.39453 | 0.00882 | 1212 | +18.5% |
+| `bp_gnn` | 0.33301 | 0.00850 | 1023 | 鈥?|
+| `bp_gnn_osd_cs0` | 0.39551 | 0.00882 | 1215 | +18.8% |
+| `bp_gnn_osd_cs4` | 0.36100 | 0.00867 | 1109 | +8.4% |
+
+| 閰嶅姣旇緝锛坧ooled McNemar锛?| 鍙?A 閿?| 鍙?B 閿?| z | p锛堝弻渚э級 |
+|---|---:|---:|---:|---:|
+| `bp_gnn` vs `bp_gnn_osd_cs0` | 410 | 602 | +6.04 | 0.0000 |
+| `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 275 | 169 | -5.03 | 0.0000 |
+| `bp_gnn` vs `bp_gnn_osd_cs4` | 460 | 546 | +2.71 | 0.0067 |
+
+| 鍗曚唤娴嬭瘯闆?| seed offset | shots | bp | bp_gnn | `bp_gnn_osd_cs0` | `bp_gnn_osd_cs4` | 鏈敹鏁?shot |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `d7_p0p01_probe` | 0 | 1024 | 0.37988 | 0.34668 | 0.38770 | 0.36914 | 996 |
+| `d7_p0p01_probe_s10` | 10 | 1024 | 0.41211 | 0.31445 | 0.37500 | 0.33496 | 1008 |
+| `d7_p0p01_probe_s20` | 20 | 1024 | 0.39160 | 0.33789 | 0.42383 | 0.37891 | 1003 |
+
+
+[2026-10-18 00:38:58] t8 d7 test-split table done (0 min)
+[2026-10-18 00:38:58] t8 d7 model-seed table start :: python scripts\t8_d7_model_seeds.py --probe-root results\t8 --output results\t8\D7_MODEL_SEEDS.md
+# T8 路 d=7 OSD-CS 鎺㈤拡锛堟ā鍨?+ 鏁版嵁閮芥崲锛?
+
+鐢?`scripts/t8_d7_model_seeds.py` 鑷姩鐢熸垚锛屽嬁鎵嬫敼銆?
+
+**鍙ｅ緞**锛氭瘡涓洰褰?= 涓€涓?*妯″瀷 seed 鑷繁鐨?checkpoint**锛岃瘎娴嬬敤**璇?seed 鑷繁鐨?*
+1024-shot 娴嬭瘯闆嗭紙妯″瀷 seed 鍋忕Щ鍚屾椂绉诲姩 `training.seed` 涓庡叏閮?split seed锛夈€?
+绉嶅瓙鏄噸澶嶅崟浣嶏紝鍥犳涓嬭〃缁欓€?seed 螖 涓?*璺?seed 鍧囧€?卤 SE**锛涗笉鎶婁笉鍚?seed 鐨?shot
+姹傚拰锛堥偅浼氭妸妯″瀷闂存暎甯冨綋鎴愪簩椤瑰櫔澹帮級銆傚鐓э細鍙崲娴嬭瘯闆嗙殑鍙ｅ緞瑙?
+`results/t8/D7_MULTISEED.md`锛坄scripts/t8_d7_multiseed.py`锛夈€?
+
+## p = 0.003銆€锛? 涓ā鍨?seed锛歴1, s2, s3锛涙瘡 seed 1024 shots锛?
+
+| 妯″瀷 seed | 鐩綍 | bp | bp_gnn | `bp_gnn_osd_cs0` | `bp_gnn_osd_cs4` | 鏈敹鏁?shot |
+|---|---|---:|---:|---:|---:|---:|
+| s1 | `d7_p0p003_probe` | 0.15234 | 0.08203 | 0.09570 | 0.05078 | 387 |
+| s2 | `d7_p0p003_probe_s2model` | 0.15332 | 0.09863 | 0.16211 | 0.10645 | 570 |
+| s3 | `d7_p0p003_probe_s3model` | 0.15234 | 0.12012 | 0.17773 | 0.09961 | 657 |
+
+### 璺?seed 閰嶅锛堢瀛愭槸閲嶅鍗曚綅锛?
+
+螖LER = LER(A) 鈭?LER(B)锛?*璐熷€艰〃绀?A 鏇村ソ**锛涚浉瀵逛竴鍒椾互璇ラ厤瀵圭殑 B 涓哄熀鍑嗐€?
+
+| 閰嶅 | 閫?seed 螖LER | 璺?seed 鍧囧€?卤 SE | 鐩稿 B |
+|---|---|---:|---:|
+| `bp_gnn` 鈭?`bp_gnn_osd_cs0` | -0.01367 / -0.06348 / -0.05762 | -0.04492 卤 0.01572 | -30.9% |
+| `bp_gnn_osd_cs0` 鈭?`bp_gnn_osd_cs4` | +0.04492 / +0.05566 / +0.07812 | +0.05957 卤 0.00978 | +69.6% |
+| `bp_gnn` 鈭?`bp_gnn_osd_cs4` | +0.03125 / -0.00781 / +0.02051 | +0.01465 卤 0.01165 | +17.1% |
+| `bp` 鈭?`bp_gnn_osd_cs4` | +0.10156 / +0.04688 / +0.05273 | +0.06706 卤 0.01734 | +78.3% |
+
+### 姣忎釜 seed 鐨勯厤瀵?McNemar锛堝崟浠?1024-shot 娴嬭瘯闆嗭紝浠呬緵鏂瑰悜锛?
+
+| 妯″瀷 seed | 閰嶅 | 鍙?A 閿?| 鍙?B 閿?| z |
+|---|---|---:|---:|---:|
+| s1 | `bp_gnn` vs `bp_gnn_osd_cs0` | 51 | 65 | +1.30 |
+| s1 | `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 56 | 10 | -5.66 |
+| s1 | `bp_gnn` vs `bp_gnn_osd_cs4` | 67 | 35 | -3.17 |
+| s2 | `bp_gnn` vs `bp_gnn_osd_cs0` | 53 | 118 | +4.97 |
+| s2 | `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 86 | 29 | -5.32 |
+| s2 | `bp_gnn` vs `bp_gnn_osd_cs4` | 72 | 80 | +0.65 |
+| s3 | `bp_gnn` vs `bp_gnn_osd_cs0` | 56 | 115 | +4.51 |
+| s3 | `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 94 | 14 | -7.70 |
+| s3 | `bp_gnn` vs `bp_gnn_osd_cs4` | 83 | 62 | -1.74 |
+
+## p = 0.005銆€锛? 涓ā鍨?seed锛歴1, s2, s3锛涙瘡 seed 1024 shots锛?
+
+| 妯″瀷 seed | 鐩綍 | bp | bp_gnn | `bp_gnn_osd_cs0` | `bp_gnn_osd_cs4` | 鏈敹鏁?shot |
+|---|---|---:|---:|---:|---:|---:|
+| s1 | `d7_p0p005_probe` | 0.22070 | 0.16504 | 0.18262 | 0.13184 | 701 |
+| s2 | `d7_p0p005_probe_s2model` | 0.25879 | 0.19727 | 0.28320 | 0.21484 | 834 |
+| s3 | `d7_p0p005_probe_s3model` | 0.27246 | 0.18750 | 0.28125 | 0.20605 | 841 |
+
+### 璺?seed 閰嶅锛堢瀛愭槸閲嶅鍗曚綅锛?
+
+螖LER = LER(A) 鈭?LER(B)锛?*璐熷€艰〃绀?A 鏇村ソ**锛涚浉瀵逛竴鍒椾互璇ラ厤瀵圭殑 B 涓哄熀鍑嗐€?
+
+| 閰嶅 | 閫?seed 螖LER | 璺?seed 鍧囧€?卤 SE | 鐩稿 B |
+|---|---|---:|---:|
+| `bp_gnn` 鈭?`bp_gnn_osd_cs0` | -0.01758 / -0.08594 / -0.09375 | -0.06576 卤 0.02419 | -26.4% |
+| `bp_gnn_osd_cs0` 鈭?`bp_gnn_osd_cs4` | +0.05078 / +0.06836 / +0.07520 | +0.06478 卤 0.00727 | +35.2% |
+| `bp_gnn` 鈭?`bp_gnn_osd_cs4` | +0.03320 / -0.01758 / -0.01855 | -0.00098 卤 0.01709 | -0.5% |
+| `bp` 鈭?`bp_gnn_osd_cs4` | +0.08887 / +0.04395 / +0.06641 | +0.06641 卤 0.01297 | +36.0% |
+
+### 姣忎釜 seed 鐨勯厤瀵?McNemar锛堝崟浠?1024-shot 娴嬭瘯闆嗭紝浠呬緵鏂瑰悜锛?
+
+| 妯″瀷 seed | 閰嶅 | 鍙?A 閿?| 鍙?B 閿?| z |
+|---|---|---:|---:|---:|
+| s1 | `bp_gnn` vs `bp_gnn_osd_cs0` | 77 | 95 | +1.37 |
+| s1 | `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 73 | 21 | -5.36 |
+| s1 | `bp_gnn` vs `bp_gnn_osd_cs4` | 102 | 68 | -2.61 |
+| s2 | `bp_gnn` vs `bp_gnn_osd_cs0` | 80 | 168 | +5.59 |
+| s2 | `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 110 | 40 | -5.72 |
+| s2 | `bp_gnn` vs `bp_gnn_osd_cs4` | 113 | 131 | +1.15 |
+| s3 | `bp_gnn` vs `bp_gnn_osd_cs0` | 79 | 175 | +6.02 |
+| s3 | `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 112 | 35 | -6.35 |
+| s3 | `bp_gnn` vs `bp_gnn_osd_cs4` | 107 | 126 | +1.24 |
+
+## p = 0.008銆€锛? 涓ā鍨?seed锛歴1, s2, s3锛涙瘡 seed 1024 shots锛?
+
+| 妯″瀷 seed | 鐩綍 | bp | bp_gnn | `bp_gnn_osd_cs0` | `bp_gnn_osd_cs4` | 鏈敹鏁?shot |
+|---|---|---:|---:|---:|---:|---:|
+| s1 | `d7_p0p008_probe` | 0.35449 | 0.30371 | 0.34277 | 0.28809 | 952 |
+| s2 | `d7_p0p008_probe_s2model` | 0.34668 | 0.33594 | 0.38281 | 0.33887 | 992 |
+| s3 | `d7_p0p008_probe_s3model` | 0.36816 | 0.29785 | 0.35938 | 0.29688 | 966 |
+
+### 璺?seed 閰嶅锛堢瀛愭槸閲嶅鍗曚綅锛?
+
+螖LER = LER(A) 鈭?LER(B)锛?*璐熷€艰〃绀?A 鏇村ソ**锛涚浉瀵逛竴鍒椾互璇ラ厤瀵圭殑 B 涓哄熀鍑嗐€?
+
+| 閰嶅 | 閫?seed 螖LER | 璺?seed 鍧囧€?卤 SE | 鐩稿 B |
+|---|---|---:|---:|
+| `bp_gnn` 鈭?`bp_gnn_osd_cs0` | -0.03906 / -0.04688 / -0.06152 | -0.04915 卤 0.00658 | -13.6% |
+| `bp_gnn_osd_cs0` 鈭?`bp_gnn_osd_cs4` | +0.05469 / +0.04395 / +0.06250 | +0.05371 卤 0.00538 | +17.4% |
+| `bp_gnn` 鈭?`bp_gnn_osd_cs4` | +0.01562 / -0.00293 / +0.00098 | +0.00456 卤 0.00565 | +1.5% |
+| `bp` 鈭?`bp_gnn_osd_cs4` | +0.06641 / +0.00781 / +0.07129 | +0.04850 卤 0.02039 | +15.8% |
+
+### 姣忎釜 seed 鐨勯厤瀵?McNemar锛堝崟浠?1024-shot 娴嬭瘯闆嗭紝浠呬緵鏂瑰悜锛?
+
+| 妯″瀷 seed | 閰嶅 | 鍙?A 閿?| 鍙?B 閿?| z |
+|---|---|---:|---:|---:|
+| s1 | `bp_gnn` vs `bp_gnn_osd_cs0` | 108 | 148 | +2.50 |
+| s1 | `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 104 | 48 | -4.54 |
+| s1 | `bp_gnn` vs `bp_gnn_osd_cs4` | 143 | 127 | -0.97 |
+| s2 | `bp_gnn` vs `bp_gnn_osd_cs0` | 160 | 208 | +2.50 |
+| s2 | `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 122 | 77 | -3.19 |
+| s2 | `bp_gnn` vs `bp_gnn_osd_cs4` | 173 | 176 | +0.16 |
+| s3 | `bp_gnn` vs `bp_gnn_osd_cs0` | 131 | 194 | +3.49 |
+| s3 | `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 132 | 68 | -4.53 |
+| s3 | `bp_gnn` vs `bp_gnn_osd_cs4` | 158 | 157 | -0.06 |
+
+## p = 0.01銆€锛? 涓ā鍨?seed锛歴1锛涙瘡 seed 1024 shots锛?
+
+鈿?缂烘ā鍨?seed s2, s3锛堣鍣０鐜囦笅灏氭湭璺戣 seed 鐨勬帰閽堬級銆?
+
+| 妯″瀷 seed | 鐩綍 | bp | bp_gnn | `bp_gnn_osd_cs0` | `bp_gnn_osd_cs4` | 鏈敹鏁?shot |
+|---|---|---:|---:|---:|---:|---:|
+| s1 | `d7_p0p01_probe` | 0.37988 | 0.34668 | 0.38770 | 0.36914 | 996 |
+
+### 璺?seed 閰嶅锛堢瀛愭槸閲嶅鍗曚綅锛?
+
+螖LER = LER(A) 鈭?LER(B)锛?*璐熷€艰〃绀?A 鏇村ソ**锛涚浉瀵逛竴鍒椾互璇ラ厤瀵圭殑 B 涓哄熀鍑嗐€?
+
+| 閰嶅 | 閫?seed 螖LER | 璺?seed 鍧囧€?卤 SE | 鐩稿 B |
+|---|---|---:|---:|
+| `bp_gnn` 鈭?`bp_gnn_osd_cs0` | -0.04102 | -0.04102 卤 nan | -10.6% |
+| `bp_gnn_osd_cs0` 鈭?`bp_gnn_osd_cs4` | +0.01855 | +0.01855 卤 nan | +5.0% |
+| `bp_gnn` 鈭?`bp_gnn_osd_cs4` | -0.02246 | -0.02246 卤 nan | -6.1% |
+| `bp` 鈭?`bp_gnn_osd_cs4` | +0.01074 | +0.01074 卤 nan | +2.9% |
+
+### 姣忎釜 seed 鐨勯厤瀵?McNemar锛堝崟浠?1024-shot 娴嬭瘯闆嗭紝浠呬緵鏂瑰悜锛?
+
+| 妯″瀷 seed | 閰嶅 | 鍙?A 閿?| 鍙?B 閿?| z |
+|---|---|---:|---:|---:|
+| s1 | `bp_gnn` vs `bp_gnn_osd_cs0` | 144 | 186 | +2.31 |
+| s1 | `bp_gnn_osd_cs0` vs `bp_gnn_osd_cs4` | 73 | 54 | -1.69 |
+| s1 | `bp_gnn` vs `bp_gnn_osd_cs4` | 156 | 179 | +1.26 |
+
+
+[2026-10-18 00:38:58] t8 d7 model-seed table done (0 min)
+[2026-10-18 00:38:58] t9 surface d3 multiseed table start :: python scripts\t9_multiseed.py --results-dir results\t9 --prefix surface_d3 --output results\t9\SURFACE_D3_MULTISEED.md
+# T9 澶氱瀛愭眹鎬?路 surface_d3
+
+鐢?`scripts/t9_multiseed.py` 鑷姩鐢熸垚锛屽嬁鎵嬫敼銆?
+
+浣跨敤 3 涓?seed锛坥ffset 0, 10, 20锛夈€?
+**璺?seed 鐨勯厤瀵硅〃鏄帹鏂彛寰?*锛氱瀛愭墠鏄噸澶嶅崟浣嶏紝鎶婂悇 seed 鐨?shot 鐩存帴
+姹傚拰浼氭妸绉嶅瓙闂存暎甯冿紙32768 shots 涓嬪疄娴?卤15%锛夊綋鎴愪簩椤瑰櫔澹帮紝浠庤€岄珮浼版樉钁楁€с€?
+
+## 1. 璺?seed 閰嶅锛堟帹鑽愬紩鐢級
+
+| 娑堣瀺鑷?| 閫?seed 螖LER vs all | 璺?seed 鍧囧€?卤 SE | 鐩稿 all |
+|---|---|---:|---:|
+| `all` | seed 0: +0.00000锛泂eed 10: +0.00000锛泂eed 20: +0.00000 | +0.00000 卤 0.00000 | 鈥?|
+| `no_check_features` | seed 0: -0.00482锛泂eed 10: +0.00177锛泂eed 20: -0.00180 | -0.00162 卤 0.00191 | -4.8% |
+| `no_variable_geometry` | seed 0: -0.00839锛泂eed 10: +0.00089锛泂eed 20: +0.00409 | -0.00114 卤 0.00374 | -3.4% |
+| `no_check_geometry` | seed 0: -0.00281锛泂eed 10: -0.01083锛泂eed 20: -0.00168 | -0.00511 卤 0.00288 | -15.1% |
+| `no_edge_degree` | seed 0: -0.00015锛泂eed 10: +0.00073锛泂eed 20: +0.00461 | +0.00173 卤 0.00146 | +5.1% |
+
+## 2. 鍚堝苟鍙ｅ緞锛堜粎浣滄暣浣撳昂搴﹀弬鑰冿級
+
+| 娑堣瀺鑷?| LER锛坧ooled锛?| 鏍囧噯璇?| 閫昏緫閿欒 | shots | 螖 vs all | 鏈哄埗 AUC 鑼冨洿 |
+|---|---:|---:|---:|---:|---:|---|
+| `all` | 0.03381 | 0.00058 | 3324 | 98304 | 鈥?| 0.9924-0.9931 |
+| `no_check_features` | 0.03220 | 0.00056 | 3165 | 98304 | -4.8% | 0.9922-0.9932 |
+| `no_variable_geometry` | 0.03267 | 0.00057 | 3212 | 98304 | -3.4% | 0.9915-0.9933 |
+| `no_check_geometry` | 0.02871 | 0.00053 | 2822 | 98304 | -15.1% | 0.9925-0.9934 |
+| `no_edge_degree` | 0.03554 | 0.00059 | 3494 | 98304 | +5.1% | 0.9919-0.9930 |
+| `prior_only`锛堜粎 1/3 seeds锛?| 0.06616 | 0.00137 | 2168 | 32768 | +95.7% | 0.9921-0.9921 |
+
+[2026-10-18 00:38:59] t9 surface d3 multiseed table done (0 min)
+[2026-10-18 00:38:59] engineering table start :: python scripts\engineering_table.py --results-dir results --output results\m5\ENGINEERING_TABLE.md
+wrote results\m5\ENGINEERING_TABLE.md (282 rows)
+[2026-10-18 00:38:59] engineering table done (0 min)
+[2026-10-18 00:38:59] issuing shutdown.exe /s /t 300 (cancel with: shutdown /a)
+[2026-10-18 00:38:59] session4 finished
+[2026-10-18 08:21:33] session4 start (pid 7512) stages=extra dryrun=True shutdownAfter=False
+[2026-10-18 08:21:33] --- stage extra (transfer multi-seeds) ---
+[2026-10-18 08:21:33] skip m3 d3->d5 s10 (result exists)
+[2026-10-18 08:21:33] skip m3 d3->d5 s20 (result exists)
+[2026-10-18 08:21:33] DRY-RUN  write rep3x3 seed configs :: scripts\m2_headline_multiseed.py --write-configs --base-config configs\m4_hgp_rep3x3_code_capacity_p0p05.json
+[2026-10-18 08:21:33] DRY-RUN  write hamming7x7 seed configs :: scripts\m2_headline_multiseed.py --write-configs --base-config configs\m4_hgp_hamming7x7_code_capacity_p0p05.json
+[2026-10-18 08:21:33] DRY-RUN  train hgp rep3x3 s10 :: -m graph_qec.m4 --config configs\m4_hgp_rep3x3_code_capacity_p0p05_s10.json --output-dir results\m4_hgp
+[2026-10-18 08:21:33] DRY-RUN  hgp transfer s10 :: scripts\m4_transfer.py --source-config configs\m4_hgp_rep3x3_code_capacity_p0p05_s10.json --target-config configs\m4_hgp_hamming7x7_code_capacity_p0p05_s10.json --checkpoint results\m4_hgp\m4_hgp_rep3x3_code_capacity_p0p05_s10__d3__code_capacity__p0p05\model_state.pt --output-dir results\m4 --tag hgp_rep3x3_s10_to_hgp_hamming7x7
+[2026-10-18 08:21:33] DRY-RUN  train hgp rep3x3 s20 :: -m graph_qec.m4 --config configs\m4_hgp_rep3x3_code_capacity_p0p05_s20.json --output-dir results\m4_hgp
+[2026-10-18 08:21:33] DRY-RUN  hgp transfer s20 :: scripts\m4_transfer.py --source-config configs\m4_hgp_rep3x3_code_capacity_p0p05_s20.json --target-config configs\m4_hgp_hamming7x7_code_capacity_p0p05_s20.json --checkpoint results\m4_hgp\m4_hgp_rep3x3_code_capacity_p0p05_s20__d3__code_capacity__p0p05\model_state.pt --output-dir results\m4 --tag hgp_rep3x3_s20_to_hgp_hamming7x7
+[2026-10-18 08:21:33] session4 finished
+[2026-10-18 08:21:43] session4 start (pid 3092) stages=extra dryrun=False shutdownAfter=False
+[2026-10-18 08:21:43] --- stage extra (transfer multi-seeds) ---
+[2026-10-18 08:21:43] skip m3 d3->d5 s10 (result exists)
+[2026-10-18 08:21:43] skip m3 d3->d5 s20 (result exists)
+[2026-10-18 08:21:43] write rep3x3 seed configs start :: python scripts\m2_headline_multiseed.py --write-configs --base-config configs\m4_hgp_rep3x3_code_capacity_p0p05.json
+wrote configs\m4_hgp_rep3x3_code_capacity_p0p05_s10.json
+wrote configs\m4_hgp_rep3x3_code_capacity_p0p05_s20.json
+[2026-10-18 08:21:43] write rep3x3 seed configs done (0 min)
+[2026-10-18 08:21:43] write hamming7x7 seed configs start :: python scripts\m2_headline_multiseed.py --write-configs --base-config configs\m4_hgp_hamming7x7_code_capacity_p0p05.json
+wrote configs\m4_hgp_hamming7x7_code_capacity_p0p05_s10.json
+wrote configs\m4_hgp_hamming7x7_code_capacity_p0p05_s20.json
+[2026-10-18 08:21:43] write hamming7x7 seed configs done (0 min)
+[2026-10-18 08:21:43] train hgp rep3x3 s10 start :: python -m graph_qec.m4 --config configs\m4_hgp_rep3x3_code_capacity_p0p05_s10.json --output-dir results\m4_hgp
+[m2] HGP(rep3,rep3): 13 qubits, 12 detectors, 39 mechanisms, 80 edges, k=1
+[m2] splits ready: train=32768 validation=16384 test=32768 (0.1s)
+[m2] epoch 1/15: train=0.13422 validation=0.07901 (21.9s)
+[m2] epoch 2/15: train=0.05199 validation=0.04003 (21.9s)
+[m2] epoch 3/15: train=0.03967 validation=0.03767 (22.7s)
+[m2] epoch 4/15: train=0.03902 validation=0.03742 (23.8s)
+[m2] epoch 5/15: train=0.03852 validation=0.03665 (21.7s)
+[m2] epoch 6/15: train=0.03409 validation=0.02748 (19.9s)
+[m2] epoch 7/15: train=0.02676 validation=0.02439 (23.2s)
+[m2] epoch 8/15: train=0.02477 validation=0.02340 (21.9s)
+[m2] epoch 9/15: train=0.02328 validation=0.02187 (22.3s)
+[m2] epoch 10/15: train=0.02230 validation=0.02144 (25.0s)
+[m2] epoch 11/15: train=0.02186 validation=0.02112 (25.2s)
+[m2] epoch 12/15: train=0.02167 validation=0.02098 (24.2s)
+[m2] epoch 13/15: train=0.02143 validation=0.02072 (23.2s)
+[m2] epoch 14/15: train=0.02161 validation=0.02068 (21.2s)
+[m2] epoch 15/15: train=0.02133 validation=0.02058 (22.0s)
+[m2] training done: best validation log loss 0.02058 in 340.3s
+[m2] validation sweep: s=0.0:ler=0.03546, s=0.25:ler=0.03247, s=0.5:ler=0.03259, s=0.75:ler=0.03436, s=1.0:ler=0.03479
+[m2] evaluating bp on 32768 shots
+[m2] evaluating bp_osd on 32768 shots
+[m2] evaluating bp_gnn on 32768 shots
+[m2] evaluating bp_gnn_osd on 32768 shots
+[
+  {
+    "code": {
+      "k": 1,
+      "name": "HGP(rep3,rep3)",
+      "num_detectors": 12,
+      "num_mechanisms": 39,
+      "num_qubits": 13,
+      "num_x_checks": 6,
+      "num_z_checks": 6
+    },
+    "decoders": [
+      {
+        "ler": 0.037384033203125,
+        "logical_errors": 1225,
+        "mean_per_shot_us": 17.123483276367672,
+        "name": "bp"
+      },
+      {
+        "ler": 0.048828125,
+        "logical_errors": 1600,
+        "mean_per_shot_us": 29.183050537109555,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.035186767578125,
+        "logical_errors": 1153,
+        "mean_per_shot_us": 12.172097778319694,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.041778564453125,
+        "logical_errors": 1369,
+        "mean_per_shot_us": 22.8795394897445,
+        "name": "bp_gnn_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_hgp\\m4_hgp_rep3x3_code_capacity_p0p05_s10__d3__code_capacity__p0p05",
+    "selected_reweight_strength": 0.25
+  }
+]
+[2026-10-18 08:27:51] train hgp rep3x3 s10 done (6.1 min)
+[2026-10-18 08:27:51] hgp transfer s10 start :: python scripts\m4_transfer.py --source-config configs\m4_hgp_rep3x3_code_capacity_p0p05_s10.json --target-config configs\m4_hgp_hamming7x7_code_capacity_p0p05_s10.json --checkpoint D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4_hgp\m4_hgp_rep3x3_code_capacity_p0p05_s10__d3__code_capacity__p0p05\model_state.pt --output-dir results\m4 --tag hgp_rep3x3_s10_to_hgp_hamming7x7
+[m2] transfer hgp_rep3x3 -> hgp_hamming7x7 (32768 shots), strength=1.0
+{
+  "bp": 13333,
+  "bp_gnn": 13985,
+  "bp_gnn_osd": 14593
+}
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4\hgp_rep3x3_s10_to_hgp_hamming7x7
+[2026-10-18 08:31:20] hgp transfer s10 done (3.5 min)
+[2026-10-18 08:31:20] train hgp rep3x3 s20 start :: python -m graph_qec.m4 --config configs\m4_hgp_rep3x3_code_capacity_p0p05_s20.json --output-dir results\m4_hgp
+[m2] HGP(rep3,rep3): 13 qubits, 12 detectors, 39 mechanisms, 80 edges, k=1
+[m2] splits ready: train=32768 validation=16384 test=32768 (0.2s)
+[m2] epoch 1/15: train=0.11128 validation=0.06465 (33.3s)
+[m2] epoch 2/15: train=0.04639 validation=0.04227 (34.5s)
+[m2] epoch 3/15: train=0.03973 validation=0.03954 (34.2s)
+[m2] epoch 4/15: train=0.03555 validation=0.02797 (33.3s)
+[m2] epoch 5/15: train=0.02549 validation=0.02461 (34.2s)
+[m2] epoch 6/15: train=0.02383 validation=0.02366 (37.6s)
+[m2] epoch 7/15: train=0.02248 validation=0.02210 (34.3s)
+[m2] epoch 8/15: train=0.02155 validation=0.02164 (34.1s)
+[m2] epoch 9/15: train=0.02124 validation=0.02153 (34.5s)
+[m2] epoch 10/15: train=0.02090 validation=0.02109 (38.6s)
+[m2] epoch 11/15: train=0.02085 validation=0.02155 (37.8s)
+[m2] epoch 12/15: train=0.02088 validation=0.02107 (37.7s)
+[m2] epoch 13/15: train=0.02064 validation=0.02093 (38.9s)
+[m2] epoch 14/15: train=0.02063 validation=0.02097 (37.8s)
+[m2] epoch 15/15: train=0.02068 validation=0.02080 (36.4s)
+[m2] training done: best validation log loss 0.02080 in 537.2s
+[m2] validation sweep: s=0.0:ler=0.03632, s=0.25:ler=0.03546, s=0.5:ler=0.03387, s=0.75:ler=0.03369, s=1.0:ler=0.03369
+[m2] evaluating bp on 32768 shots
+[m2] evaluating bp_osd on 32768 shots
+[m2] evaluating bp_gnn on 32768 shots
+[m2] evaluating bp_gnn_osd on 32768 shots
+[
+  {
+    "code": {
+      "k": 1,
+      "name": "HGP(rep3,rep3)",
+      "num_detectors": 12,
+      "num_mechanisms": 39,
+      "num_qubits": 13,
+      "num_x_checks": 6,
+      "num_z_checks": 6
+    },
+    "decoders": [
+      {
+        "ler": 0.037017822265625,
+        "logical_errors": 1213,
+        "mean_per_shot_us": 33.970895385742466,
+        "name": "bp"
+      },
+      {
+        "ler": 0.049285888671875,
+        "logical_errors": 1615,
+        "mean_per_shot_us": 46.340689086914885,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.033416748046875,
+        "logical_errors": 1095,
+        "mean_per_shot_us": 14.94948120117287,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.035858154296875,
+        "logical_errors": 1175,
+        "mean_per_shot_us": 25.746717834469052,
+        "name": "bp_gnn_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_hgp\\m4_hgp_rep3x3_code_capacity_p0p05_s20__d3__code_capacity__p0p05",
+    "selected_reweight_strength": 1.0
+  }
+]
+[2026-10-18 08:41:00] train hgp rep3x3 s20 done (9.7 min)
+[2026-10-18 08:41:00] hgp transfer s20 start :: python scripts\m4_transfer.py --source-config configs\m4_hgp_rep3x3_code_capacity_p0p05_s20.json --target-config configs\m4_hgp_hamming7x7_code_capacity_p0p05_s20.json --checkpoint D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4_hgp\m4_hgp_rep3x3_code_capacity_p0p05_s20__d3__code_capacity__p0p05\model_state.pt --output-dir results\m4 --tag hgp_rep3x3_s20_to_hgp_hamming7x7
+[m2] transfer hgp_rep3x3 -> hgp_hamming7x7 (32768 shots), strength=1.0
+{
+  "bp": 13243,
+  "bp_gnn": 14896,
+  "bp_gnn_osd": 15451
+}
+wrote D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4\hgp_rep3x3_s20_to_hgp_hamming7x7
+[2026-10-18 08:47:40] hgp transfer s20 done (6.7 min)
+[2026-10-18 08:47:40] session4 finished

@@ -1,0 +1,279 @@
+{
+  "checkpoint": {
+    "architecture": {
+      "check_feature_dim": 3,
+      "edge_feature_dim": 3,
+      "hidden_size": 32,
+      "num_layers": 3,
+      "variable_feature_dim": 6
+    },
+    "checkpoint": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m2\\m2_learned_basis_repetition_circuit_level_d3_s10__d3__circuit_level__p0p01\\model_state.pt",
+    "checkpoint_config_sha256": "6f945f588d263435f349b8898bd49762553f2b8952e6fd2cb1493bd83042fe37"
+  },
+  "config": {
+    "benchmark": {
+      "decoders": [
+        "mwpm",
+        "bp",
+        "bp_osd",
+        "bp_gnn",
+        "bp_gnn_osd",
+        "bp_gnn_osd_learned_order",
+        "osd_gnn"
+      ],
+      "timed_runs": 3
+    },
+    "decoder": {
+      "damping": 0.0,
+      "max_iterations": 32,
+      "min_sum_scaling": 0.75,
+      "osd_combination_sweep": 0,
+      "reweight_strengths": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ]
+    },
+    "experiment": {
+      "code": {
+        "distance": 3,
+        "family": "repetition_code",
+        "rounds": 3
+      },
+      "name": "repetition",
+      "noise": {
+        "model": "circuit_level",
+        "physical_error_rate": 0.01
+      },
+      "sampling": {
+        "shots": 4096
+      },
+      "seed": 20261012
+    },
+    "model": {
+      "dropout": 0.0,
+      "hidden_size": 32,
+      "num_layers": 3
+    },
+    "name": "m3_learned_basis_repetition_circuit_level_d3",
+    "schema_version": 1,
+    "splits": {
+      "test_seeds": [
+        301,
+        302
+      ],
+      "test_shots": 16384,
+      "train_seeds": [
+        101,
+        102
+      ],
+      "train_shots": 8192,
+      "validation_seeds": [
+        201
+      ],
+      "validation_shots": 8192
+    },
+    "training": {
+      "batch_size": 1024,
+      "epochs": 15,
+      "learning_rate": 0.002,
+      "max_grad_norm": 1.0,
+      "seed": 7,
+      "torch_threads": 6,
+      "weight_decay": 0.0
+    }
+  },
+  "config_sha256": "4832b5a73dc0207259d8e9517f75e42e6d4824905ddc566779ff6c296b8a1ff2",
+  "decoders": [
+    {
+      "decoder": "mwpm",
+      "diagnostics": {
+        "num_edges": 65,
+        "num_nodes": 24
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 0.3703582764913449,
+        "mean_total_seconds": 0.01213590000406839,
+        "run_seconds": [
+          0.01213590000406839
+        ],
+        "throughput_shots_per_second": 2700088.167257063,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.00140380859375,
+      "logical_error_rate_standard_error": 0.00020683495375578394,
+      "logical_errors": 46,
+      "prediction_sha256": "d748268996f8a7707b697443237ce9c3b1e94c7bc5866ec315e02bd566f38c80",
+      "syndrome_consistency_rate": null
+    },
+    {
+      "decoder": "bp",
+      "diagnostics": {
+        "average_final_syndrome_distance": 0.150238037109375,
+        "average_iterations": 5.599334716796875,
+        "converged_shots": 28701,
+        "convergence_rate": 0.875885009765625,
+        "engine": "batched_min_sum",
+        "prior_llr_override": false
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 96.30227050783091,
+        "mean_total_seconds": 3.1556328000006033,
+        "run_seconds": [
+          3.1556328000006033
+        ],
+        "throughput_shots_per_second": 10383.97116419684,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.054656982421875,
+      "logical_error_rate_standard_error": 0.001255719297378556,
+      "logical_errors": 1791,
+      "prediction_sha256": "cdc71e6aefca184a1ff612951c4b77f4f85fc00fff4e04613e78d649a71cb20e",
+      "syndrome_consistency_rate": 0.875885009765625
+    },
+    {
+      "decoder": "bp_osd",
+      "diagnostics": {
+        "average_iterations": 5.599334716796875,
+        "average_osd_rank": 24.0,
+        "combination_sweep_order": 0,
+        "converged_shots": 28701,
+        "convergence_rate": 0.875885009765625,
+        "engine": "batched_min_sum",
+        "forced_osd": false,
+        "osd_order": 0,
+        "osd_ordering_override": false,
+        "osd_rate": 0.124114990234375,
+        "osd_shots": 4067,
+        "prior_llr_override": false
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 144.47073974599434,
+        "mean_total_seconds": 4.734017199996742,
+        "run_seconds": [
+          4.734017199996742
+        ],
+        "throughput_shots_per_second": 6921.816845114662,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.064300537109375,
+      "logical_error_rate_standard_error": 0.0013550350309883932,
+      "logical_errors": 2107,
+      "prediction_sha256": "7ab603376a0d7c07ef219e459076a2b41d0dbbc5f6e92cc22ee9e16e9f57f630",
+      "syndrome_consistency_rate": 1.0
+    },
+    {
+      "decoder": "bp_gnn",
+      "diagnostics": {
+        "average_final_syndrome_distance": 0.056396484375,
+        "average_iterations": 2.352874755859375,
+        "converged_shots": 31296,
+        "convergence_rate": 0.955078125,
+        "engine": "batched_min_sum",
+        "prior_llr_override": true
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 38.58719787586118,
+        "mean_total_seconds": 1.264425299996219,
+        "run_seconds": [
+          1.264425299996219
+        ],
+        "throughput_shots_per_second": 25915.33086224863,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.01751708984375,
+      "logical_error_rate_standard_error": 0.0007247171080449204,
+      "logical_errors": 574,
+      "prediction_sha256": "a74cc89d188497d1d75ffa479ab1823cdf4fbdf7e94ee1239c9e03b69b4e3f86",
+      "syndrome_consistency_rate": 0.955078125
+    },
+    {
+      "decoder": "bp_gnn_osd",
+      "diagnostics": {
+        "average_iterations": 2.352874755859375,
+        "average_osd_rank": 24.0,
+        "combination_sweep_order": 0,
+        "converged_shots": 31296,
+        "convergence_rate": 0.955078125,
+        "engine": "batched_min_sum",
+        "forced_osd": false,
+        "osd_order": 0,
+        "osd_ordering_override": false,
+        "osd_rate": 0.044921875,
+        "osd_shots": 1472,
+        "prior_llr_override": true
+      },
+      "latency": {
+        "mean_per_shot_microseconds": 58.309164428838045,
+        "mean_total_seconds": 1.910674700004165,
+        "run_seconds": [
+          1.910674700004165
+        ],
+        "throughput_shots_per_second": 17149.962785359836,
+        "timed_runs": 1
+      },
+      "logical_error_rate": 0.025054931640625,
+      "logical_error_rate_standard_error": 0.0008633993492661023,
+      "logical_errors": 821,
+      "prediction_sha256": "f7d7e347ffbd8d099b09d82241eb037834fb0f6f1cd558a378a1f6f06133b978",
+      "syndrome_consistency_rate": 1.0
+    }
+  ],
+  "environment": {
+    "numpy": "2.5.3",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.1",
+    "stim": "1.16.0",
+    "torch": "2.14.1+cpu"
+  },
+  "graph": {
+    "num_detectors": 24,
+    "num_edges": 182,
+    "num_errors": 101,
+    "num_observables": 1
+  },
+  "mechanism_prediction": {
+    "all_zeros_accuracy": 0.9902337706915223,
+    "dem_prior_log_loss": 0.05328586978404529,
+    "dem_prior_roc_auc": 0.6590784965862656,
+    "positive_rate": 0.009766229308477722,
+    "test_binary_accuracy": 0.9912765049698329,
+    "test_log_loss": 0.02394390764685375,
+    "test_roc_auc": 0.9839291736401186
+  },
+  "name": "m3_learned_basis_repetition_circuit_level_d3",
+  "schema_version": 1,
+  "splits": {
+    "test": {
+      "detections_sha256": "f68915aeae0bb95fd9db8f74248a255b20f35bb32f59991fd836e5b431ed8ca7",
+      "mechanism_rate": 0.009766229308477722,
+      "seeds": [
+        311,
+        312
+      ],
+      "shots": 32768
+    }
+  },
+  "stage": "M3-transfer",
+  "total_seconds": 32.78626819999772,
+  "transfer": {
+    "reweight_strength": 1.0,
+    "source_experiment": {
+      "distance": 3,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 3
+    },
+    "strength_source": "fixed at the source config maximum; not re-selected on target",
+    "target_experiment": {
+      "distance": 5,
+      "family": "repetition_code",
+      "noise_model": "circuit_level",
+      "physical_error_rate": 0.01,
+      "rounds": 5
+    }
+  }
+}

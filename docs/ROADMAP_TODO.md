@@ -130,7 +130,7 @@ $env:PYTHONPATH = "src"
 
 ### 2.2 主线实验
 
-- [x] **T6 · 表面码 d=5 / d=7 学习重加权 + LER-延迟 Pareto**　（P1，2026-10-16 完成主体）
+- [x] **T6 · 表面码 d=5 / d=7 学习重加权 + LER-延迟 Pareto**　（P1，2026-10-17 完成 **30/30 点**）
   - 规模：5 个噪声率 x 8192 shots x 3 seeds，d=5 与 d=7
   - 已确认的约束：d=5/d=7 训练必须用 `batch_size=128`——`batch_size=1024` 在 d=5 的 5004 条边上内存耗尽（进程被系统终止，无 traceback），d=7 更紧张
   - **已完成的首个数据点**（2026-10-15）：表面码 d=5 线路级 p=0.005，2048 shots、1 seed——`bp` 0.10352 → `bp_gnn` **0.06445（-38%）**，迭代 -43%，收敛率 0.579 → 0.767，延迟 10.3 → 5.8 ms/shot；d=3 的对应增益是 -18%，**增益随码距增长**（详见 `docs/M4_HGP_AND_SURFACE.md` 第 7.4 节）
@@ -143,8 +143,11 @@ $env:PYTHONPATH = "src"
     - d=5：−43.4% / −37.1% / −32.8%；d=7：−32.6% / −25.1% / −15.6%（都随 p 升高而下降）
     - 同 p 下 d=5 的增益在三个噪声率上都高于 d=7
     - **规律修正**：收益在 BP 强度"中等"时最大——码距轴非单调（**d=3 −29.0% ± 2.4%（3 seeds）** → d=5 −37.1% → d=7 −25.1%），噪声率轴单调下降。"BP 越弱收益越大"只是码距轴现象
-    - **2026-10-16 下午起在补齐残点**（`scripts/session3_seeds.ps1 -Chain D`，预算 480 min，按价值排序、完成即跳过、可断点续跑）：① d=7 p=0.008 的 s2/s3；② d=5 p=0.01 × 3 seeds；③ d=7 p=0.01 × 3 seeds。补完后需重跑 `scripts/t10_multiseed_stats.py` 与 `scripts/threshold_estimate.py`，并把 `docs/FINAL_REPORT.md` 4.6/4.7 的表格换掉
-  - 仍未排期：p=0.002 × {d=5, d=7} × 3 seeds（低噪声端，属最末优先级）
+    - **2026-10-17 夜间完成全部 30 点**（`session4_seeds.ps1 -Stage grid`；6 个残点 208.5 min：d=5 p=0.002 三点 22.3-22.6 min，d=7 p=0.002 三点 42.5-51.6 min）
+      - d=5 噪声率曲线：−37.4%（p=0.002）→ **−43.4%（p=0.003，峰值）** → −37.1% → −32.8% → −25.4%（p=0.01）
+      - d=7：−38.2% → −32.6% → −25.1% → −13.4% → −9.9%，**单调下降**，峰值落在区间下沿
+      - **新增结论**：噪声率轴上 d=5 出现低端拐点（p=0.003），d=7 的拐点已移到 p≤0.002 → 「拐点位置随码距移动」；OSD-0 在全部 10 个点上都比不开更差（`bp_osd` +10.4%~+60.5%，`bp_gnn_osd` +18.0%~+48.7%）
+  - 验收：✅ 30/30 点、每点 3 seeds，`results/t10/MULTISEED.md` 与 `results/m4/THRESHOLD.md` 已由收口脚本重生成
   - 验收：✅ `results/m4_surface/` 的 d=5/d=7 `bp` vs `bp_gnn` 对照表（含均值 ± 标准误、shots 与 seed 数）；Pareto 图由 `results/t10/MULTISEED.md` 支撑
   - 依据：第 1.3 节第 1、2 条
   - 工作量：编码 1-2 人日；算力约 18 h（隔夜 + 1 天）
@@ -168,7 +171,10 @@ $env:PYTHONPATH = "src"
     - `bp_osd_cs0 → bp_osd_cs4`：**−0.00279 ± 0.00012**（z=−12.23）→ 主结论更硬
     - `bp_osd_cs4 → bp_gnn_osd_cs4`：**+0.00055 ± 0.00043**（逐 seed +0.00006/+0.00140/+0.00018）→ **单 seed 的「打平（p=0.53）」要撤回**，改为「种子噪声内不可区分」
   - 验收：✅ 新增 decoder + 单测 + 与 `bp`/`bp_gnn`/`bp_gnn_osd` 的配对检验表 + d=7 与 repetition 的多种子汇总
-  - **2026-10-17 排期（`session4_seeds.ps1 -Stage probes,probes-extra`）**：把 d=7 探针升级为「模型 + 数据都换」（用 T6 网格 s2/s3 各自的 checkpoint；汇总 `scripts/t8_d7_model_seeds.py` → `results/t8/D7_MODEL_SEEDS.md`，与只换测试集的 `D7_MULTISEED.md` 分口径并列），并补 p=0.01 这一新噪声率点的 3 份测试集
+  - **2026-10-17 夜间完成（模型 + 数据都换，`session4_seeds.ps1 -Stage probes`）**：6 次探针 6.5-9.5 min/次 → `results/t8/D7_MODEL_SEEDS.md`（新脚本 `scripts/t8_d7_model_seeds.py`，种子是重复单位）
+    - OSD-0 相对 `bp_gnn` 恶化 **+43.0%±14.0% / +34.7%±12.2% / +15.8%±2.4%**（p=0.003/0.005/0.008，3 个模型 seed 全部同号）
+    - OSD-CS 修回 **−41.7%±3.8% / −26.2%±1.1% / −14.9%±1.8%**；但 CS 相对 `bp_gnn` 的净增益只有 p=0.003 有方向（−15.7%±13.3%，n.s.），p≥0.005 归零
+    - → **旧口径的 −34.9%/−11.6%/−1.9% 是单模型效应**（`D7_MULTISEED.md` 保留为「只换测试集」口径）；另补 d=7 p=0.01 的 3 份测试集（cs4 比 `bp_gnn` 差 +8.4%）
 - [x] **T9 · 消融补全：图特征组合 + top-k 候选规模**　（P1，2026-10-15 完成）
   - top-k：OSD-CS 的 λ ∈ {0,2,4,6,8} 扫描（见 T8）——表面码单调、repetition 非单调（λ=4 最优）
   - 图特征组合：`scripts/t9_feature_ablation.py`（置零特征列 + 同 seed 重训，架构不变）
@@ -182,7 +188,9 @@ $env:PYTHONPATH = "src"
   - 依据：`README.md` 7.2 列出 7 类消融，当前 3 类有数据
   - 依赖：T8（top-k 需要候选集机制）
   - 工作量：编码 3 人日；算力 1 h
-  - **2026-10-17 排期（`session4_seeds.ps1 -Stage ablation`）**：表面码 d=3 剩余 3 条臂 (`no_check_features` / `no_check_geometry` / `no_edge_degree`) × {s10,s20}，把 4.8.1 的表面码表补齐到 3 seeds（汇总 `scripts/t9_multiseed.py --prefix surface_d3` → `results/t9/SURFACE_D3_MULTISEED.md`）
+  - **2026-10-18 完成（`session4_seeds.ps1 -Stage ablation` + `prior_only` 补臂）**：表面码 d=3 的 5 条臂全部补齐到 3 seeds（98304 shots，`results/t9/SURFACE_D3_MULTISEED.md`）
+    - `no_check_features` −4.8%±5.6%、`no_variable_geometry` −3.4%±11.1%、`no_edge_degree` +5.1%±4.3%（均在噪声内）；`no_check_geometry` −15.1%±8.5%（逐 seed 同号、t≈1.8，未达显著）
+    - `prior_only` **+103.4% ± 12.0%**（逐 seed +0.03162/+0.03027/+0.04303）→ 「图结构特征不可省」在 3 seeds 上确认
 - [x] **T10 · 多种子统计稳健性**　（P1，2026-10-16 完成；repetition d=5 的强度复核仍未做）
   - 产出：`results/t10/MULTISEED.md` + `multiseed.json` + `surface_sweep_mean.json`（跨 seed 均值 ± 标准误、逐 seed 值、配对 Δ 与符号检验）
   - 修正了一处数据质量问题：p=0.005 组曾混入 2048-shot 的历史单点，加了 `--min-test-shots` 过滤
@@ -190,7 +198,9 @@ $env:PYTHONPATH = "src"
   - **2026-10-16 补测**：M2 旗舰表（repetition d=3 同分布，效应量最小的一张表）补到 3 seeds / 98304 shots：`bp_gnn` vs `bp` 的配对 ΔLER = +0.00009 / −0.00098 / +0.00003（均值 −0.00028 ± 0.00035，符号翻转）→ 「无收益」结论被误差棒确认；`mwpm` vs `bp_gnn` = +0.00288 ± 0.00034（三 seed 同号）。工具：`scripts/m2_headline_multiseed.py`（`--write-configs` / `--aggregate`）+ `scripts/m2_headline_seeds.ps1`；产物 `results/m2/HEADLINE_MULTISEED.md`
   - 范围：对 4 个关键结论（d=5/d=7 的 `bp` vs `bp_gnn`、HGP 跨尺寸迁移、MWPM 边权结论）给出 3 seeds 的均值 ± 标准误与配对检验；并在 repetition d=5 的目标分布验证集上复核先验插值强度（当前 d=5 评测沿用源配置上限 1.00）
   - 工作量：编码 1 人日；算力并入 T6
-  - **2026-10-17 排期（`session4_seeds.ps1 -Stage extra`）**：本条目自带的两项遗留——HGP 跨尺寸迁移与 M3 跨码距迁移 (d=3 → d=5)——各补到 3 seeds（复用 `results/m2` 的 s10/s20 checkpoint；HGP 侧源模型换 seed 重训、目标测试集同步换 seed）
+  - **2026-10-18 完成（`session4_seeds.ps1 -Stage extra`）**：两项迁移各补到 3 seeds
+    - **M3 跨码距迁移（d=3 → d=5）稳健**：`bp` → `bp_gnn` 为 −66.3% / −68.0% / −71.0%（三个种子同号；0.05078→0.01709 / 0.05466→0.01752 / 0.05365→0.01556）
+    - **HGP 跨尺寸迁移不稳健**：−11.4%（s0）/ +4.9%（s10）/ +12.5%（s20），均值 **+2.0% ± 7.1%** → **单 seed 的 −11% 结论已撤回**（源域 [[13,1,3]] 的增益仍同号：−3.1%/−5.9%/−9.7%）
 - [x] **T11 · CPU 工程性能表**　（P1，2026-10-15 完成）
   - 依据：`README.md` 8.2
   - 产出：`scripts/engineering_table.py` 从 `results/` 自动生成 `results/m5/ENGINEERING_TABLE.md`（95 行：M1 六个配置 + M2/M3/M4 运行记录，含 LER、µs/shot、shot/s、峰值 RSS delta、BP 平均迭代、OSD 触发比例、syndrome 一致率、模型规模）

@@ -1,0 +1,49 @@
+D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\.venv\Scripts\python.exe -m graph_qec.m2 --config D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\configs\t6\m4_rotated_surface_code_circuit_level_d7_s2__p0p01.json --output-dir D:\work2026\BuChou\Projects_BuChou\01_graph_aware_neural_qec_decoder\results\m4_surface
+
+[m2] generating splits for m4_rotated_surface_code_circuit_level_d7_s2
+[m2] splits ready: train=8192 validation=1024 test=4096 (0.7s)
+[m2] graph: 336 detectors, 6023 mechanisms, 18424 edges
+[m2] epoch 1/2: train=0.08027 validation=0.02081 (507.1s)
+[m2] epoch 2/2: train=0.01488 validation=0.01369 (517.5s)
+[m2] training done: best validation log loss 0.01369 in 1024.6s
+[m2] validation sweep: s=0.0:ler=0.39551, s=0.25:ler=0.39551, s=0.5:ler=0.41602, s=0.75:ler=0.38477, s=1.0:ler=0.36523
+[m2] selected reweight strength 1.0
+[m2] evaluating mwpm on 4096 test shots
+[m2] evaluating bp on 4096 test shots
+[m2] evaluating bp_osd on 4096 test shots
+[m2] evaluating bp_gnn on 4096 test shots
+[m2] evaluating bp_gnn_osd on 4096 test shots
+[
+  {
+    "config_sha256": "2ec99435e2e360d8a619c78883011f1f94eece7135aa643e47652299bea0676e",
+    "decoders": [
+      {
+        "ler": 0.10595703125,
+        "mean_per_shot_us": 26.599194338672305,
+        "name": "mwpm"
+      },
+      {
+        "ler": 0.397216796875,
+        "mean_per_shot_us": 60520.14255371319,
+        "name": "bp"
+      },
+      {
+        "ler": 0.425537109375,
+        "mean_per_shot_us": 99202.86821288826,
+        "name": "bp_osd"
+      },
+      {
+        "ler": 0.3642578125,
+        "mean_per_shot_us": 55579.729394530375,
+        "name": "bp_gnn"
+      },
+      {
+        "ler": 0.447998046875,
+        "mean_per_shot_us": 90368.32377929827,
+        "name": "bp_gnn_osd"
+      }
+    ],
+    "output_dir": "D:\\work2026\\BuChou\\Projects_BuChou\\01_graph_aware_neural_qec_decoder\\results\\m4_surface\\m4_rotated_surface_code_circuit_level_d7_s2__d7__circuit_level__p0p01",
+    "selected_reweight_strength": 1.0
+  }
+]

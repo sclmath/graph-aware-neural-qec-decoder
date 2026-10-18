@@ -25,6 +25,72 @@
       ],
       "mechanism_auc": 0.9914946619224945,
       "shots": 32768
+    },
+    {
+      "arm": "no_check_features",
+      "best_validation_log_loss": 0.008931974996812642,
+      "logical_error_rate": 0.026458740234375,
+      "logical_errors": 867,
+      "masked_check": [
+        0,
+        1,
+        2
+      ],
+      "masked_edge": [],
+      "masked_variable": [],
+      "mechanism_auc": 0.9928556626832391,
+      "shots": 32768
+    },
+    {
+      "arm": "no_check_geometry",
+      "best_validation_log_loss": 0.009090934181585908,
+      "logical_error_rate": 0.026580810546875,
+      "logical_errors": 871,
+      "masked_check": [
+        1,
+        2
+      ],
+      "masked_edge": [],
+      "masked_variable": [],
+      "mechanism_auc": 0.992483185595809,
+      "shots": 32768
+    },
+    {
+      "arm": "no_edge_degree",
+      "best_validation_log_loss": 0.009220115724019706,
+      "logical_error_rate": 0.032867431640625,
+      "logical_errors": 1077,
+      "masked_check": [],
+      "masked_edge": [
+        1,
+        2
+      ],
+      "masked_variable": [],
+      "mechanism_auc": 0.9919101480486561,
+      "shots": 32768
+    },
+    {
+      "arm": "prior_only",
+      "best_validation_log_loss": 0.009306706604547799,
+      "logical_error_rate": 0.0712890625,
+      "logical_errors": 2336,
+      "masked_check": [
+        0,
+        1,
+        2
+      ],
+      "masked_edge": [
+        1,
+        2
+      ],
+      "masked_variable": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "mechanism_auc": 0.9918893699272017,
+      "shots": 32768
     }
   ],
   "seed_offset": 20

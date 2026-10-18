@@ -94,5 +94,37 @@
       "shots": 3072,
       "standard_error": 0.004067547853196564
     }
+  },
+  "p=0.01": {
+    "bp": {
+      "logical_error_rate": 0.39453125,
+      "logical_errors": 1212,
+      "shots": 3072,
+      "standard_error": 0.008818119196474287
+    },
+    "bp_gnn": {
+      "logical_error_rate": 0.3330078125,
+      "logical_errors": 1023,
+      "shots": 3072,
+      "standard_error": 0.008503093977991556
+    },
+    "bp_gnn_osd_cs0": {
+      "logical_error_rate": 0.3955078125,
+      "logical_errors": 1215,
+      "shots": 3072,
+      "standard_error": 0.00882190290967558
+    },
+    "bp_gnn_osd_cs4": {
+      "logical_error_rate": 0.3610026041666667,
+      "logical_errors": 1109,
+      "shots": 3072,
+      "standard_error": 0.008665509562271129
+    },
+    "mwpm": {
+      "logical_error_rate": 0.09733072916666667,
+      "logical_errors": 299,
+      "shots": 3072,
+      "standard_error": 0.005347843775673304
+    }
   }
 }

@@ -2,47 +2,92 @@
   {
     "decoder": "bp",
     "distance": 3,
-    "logical_error_rate": 0.040069580078125,
-    "logical_error_rate_standard_error": 0.0,
+    "logical_error_rate": 0.041493733723958336,
+    "logical_error_rate_standard_error": 0.0007122947722630703,
     "noise_model": "circuit_level",
     "physical_error_rate": 0.005,
-    "shots": 32768
+    "shots": 98304
   },
   {
     "decoder": "bp_gnn",
     "distance": 3,
-    "logical_error_rate": 0.03277587890625,
-    "logical_error_rate_standard_error": 0.0,
+    "logical_error_rate": 0.029449462890625,
+    "logical_error_rate_standard_error": 0.0016854804340114468,
     "noise_model": "circuit_level",
     "physical_error_rate": 0.005,
-    "shots": 32768
+    "shots": 98304
   },
   {
     "decoder": "bp_gnn_osd",
     "distance": 3,
-    "logical_error_rate": 0.035491943359375,
-    "logical_error_rate_standard_error": 0.0,
+    "logical_error_rate": 0.033121744791666664,
+    "logical_error_rate_standard_error": 0.0012053906821799377,
     "noise_model": "circuit_level",
     "physical_error_rate": 0.005,
-    "shots": 32768
+    "shots": 98304
   },
   {
     "decoder": "bp_osd",
     "distance": 3,
-    "logical_error_rate": 0.04315185546875,
-    "logical_error_rate_standard_error": 0.0,
+    "logical_error_rate": 0.044708251953125,
+    "logical_error_rate_standard_error": 0.0008247277855920125,
     "noise_model": "circuit_level",
     "physical_error_rate": 0.005,
-    "shots": 32768
+    "shots": 98304
   },
   {
     "decoder": "mwpm",
     "distance": 3,
-    "logical_error_rate": 0.016937255859375,
-    "logical_error_rate_standard_error": 0.0,
+    "logical_error_rate": 0.017293294270833332,
+    "logical_error_rate_standard_error": 0.00017997035739089083,
     "noise_model": "circuit_level",
     "physical_error_rate": 0.005,
-    "shots": 32768
+    "shots": 98304
+  },
+  {
+    "decoder": "bp",
+    "distance": 5,
+    "logical_error_rate": 0.0198974609375,
+    "logical_error_rate_standard_error": 0.0005593964471381642,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.002,
+    "shots": 24576
+  },
+  {
+    "decoder": "bp_gnn",
+    "distance": 5,
+    "logical_error_rate": 0.012451171875,
+    "logical_error_rate_standard_error": 0.000626416191338731,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.002,
+    "shots": 24576
+  },
+  {
+    "decoder": "bp_gnn_osd",
+    "distance": 5,
+    "logical_error_rate": 0.018513997395833332,
+    "logical_error_rate_standard_error": 0.0028456902970224384,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.002,
+    "shots": 24576
+  },
+  {
+    "decoder": "bp_osd",
+    "distance": 5,
+    "logical_error_rate": 0.031941731770833336,
+    "logical_error_rate_standard_error": 0.0005740045564642693,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.002,
+    "shots": 24576
+  },
+  {
+    "decoder": "mwpm",
+    "distance": 5,
+    "logical_error_rate": 0.0010172526041666667,
+    "logical_error_rate_standard_error": 0.00022655291189900806,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.002,
+    "shots": 24576
   },
   {
     "decoder": "bp",
@@ -181,6 +226,96 @@
   },
   {
     "decoder": "bp",
+    "distance": 5,
+    "logical_error_rate": 0.244873046875,
+    "logical_error_rate_standard_error": 0.001753455519727803,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.01,
+    "shots": 24576
+  },
+  {
+    "decoder": "bp_gnn",
+    "distance": 5,
+    "logical_error_rate": 0.18265787760416666,
+    "logical_error_rate_standard_error": 0.0026710194388470557,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.01,
+    "shots": 24576
+  },
+  {
+    "decoder": "bp_gnn_osd",
+    "distance": 5,
+    "logical_error_rate": 0.21634928385416666,
+    "logical_error_rate_standard_error": 0.0022775556590424037,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.01,
+    "shots": 24576
+  },
+  {
+    "decoder": "bp_osd",
+    "distance": 5,
+    "logical_error_rate": 0.301025390625,
+    "logical_error_rate_standard_error": 0.002291326208545099,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.01,
+    "shots": 24576
+  },
+  {
+    "decoder": "mwpm",
+    "distance": 5,
+    "logical_error_rate": 0.08182779947916667,
+    "logical_error_rate_standard_error": 0.0007402915608178814,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.01,
+    "shots": 24576
+  },
+  {
+    "decoder": "bp",
+    "distance": 7,
+    "logical_error_rate": 0.104248046875,
+    "logical_error_rate_standard_error": 0.001708984375,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.002,
+    "shots": 12288
+  },
+  {
+    "decoder": "bp_gnn",
+    "distance": 7,
+    "logical_error_rate": 0.064453125,
+    "logical_error_rate_standard_error": 0.004955513459517686,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.002,
+    "shots": 12288
+  },
+  {
+    "decoder": "bp_gnn_osd",
+    "distance": 7,
+    "logical_error_rate": 0.09041341145833333,
+    "logical_error_rate_standard_error": 0.015743021810134882,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.002,
+    "shots": 12288
+  },
+  {
+    "decoder": "bp_osd",
+    "distance": 7,
+    "logical_error_rate": 0.128173828125,
+    "logical_error_rate_standard_error": 0.0009243014885742633,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.002,
+    "shots": 12288
+  },
+  {
+    "decoder": "mwpm",
+    "distance": 7,
+    "logical_error_rate": 0.0004069010416666667,
+    "logical_error_rate_standard_error": 0.00021531179289262622,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.002,
+    "shots": 12288
+  },
+  {
+    "decoder": "bp",
     "distance": 7,
     "logical_error_rate": 0.15673828125,
     "logical_error_rate_standard_error": 0.003969319140057682,
@@ -272,46 +407,91 @@
   {
     "decoder": "bp",
     "distance": 7,
-    "logical_error_rate": 0.35498046875,
-    "logical_error_rate_standard_error": 0.0,
+    "logical_error_rate": 0.3505859375,
+    "logical_error_rate_standard_error": 0.00552966389302057,
     "noise_model": "circuit_level",
     "physical_error_rate": 0.008,
-    "shots": 4096
+    "shots": 12288
   },
   {
     "decoder": "bp_gnn",
     "distance": 7,
-    "logical_error_rate": 0.299560546875,
-    "logical_error_rate_standard_error": 0.0,
+    "logical_error_rate": 0.3036295572916667,
+    "logical_error_rate_standard_error": 0.004191673261613253,
     "noise_model": "circuit_level",
     "physical_error_rate": 0.008,
-    "shots": 4096
+    "shots": 12288
   },
   {
     "decoder": "bp_gnn_osd",
     "distance": 7,
-    "logical_error_rate": 0.33837890625,
-    "logical_error_rate_standard_error": 0.0,
+    "logical_error_rate": 0.364501953125,
+    "logical_error_rate_standard_error": 0.014429103374792194,
     "noise_model": "circuit_level",
     "physical_error_rate": 0.008,
-    "shots": 4096
+    "shots": 12288
   },
   {
     "decoder": "bp_osd",
     "distance": 7,
     "logical_error_rate": 0.402099609375,
-    "logical_error_rate_standard_error": 0.0,
+    "logical_error_rate_standard_error": 0.002396229144585849,
     "noise_model": "circuit_level",
     "physical_error_rate": 0.008,
-    "shots": 4096
+    "shots": 12288
   },
   {
     "decoder": "mwpm",
     "distance": 7,
-    "logical_error_rate": 0.049560546875,
-    "logical_error_rate_standard_error": 0.0,
+    "logical_error_rate": 0.052571614583333336,
+    "logical_error_rate_standard_error": 0.0015071825502483832,
     "noise_model": "circuit_level",
     "physical_error_rate": 0.008,
-    "shots": 4096
+    "shots": 12288
+  },
+  {
+    "decoder": "bp",
+    "distance": 7,
+    "logical_error_rate": 0.3956705729166667,
+    "logical_error_rate_standard_error": 0.0009171083715482296,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.01,
+    "shots": 12288
+  },
+  {
+    "decoder": "bp_gnn",
+    "distance": 7,
+    "logical_error_rate": 0.3563639322916667,
+    "logical_error_rate_standard_error": 0.004381702677725197,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.01,
+    "shots": 12288
+  },
+  {
+    "decoder": "bp_gnn_osd",
+    "distance": 7,
+    "logical_error_rate": 0.4204915364583333,
+    "logical_error_rate_standard_error": 0.015145466782141006,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.01,
+    "shots": 12288
+  },
+  {
+    "decoder": "bp_osd",
+    "distance": 7,
+    "logical_error_rate": 0.4369303385416667,
+    "logical_error_rate_standard_error": 0.006180075389864483,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.01,
+    "shots": 12288
+  },
+  {
+    "decoder": "mwpm",
+    "distance": 7,
+    "logical_error_rate": 0.10538736979166667,
+    "logical_error_rate_standard_error": 0.0003547281041292866,
+    "noise_model": "circuit_level",
+    "physical_error_rate": 0.01,
+    "shots": 12288
   }
 ]
