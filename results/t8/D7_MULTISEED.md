@@ -1,4 +1,4 @@
-# T8 · d=7 OSD-CS 探针的多种子汇总
+# d=7 OSD-CS 探针多种子汇总
 
 由 `scripts/t8_d7_multiseed.py` 自动生成，勿手改。每个目录 = 一份**独立 seed
 偏移**的 1024-shot 测试集；同一点的多份测试集相互独立，逐 shot 错误可直接

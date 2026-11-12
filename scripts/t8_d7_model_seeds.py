@@ -94,7 +94,7 @@ def fmt(value: float, digits: int = 5) -> str:
 
 def markdown(groups: dict[float, dict[int, dict[str, Any]]]) -> str:
     lines: list[str] = [
-        "# T8 · d=7 OSD-CS 探针（模型 + 数据都换）",
+        "# d=7 OSD-CS 探针：模型种子与独立测试集",
         "",
         "由 `scripts/t8_d7_model_seeds.py` 自动生成，勿手改。",
         "",

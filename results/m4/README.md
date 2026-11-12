@@ -13,4 +13,4 @@
 
 表面码与 HGP 的学习重加权结果分别在 `results/m4_surface/`、`results/m4_surface_cc/`、`results/m4_hgp/`。
 
-> Union-Find 重跑细节见 `docs/T18_UNION_FIND_ANALYSIS.md`；实验总述见 `docs/M4_HGP_AND_SURFACE.md`；完整数字以 `docs/FINAL_REPORT.md` 为准。本文件只做目录导航。
+> 加权 Union-Find 细节见 `docs/UNION_FIND.md`；实验总述见 `docs/M4_HGP_AND_SURFACE.md`；完整数字以 `docs/FINAL_REPORT.md` 为准。本文件只做目录导航。

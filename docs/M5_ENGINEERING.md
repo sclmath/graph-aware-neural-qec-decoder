@@ -1,6 +1,6 @@
 # M5：工程优化（向量化 BP、量化推理、GPU 现状）
 
-日期：2026-10-13
+版本日期：2026-11-12
 前置：`docs/BP_IMPLEMENTATION.md`
 
 ## 1. 目标（来自 README 的 M5 定义）
@@ -42,25 +42,25 @@
 
 - **量化几乎无损**：权重压缩 **3.72×**，机制后验 log loss 与接回 BP 后的 LER 完全不变（logit 最大偏差 0.44，机制符号一致率 0.99995）；
 - **但 CPU 上是负加速（0.77×）**：动态量化的反量化开销抵消了更便宜的矩阵乘，且当前规模（34 条边、hidden 32）本来就偏小；
-- 工程观察：**向量化之后，GNN 前向成了整条管线的瓶颈（d=3 repetition 31.7 µs/shot @ batch 1024），而 BP 只要 1.9 µs/shot**。因此要优化的是 GNN 的形状（减少每边的 MLP 计算、预分配缓冲、或把消息传递改成稀疏矩阵乘），而不是 BP；表面码 d=7 上 GNN 前向与 BP 同量级（优化后 35 ms/shot @ batch 256，BP 为 47 ms/shot，见 `docs/BP_IMPLEMENTATION.md` 第 4 节与 `results/m5/GNN_PERF.md`）。
+- 工程观察：**GNN 前向是当前管线的瓶颈（d=3 repetition 32.4 µs/shot @ batch 1024），BP 为 1.9 µs/shot**。因此继续优化应集中在 GNN 的形状与内存访问（减少每边 MLP 计算、预分配缓冲、或改用稀疏矩阵乘）；表面码 d=7 上 GNN 前向与 BP 同量级（GNN 35.3 ms/shot @ batch 256，BP 为 47 ms/shot，见 `docs/BP_IMPLEMENTATION.md` 第 4 节与 `results/m5/GNN_PERF.md`）。
 - 该小节的数字与 `docs/M3_HYBRID_DECODER.md` 第 3 节的同分布结论一致：d=3 repetition 上学习先验没有可测的 LER 收益。
 
 ## 4. GPU 现状与迁移路径
 
-交付环境为 CPU-only：PyTorch 是 CPU-only 构建（`torch 2.14.1+cpu`，`torch.cuda.is_available() == False`），因此 GPU 批处理与量化推理对比不在交付范围内，本文档不给出任何 GPU 数字。需要 GPU 时的迁移路径：
+当前环境为 CPU-only：PyTorch 是 CPU-only 构建（`torch 2.14.1+cpu`，`torch.cuda.is_available() == False`），因此本文档不给出 GPU 数字。需要 GPU 时的迁移路径：
 
 1. 向量化 BP 的 shot 维天然可搬到 GPU：把 `bp_engine` 里的活动集合切片换成 `torch.Tensor`，边聚合用 `index_add_` / `torch.sparse` 的稀疏矩阵-向量乘；
 2. GNN 前向已经是 `(shots, edges, hidden)` 的批量张量，改 `device=` 即可；主要成本在 `torch.cat` 的临时张量，可先做 `index_select` + 预分配缓冲；
 3. 量化对比需要把 `torch.ao.quantization.quantize_dynamic` 换成 `torchao`（当前 torch 版本的动态量化 API 已标记为 deprecated，2026-10 后 `torch.ao.quantization` 会被移除）。
 
-GPU 的延迟、吞吐与峰值显存对比属于后续工作，见 `docs/ROADMAP_TODO.md` 第 7 节。
+GPU 的延迟、吞吐与峰值显存对比属于后续工作，见 [`ROADMAP.md`](ROADMAP.md) 的工程与平台部分。
 
-## 5. 把学习后验喂给 MWPM 的对照实验
+## 5. 把学习后验喂给 MWPM
 
-逐 shot 用学习后验重建 DEM 会丢掉 Stim 的 `^` 分解，MWPM 因此从 0.0439 退化到 0.0679；这属于实现问题，不能用来评价学习后验。保分解 + 相对重加权的完整阶梯实验、映射覆盖率与结论见 `docs/M5_DECOMPOSED_MWPM.md`。
+当前实现保留 Stim 的 `^` 分解，并对分解后的指令做相对、保尺度的概率重加权。实现约定、结构一致性校验、映射覆盖率和最终结果见 [`MWPM_REWEIGHTING.md`](MWPM_REWEIGHTING.md)。
 
 ## 6. 结论
 
 1. **向量化 BP 是本阶段最有价值的工程项**：约两个数量级加速（实现规范与等价性保证见 `docs/BP_IMPLEMENTATION.md`）；
 2. 量化收益见第 3 节；GNN 在整条管线里通常只占 10–30% 的时间（表面码上因为提前收敛省下 BP 迭代，GNN 反而"免费"），所以量化的主要意义在显存/内存而非吞吐；
-3. GPU 项不在交付范围内；若引入 GPU，迁移方案见第 4 节。
+3. 当前版本未包含 GPU 实测；若引入 GPU，迁移方案见第 4 节。

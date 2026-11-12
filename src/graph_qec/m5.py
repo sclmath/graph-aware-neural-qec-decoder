@@ -238,7 +238,7 @@ def log_odds_to_probabilities(log_odds: np.ndarray) -> np.ndarray:
 
     NB: ``p = sigmoid(-llr)``. The M5 prototype used ``sigmoid(+llr)`` and
     therefore fed ``1 - p`` into every rebuilt matching graph; see
-    ``docs/M5_DECOMPOSED_MWPM.md``.
+    ``docs/MWPM_REWEIGHTING.md``.
     """
 
     values = np.asarray(log_odds, dtype=np.float64)

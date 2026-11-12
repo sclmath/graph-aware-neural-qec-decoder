@@ -28,7 +28,7 @@ The original implementation XOR-ed the ``fault_mask`` of *every* merged edge and
 had no peeling, so ~97% of the defective shots returned corrections that did
 not reproduce the syndrome; on the surface code it was 18x worse than MWPM (or
 worse). The faithful version above matches MWPM on the small surface codes and
-is documented in ``docs/T18_UNION_FIND_ANALYSIS.md``.
+is documented in ``docs/UNION_FIND.md``.
 """
 
 from __future__ import annotations

@@ -70,7 +70,7 @@ def mean_se(values: Sequence[float]) -> tuple[float, float]:
 def markdown(runs: Sequence[dict[str, Any]]) -> str:
     shots = sum(run["shots"] for run in runs)
     lines = [
-        "# T8 · repetition d=3 OSD-CS 研究的多种子复核",
+        "# repetition d=3 OSD-CS 多种子结果",
         "",
         "由 `scripts/t8_repetition_multiseed.py` 自动生成，勿手改。",
         f"{len(runs)} 个独立 seed（M2 运行的种子偏移 "

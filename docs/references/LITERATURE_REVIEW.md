@@ -3,7 +3,7 @@
 > 检索截止日期：2026-09-25  
 > 项目定位：表面码、量子 LDPC/HGP 码上的图感知神经混合解码  
 > 主要检索源：arXiv 检索页、OpenAlex、Crossref  
-> 配套文件：完整文献表见 `docs/references.md`，BibTeX 见 `docs/references.bib`
+> 配套文件：完整文献表见 [`references.md`](references.md)，BibTeX 见 [`references.bib`](references.bib)。
 
 ## 0. 执行摘要
 
@@ -172,4 +172,4 @@
 
 ## 参考文献
 
-完整分类文献表和逐条关联说明见 [`docs/references.md`](references.md)。可导入 Zotero/LaTeX 的 BibTeX 见 [`docs/references.bib`](references.bib)。
+完整分类文献表和逐条关联说明见 [`references.md`](references.md)。可导入 Zotero/LaTeX 的 BibTeX 见 [`references.bib`](references.bib)。

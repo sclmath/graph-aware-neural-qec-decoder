@@ -86,7 +86,7 @@ def markdown(prefix: str, runs: list[tuple[int, dict[str, Any]]]) -> str:
     common = [arm for arm in arms
               if all(arm_row(summary, arm) is not None for _, summary in runs)]
     lines = [
-        f"# T9 多种子汇总 · {prefix}",
+        f"# 多种子汇总 · {prefix}",
         "",
         "由 `scripts/t9_multiseed.py` 自动生成，勿手改。",
         "",

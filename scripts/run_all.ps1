@@ -5,7 +5,7 @@
 .DESCRIPTION
     默认（小规模）模式在数分钟内完成：单元测试、M0 数据链路、M1 基线 benchmark、
     CPU 预算探针、M2 汇总与出图。加 -Full 会额外跑 M2 训练与 M3 迁移扫描
-    （数十分钟到数小时，见 docs/ROADMAP_TODO.md 第 1 节的算力预算）。
+    （数十分钟到数小时，预算与限制见 docs/ROADMAP.md）。
 
 .EXAMPLE
     .\scripts\run_all.ps1
@@ -25,7 +25,7 @@ $env:PYTHONPATH = Join-Path $PWD 'src'
 $env:PYTHONUTF8 = '1'
 
 $smoke = 'results\smoke'
-# M0/M1 的目标目录已存在时会显式抛 FileExistsError（这是刻意的保护，见 HANDOFF 第 4 节），
+# M0/M1 的目标目录已存在时会显式抛 FileExistsError（这是刻意的保护），
 # 所以 smoke 每次必须先清空自己的临时目录——它被 .gitignore 排除、只由本脚本写入。
 # 用 Python 的 shutil 而不是 Remove-Item -Recurse（本机策略会拒绝后者）。
 & $py -c "import shutil, pathlib; shutil.rmtree(pathlib.Path('results/smoke'), ignore_errors=True)"

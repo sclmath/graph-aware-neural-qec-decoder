@@ -1,4 +1,4 @@
-# T8 · OSD 候选集学习（OSD-CS / combination sweep）
+# OSD 候选集学习（OSD-CS）
 
 - 配置：`results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p008\config.json`
 - 检查点：`results\m4_surface\m4_rotated_surface_code_circuit_level_d7_s1__d7__circuit_level__p0p008\model_state.pt`

@@ -1,4 +1,4 @@
-# T8 · repetition d=3 OSD-CS 研究的多种子复核
+# repetition d=3 OSD-CS 多种子结果
 
 由 `scripts/t8_repetition_multiseed.py` 自动生成，勿手改。
 3 个独立 seed（M2 运行的种子偏移 0 / 10 / 20），每个 32768 shots，合计 98304 shots。

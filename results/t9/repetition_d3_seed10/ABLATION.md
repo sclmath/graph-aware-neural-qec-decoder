@@ -1,4 +1,4 @@
-# T9 · 图特征组合消融
+# 图特征组合消融
 
 - 配置：`configs\m2_learned_basis_repetition_circuit_level_d3.json`；测试集 32768 shots
 - 做法：把对应特征列**置零**后用同一 seed 重训，架构不变，因此比较的是该组特征携带的**信息量**

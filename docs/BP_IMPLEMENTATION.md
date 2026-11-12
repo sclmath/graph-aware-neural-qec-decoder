@@ -1,6 +1,6 @@
 # BP 实现规范与批量化
 
-日期：2026-10-15
+版本日期：2026-11-12
 适用范围：`src/graph_qec/decoders/bp.py`、`src/graph_qec/decoders/bp_engine.py`，以及所有 BP 系解码器（`bp`、`bp_osd`、`bp_gnn`、`bp_gnn_osd`、`osd_bp`、`osd_gnn`）
 
 ## 1. 算法定义
@@ -58,7 +58,7 @@
 | 7 | 336 | 6602 | 20196 | 91 | 46,854 | 0.109 | 29.14 |
 | 9 | 720 | 14,966 | 46,960 | 91 | 127,877 | 0.000 | 32.00 |
 
-代价随 check 度增长而非线性，主要来源是收敛率下降（未收敛 shot 需要跑满迭代上限）。该表由 `scripts/probe_cpu_budget.py` 生成，是交付范围内噪声率与码距扫描的预算依据（见 `docs/ROADMAP_TODO.md` 第 1 节）。
+代价随 check 度增长而非线性，主要来源是收敛率下降（未收敛 shot 需要跑满迭代上限）。该表由 `scripts/probe_cpu_budget.py` 生成，是噪声率与码距扫描的预算依据；平台与规模建议见 [`ROADMAP.md`](ROADMAP.md)。
 
 ## 5. 结果落点
 

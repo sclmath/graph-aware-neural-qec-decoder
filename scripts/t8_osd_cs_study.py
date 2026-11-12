@@ -46,7 +46,7 @@ def _consistent(corrections, detections, system) -> np.ndarray:
 
 def _markdown(summary: dict[str, Any]) -> str:
     lines = [
-        "# T8 · OSD 候选集学习（OSD-CS / combination sweep）",
+        "# OSD 候选集学习（OSD-CS）",
         "",
         f"- 配置：`{summary['config']}`",
         f"- 检查点：`{summary['checkpoint']}`",

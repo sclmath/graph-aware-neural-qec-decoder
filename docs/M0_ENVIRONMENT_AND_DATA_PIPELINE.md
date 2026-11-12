@@ -1,5 +1,7 @@
 # M0：环境与数据链路
 
+- **版本日期**：2026-11-12
+
 ## 1. 阶段目标
 
 M0 建立后续所有基线和模型共用的数据契约：
@@ -86,7 +88,7 @@ artifacts/m0/<artifact-name>/
 2. 固定配置重复运行得到相同样本哈希；
 3. 原始 DEM 与分解 DEM 均成功生成；
 4. PyMatching 能读取分解 DEM 并批量解码；
-5. 测试全部通过且 manifest 哈希复核通过。
+5. 测试全部通过且 manifest 哈希校验通过。
 
 ## 7. 复现记录
 
@@ -105,11 +107,11 @@ artifacts/m0/<artifact-name>/
 | code_capacity | 9 | 8 | 4096 | 2 | 0.00048828125 |
 | circuit_level | 21 | 8 | 4096 | 39 | 0.009521484375 |
 
-固定种子复核时，重新生成的 `samples`、`circuit` 和 `detector_error_model` 字段与已保存 manifest 完全一致。关键样本哈希为：
+固定种子校验时，重新生成的 `samples`、`circuit` 和 `detector_error_model` 字段与已保存 manifest 完全一致。关键样本哈希为：
 
 | 噪声模型 | configuration SHA-256 | detection SHA-256 |
 |---|---|---|
 | code_capacity | `efda914374558b905c96c2053ad894c82dd968232efd3d744ca85c1ff31dcc78` | `af161fefcc35746b7385380c41a358aea7679b35d4589dbfee05f64664599e00` |
 | circuit_level | `a0c559fb599cc15d2884e10249900a58d454c656066cc4a42a57d4f6c36a73b1` | `2040e1221eb153e233d4d2c32c40f6a1f782186cbe863a6b70fb1a1503bf3245` |
 
-所有 artifact 均位于 `artifacts/m0/`，且已通过 manifest 哈希复核。M0 可以冻结作为后续 M1 基线的数据接口。
+所有 artifact 均位于 `artifacts/m0/`，且已通过 manifest 哈希校验。M0 可以冻结作为后续 M1 基线的数据接口。

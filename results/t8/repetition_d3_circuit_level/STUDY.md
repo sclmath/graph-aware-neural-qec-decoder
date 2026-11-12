@@ -1,4 +1,4 @@
-# T8 · OSD 候选集学习（OSD-CS / combination sweep）
+# OSD 候选集学习（OSD-CS）
 
 - 配置：`configs\m3_learned_basis_repetition_circuit_level_d3.json`
 - 检查点：`results\m3\m3_learned_basis_repetition_circuit_level_d3__d3__circuit_level__p0p01\model_state.pt`

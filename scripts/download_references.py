@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download the papers listed in docs/references.md, preferring arXiv preprints."""
+"""Download the papers listed in docs/references/references.md, preferring arXiv preprints."""
 
 from __future__ import annotations
 
@@ -430,8 +430,8 @@ def write_manifest(output_dir: Path, records: list[dict[str, Any]]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--references", default="docs/references.md")
-    parser.add_argument("--output", default="docs/references_pdfs")
+    parser.add_argument("--references", default="docs/references/references.md")
+    parser.add_argument("--output", default="docs/references/references_pdfs")
     parser.add_argument("--only", nargs="*", help="Optional reference IDs, e.g. R01 R02")
     parser.add_argument("--retry-failed", action="store_true", help="Retry entries without an existing valid PDF")
     args = parser.parse_args()

@@ -236,7 +236,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         handle.write("\n")
     markdown = [
-        "# T9 · 图特征组合消融",
+        "# 图特征组合消融",
         "",
         f"- 配置：`{args.config}`；测试集 {merged_rows[0]['shots']} shots",
         "- 做法：把对应特征列**置零**后用同一 seed 重训，架构不变，因此比较的是该组特征携带的**信息量**",

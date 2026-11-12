@@ -1,4 +1,4 @@
-# T9 多种子汇总 · surface_d3
+# 多种子汇总 · surface_d3
 
 由 `scripts/t9_multiseed.py` 自动生成，勿手改。
 

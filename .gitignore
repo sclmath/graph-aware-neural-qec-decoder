@@ -26,3 +26,5 @@ artifacts/delivery/
 
 # ===== 端到端 smoke 产出（scripts/run_all.ps1 生成，可随时重建）=====
 results/smoke/
+# ===== 本地讨论记录（不入库）=====
+discussion.md

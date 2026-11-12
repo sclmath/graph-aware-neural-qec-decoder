@@ -1,4 +1,4 @@
-# m4_learned_basis_rotated_surface_code_circuit_level_d3 · 多种子复核
+# m4_learned_basis_rotated_surface_code_circuit_level_d3 · 多种子结果
 
 由 `scripts/m2_headline_multiseed.py` 自动生成，勿手改。
 每个 seed = 32768 test shots（`splits.test_seeds` 合并），共 3 个 seed。

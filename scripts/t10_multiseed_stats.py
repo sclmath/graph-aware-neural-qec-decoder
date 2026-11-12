@@ -98,7 +98,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "groups": [],
     }
     markdown = [
-        "# T10 · 多种子统计（T6 表面码扫描）",
+        "# 多种子统计：表面码扫描",
         "",
         "每个点是单 seed 的一条 (distance, p) 曲线；下表给出跨 seed 的均值 ± 标准误。",
         "",

@@ -131,7 +131,7 @@ def markdown(base_config: Path, out_dir: Path, offsets: Sequence[int]) -> str:
     shots = runs[0][1]["splits"]["test"]["shots"]
     columns = ordered_columns(decoder_rows(runs[0][1]))
     lines = [
-        f"# {base['name']} · 多种子复核",
+        f"# {base['name']} · 多种子结果",
         "",
         "由 `scripts/m2_headline_multiseed.py` 自动生成，勿手改。",
         f"每个 seed = {shots} test shots（`splits.test_seeds` 合并），共 {len(runs)} 个 seed。",

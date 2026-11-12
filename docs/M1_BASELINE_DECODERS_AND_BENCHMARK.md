@@ -1,5 +1,7 @@
 # M1：经典基线解码器与 Benchmark
 
+- **版本日期**：2026-11-12
+
 ## 1. 阶段目标
 
 M1 建立后续 GNN 重加权和混合解码器必须共同使用的经典基线：
@@ -32,7 +34,7 @@ result.diagnostics   # 迭代次数、收敛率、OSD 触发率、图规模等
 
 ### 3.2 Union-Find
 
-`UnionFindDecoder` 直接解析分解 DEM 的 graphlike component，并实现 **Delfosse–Nickerson 的加权 Union-Find**（2026-10-15 重写，见 `docs/T18_UNION_FIND_ANALYSIS.md`）：
+`UnionFindDecoder` 直接解析分解 DEM 的 graphlike component，并实现 **Delfosse–Nickerson 的加权 Union-Find**，算法与结果见 [`UNION_FIND.md`](UNION_FIND.md)：
 
 - 单 detector target 连接到虚拟 boundary；双 detector target 形成内部边；权重为 `log((1-p)/p)`；保留每个 component 的 observable fault mask；
 - **half-edge 生长**：每个缺陷是 parity 为 1 的 cluster，前沿按权重逐半条边推进；两条前沿在同一条边上相遇即融合（因此簇会在中途相遇，而不是等一方先撞到 boundary 后冻结）；
@@ -64,7 +66,7 @@ BP 达到 syndrome 一致时立即停止。若未收敛，仍输出当前最优�
 3. 固定非 pivot 位，求解 pivot 位；
 4. 输出满足 syndrome 约束的 correction。
 
-M1 只实现 OSD-0；更高阶 OSD（OSD-λ / combination sweep）见 `docs/ROADMAP_TODO.md`（T8）。
+M1 只实现 OSD-0；更高阶 OSD（OSD-λ / combination sweep）见 [`OSD_CANDIDATE_SET.md`](OSD_CANDIDATE_SET.md)。
 
 ## 4. 固化的实验配置
 
@@ -164,7 +166,7 @@ BP/BP+OSD 的诊断：
 - BP+OSD 的 OSD 触发：53/4096 = 1.29%；
 - BP+OSD syndrome 一致率：100%。
 
-本设置下 BP 的原始 LER 低于当前 OSD-0，主要因为单独 BP 在未收敛 shot 上仍直接输出 posterior 硬判决，而 BP+OSD 强制 syndrome 一致，且 OSD-0 当前尚未做候选组合搜索。两者标准误约 0.002，差异不构成算法结论。更高阶 OSD、候选剪枝与 GNN 重加权见 `docs/M3_HYBRID_DECODER.md` 与 `docs/ROADMAP_TODO.md`（T8）。
+本设置下 BP 的 LER 低于 OSD-0，主要因为单独 BP 在未收敛 shot 上仍直接输出 posterior 硬判决，而 BP+OSD 强制 syndrome 一致，且 OSD-0 尚未做候选组合搜索。两者标准误约 0.002，差异不构成算法结论。更高阶 OSD、候选剪枝与 GNN 重加权见 [`M3_HYBRID_DECODER.md`](M3_HYBRID_DECODER.md) 与 [`OSD_CANDIDATE_SET.md`](OSD_CANDIDATE_SET.md)。
 
 ## 8. 验收结论
 
