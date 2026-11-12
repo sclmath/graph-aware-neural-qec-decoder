@@ -1,56 +1,79 @@
-# Graph-Aware Neural QEC Decoder · 第一阶段技术报告（T17）
+# Graph-Aware Neural QEC Decoder · 第一阶段技术报告
 
-- **日期**：2026-10-18（本地收口刷新）
-- **状态**：**完成（本地收口）**。第 4.6 节覆盖 5 个噪声率 × {d=5, d=7} × 3 seeds（30/30 点）；第 4.7 节含线路级与码容量的阈值结论。
-- **本地收口**：D1 暂不接远端，CI 首跑挂起；本地验证与快照见 `docs/DELIVERY_LOCAL.md`。
-- **交付环境**：Intel i5-12400（6C/12T）/ 16 GB / CPU-only PyTorch（`torch.cuda.is_available() == False`）
-- **代码**：`src/graph_qec/`；测试：`pytest` **72 项全绿**；所有表格中的数字均可由仓库内脚本复现
+- **版本日期**：2026-11-12
+- **状态**：第一阶段 CPU-only 实验完成
+- **实验环境**：Intel i5-12400（6C/12T）/ 16 GB / CPU-only PyTorch（`torch.cuda.is_available() == False`）
+- **代码**：`src/graph_qec/`
+- **测试**：`pytest` 72 项通过
+- **结果范围**：repetition code、旋转表面码 d=3/5/7、两个小型 HGP 码；code-capacity 与 circuit-level 噪声
 
-> 本文是科学结论与数字的唯一事实源；文档职责与阅读顺序见 `docs/INDEX.md`，项目概览与核心结论见 `README.md` §9–11。凡有冲突以本文为准。
-
----
+> 本文是当前版本科学结论、统计口径和正式数字的唯一事实源。复现命令见 [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md)，限制与后续方向见 [`ROADMAP.md`](ROADMAP.md)。
 
 ## 1. 摘要
 
-本项目把量子纠错解码建模为带噪图上的推断与组合优化问题，交付了一条 **BP → 图神经网络重加权 → OSD 候选集后处理** 的混合解码器链路，并在 CPU-only 环境下完成了 repetition code、旋转表面码（d=3/5/7）与两个小型 HGP 码的完整实验、代码与报告。
+本项目把量子纠错解码建模为带噪图上的推断与组合优化问题，实现了一条 **BP → 图神经网络重加权 → OSD 候选集后处理** 的混合解码链路，并在 CPU-only 环境下完成经典基线、GNN 重加权、OSD-CS、加权 Union-Find、阈值与工程性能评测。
 
-**五条可交付的核心结论：**
+当前版本的五条核心结论：
 
-1. **机制层面判别很容易，但机制边际本身换不来精度。** GNN 把「哪个 error mechanism 发生」的 AUC 从 0.62 提到 0.99 以上（M2），但把同一份预测当先验接进 BP，在 d=3 repetition 上**没有显著收益**（0.00943 → 0.00952，McNemar p=0.44）；它的稳定价值是**把 BP 平均迭代数降下来**（0.707 → 0.557）并在 BP 较弱的大图上显著改善 LER。
-2. **学习先验的收益在 BP 强度"中等"时最大，两侧都会缩小。** 表面码线路级（**5 个噪声率 × 3 seeds 全网格**，T6）：**码距轴**上 p=0.005 为 d=3 **−29.0% ± 2.4%** → d=5 **−37.1%** → d=7 −25.1%（非单调，峰值 d=5）；**噪声率轴**上 d=5 为 −37.4%（p=0.002）→ **−43.4%（p=0.003，峰值）** → −37.1% → −32.8% → −25.4%（p=0.01），d=7 为 −38.2% → −32.6% → −25.1% → −13.4% → −9.9%（**单调下降，峰值已落在采样区间下沿**）。所以真正成立的规律不是"BP 越弱收益越大"，而是：BP 接近最优（d=3）时没有空间，BP 退化到局部推断本身失效（d=7、高 p）时也救不回来；**d=5 在 p=0.003 出现低端拐点、d=7 的拐点已移到 p≤0.002，说明拐点位置随码距移动**（见 4.6）。
-3. **真正的杠杆是「候选基质量」，不是「机制边际」。** 把 OSD-0 换成 **OSD-CS(λ)**（对 λ 个最不可靠的非 pivot 列做组合扫描）后，表面码 d=3 线路级从 0.04007 降到 **0.01913**（`bp_gnn_osd_cs8`，−52%，距 MWPM 仅 +13%），而 OSD-0 在该配置上**让结果变差**。这条结论在 BP 已经失效的 d=7 上更明显：3 个**模型 seed** 上 `bp` → `bp_gnn_osd_cs4` 为 **−44.0% ± 11.4% / −27.2% ± 6.9% / −13.4% ± 5.6%**（p=0.003/0.005/0.008），其中"只换先验"为 −32.6% / −25.1% / −13.4%。但要分清：**CS 相对 `bp_gnn` 的额外增益只在 p=0.003 有方向**（−15.7% ± 13.3%，n.s.），p≥0.005 只剩"消掉开 OSD 的代价"——旧口径的 −34.9%/−11.6%/−1.9% 是单一模型的效应（见 4.6 第 4 条）。**M2/M3/M5 的三条负结果由此统一收口成正面出口。**
-4. **基线可信度问题已修复。** 原 `UnionFindDecoder` 缺少 peeling，约 97% 的含缺陷 shot 产出违反 syndrome 约束的 correction；重写为忠实加权 Union-Find（half-edge 生长 + peeling + 2-core T-join）后，表面码 d=3 码容量 LER 与 MWPM **逐位一致**，全部 10 个扫描点比值 1.00-1.41×。
-5. **图结构决定解码器的可用性。** 线路级表面码 DEM 是稠密超图（d=3/5 check 度最大 48/80、4-圈 1956/26046），HGP 码**不可匹配**（`matchable=False`），MWPM 类解码器对其完全不可用——这才是混合解码器不可替代的场景。
+1. **机制判别能力很强，但机制边际本身不保证 LER 收益。** GNN 将 error mechanism 后验 AUC 从 0.62 提升到 0.99 以上；d=3 repetition 上 `bp_gnn` 与 `bp` 的 LER 在种子噪声内不可区分，但平均 BP 迭代从 0.707 降到 0.557。
+2. **学习先验的收益在 BP 强度中等时最大。** 表面码线路级 5 个噪声率 × 3 seeds 的结果显示，p=0.005 时 d=3/d=5/d=7 的 LER 改善分别为 −29.0% ± 2.4%、−37.1%、−25.1%，峰值在 d=5；d=5 在 p=0.003 达到 −43.4%。
+3. **候选基质量是 OSD 路径的主要杠杆。** OSD-0 在所测表面码点位上均使 LER 变差；OSD-CS(λ) 把 repetition d=3 从 0.00943 降到 0.00754，把表面码 d=3 从 0.04007 降到 0.02505。`bp_gnn_osd_cs8` 达到 0.01913，距离 MWPM 约 +13%。
+4. **加权 Union-Find 已达到可用基线。** 表面码 10 个扫描点上，加权 Union-Find 相对 MWPM 的 LER 比值为 1.00–1.41×；d=3 code-capacity 与 MWPM 逐位一致，所有 correction 均满足 syndrome 约束。
+5. **图结构决定解码器可用性，也决定学习模块的作用位置。** 当前结果可按图类型分为四类：
+   - **可匹配的 graphlike DEM**：repetition code，以及经过 Stim `^` 分解后的旋转表面码，可以构造匹配图，因此 MWPM 和加权 Union-Find 可用；BP / BP+GNN 也可以直接运行。
+   - **稠密但仍可匹配的线路级表面码**：原始 DEM 是含高阶 error mechanism 的稠密超图，BP 收敛率随码距和噪声率下降；匹配解码器需要保留 Stim 的 `^` 分解，在分解后的 graphlike 边上建图。GNN 重加权在这一类图上收益最明显。
+   - **不可匹配的超图 / Tanner 图**：当前实现中的 HGP 码 `matchable=False`，MWPM / Union-Find 不可用；在本项目中只能使用 BP、BP+GNN 和 OSD 系解码器。GNN 直接作用于 detector/check 与 error mechanism 构成的二分图，因此不要求 DEM 可匹配。
+   - **BP 已接近饱和的图**：例如 repetition d=3，GNN 仍能降低 BP 迭代次数，但 LER 改善不显著。学习模块的主要价值应定位在 BP 收敛率低、图结构更稠密或不可匹配的码类上。
 
----
+## 2. 范围与验收标准
 
-## 2. 交付范围与出口标准
-
-| 出口标准（`docs/ROADMAP_TODO.md` 第 0.1 节） | 状态 |
+| 验收项 | 当前状态 |
 |---|---|
-| `pytest` 全绿，CI 在干净环境可复现 | ✅ 本地 72 项全绿；`.github/workflows/ci.yml`（3.10/3.12 矩阵）就位。**D1 暂不接远端，CI 首跑挂起** |
-| `scripts/run_all.ps1` 小规模模式端到端跑通 | ✅ 本地实测约 26 s（含单测；`-SkipTests` 约 21 s） |
-| d=3/5/7 的 LER-p 曲线与阈值估计，显式标注 shots 与 seed 数 | 🔶 d=3/5/7 曲线与 30/30 网格完成；d=3/5 阈值已定位，d=7 阈值在采样区间外（见 4.7） |
-| 学习重加权在至少一个噪声区间改善精度或延迟，且给出配对检验 | ✅ 见 4.3 / 4.6（McNemar + 多种子标准误） |
-| 所有图表由脚本自动生成 | ✅ |
-| `docs/FINAL_REPORT.md` 写清适用范围、计算成本与未解决问题 | ✅ 本文第 5-7 节 |
+| 单元测试 | 72 项通过；CI 覆盖 Python 3.10/3.12 |
+| 端到端 smoke | `scripts/run_all.ps1` 通过，含单测约 26 s |
+| 表面码 LER-p 与阈值 | d=3/5/7 曲线完成；d=3/5 阈值已定位，d=7 阈值在采样区间之外 |
+| 学习重加权 | 表面码上存在明确 LER 与迭代收益，并提供配对统计 |
+| 图表可重建 | 由仓库脚本自动生成 |
+| 报告完整性 | 本文覆盖方法、结果、适用范围、成本和限制 |
 
 ## 3. 方法与实现
 
 | 模块 | 内容 | 关键文件 |
 |---|---|---|
-| M0 | Stim 线路与 DEM、固定种子采样、可复现数据链路 | `data_pipeline.py`、`circuits.py` |
-| M1 | 统一 LER / 延迟 / 吞吐 / 内存夹具；MWPM、Union-Find、BP、BP+OSD 四个基线 | `benchmark.py`、`decoders/` |
-| M2 | detector graph 特征化 + 二分图 GNN，输出逐机制后验，按固定 LLR 转换接入 BP | `graph_features.py`、`models/bipartite_gnn.py`、`m2_pipeline.py` |
-| M3 | 同分布 / 噪声率外推 / 跨码距迁移；失败分析 | `m3_pipeline.py`、`scripts/m3_failure_analysis.py` |
-| M4 | 旋转表面码；HGP 码构造（Tillich-Zémor、辛配对逻辑算符、code-capacity DEM）；图结构对比 | `codes/hgp.py`、`m4_pipeline.py` |
-| M5 | 向量化 BP（约 100×）；GNN int8 量化；学习后验接入 MWPM | `decoders/bp_engine.py`、`scripts/m5_*.py` |
-| **T8** | **OSD-CS(λ) 候选组合扫描**（Gray 码枚举 + 增量软权重） | `decoders/bp.py`、`scripts/t8_osd_cs_study.py` |
-| **T18** | **忠实加权 Union-Find**（half-edge 生长 + erasure peeling + 2-core T-join） | `decoders/union_find.py` |
+| 数据链路 | Stim 线路、DEM、固定种子采样、训练/验证/测试切分 | `data_pipeline.py`、`circuits.py` |
+| 经典基线 | MWPM、加权 Union-Find、BP、BP+OSD | `decoders/`、`benchmark.py` |
+| 图表示 | detector/check 与 error mechanism 的二分图张量 | `graph_features.py` |
+| GNN | syndrome 条件二分图消息传递，输出逐机制后验 logit | `models/bipartite_gnn.py` |
+| 混合解码 | 学习先验接入 BP；学习排序接入 OSD | `m2_pipeline.py`、`m3_pipeline.py`、`decoders/bp.py` |
+| OSD-CS | 对非 pivot 列做 Gray 码组合扫描 | `decoders/bp.py`、`scripts/t8_osd_cs_study.py` |
+| HGP | Tillich-Zémor 超图积、逻辑算符基、code-capacity DEM | `codes/hgp.py`、`m4_pipeline.py` |
+| 加权 Union-Find | half-edge 生长、erasure peeling、2-core T-join | `decoders/union_find.py` |
+
+### 3.1 HGP 码设置
+
+HGP 码由两个经典线性码的校验矩阵 $H_1\in\mathbb{F}_2^{m_1\times n_1}$、$H_2\in\mathbb{F}_2^{m_2\times n_2}$ 通过 Tillich–Zémor 超图积构造：
+
+$$
+H_X=[H_1\otimes I_{n_2}\mid I_{m_1}\otimes H_2^T],\qquad
+H_Z=[I_{n_1}\otimes H_2\mid H_1^T\otimes I_{m_2}],
+$$
+
+作用在 $n_1n_2+m_1m_2$ 个物理量子比特上，并满足 $H_XH_Z^T=0\pmod 2$。逻辑算符由 $\ker(H_Z)/\mathrm{rowspan}(H_X)$ 与 $\ker(H_X)/\mathrm{rowspan}(H_Z)$ 得到并规范化为可复现的逻辑基，用于构造 code-capacity DEM。
+
+项目目前包含两个小型实例：
+
+| 家族名 | 经典种子码 | 量子参数 | 物理量子比特 | X/Z checks | detectors | 逻辑比特 $k$ |
+|---|---|---|---:|---:|---:|---:|
+| `hgp_rep3x3` | repetition $[3,1,3]\times[3,1,3]$ | $[[13,1,3]]$ | 13 | 6 / 6 | 12 | 1 |
+| `hgp_hamming7x7` | Hamming $[7,4,3]\times[7,4,3]$ | $[[58,16,3]]$ | 58 | 21 / 21 | 42 | 16 |
+
+目前仅实现 code-capacity 误差模型：每个物理量子比特独立施加 X、Y、Z 错误，各以 $p/3$ 概率发生；DEM 直接由 $H_X$、$H_Z$ 和逻辑算符构造，不经过 Stim 线路或 matching 分解，因此标记为 `matchable=False`，MWPM / Union-Find 不适用，HGP 上仅评测 BP、BP+GNN 与 BP+OSD。完整构造、图结构统计和实验结果见 [`M4_HGP_AND_SURFACE.md`](M4_HGP_AND_SURFACE.md) §3–§7。
 
 ## 4. 结果
 
-### 4.1 经典基线（M1，repetition d=3，4096 shots，p=0.01）
+### 4.1 经典基线
+
+repetition d=3，p=0.01，4096 shots：
 
 | decoder | 码容量 LER | 线路级 LER | 线路级 µs/shot |
 |---|---:|---:|---:|
@@ -59,17 +82,17 @@
 | bp | 0.00049 | 0.01294 | 3.8 |
 | bp_osd | 0.00049 | 0.01489 | 6.6 |
 
-码容量下四个解码器完全一致；线路级下 Union-Find 追平并略优于 MWPM，BP 系落后。Union-Find 的数字来自 T18 重写后的重跑（`scripts/t18_rerun.ps1`）。
+码容量下四个解码器一致；线路级下加权 Union-Find 略优于 MWPM，BP 系落后。
 
-### 4.2 图结构与码族（M4）
+### 4.2 图结构与码族
 
-- 线路级表面码 DEM 是稠密超图：d=3/d=5 的 check 度最大 48/80、平均 23.5/41.7，4-圈 1956/26046；
-- 两个 HGP 码 [[13,1,3]] 与 [[58,16,3]] 由超图积构造，**不可匹配**（`matchable=False`），MWPM / Union-Find 完全不可用；
-- 规律：**DEM 越大、BP 收敛率越低，学习先验的收益越大**（d=3 0.888 → d=5 0.535 → d=7 0.109）。
+- 线路级表面码 DEM 是稠密超图：d=3/d=5 的 check 度最大 48/80，平均 23.5/41.7，4-圈数量 1956/26046。
+- HGP [[13,1,3]] 与 [[58,16,3]] 由超图积构造，`matchable=False`，MWPM / Union-Find 不可用。
+- BP 收敛率随图规模下降：repetition 与表面码上的代表性读数从 0.888 降到 0.535、0.109。
 
-### 4.3 GNN 重加权（M2 / M3 / M4）
+### 4.3 GNN 重加权
 
-同分布 headline（repetition d=3，线路级 p=0.01，32768 shots）：
+同分布 headline：repetition d=3，线路级 p=0.01，32768 shots。
 
 | decoder | logical errors | LER | 收敛率 | 平均迭代 | µs/shot |
 |---|---:|---:|---:|---:|---:|
@@ -79,65 +102,79 @@
 | bp_osd | 331 | 0.01010 | 0.9899 | 0.707 | 4.0 |
 | bp_gnn_osd_learned_order | 317 | 0.00967 | 0.9912 | 0.557 | 3.0 |
 
-结论：d=3 repetition 上**学习先验无显著收益**（+21% 迭代节省），但把 OSD 排序换成学习 logits 有正收益（0.01016 → 0.00967，McNemar z=+2.26，p=0.024）。**跨码距迁移（d=3 → d=5）在 3 个模型 seed 上稳定复现**：`bp` → `bp_gnn` 为 0.05078 → **0.01709（−66.3%）** / 0.05466 → 0.01752（−68.0%）/ 0.05365 → 0.01556（−71.0%）（`results/m3/`）。
-
-**多种子复核（2026-10-16 补测，`results/m2/HEADLINE_MULTISEED.md`，由 `scripts/m2_headline_multiseed.py` 生成）**：这张表的效应量是全报告最小的（`bp` 0.00943 vs `bp_gnn` 0.00952，差 0.0001 量级），所以又补了两个 seed（`--write-configs` 只移动 `training.seed` 与三个 split seed 列表，`scripts/m2_headline_seeds.ps1` 重跑 M2），每个 seed 32768 test shots、合计 98304 shots：
+3 个模型 seed、合计 98304 shots 的结果：
 
 | 种子偏移 | mwpm | bp | `osd_gnn` | bp_osd | bp_gnn |
 |---:|---:|---:|---:|---:|---:|
-| 0（旗舰） | 0.00662 | 0.00943 | 0.00974 | 0.01010 | 0.00952 |
+| 0 | 0.00662 | 0.00943 | 0.00974 | 0.01010 | 0.00952 |
 | 10 | 0.00705 | 0.01031 | 0.01013 | 0.01068 | 0.00934 |
 | 20 | 0.00754 | 0.01096 | 0.01071 | 0.01114 | 0.01099 |
 
-- **`bp_gnn` 相对 `bp` 的配对 ΔLER：+0.00009 / −0.00098 / +0.00003，均值 −0.00028 ± 0.00035（符号翻转）**——"学习先验在同分布 d=3 repetition 上没有收益"这句话现在有误差棒支撑，单 seed 那次的 +0.00009 落在噪声里（口径纪律见 4.8.1 与第 7 节）。
-- `mwpm` 相对 `bp_gnn` 稳定领先 **+0.00288 ± 0.00034**（三个 seed 同号），是本表唯一跨 seed 稳健的差异。
-- 口径：`bp_gnn` 列取自 T9 消融的 `all` 臂（同一 splits、同一训练种子；种子偏移 0 与旗舰值逐位一致），其余列取自同一批 `graph_qec.m2` 运行的 `results.json`；`osd_gnn` 是本运行里学习排序 OSD 的解码器名，与表中 `bp_gnn_osd_learned_order` 的协议不同，不直接等价。
-- **HGP 与跨尺寸迁移的多 seed 复核（2026-10-18）**：HGP 源域 [[13,1,3]] 上 3 个 seed 的 `bp` → `bp_gnn` 为 **−3.1% / −5.9% / −9.7%**（同号，效应小）；但 **跨尺寸迁移 [[13,1,3]] → [[58,16,3]] 不可复现**：−11.4%（s0）/ +4.9%（s10）/ +12.5%（s20），均值 **+2.0% ± 7.1%**（32768 shots/seed）。**此前引用的 −11% 是单一模型的结果，不能作为"跨尺寸迁移有效"的证据**；对照之下，M3 的跨码距迁移（d=3→d=5）三个 seed 都是 −66% ~ −71%，才是稳健的迁移结论。
+- `bp_gnn` 相对 `bp` 的配对 ΔLER 均值为 **−0.00028 ± 0.00035**，符号在 seed 间翻转；当前数据不支持 d=3 repetition 上的 LER 收益。
+- `mwpm` 相对 `bp_gnn` 稳定领先 **+0.00288 ± 0.00034**。
+- 学习 logits 用于 OSD 排序时，`bp_gnn_osd_learned_order` 相对 `bp_gnn_osd` 有正收益（33 修好 / 17 弄坏，McNemar z=+2.26，p=0.024）。
 
+跨码距迁移：d=3 → d=5，3 个模型 seed 的 `bp` → `bp_gnn` 分别为 0.05078 → 0.01709（−66.3%）、0.05466 → 0.01752（−68.0%）、0.05365 → 0.01556（−71.0%）。
 
-### 4.4 OSD 候选集学习（T8）
+HGP 源域 [[13,1,3]] 上 3 个 seed 的 `bp` → `bp_gnn` 为 −3.1% / −5.9% / −9.7%。跨尺寸迁移 [[13,1,3]] → [[58,16,3]] 的均值为 **+2.0% ± 7.1%**，当前数据不支持稳健的跨尺寸收益。
 
-| 配置（32768 shots） | bp | OSD-0 | OSD-CS | bp+GNN | bp+GNN+OSD-CS | mwpm |
+### 4.4 OSD 候选集学习
+
+两个代表配置，32768 shots：
+
+| 配置 | bp | OSD-0 | OSD-CS | bp+GNN | bp+GNN+OSD-CS | mwpm |
 |---|---:|---:|---:|---:|---:|---:|
-| repetition d=3 线路级 p=0.01 | 0.00943 | 0.01010 | **0.00754** (λ=4) | 0.00952 | **0.00760** | 0.00662 |
-| 表面码 d=3 线路级 p=0.005 | 0.04007 | 0.04315 | **0.02505** (λ=8) | 0.03455 | **0.01913** | 0.01694 |
+| repetition d=3 线路级 p=0.01 | 0.00943 | 0.01010 | **0.00754**（λ=4） | 0.00952 | **0.00760** | 0.00662 |
+| 表面码 d=3 线路级 p=0.005 | 0.04007 | 0.04315 | **0.02505**（λ=8） | 0.03455 | **0.01913** | 0.01694 |
 
-- OSD-0 在两个配置上都**有害**（McNemar z=−1.73 / −3.19）；OSD-CS 把它变成**显著有益**（`bp_osd_cs0 → bp_osd_cs8`：835 救回 / 242 弄坏，z=18.07）
-- 收益集中在未收敛 shot：表面码 1521/32768 个未收敛 shot 上，`bp_gnn` 764 错 → OSD-0 **955 错（弄坏）** → OSD-CS(8) **259 错**（MWPM 参考 209）
-- `bp_gnn_osd_cs8` 距 MWPM 仅 **+13%**（`bp` 差 +137%）
-- 机制洞见（**已按 3 seeds 修正**，见下）：repetition 上 DEM 先验与学习先验在 λ=4 上**在种子噪声内不可区分**，所以"候选集选对之后逐机制边际不再提供增量"作为**方向性**结论仍成立，但**不能再写成"两者等价/打平"**；表面码上学习先验仍有 −24%（BP 越弱越有用）
+- OSD-0 在两个配置上均使 LER 变差。
+- OSD-CS 显著改善未收敛子集：表面码 1521/32768 个未收敛 shot 中，`bp_gnn` 有 764 个错误，OSD-0 为 955 个，OSD-CS(8) 降到 259 个；MWPM 为 209 个。
+- `bp_gnn_osd_cs8` 与 MWPM 的差距为 **+13%**，`bp` 与 MWPM 的差距为 +137%。
 
-**repetition 配置的多种子复核（2026-10-16 补测，`results/t8/REPETITION_D3_MULTISEED.md`）**：这张表里唯一"小差异"结论是 λ=4 上 DEM 先验与学习先验的打平，于是把整个 OSD-CS 研究在两个额外 seed 上重跑（用该 seed 自己训练的模型与 splits，**模型与数据方差都换**，3 × 32768 = 98304 shots）：
+repetition d=3 的 3-seed 汇总（98304 shots）：
 
-| 配对 | 逐 seed ΔLER | 跨 seed 均值 ± SE | 相对 | 合并 McNemar |
-|---|---|---:|---:|---|
-| `bp_osd_cs0` → `bp_osd_cs4`（换候选集） | −0.00256 / −0.00296 / −0.00284 | **−0.00279 ± 0.00012** | −26.2% | z=−12.23 (p=2e-34) |
-| `bp` → `bp_osd_cs4` | −0.00189 / −0.00259 / −0.00266 | −0.00238 ± 0.00024 | −23.3% | z=−10.40 (p=2e-25) |
-| `bp_gnn` → `bp_gnn_osd_cs4` | −0.00192 / −0.00021 / −0.00250 | −0.00155 ± 0.00069 | −15.5% | z=−7.17 (p=8e-13) |
-| `bp` → `bp_osd_cs0`（OSD-0 有害） | +0.00067 / +0.00037 / +0.00018 | +0.00041 ± 0.00014 | +4.0% | z=+1.85 (p=0.065) |
-| `bp_osd_cs4` → `bp_gnn_osd_cs4`（先验之争） | +0.00006 / +0.00140 / +0.00018 | **+0.00055 ± 0.00043** | +7.0% | z=+3.58 (p=3e-4) |
+| 配对 | 跨 seed 均值 ± SE | 相对变化 | 合并 McNemar |
+|---|---:|---:|---|
+| `bp_osd_cs0` → `bp_osd_cs4` | **−0.00279 ± 0.00012** | −26.2% | z=−12.23 |
+| `bp` → `bp_osd_cs4` | −0.00238 ± 0.00024 | −23.3% | z=−10.40 |
+| `bp_gnn` → `bp_gnn_osd_cs4` | −0.00155 ± 0.00069 | −15.5% | z=−7.17 |
+| `bp` → `bp_osd_cs0` | +0.00041 ± 0.00014 | +4.0% | z=+1.85（p=0.065） |
+| `bp_osd_cs4` → `bp_gnn_osd_cs4` | +0.00055 ± 0.00043 | +7.0% | z=+3.58 |
 
-- **主结论更硬了**：把目标从"逐机制边际"换成"候选基质量"带来 −26.2%（跨 seed SE 仅 0.00012，三个 seed 同向），远大于任何种子效应。
-- **"打平"这句要撤回**：单 seed 的 247 vs 249（p=0.53）在 3 seeds 下变成 **+0.00055 ± 0.00043**（学习先验略差），且三个 seed 的 Δ 从 +0.00006 到 +0.00140，散布与效应同量级。正确写法是"**两者在种子噪声内不可区分**，λ=4 上选哪个先验不影响结论量级"。
-- 表面码配置上学习先验仍好 −24%，与 repetition 的方向相反 → **λ=4 上的先验之争是配置/种子依赖的，不宜作为普遍结论**。
+d=7 线路级、3 个模型 seed × 每个 1024 shots：
 
+| p | OSD-0 vs `bp_gnn` | OSD-CS(4) vs OSD-0 | OSD-CS(4) vs `bp_gnn` | OSD-CS(4) vs `bp` |
+|---:|---:|---:|---:|---:|
+| 0.003 | **+43.0% ± 14.0%** | **−41.7% ± 3.8%** | −15.7% ± 13.3% | **−44.0% ± 11.4%** |
+| 0.005 | **+34.7% ± 12.2%** | **−26.2% ± 1.1%** | −0.4% ± 9.8% | **−27.2% ± 6.9%** |
+| 0.008 | **+15.8% ± 2.4%** | **−14.9% ± 1.8%** | −1.5% ± 1.8% | **−13.4% ± 5.6%** |
 
-### 4.5 Union-Find 重写（T18）
+当前结论：OSD-CS 的稳健价值是消除 OSD-0 的代价，并在低噪声端点保持相对 `bp` 的净收益；相对 `bp_gnn` 的额外增益只在 p=0.003 具有方向性证据，且未达到显著。
 
-| 配置 | shots | MWPM | 修复前 | 修复后 | 修复后比值 |
-|---|---:|---:|---:|---:|---:|
-| 表面码 d=3 码容量 p=0.01 | 16384 | 0.00214 | 0.06311 | **0.00214** | 1.00 |
-| 表面码 d=3 线路级 p=0.005 | 8192 | 0.01599 | 0.11121 | 0.01685 | 1.05 |
-| 表面码 d=5 码容量 p=0.05 | 16384 | 0.04016 | 0.47565 | 0.04517 | 1.12 |
-| 表面码 d=5 线路级 p=0.005 | 4096 | 0.01416 | 0.28906 | 0.02002 | 1.41 |
+### 4.5 加权 Union-Find
 
-原实现的问题是**协议级错误**（97% 的缺陷 shot 违反 `H·c = s`），不是精度不足。重写覆盖了 half-edge 生长、冻结/解冻、以及 peeling 的三处语义缺陷，详见 `docs/T18_UNION_FIND_ANALYSIS.md`。
+当前实现采用 Delfosse–Nickerson 风格的加权 Union-Find：half-edge 生长、冻结/解冻、erasure peeling 和 2-core T-join。表面码扫描结果：
 
-### 4.6 表面码 d=5 / d=7 多种子扫描（T6 / T10）
+| 配置 | shots | MWPM | Union-Find | 比值 |
+|---|---:|---:|---:|---:|
+| d=3 码容量 p=0.01 | 16384 | 0.00214 | **0.00214** | 1.00 |
+| d=3 码容量 p=0.02 | 16384 | 0.00916 | 0.00916 | 1.00 |
+| d=3 码容量 p=0.05 | 16384 | 0.04877 | 0.04877 | 1.00 |
+| d=3 线路级 p=0.003 | 8192 | 0.00610 | 0.00610 | 1.00 |
+| d=3 线路级 p=0.005 | 8192 | 0.01599 | 0.01685 | 1.05 |
+| d=3 线路级 p=0.008 | 8192 | 0.04089 | 0.04126 | 1.01 |
+| d=5 码容量 p=0.01 | 16384 | 0.00037 | 0.00049 | 1.33 |
+| d=5 码容量 p=0.02 | 16384 | 0.00262 | 0.00354 | 1.35 |
+| d=5 码容量 p=0.05 | 16384 | 0.04016 | 0.04517 | 1.12 |
+| d=5 线路级 p=0.005 | 4096 | 0.01416 | 0.02002 | 1.41 |
 
-规模：**5 个噪声率 × 3 seeds × {d=5, d=7} = 30 个点全部完成**，线路级；d=5 每点 8192 test shots、d=7 每点 4096 test shots（训练 8192/4096 shots）。驱动 `scripts/t6_surface_grid.py`（可断点续跑、按价值排序）。
+所有测试 shot 的 correction 均满足 `H·c = s`，`unresolved_shots == 0`。
 
-**d=5 线路级（每点 3 seeds × 8192 test shots）：**
+### 4.6 表面码 d=5 / d=7 多种子扫描
+
+规模：5 个噪声率 × 3 seeds × {d=5, d=7}；d=5 每点 8192 test shots，d=7 每点 4096 test shots。
+
+**d=5 线路级：**
 
 | p | mwpm | bp | bp_gnn | Δ(bp_gnn vs bp) | bp_osd | bp_gnn_osd |
 |---:|---:|---:|---:|---:|---:|---:|
@@ -147,7 +184,7 @@
 | 0.008 | 0.04915 ± 0.00084 | 0.19324 ± 0.00264 | **0.12984 ± 0.00231** | **−32.8%** | 0.24097 ± 0.00288 | 0.16549 ± 0.00122 |
 | 0.01 | 0.08183 ± 0.00074 | 0.24487 ± 0.00175 | **0.18266 ± 0.00267** | **−25.4%** | 0.30103 ± 0.00229 | 0.21635 ± 0.00228 |
 
-**d=7 线路级（每点 3 seeds × 4096 test shots）：**
+**d=7 线路级：**
 
 | p | mwpm | bp | bp_gnn | Δ(bp_gnn vs bp) | bp_osd | bp_gnn_osd |
 |---:|---:|---:|---:|---:|---:|---:|
@@ -157,215 +194,127 @@
 | 0.008 | 0.05257 ± 0.00151 | 0.35059 ± 0.00553 | **0.30363 ± 0.00419** | **−13.4%** | 0.40210 ± 0.00240 | 0.36450 ± 0.01443 |
 | 0.01 | 0.10539 ± 0.00035 | 0.39567 ± 0.00092 | **0.35636 ± 0.00438** | **−9.9%** | 0.43693 ± 0.00618 | 0.42049 ± 0.01515 |
 
-（合并 M4 的 d=3 点作对照：p=0.005 时 `bp` → `bp_gnn`，**3 seeds 复核为 −29.0% ± 2.4%**——单 seed 曾给出 −18.2%，是三个 seed 里最小的那个；见 `results/m4_surface/D3_MULTISEED.md`。）
+当前读数：
 
-**六条读数：**
+1. d=5 的噪声率峰值在 p=0.003（−43.4%）；d=7 在采样区间内单调下降，峰值位于区间下沿。
+2. p=0.005 的码距轴为 d=3 −29.0% ± 2.4% → d=5 −37.1% → d=7 −25.1%，峰值在 d=5。
+3. OSD-0 在 d=5/d=7 的 10 个点位上均比不开 OSD 更差；`bp_osd` 相对 `bp` 增加 +10.4% ~ +60.5%，`bp_gnn_osd` 相对 `bp_gnn` 增加 +18.0% ~ +48.7%。
+4. 与 MWPM 的差距随码距拉大：d=5 为 2.2–12.2×，d=7 为 3.4–157×。
+5. 全部 30 个点位于当前 BP 系线路级阈值之上，因此大 code distance 下的绝对 LER 主要受阈值效应限制。
 
-1. **噪声率轴上出现低端拐点**：d=5 的增益在 p=0.003 达到峰值 **−43.4%**，降到 p=0.002 时回落到 **−37.4%**；d=7 则在采样区间内**单调下降**（−38.2% → −32.6% → −25.1% → −13.4% → −9.9%），峰值落在区间下沿。两者合起来说明"收益在 BP 强度中等时最大"这条规律在噪声率轴上同样成立，只是**拐点位置随码距移动**（d=5 在 p≈0.003，d=7 已移到 p≤0.002）。
-2. **同一噪声率下，增益与码距的关系不是单调的**：p=0.005 时 d=3 **−29.0% ± 2.4%** → d=5 **−37.1%** → d=7 **−25.1%**，峰值在 d=5；p=0.002 是唯一 d=7（−38.2%）略高于 d=5（−37.4%）的点，其余噪声率上 d=5 都更高。所以"码距越大增益越大"在 d>5 之后明确失效。d=3 上 BP 本来已接近饱和（收敛率 0.90）却仍拿到 −29%，说明"BP 还够用就没有空间"的直觉不成立；d=7 上 BP 已越过"仍可用"的边界（收敛率 0.118-0.121、平均迭代 28.9/32），学习先验能把收敛率提到 0.166-0.298、迭代降到 23.5-27.6，但换不来同比例的精度——**局部推断本身失效时，单纯给边际重加权救不回来**；此时需要的是第 4 条那条路（换候选集）。
-3. **OSD-0 在全部 10 个 d=5/d=7 点上都比不开更差**：`bp_osd` 比 `bp` 差 **+10.4% ~ +60.5%**，`bp_gnn_osd` 比 `bp_gnn` 差 **+18.0% ~ +48.7%**。这与 T8 的发现一致，也把"OSD 该不该开"这个问题彻底改写为"**候选基选得对不对**"。
-4. **d=7 上"换候选集"的收益，按模型种子复核后要改写**（3 个**模型 seed** × 各 1024 shots，`results/t8/D7_MODEL_SEEDS.md`；旧口径"3 份测试集 × 同一 checkpoint"见 `results/t8/D7_MULTISEED.md`）：
+### 4.7 阈值估计
 
-   | d=7 p | OSD-0 vs `bp_gnn`（LER 增加） | `bp_gnn_osd_cs4` vs OSD-0（LER 下降） | `bp_gnn_osd_cs4` vs `bp_gnn` | `bp_gnn_osd_cs4` vs `bp` |
-   |---:|---:|---:|---:|---:|
-   | 0.003 | **+43.0% ± 14.0%** | **−41.7% ± 3.8%** | −15.7% ± 13.3% | **−44.0% ± 11.4%** |
-   | 0.005 | **+34.7% ± 12.2%** | **−26.2% ± 1.1%** | −0.4% ± 9.8% | **−27.2% ± 6.9%** |
-   | 0.008 | **+15.8% ± 2.4%** | **−14.9% ± 1.8%** | −1.5% ± 1.8% | **−13.4% ± 5.6%** |
-   | 0.01 † | +11.8% | −4.8% | +6.5% | −2.8% |
-
-   † p=0.01 只有 s1 一个模型 seed（3 份测试集，`D7_MULTISEED.md` 的 pooled 口径为 cs4 比 `bp_gnn` 差 +8.4%）。
-
-   三点读数：① **OSD-0 的伤害**在三个噪声率 × 三个模型 seed 上全部成立（+15.8% ~ +43.0%，最小的一点也有 +15.8% ± 2.4%）；② **OSD-CS 对 OSD-0 的修补**在全部 9 个 (p, seed) 组合上成立（−41.7% / −26.2% / −14.9%），且幅度随噪声率下降；③ 但 **CS 相对 `bp_gnn` 的净增益只在 p=0.003 有方向性**（−15.7% ± 13.3%，n.s.，逐 seed −38.1% / +7.9% / −17.1%），p≥0.005 归零。**旧口径下"cs4 vs bp_gnn 为 −34.9%/−11.6%/−1.9%"是单一 s1 模型的效应**，换模型后不成立。正确的定位是：**CS 的稳健价值是"消掉开 OSD 的代价"（相对 `bp` 仍 −44.0%/−27.2%/−13.4%），不是在 `bp_gnn` 之上再赚；只有在最低噪声率上才可能有额外增益。**
-
-5. **与 MWPM 的差距随码距急剧拉大**：d=5 是 2.2-12.2×，d=7 是 3.4-157×（p=0.002 处最悬殊）。结合 4.7 的阈值结论（线路级阈值低于 0.003），这些点**全部位于阈值之上**，码距越大反而越差是阈值效应的必然结果。
-6. **成本**：d=5 单点 20-48 min，d=7 单点 42-92 min（其中评测占 80%，被 OSD-0 主导）。30 个点的累计壁钟约 24 h，分三批完成（16 + 8 + 6 点；最后一批 6 点 208.5 min）。
-
-### 4.7 阈值估计（T7）
-
-用 T6 的 d=5/d=7 曲线合并 M4 的 d=3 曲线后重新估计（`results/m4/THRESHOLD.md`）：
-
-**线路级**
+线路级：
 
 | decoder | 阈值结论 | 依据 |
 |---|---|---|
-| mwpm | **0.005 < p_th < 0.008**（线性插值 ≈ 0.00594） | p=0.005 时 d=5 更优（0.01314 vs 0.01694），p=0.008 时 d=3 更优（0.04089 vs 0.04915） |
-| bp / bp_osd / bp_gnn / bp_gnn_osd | **p_th < 0.003** | 在 **0.003-0.01** 内**始终** d=3 更优，未观测到排序翻转 → 阈值在采样区间之下 |
-| union_find | 未定位（只有 p=0.005 一个点同时覆盖 d=3/d=5） | 该点 d=3 更优（0.01685 vs 0.02002） |
+| mwpm | **0.005 < p_th < 0.008**（线性插值 ≈ 0.00594） | p=0.005 时 d=5 更优，p=0.008 时 d=3 更优 |
+| bp 系 | **p_th < 0.003** | 0.003–0.01 内始终 d=3 更优，未观察到排序翻转 |
+| union_find | 未定位 | 当前只有 p=0.005 同时覆盖 d=3/d=5 |
 
-补齐 p=0.002（只有 d=5）与 p=0.01 后上表结论不变：BP 系在 0.003-0.01 的全部 d=3/d=5 对照中仍是 d=3 更优；p=0.002 没有 d=3 对照点，只用于 4.6 的增益曲线。
-
-**码容量**（M4 扫描）
+码容量：
 
 | decoder | 阈值结论 |
 |---|---|
 | mwpm | **0.05 < p_th < 0.08**（线性插值 ≈ 0.0616） |
-| bp / bp_osd | 在 0.01-0.12 内**始终** d=3 更优 → 未定位，需要 d=7 与更高噪声率 |
+| bp / bp_osd | 0.01–0.12 内始终 d=3 更优，阈值未定位 |
 
-**含义（重要）**：BP 系的线路级阈值比 MWPM 低一倍以上，且**30 个 T6 点全部位于阈值之上**。因此 4.6 里"d=7 比 d=5 差"主要不是解码器变弱，而是**阈值效应**；同时也解释了为什么 d=7 上学习先验的收益会回落。把解码器对比做在阈值之下（更低的 p 或码容量噪声模型）才是有利区间——这是本次交付最重要的一条方法学提醒。
+结论：BP 系线路级阈值低于 MWPM；当前 30 个表面码线路级点均位于 BP 系阈值之上。
 
-### 4.8 消融（T9）
+### 4.8 消融
 
-README 7.2 列出 7 类消融，当前状态：
-
-| 消融项 | 状态 | 结论 |
+| 消融项 | 状态 | 当前结论 |
 |---|---|---|
-| top-k 候选规模（OSD-CS 的 λ） | ✅ | 表面码上单调（0.04315 → 0.02505，λ=0→8）；repetition 上非单调（λ=4 最优），说明 `Σ\|posterior LLR\|` 只是 LER 的代理 |
-| 有/无 GNN 重加权 | ✅ | 见 4.3 / 4.6：d=3 repetition 无效；d=5/d=7 表面码的增益为 −9.9% ~ −43.4%（随 p/码距变化，见 4.6） |
-| 有/无 OSD | ✅ | 见 4.4/4.6：OSD-0 在 10 个表面码点全部有害；OSD-CS 能消掉 OSD-0 的代价，但相对 `bp_gnn` 的净增益只在 p=0.003 有方向（−15.7%±13.3%，n.s.） |
-| 强度自标定 | ✅ | 目标分布验证集上重选先验插值强度，最优点落在 0.75-1.00，曲线平坦 |
-| 不同图特征组合 | ✅ | 见下方 4.8.1 |
-| CPU vs GPU | ⛔ | 不适用（交付环境无 GPU，见第 6 节） |
-| 浮点 vs 量化推理 | ✅ | M5 动态 int8：权重压缩 3.72×、精度无损、CPU 无加速 |
+| OSD-CS 的 λ | 完成 | 表面码单调改善（0.04315 → 0.02505，λ=0→8）；repetition 在 λ=4 最优 |
+| GNN 重加权 | 完成 | d=3 repetition 无显著 LER 收益；表面码 d=5/d=7 的改善为 −9.9% ~ −43.4% |
+| OSD 开关 | 完成 | OSD-0 在 10 个表面码点均有害；OSD-CS 消除其代价 |
+| 先验强度 | 完成 | 最优点位于 0.75–1.00，曲线接近平坦 |
+| 图特征组合 | 完成 | 见 4.8.1 |
+| CPU vs GPU | 未测 | 当前环境无 GPU |
+| 浮点 vs 量化 | 完成 | 动态 int8 权重压缩 3.72×，精度无损，CPU 无加速 |
 
-#### 4.8.1 图特征组合消融（`scripts/t9_feature_ablation.py`）
+#### 4.8.1 图特征组合
 
-做法：把某一组特征列**置零**后用同一 seed 重训（架构不变），因此比较的是该组特征携带的**信息量**。repetition d=3 线路级 p=0.01，**3 seeds × 32768 shots = 98304 shots**（`results/t9/REPETITION_D3_MULTISEED.md`，由 `scripts/t9_multiseed.py` 跨 seed 汇总）：
+repetition d=3 线路级 p=0.01，3 seeds × 32768 shots：
 
-| 消融臂 | 逐 seed ΔLER vs all（seed 0 / 10 / 20） | 跨 seed 均值 ± SE | 机制 AUC 范围 |
+| 消融臂 | 逐 seed ΔLER vs all | 跨 seed 均值 ± SE | AUC 范围 |
 |---|---|---:|---:|
-| all（基线） | — | — | 0.9836-0.9905 |
-| no_check_features | −0.00009 / +0.00043 / +0.00006 | +0.00013 ± 0.00015 | 0.9834-0.9924 |
-| no_variable_geometry（置零坐标/时间） | +0.00012 / +0.00320 / +0.00006 | +0.00113 ± 0.00104 | 0.9827-0.9894 |
-| no_check_geometry | +0.00003 / +0.00070 / +0.00006 | +0.00026 ± 0.00022 | 0.9807-0.9924 |
-| no_edge_degree | −0.00009 / −0.00003 / −0.00052 | −0.00022 ± 0.00015 | 0.9831-0.9880 |
-| **prior_only**（只留 DEM 先验） | +0.01419 / +0.01297 / +0.01272 | **+0.01329 ± 0.00045** | 0.9801-0.9857 |
+| all | — | — | 0.9836–0.9905 |
+| no_check_features | −0.00009 / +0.00043 / +0.00006 | +0.00013 ± 0.00015 | 0.9834–0.9924 |
+| no_variable_geometry | +0.00012 / +0.00320 / +0.00006 | +0.00113 ± 0.00104 | 0.9827–0.9894 |
+| no_check_geometry | +0.00003 / +0.00070 / +0.00006 | +0.00026 ± 0.00022 | 0.9807–0.9924 |
+| no_edge_degree | −0.00009 / −0.00003 / −0.00052 | −0.00022 ± 0.00015 | 0.9831–0.9880 |
+| prior_only | +0.01419 / +0.01297 / +0.01272 | **+0.01329 ± 0.00045** | 0.9801–0.9857 |
 
-**四条结论（全部为 3 seeds 复核）：**
+表面码 d=3，3 seeds × 32768 shots：
 
-1. **显式的坐标/时间特征在 GNN 里是冗余的**：repetition d=3 上置零 `detector_index`/`detector_time` 的配对 ΔLER 为 **+0.00113 ± 0.00104**（t≈1.1，不显著）；表面码 d=3 上同一组特征为 **−0.00114 ± 0.00374（−3.4%）**，符号在三个 seed 间翻转（−0.00839 / +0.00089 / +0.00409）。两族一致地说明：**去不去掉这组特征都在种子噪声内**。原因是**二分图拓扑本身已经携带了几何信息**，消息传递可以从中恢复局部性。
-2. **但图结构特征整体不可省**：只留 DEM 先验（置零所有 check 特征与度数特征）时，机制 AUC 仍有 0.9801-0.9932，**LER 却大幅恶化**——repetition d=3 **+133%**（+0.01329 ± 0.00045，t≈30），表面码 d=3 **+103.4%**（+0.03497 ± 0.00405，逐 seed +0.03162/+0.03027/+0.04303）。这正是 M2/M3 主线的又一个侧面：**判别能力好 ≠ 能当先验用**。
-3. **表面码上的"位置特征有害"经多种子复核后不成立——这是本次交付里最重要的一次自我纠错。** 单 seed（训练种子 7）时置零 `detector_index_mean`/`detector_time_mean` 看似把 LER 拉低 24%，但另外两个种子给出相反的符号：
+| 消融臂 | 逐 seed ΔLER vs all | 跨 seed 均值 ± SE | 相对 all |
+|---|---|---:|---:|
+| no_check_features | −0.00482 / +0.00177 / −0.00180 | −0.00162 ± 0.00191 | −4.8% |
+| no_variable_geometry | −0.00839 / +0.00089 / +0.00409 | −0.00114 ± 0.00374 | −3.4% |
+| no_check_geometry | −0.00281 / −0.01083 / −0.00168 | −0.00511 ± 0.00288 | −15.1% |
+| no_edge_degree | −0.00015 / +0.00073 / +0.00461 | +0.00173 ± 0.00146 | +5.1% |
+| prior_only | +0.03162 / +0.03027 / +0.04303 | **+0.03497 ± 0.00405** | **+103.4%** |
 
-   | 训练种子 | all | no_variable_geometry | Δ |
-   |---:|---:|---:|---:|
-   | 7 | 0.03455 | 0.02615 | **−24.3%** |
-   | 17 | 0.03864 | 0.03952 | +2.3% |
-   | 27 | 0.02826 | 0.03235 | +14.5% |
+当前结论：显式坐标/时间特征在 GNN 中冗余；图结构特征整体不可省。`prior_only` 在两个码族上均显著最差，说明有效信息来自图拓扑与 syndrome 条件下的机制推断。
 
-   均值 −3.4%，符号翻转，**种子间散布大于所测效应**。即使机制 AUC 在三个种子上几乎不变（0.9915-0.9933），LER 也不能支持"位置特征有害"。正确说法是：**显式坐标/时间特征在 GNN 里是冗余的**（去不去掉都在噪声内），而不是有害的。
+### 4.9 工程性能
 
-   **表面码 d=3 全部 5 条臂已补齐到 3 seeds（98304 shots）**（`results/t9/SURFACE_D3_MULTISEED.md`）：
+由 `scripts/engineering_table.py` 生成的完整表见 `results/m5/ENGINEERING_TABLE.md`。
 
-   | 消融臂 | 逐 seed ΔLER vs all | 跨 seed 均值 ± SE | 相对 all |
-   |---|---|---:|---:|
-   | `no_check_features` | −0.00482 / +0.00177 / −0.00180 | −0.00162 ± 0.00191 | −4.8% |
-   | `no_variable_geometry` | −0.00839 / +0.00089 / +0.00409 | −0.00114 ± 0.00374 | −3.4% |
-   | `no_check_geometry` | −0.00281 / −0.01083 / −0.00168 | −0.00511 ± 0.00288 | −15.1% |
-   | `no_edge_degree` | −0.00015 / +0.00073 / +0.00461 | +0.00173 ± 0.00146 | +5.1% |
-   | `prior_only` | +0.03162 / +0.03027 / +0.04303 | **+0.03497 ± 0.00405** | **+103.4%** |
-
-   读法：除 `prior_only` 外，四条臂的 |ΔLER| 都 ≤ 0.005 且跨 seed 符号不稳；`no_check_geometry` 的 −15.1% 三个 seed 同号，但相对 SE 为 8.5%（t≈1.8，n=3 未达显著），只能记为"**没有证据表明 check 侧几何列提供可复现收益**"，不能反写"有害"。
-
-4. `prior_only` 在 3 seeds 上稳定最差（+103.4%），与 repetition 一致：**"用得上"的不是坐标，而是图结构（度、拓扑）与拓扑条件下的机制推断。**
-
-> **方法学教训（写给后续接手）**：本次交付里"单 seed 的消融/迁移结论"被 3 seeds 复核推翻了三处——表面码位置特征（−24% → 不成立）、T8 的 d=7 探针 cs4 vs `bp_gnn`（−34.9% → 归零）、HGP 跨尺寸迁移（−11% → +2.0% ± 7.1%）。种子间散布在 32768 shots 下仍有 ±15%，**任何消融/迁移结论都必须至少 3 seeds**；`prior_only`（+103%）与 M3 跨码距迁移（−66% ~ −71%）之所以可信，是因为效应量远超种子噪声且逐 seed 同号。
-
-
-### 4.9 工程性能（M5 / T11）
-
-由 `scripts/engineering_table.py` 从 `results/` 自动生成 `results/m5/ENGINEERING_TABLE.md`，含 M1 六个配置与 M2/M3/M4/T8/T18 的运行记录：LER、µs/shot、shot/s、峰值 RSS delta、BP 平均迭代、OSD 触发比例、syndrome 一致率、模型规模。不可测项（GPU 延迟/显存、更大 batch 的吞吐）在表中显式列出原因。
-
-关键工程数字：
-- 向量化 BP 约 **100×** 加速（repetition d=3 205 → 1.9 µs/shot；表面码 d=3 18.5 ms → 0.54 ms/shot）；
-- GNN 前向优化 1.11-1.22×（T5，未达 10 ms/shot 目标，遗留按边分块/稀疏乘）；
-- OSD-CS 延迟（强制每 shot 都跑 OSD）：repetition d=3 λ=0→4 为 149→304 µs；表面码 d=3 λ=0→8 为 1323→2432 µs。实际 OSD 只在未收敛 shot 上触发（repetition 约 1%、表面码 d=3 约 60%），**推荐工作点 λ=4**；
-- 加权 Union-Find：repetition d=3 线路级 10.7 µs/shot（低于同配置 BP），表面码 d=5 线路级 3441 µs/shot。
+- 向量化 BP 约 **100×** 加速：repetition d=3 从 205 µs/shot 降到 1.9 µs/shot；表面码 d=3 从 18.5 ms/shot 降到 0.54 ms/shot。
+- GNN 前向优化为 1.11–1.22×，d=7 仍未达到 10 ms/shot 目标。
+- OSD-CS 强制每 shot 执行时，repetition d=3 λ=0→4 为 149→304 µs/shot；表面码 d=3 λ=0→8 为 1323→2432 µs/shot。实际 OSD 只在未收敛 shot 上触发，推荐工作点 λ=4。
+- 加权 Union-Find：repetition d=3 线路级 10.7 µs/shot；表面码 d=5 线路级 3441 µs/shot。
 
 ## 5. 适用范围
 
-**结论成立的区间：**
-
-- **码族**：repetition code（d=3/5/9）、旋转表面码（d=3 完整、d=5 完整、d=7 见 4.6）、两个小型 HGP 码。**不可匹配码（HGP）上 MWPM / Union-Find 不可用**，BP 系是唯一通用选择。
+- **码族**：repetition code（d=3/5/9）、旋转表面码（d=3/5/7）、HGP [[13,1,3]] 与 [[58,16,3]]。
 - **噪声**：code-capacity 与 circuit-level，p ∈ [0.001, 0.12]。
-- **统计规模**：8192-32768 shots；每结论 3 seeds（d=5 线路级 headline 已满足；d=7 与其余噪声率点由 T6 网格补齐）。
-- **增益条件（最重要的一条）**：学习重加权的收益随 **BP 变弱**（DEM 更大、收敛率更低）而增大，但**在噪声率轴上存在上限拐点**。d=3 repetition（收敛率 0.99）上无显著收益；d=5/d=7 表面码上有 **−9.9% ~ −43.4%** 的增益（5 个噪声率全网格，见 4.6）；HGP 源域只有 −3.1% ~ −9.7%，且**跨尺寸迁移在 3 seeds 后无稳健收益（+2.0% ± 7.1%）**。**不要在小图上期待收益。**
-- **谁在起作用**：在 OSD 路径上，**候选基质量（OSD-CS）比机制边际（学习先验）重要得多**：λ 从 0 到 8 带来 −42%，而先验换成学习值在 repetition 上是 0%。
+- **统计规模**：8192–32768 shots；核心结论使用 3 个 seed。部分专题仍为单 seed，见第 7 节。
+- **学习重加权**：收益随 BP 退化而增大，但在噪声率轴上存在峰值；表面码上为 −9.9% ~ −43.4%。d=3 repetition 无显著 LER 收益。
+- **OSD 路径**：候选基质量比逐机制边际更关键；OSD-CS 适用于未收敛子集，OSD-0 不应作为默认回退。
 
-**明确不适用的场景：**
+不适用或未覆盖：
 
-- GPU 相关的一切数字（延迟、显存、吞吐）——交付阶段无 GPU；
-- d=9 及更大码距的 BP 系解码（收敛率 0.000，属"需要更强先验或更长迭代"的开放问题，不是算力问题）；
-- 时序编码器（syndrome history）与端到端可微 BP——未实现。
+- GPU 延迟、吞吐和显存数字；
+- d=9 及更大码距的 BP 系解码；
+- 时序编码器与端到端可微 BP；
+- 结构化量子 LDPC（非 HGP）；
+- 大规模实时硬件部署。
 
 ## 6. 计算成本
 
 | 项目 | 实测 |
-|---|---|
-| 交付环境 | Intel i5-12400（6C/12T）/ 16 GB / CPU-only |
-| 回归测试 | `pytest -q` 约 10 s（72 项，本地 Python 3.12.1） |
-| 端到端 smoke | `scripts/run_all.ps1` 约 26 s（含单测；`-SkipTests` 约 21 s） |
-| 单点 M2 训练 + 评测（表面码 d=5，8192 test shots） | 20-48 min（随 p；训练 ~17-21 min） |
-| 单点 M2 训练 + 评测（表面码 d=7，4096 test shots） | **42-92 min**（随 p；训练 17-18 min，评测 25-74 min） |
-| T6 全网格（30 点） | **约 24 h 累计壁钟**（16 + 8 + 6 点三批；最后一批 208.5 min） |
-| T8 研究（两个配置 × 32768 shots × 5 个 λ） | 约 15 min |
-| T18 重跑（M1 六个配置 + 表面码 10 个扫描点） | 约 25 min |
-| **第一阶段合计算力壁钟** | **约 20-25 h**（与 `docs/ROADMAP_TODO.md` 第 1.4 节预算一致） |
+|---|---:|
+| 回归测试 | 约 10 s |
+| 端到端 smoke | 约 26 s（含单测） |
+| 表面码 d=5 单点训练 + 评测（8192 test shots） | 20–48 min |
+| 表面码 d=7 单点训练 + 评测（4096 test shots） | 42–92 min |
+| 表面码 d=5/d=7 全网格（30 点） | 约 24 h 累计壁钟 |
+| OSD-CS 两个代表配置 × 5 个 λ | 约 15 min |
+| 加权 Union-Find 全量重跑 | 约 25 min |
+| **第一阶段合计** | **约 20–25 h** |
 
-**结论**：交付瓶颈是编码人日，不是 CPU 算力。16 GB 内存是表面码 d=5/d=7 训练的硬约束（`batch_size` 必须 ≤128；1024 会在 d=5 直接 OOM 并被系统静默杀死）。
+d=7 单点成本中评测约占 80%，主要来自未收敛 shot 的 OSD 后处理。16 GB 内存是 d=5/d=7 训练的硬约束，`batch_size` 必须 ≤128。
 
-**实测的 d=7 成本结构（新增观察，值得记录）**：d=7 单点 92 min，其中训练只占 18 min，**评测占了 74 min（80%）**。评测里的主要开销是 `bp_osd` / `bp_gnn_osd`：d=7 的 BP 收敛率只有 0.109，意味着约 89% 的 shot 要跑 OSD-0，而 OSD-0 在 6023 个 mechanism × 336 个 detector 的规模上仍是逐列 numpy 的前向消元。**要把 d=7 扫描做便宜，先优化 OSD 的批量化/位运算重写，而不是优化训练。** 这也解释了本窗口内 d=7 只能覆盖少量噪声率点。
+## 7. 当前限制
 
-## 7. 未解决问题
+1. OSD-CS 的目标函数 `Σ|posterior LLR|` 不是 LER 的单调代理，数据驱动的候选排序尚未实现。
+2. Union-Find 的 2-core T-join 使用最小生成森林近似，不是 core 上的精确最小 T-join。
+3. 学习先验的收益仍缺少从 DEM 结构到 LER 的定量预测。
+4. HGP 仅覆盖 code-capacity 与两个小型码；结构化 qLDPC 未实现。
+5. OSD 触发仍以“BP 未收敛”为唯一判据。
+6. d=9 收敛率为 0，属于当前 BP 的失能区。
+7. 表面码 d=3 OSD-CS、d=3 → d=5 code-capacity 迁移和 repetition d=5 先验强度仍是单 seed 或小样本结果。
 
-1. **OSD-CS 的目标函数不是 LER 的单调代理。** λ 增大时目标值单调不增，但 repetition 上 LER 反而在 λ=4 之后变差。直接动机是**数据驱动的候选排序（learning-to-rank）**——这正是 T8 未做的那一半。
-2. **Union-Find 的 2-core T-join 是近似。** 当前用最小生成森林上的 T-join 收尾，不是 core 上的精确最小 T-join；后者能进一步压低 d=5 的差距。
-3. **学习先验的机制性解释仍不完整。** "BP 越弱收益越大"是经验规律；缺少从 DEM 结构（度数、环数、收敛率）到收益的定量预测。
-4. **HGP 只做到 code-capacity、小码（[[13,1,3]]、[[58,16,3]]）。** 结构化量子 LDPC（非 HGP）未实现（`docs/ROADMAP_TODO.md` F1）。
-5. **BP+OSD 的 OSD 触发策略仍是"未收敛就触发"。** M3 已证明不存在"只救不伤"的阈值，T8 说明正确的解法是换候选集而不是换阈值；但**何时该触发 OSD-CS** 仍以"未收敛"为唯一判据。
-6. **d=9 是 BP 的失能区**（收敛率 0.000，128 ms/shot），交付内未处理。
-7. **小规模统计功效是本次交付最真实的风险**：本次交付共撤回/改写了 **五处** 单 seed 结论——M2 旗舰表（4.3）、T8 的 d=7 探针与 repetition d=3 研究（4.4/4.6 第 4 条）、T9 的 repetition 消融（4.8.1）、表面码位置特征（4.8.1）、HGP 跨尺寸迁移（4.3/4.8.1）；其中三处是「小差异」型结论被直接改写（λ=4 的「打平」→「不可区分」、T8 的 cs4 vs `bp_gnn` −34.9% → 归零、HGP 迁移 −11% → +2.0% ± 7.1%）。**仍属单 seed 或小 shots 量级**的是：T8 的 repetition/表面码 d=3 两个 OSD-CS 研究（效应量大，优先级低）、表面码 d=3→d=5 的码容量迁移（−12%，未做多种子）、T10 的 repetition d=5 先验强度复核（未做）。**这不是理论担忧——T9 的"位置特征有害（−24%）"就是被 3 seeds 复核直接推翻的一个实例**（见 4.8.1），种子间散布在 32768 shots 下仍有 ±15%。后续任何消融/迁移结论都应至少 3 seeds。**口径纪律**：跨 seed 的推断必须用种子的实测散布（`scripts/t9_multiseed.py` 的配对表）；把所有 seed 的 shot 直接求和会把种子间散布当成二项噪声，从而高估显著性。
+## 8. 复现与结果维护
 
-## 8. 复现说明
+完整安装、测试、smoke、全量实验、长跑和结果再生成命令见 [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md)。
 
-```powershell
-# 0) 环境（CPU-only）
-$env:PYTHONPATH = "src"; $env:PYTHONUTF8 = "1"
+- 快速验证：`pytest -q` 与 `scripts/run_all.ps1`。
+- 正式结果变化时，先更新本文，再同步 README 摘要。
+- `results/**/*.md` 除人工索引外均由脚本生成；不要手工修改生成结果中的数字。
+- 所有正式数字均应与配置、随机种子、shots 和生成脚本一起保留。
 
-# 1) 回归测试（72 项）
-.\.venv\Scripts\python.exe -m pytest -q
-
-# 2) 端到端 smoke（约 26 s，含单测）
-.\scripts\run_all.ps1
-
-# 3) 经典基线 + 表面码扫描（T18 重跑，生成 results/m1 与 results/m4/surface_sweep.*）
-.\scripts\t18_rerun.ps1
-
-# 4) 表面码 d=5/d=7 学习重加权网格（T6，可断点续跑）
-.\.venv\Scripts\python.exe scripts\t6_surface_grid.py --print-plan
-.\.venv\Scripts\python.exe scripts\t6_surface_grid.py --budget-minutes 720
-
-# 5) 多种子汇总（T10）与阈值（T7）
-.\.venv\Scripts\python.exe scripts\t10_multiseed_stats.py --results-dir results\m4_surface --output-dir results\t10
-.\.venv\Scripts\python.exe scripts\threshold_estimate.py --inputs results\t10\surface_sweep_mean.json results\m4\surface_sweep.json results\m4_threshold\surface_sweep.json --output results\m4\THRESHOLD.md
-
-# 6) OSD 候选集研究（T8）
-.\.venv\Scripts\python.exe scripts\t8_osd_cs_study.py --config <run>\config.json --checkpoint <run>\model_state.pt --sweeps 0 2 4 6 8 --output-dir results\t8\<tag>
-
-# 7) 多种子汇总（d=7 OSD-CS 探针、T9 消融）
-.\.venv\Scripts\python.exe scripts\t8_d7_multiseed.py --json results\t8\d7_multiseed.json --output results\t8\D7_MULTISEED.md
-.\.venv\Scripts\python.exe scripts\t9_multiseed.py --prefix repetition_d3 --output results\t9\REPETITION_D3_MULTISEED.md
-.\.venv\Scripts\python.exe scripts\t8_repetition_multiseed.py --output results\t8\REPETITION_D3_MULTISEED.md
-
-# 7b) 模型种子口径（T8 d=7 探针）与表面码 d=3 消融的多种子汇总
-.\.venv\Scripts\python.exe scripts\t8_d7_model_seeds.py --probe-root results\t8 --output results\t8\D7_MODEL_SEEDS.md
-.\.venv\Scripts\python.exe scripts\t9_multiseed.py --results-dir results\t9 --prefix surface_d3 --output results\t9\SURFACE_D3_MULTISEED.md
-
-# 7c) 一条命令跑完 T6 残点 + T8/T9 补点 + 迁移多种子 + 全部表格（session4，幂等可续跑）
-pwsh -File scripts\session4_seeds.ps1 -Stage all -DryRun     # 预演：只打印将执行的命令
-pwsh -File scripts\session4_seeds.ps1 -Stage all               # 实跑（无人值守可加 -ShutdownAfter）
-
-# 8) 旗舰表的多种子复核（repetition d=3 与表面码 d=3）
-.\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --write-configs
-.\scripts\m2_headline_seeds.ps1 -BaseConfig configs\m2_learned_basis_repetition_circuit_level_d3.json -OutDir results\m2
-.\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --aggregate
-# 表面码 d=3（同一工具换 --base-config/--out-dir；产物 results\m4_surface\D3_MULTISEED.md）
-$base = 'results\m4_surface\m4_learned_basis_rotated_surface_code_circuit_level_d3__d3__circuit_level__p0p005\config.json'
-.\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --write-configs --base-config $base --offsets 10 20
-.\scripts\m2_headline_seeds.ps1 -BaseConfig $base -OutDir results\m4_surface
-.\.venv\Scripts\python.exe scripts\m2_headline_multiseed.py --aggregate --base-config $base --out-dir results\m4_surface --output results\m4_surface\D3_MULTISEED.md
-
-# 9) 工程性能表（T11）
-.\.venv\Scripts\python.exe scripts\engineering_table.py
-```
-
-**逐模块的技术细节**见 `docs/M0_ENVIRONMENT_AND_DATA_PIPELINE.md`、`M1_BASELINE_DECODERS_AND_BENCHMARK.md`、`M2_GNN_REWEIGHTING.md`、`M3_HYBRID_DECODER.md`、`M4_HGP_AND_SURFACE.md`、`M5_ENGINEERING.md`、`M5_DECOMPOSED_MWPM.md`、`BP_IMPLEMENTATION.md`、`T8_OSD_CANDIDATE_SET.md`、`T18_UNION_FIND_ANALYSIS.md`。
+逐模块技术细节见 [`M0_ENVIRONMENT_AND_DATA_PIPELINE.md`](M0_ENVIRONMENT_AND_DATA_PIPELINE.md)、[`M1_BASELINE_DECODERS_AND_BENCHMARK.md`](M1_BASELINE_DECODERS_AND_BENCHMARK.md)、[`M2_GNN_REWEIGHTING.md`](M2_GNN_REWEIGHTING.md)、[`M3_HYBRID_DECODER.md`](M3_HYBRID_DECODER.md)、[`M4_HGP_AND_SURFACE.md`](M4_HGP_AND_SURFACE.md)、[`M5_ENGINEERING.md`](M5_ENGINEERING.md)、[`MWPM_REWEIGHTING.md`](MWPM_REWEIGHTING.md)、[`BP_IMPLEMENTATION.md`](BP_IMPLEMENTATION.md)、[`OSD_CANDIDATE_SET.md`](OSD_CANDIDATE_SET.md) 与 [`UNION_FIND.md`](UNION_FIND.md)。
